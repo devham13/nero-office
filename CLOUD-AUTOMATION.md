@@ -137,12 +137,11 @@ agent worker start --pool --pool-name nero-network --idle-release-timeout 600
 Финальный ответ: URL опубликованной страницы или блокер с причиной.
 ```
 
-## После каждого запуска
+## После каждого запуска (создание)
 
-Проверь, что изменились:
+- `<PROJECT_ROOT>/shared/kirill-news-ledger.md` (статус `selected`)
+- `wordpress/page-{slug}.php` в коммите/PR
 
-- `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
-- `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
-- при необходимости файлы страницы/шаблона
+`published-pages.md` и `published` в ledger — только после отдельной публикации.
 
 Если Automation работает через PR, смерджи PR, чтобы следующий запуск видел свежий ledger и не повторял новость.
