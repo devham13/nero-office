@@ -4,6 +4,8 @@
 !.env.example
 **/*.local
 **/hosting-credentials.local
+google-service-account.json
+**/google-service-account.json
 *.credentials.local
 *.local.ps1
 *.local.sh
@@ -16,9 +18,6 @@ id_ed25519*
 output/
 .cursor/nero-network-handoff.md
 .cursor/nero-network-fragments/
-wordpress-theme/
-scripts/build-page-*.py
-scripts/build-ai-*.py
 page-*.php
 !wordpress/
 !wordpress/page-*.php

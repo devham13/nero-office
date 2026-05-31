@@ -15,6 +15,12 @@ import paramiko
 
 from credentials import get_credential, public_site_url, require_credential
 
+try:
+    from google_sheets import detect_sheet_row, try_update_site_link
+except ImportError:
+    detect_sheet_row = None  # type: ignore[assignment]
+    try_update_site_link = None  # type: ignore[assignment]
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Deploy a Nero Network page template safely.")
@@ -23,6 +29,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--description", required=True)
     parser.add_argument("--local-path", required=True)
     parser.add_argument("--skip-live-check", action="store_true")
+    parser.add_argument(
+        "--sheet-row",
+        type=int,
+        default=None,
+        help="Номер строки в Google Таблице (как в UI) для колонки «Ссылка на сайт»",
+    )
+    parser.add_argument(
+        "--handoff",
+        default=None,
+        help="Путь к nero-network-handoff.md для автоопределения GOOGLE_SHEET_ROW",
+    )
+    parser.add_argument("--skip-google-sheet", action="store_true")
     return parser.parse_args()
 
 
@@ -184,9 +202,8 @@ def create_or_update_page(
 def verify_live(url: str, slug: str) -> None:
     markers = (
         'id="primary"',
-        "nero-ai-home-page",
-        'class="nero-ai-header"',
-        "nero-ai-hero",
+        f"{slug}-page",
+        "kpmg-gateway-hero-canvas",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
