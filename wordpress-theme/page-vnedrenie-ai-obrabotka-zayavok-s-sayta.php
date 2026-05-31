@@ -23,14 +23,38 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 $brand = get_bloginfo('name') ?: 'AI-автоматизация';
 $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Аудит потерь за 30 минут';
 $primary_cta_url = getenv('PRIMARY_CTA_URL') ?: '#audit-30-min';
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Что можно автоматизировать';
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Внедрение под ключ';
 $secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '#vnedrenie-pod-kluch';
 
+$nero_ai_header_links = [
+    ['label' => 'Потери заявок', 'href' => '#pochemu-teryaet-zayavki'],
+    ['label' => 'AI-агент', 'href' => '#chto-takoe-ai-agent'],
+    ['label' => 'Сайт → CRM', 'href' => '#svyazka-sayt-ai-crm'],
+    ['label' => 'Внедрение', 'href' => '#vnedrenie-pod-kluch'],
+    ['label' => 'Стоимость', 'href' => '#stoimost'],
+    ['label' => 'FAQ', 'href' => '#faq'],
+];
+
 get_header();
+
+$theme_dir = get_stylesheet_directory();
+require $theme_dir . '/nero-ai-floating-header.inc.php';
 
 ?>
 
 <style>
+<?php
+$header_css = $theme_dir . '/nero-ai-floating-header.css';
+echo is_readable($header_css) ? file_get_contents($header_css) : '';
+?>
+
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta #masthead,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .site-header,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta header.site-header,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .kadence-header,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta #mobile-header {
+  display: none !important;
+}
 
 .breadcrumbs, .breadcrumb, .breadcrumb-list, .breadcrumb-item,
 nav[aria-label="Хлебные крошки"],
@@ -240,7 +264,7 @@ body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .content-area {
   min-height: min(980px, calc(100dvh - 1px));
   display: grid;
   align-items: center;
-  padding: clamp(72px, 9vw, 132px) 0 clamp(44px, 7vw, 86px);
+  padding: clamp(108px, 14vh, 148px) 0 clamp(44px, 7vw, 86px);
   isolation: isolate;
 }
 .nero-ai-hero::before {
@@ -1778,6 +1802,13 @@ body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .content-area {
     }
   ]
 }
+</script>
+
+<script>
+<?php
+$header_js = $theme_dir . '/nero-ai-floating-header.js';
+echo is_readable($header_js) ? file_get_contents($header_js) : '';
+?>
 </script>
 
 <?php
