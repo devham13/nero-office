@@ -72,12 +72,23 @@ nav[aria-label="Хлебные крошки"], .woocommerce-breadcrumb,
   --nero-ai-container: 1220px;
 }
 
+html { overflow-x: clip; }
+body.home #wrapper,
+body.home #inner-wrap,
+body.home .site,
+body.home .site-content,
+body.home .content-area,
+body.home #content {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
 #primary.nero-ai-home-page,
 .nero-ai-home-page {
-  min-height: 100vh;
+  min-height: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: visible;
   color: var(--nero-ai-text);
   background:
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),

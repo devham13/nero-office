@@ -41,6 +41,31 @@ nav[aria-label="Хлебные крошки"],
   margin-top: 0 !important;
 }
 
+/* Один скролл документа: не overflow на main (иначе overflow-y→auto + body scroll) */
+html {
+  overflow-x: clip;
+}
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta {
+  overflow-x: clip;
+}
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta #wrapper,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta #inner-wrap,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .site,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .site-content,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .content-area,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta #content,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .content-wrap,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .entry-content-wrap,
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .entry-content {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+body.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta .content-area {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 /**
  * Meta Journal homepage design reference (dark nero-ai layout).
  * Назначение: новый шаблонный дизайн для главной страницы и будущих AI/B2B лендингов.
@@ -76,10 +101,10 @@ nav[aria-label="Хлебные крошки"],
 
 #primary.nero-ai-home-page,
 .nero-ai-home-page {
-  min-height: 100vh;
+  min-height: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: visible;
   color: var(--nero-ai-text);
   background:
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),
