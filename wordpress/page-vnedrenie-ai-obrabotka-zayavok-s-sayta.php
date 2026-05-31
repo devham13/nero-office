@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: AI-обработка заявок с сайта
- * Description: Лонгрид Nero Network — AI-агент для первичной обработки заявок (slug: ai-obrabotka-zayavok-s-sayta)
+ * Template Name: Внедрение AI — обработка заявок с сайта
+ * Description: Лонгрид Nero Network — AI-агент для первичной обработки заявок (slug: vnedrenie-ai-obrabotka-zayavok-s-sayta)
  */
 
 $page_seo_title = 'Внедрение AI-агента: обработка заявок с сайта под ключ';
