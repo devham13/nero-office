@@ -41,7 +41,9 @@
 
 ## Лонгрид (тело)
 
-- Секции: **`nero-ai-section`**, чередование **`nero-ai-section-alt`**.
+- Секции: **`nero-ai-section`**, чередование **`nero-ai-section-alt`**; порядок контента — по **`shared/longread-structure-maslow.md`** (пирамида Маслоу).
+- **FAQ:** `id="faq"`, класс **`nero-ai-faq`**, `<details>`/`<summary>`; JSON-LD **FAQPage**; не сокращать вопросы относительно текста Жени.
+- **Кейсы:** в прозе лонгрида **без** кликабельных ссылок и голых URL в блоке кейсов.
 - Текст: **`nero-ai-prose`** на `<section>` (таблицы, callout, steps — классы из reference CSS).
 - Введение после hero: **`nero-ai-intro-grid`** (лид слева + терминал/чипы справа).
 - Оглавление: **`nero-ai-toc`** (pill-ссылки по центру под вводным блоком).
