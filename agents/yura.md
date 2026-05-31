@@ -34,7 +34,12 @@ is_background: false
 8. Установи/проверь `_wp_page_template = page-{slug}.php`, очисти object cache и внешний page cache.
 9. **Проверь live HTML, не только HTTP 200**: есть `main#primary`, `{slug}-page`, hero/canvas-маркеры; нет симптома дефолтного `page.php` с breadcrumbs и пустым `entry-content`.
 10. Если после публикации Лёня записал в файл обмена SEO/GEO-рекомендации — **исправь страницу и перепубликуй** с их учётом.
-11. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку со статусом `published`, публичным URL и проверкой. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
+11. **Google Таблица (обязательно, если тема от Кирилла):** после успешной проверки live URL открой таблицу `10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw-ls`, найди **номер строки** из блока Кирилла и:
+    - в колонку **«Ссылка на страницу»** — полный публичный URL (`https://…/{slug}/`);
+    - в **Статус страницы** / **Статус пайплайна** (если есть) — `опубликовано` + `YYYY-MM-DD`;
+    - если в «Ссылке» уже **другой** URL — не перезаписывай: зафиксируй конфликт в блоке Юры;
+    - если нет прав на запись — `❌ БЛОКЕР: Google Таблица не обновлена` с причиной.
+12. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/shared/published-pages.md`. Если в handoff есть `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===` / `=== КИРИЛЛ (ТЕМА ДНЯ ИЗ GOOGLE ТАБЛИЦЫ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку `published` с URL. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
 
 ```md
 === ЮРА (ПУБЛИКАЦИЯ) ===
@@ -43,7 +48,10 @@ URL: https://...
 Статус: опубликовано
 Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
 Способ: FTP → page-{slug}.php в тему ${WP_THEME_SLUG}
-Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
+Google Таблица — строка: №…
+Google Таблица — «Ссылка на страницу»: записан URL | ❌ не обновлено (причина)
+Google Таблица — статус: опубликовано (YYYY-MM-DD) | не менялся
+Журнал публикаций: <PROJECT_ROOT>/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
 ```
 
@@ -71,4 +79,5 @@ ftp.quit()
 - **Не публиковать через MCP KV / WordPress API если есть `<script>`.**
 - **Не оставлять пустой `post_excerpt`, если в handoff есть `Description`.**
 - **Не публиковать кастомную страницу без рабочего `main#primary`, если в шапке темы есть skip-link на `#primary`.**
+- **Не завершать публикацию темы из Google Таблицы без URL в колонке «Ссылка на страницу» (или явного ❌ БЛОКЕР).**
 
