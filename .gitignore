@@ -18,6 +18,7 @@ output/
 .cursor/nero-network-fragments/
 wordpress-theme/
 scripts/build-page-*.py
+scripts/build-ai-*.py
 page-*.php
 !wordpress/
 !wordpress/page-*.php
