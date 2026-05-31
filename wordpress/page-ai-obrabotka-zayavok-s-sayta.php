@@ -736,28 +736,38 @@ nav[aria-label="Хлебные крошки"],
 }
 
 
-/* Hero Алины: не затемнять глобальными правилами nero-ai-home-page */
-.nero-ai-home-page .ai-intake-hero,
-.nero-ai-home-page .fullscreen-white-office.ai-intake-hero,
-.nero-ai-home-page #ai-intake-hero {
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 48%, #f1f5f9 100%) !important;
-  color: #0f172a !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  position: relative !important;
+
+/* Neurinix dark page hero (canvas in dashboard shell) */
+.nero-ai-page-hero {
+  padding: clamp(40px, 7vw, 88px) 0 clamp(48px, 8vw, 96px);
+  min-height: min(92vh, 920px);
 }
-.nero-ai-home-page .ai-intake-hero .giant-seo,
-.nero-ai-home-page .ai-intake-hero .giant-seo span,
-.nero-ai-home-page .ai-intake-hero h1,
-.nero-ai-home-page .ai-intake-hero p,
-.nero-ai-home-page .ai-intake-hero .ai-intake-sub,
-.nero-ai-home-page .ai-intake-hero .ai-intake-steps,
-.nero-ai-home-page .ai-intake-hero .ai-intake-pill {
-  color: inherit;
+.nero-ai-hero-canvas-host .nero-ai-window-body {
+  position: relative;
+  min-height: clamp(320px, 42vw, 460px);
+  padding: 12px;
+  overflow: hidden;
 }
-.nero-ai-home-page .ai-intake-hero a.cta-telegram {
-  color: #fff !important;
+.nero-ai-hero-canvas-wrap {
+  position: absolute;
+  inset: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(8, 12, 24, 0.95), rgba(17, 24, 39, 0.92));
+  border: 1px solid rgba(121, 242, 255, 0.12);
 }
+.nero-ai-hero-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.nero-ai-hero-stage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.nero-ai-hero-stage-chips .nero-ai-badge { font-size: 11px; padding: 6px 10px; }
 
 /* Intro после hero */
 .ai-obrabotka-intro-grid {
@@ -908,189 +918,31 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <div id="primary" class="site-main nero-ai-home-page ai-obrabotka-zayavok-s-sayta-page" tabindex="-1"><span id="main" class="screen-reader-text" aria-hidden="true"></span>
-<section id="ai-intake-hero" class="fullscreen-white-office ai-intake-hero" aria-label="Hero: AI-обработка заявок с сайта">
-<style>
-.fullscreen-white-office.ai-intake-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 48%, #f1f5f9 100%);
-}
-.ai-intake-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
-}
-.ai-intake-hero-canvas-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-#ai-lead-hub-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.ai-intake-copy {
-  position: absolute;
-  left: clamp(20px, 5vw, 72px);
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: min(520px, 42vw);
-  z-index: 4;
-}
-.giant-seo {
-  font-size: clamp(32px, 4.6vw, 68px);
-  font-weight: 900;
-  line-height: 1.06;
-  letter-spacing: -2px;
-  color: #0f172a;
-  margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-}
-.giant-seo span {
-  display: block;
-  background: linear-gradient(92deg, #0ea5e9, #6366f1);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.giant-seo-sub {
-  font-size: clamp(15px, 1.9vw, 21px);
-  line-height: 1.55;
-  color: rgba(15, 23, 42, 0.72);
-  margin: 18px 0 0;
-  max-width: 520px;
-  font-family: Inter, system-ui, sans-serif;
-}
-.telegram-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 26px;
-  padding: 12px 22px;
-  background: #0f172a;
-  color: #fff !important;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: transform 0.2s;
-  font-family: Inter, system-ui, sans-serif;
-}
-.telegram-button:hover { transform: translateY(-2px); }
-.vl-ui-tasks.ai-intake-steps {
-  position: absolute;
-  left: clamp(16px, 4vw, 56px);
-  top: clamp(72px, 10vh, 120px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 3;
-}
-.vl-ui-task {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: Inter, system-ui, sans-serif;
-}
-.vl-ui-task span {
-  width: 26px;
-  height: 26px;
-  background: #0ea5e9;
-  color: #fff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-.vl-ui-pill.ai-intake-pill {
-  position: absolute;
-  top: clamp(20px, 4vh, 48px);
-  right: clamp(16px, 4vw, 56px);
-  left: auto;
-  bottom: auto;
-  transform: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-  z-index: 3;
-}
-.vl-ui-pill.ai-intake-pill span {
-  padding: 9px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  font-family: Inter, system-ui, sans-serif;
-}
-@media (max-width: 900px) {
-  .ai-intake-copy {
-    top: auto;
-    bottom: clamp(100px, 18vh, 160px);
-    transform: none;
-    max-width: calc(100% - 40px);
-  }
-  .vl-ui-tasks.ai-intake-steps {
-    top: auto;
-    bottom: clamp(16px, 3vh, 32px);
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: calc(100% - 32px);
-  }
-  .vl-ui-pill.ai-intake-pill {
-    top: 12px;
-    right: 12px;
-    left: 12px;
-    justify-content: center;
-  }
-}
-</style>
-
-<div class="ai-intake-hero-canvas-wrap" aria-hidden="true">
-  <canvas id="ai-lead-hub-canvas" width="1200" height="800"></canvas>
-</div>
-
-<div class="vl-ui-tasks ai-intake-steps" aria-label="Этапы обработки заявки">
-  <div class="vl-ui-task"><span>1</span> Захват формы</div>
-  <div class="vl-ui-task"><span>2</span> AI-разбор</div>
-  <div class="vl-ui-task"><span>3</span> Маршрутизация</div>
-  <div class="vl-ui-task"><span>4</span> Ответ клиенту</div>
-  <div class="vl-ui-task"><span>5</span> Запись в CRM</div>
-</div>
-
-<div class="vl-ui-pill ai-intake-pill" aria-label="Метрики">
-  <span>&lt; 30 сек на лид</span>
-  <span>24/7 приём</span>
-  <span>Антиспам-фильтр</span>
-</div>
-
-<div class="ai-intake-copy">
-  <h1 class="giant-seo">AI-агент принимает <span>заявки с сайта</span></h1>
-  <p class="giant-seo-sub">Читает форму за секунды, уточняет контакт, оценивает лид и передаёт ответственному менеджеру — без потерь в почте и мессенджерах.</p>
-  <a class="telegram-button" href="https://t.me/neroteam" target="_blank" rel="noopener">Обсудить внедрение →</a>
-</div>
+<section id="ai-intake-hero" class="nero-ai-hero nero-ai-page-hero" aria-label="Hero: AI-обработка заявок с сайта">
+  <div class="nero-ai-container nero-ai-hero-grid">
+    <div class="nero-ai-hero-copy nero-ai-reveal">
+      <p class="nero-ai-eyebrow">Meta Journal · внедрение AI</p>
+      <h1 id="page-hero-title">AI-агент принимает <span class="nero-ai-gradient-text">заявки с сайта</span></h1>
+      <p class="nero-ai-hero-lead">Читает форму за секунды, уточняет контакт, оценивает лид и передаёт ответственному менеджеру — без потерь в почте и мессенджерах.</p>
+      <ul class="nero-ai-badges nero-ai-hero-stage-chips" aria-label="Этапы сценария"><li class="nero-ai-badge">Захват формы</li><li class="nero-ai-badge">AI-разбор</li><li class="nero-ai-badge">Маршрутизация</li><li class="nero-ai-badge">Ответ клиенту</li><li class="nero-ai-badge">Запись в CRM</li><li class="nero-ai-badge">&lt; 30 сек на лид</li><li class="nero-ai-badge">24/7 приём</li></ul>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="https://t.me/neroteam" target="_blank" rel="noopener noreferrer">Обсудить внедрение</a>
+      </div>
+    </div>
+    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Визуализация сценария">
+      <div class="nero-ai-dashboard-shell nero-ai-hero-canvas-host">
+        <div class="nero-ai-window-top">
+          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+          <span class="nero-ai-window-title">live-сценарий · демо</span>
+        </div>
+        <div class="nero-ai-window-body">
+          <div class="nero-ai-hero-canvas-wrap" aria-hidden="true">
+            <canvas id="ai-lead-hub-canvas" width="1200" height="800"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>

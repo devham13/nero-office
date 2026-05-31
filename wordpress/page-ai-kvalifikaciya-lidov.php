@@ -751,28 +751,38 @@ nav[aria-label="Хлебные крошки"],
 }
 
 
-/* Hero Алины: не затемнять глобальными правилами nero-ai-home-page */
-.nero-ai-home-page .ai-intake-hero,
-.nero-ai-home-page .fullscreen-white-office.ai-intake-hero,
-.nero-ai-home-page #ai-intake-hero {
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 48%, #f1f5f9 100%) !important;
-  color: #0f172a !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  position: relative !important;
+
+/* Neurinix dark page hero (canvas in dashboard shell) */
+.nero-ai-page-hero {
+  padding: clamp(40px, 7vw, 88px) 0 clamp(48px, 8vw, 96px);
+  min-height: min(92vh, 920px);
 }
-.nero-ai-home-page .ai-intake-hero .giant-seo,
-.nero-ai-home-page .ai-intake-hero .giant-seo span,
-.nero-ai-home-page .ai-intake-hero h1,
-.nero-ai-home-page .ai-intake-hero p,
-.nero-ai-home-page .ai-intake-hero .ai-intake-sub,
-.nero-ai-home-page .ai-intake-hero .ai-intake-steps,
-.nero-ai-home-page .ai-intake-hero .ai-intake-pill {
-  color: inherit;
+.nero-ai-hero-canvas-host .nero-ai-window-body {
+  position: relative;
+  min-height: clamp(320px, 42vw, 460px);
+  padding: 12px;
+  overflow: hidden;
 }
-.nero-ai-home-page .ai-intake-hero a.cta-telegram {
-  color: #fff !important;
+.nero-ai-hero-canvas-wrap {
+  position: absolute;
+  inset: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(8, 12, 24, 0.95), rgba(17, 24, 39, 0.92));
+  border: 1px solid rgba(121, 242, 255, 0.12);
 }
+.nero-ai-hero-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.nero-ai-hero-stage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.nero-ai-hero-stage-chips .nero-ai-badge { font-size: 11px; padding: 6px 10px; }
 
 /* Intro после hero */
 .ai-kvalifikaciya-intro-grid {
@@ -919,11 +929,6 @@ nav[aria-label="Хлебные крошки"],
   .ai-kvalifikaciya-intro-grid { grid-template-columns: 1fr; }
   .ai-kvalifikaciya-intro-copy { border-left-width: 3px; }
 }
-#lead-qualify-hero.lq-hero.fullscreen-white-office {
-  min-height: 100vh;
-  min-height: 100dvh;
-  position: relative;
-}
 .ai-kvalifikaciya-intro-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
@@ -961,542 +966,31 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <div id="primary" class="site-main nero-ai-home-page ai-kvalifikaciya-lidov-page" role="main" tabindex="-1"><span id="main" class="screen-reader-text" aria-hidden="true"></span>
-<section id="lead-qualify-hero" class="lq-hero fullscreen-white-office" aria-label="AI-квалификация лидов">
-<style>
-.lq-hero.fullscreen-white-office {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  background: #f8fafc;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.lq-hero .lq-canvas-wrap {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-.lq-hero canvas#ai-kvalifikaciya-lidov-hero-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.lq-hero .lq-copy {
-  position: absolute;
-  left: clamp(16px, 4vw, 56px);
-  top: 50%;
-  transform: translateY(-52%);
-  max-width: min(520px, 42vw);
-  z-index: 4;
-  pointer-events: none;
-}
-.lq-hero .lq-copy a.telegram-button { pointer-events: auto; margin-top: 28px; }
-.lq-hero .giant-seo {
-  font-size: clamp(32px, 4.2vw, 64px);
-  font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: -2px;
-  color: #0f172a;
-  margin: 0;
-}
-.lq-hero .giant-seo span {
-  display: block;
-  background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.lq-hero .giant-seo-sub {
-  font-size: clamp(15px, 1.8vw, 20px);
-  line-height: 1.55;
-  color: rgba(15, 23, 42, 0.72);
-  margin-top: 18px;
-  max-width: 480px;
-}
-.lq-hero .telegram-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  background: #0f172a;
-  color: #fff !important;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: transform 0.2s;
-}
-.lq-hero .telegram-button:hover { transform: translateY(-2px); }
-.lq-hero .vl-ui-tasks {
-  position: absolute;
-  left: clamp(16px, 4vw, 56px);
-  bottom: clamp(24px, 5vh, 56px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  max-width: min(640px, 90vw);
-  z-index: 3;
-}
-.lq-hero .vl-ui-task {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-.lq-hero .vl-ui-task span {
-  width: 26px;
-  height: 26px;
-  background: linear-gradient(135deg, #0ea5e9, #6366f1);
-  color: #fff;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-.lq-hero .vl-ui-pill {
-  position: absolute;
-  right: clamp(16px, 4vw, 48px);
-  top: clamp(20px, 4vh, 48px);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-  z-index: 3;
-}
-.lq-hero .vl-ui-pill span {
-  padding: 9px 16px;
-  background: rgba(255,255,255,0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #334155;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.lq-hero .vl-ui-pill span:nth-child(3) {
-  border-color: #fecaca;
-  color: #b91c1c;
-  background: #fff5f5;
-}
-@media (max-width: 900px) {
-  .lq-hero .lq-copy {
-    top: auto;
-    bottom: 42%;
-    transform: none;
-    max-width: 92vw;
-  }
-  .lq-hero .vl-ui-tasks { max-width: 96vw; }
-}
-</style>
-
-  <div class="lq-canvas-wrap" aria-hidden="true">
-    <canvas id="ai-kvalifikaciya-lidov-hero-canvas" role="img" aria-label="Анимация: лиды проходят скоринг и попадают в CRM"></canvas>
+<section id="lead-qualify-hero" class="nero-ai-hero nero-ai-page-hero" aria-label="AI-квалификация лидов">
+  <div class="nero-ai-container nero-ai-hero-grid">
+    <div class="nero-ai-hero-copy nero-ai-reveal">
+      <p class="nero-ai-eyebrow">Meta Journal · внедрение AI</p>
+      <h1 id="page-hero-title">AI-квалификация лидов <span class="nero-ai-gradient-text">без ручного разбора входящих</span></h1>
+      <p class="nero-ai-hero-lead">Нейросеть оценивает заявки по скорингу, тегам и воронке — в CRM уходит только то, что готово к звонку менеджеру.</p>
+      <ul class="nero-ai-badges nero-ai-hero-stage-chips" aria-label="Этапы сценария"><li class="nero-ai-badge">Сбор заявок</li><li class="nero-ai-badge">Скоринг</li><li class="nero-ai-badge">Теги</li><li class="nero-ai-badge">Маршрут в CRM</li><li class="nero-ai-badge">Задача менеджеру</li><li class="nero-ai-badge">MQL</li><li class="nero-ai-badge">SQL</li></ul>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>" target="_blank" rel="noopener noreferrer">Обсудить внедрение</a>
+      </div>
+    </div>
+    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Визуализация сценария">
+      <div class="nero-ai-dashboard-shell nero-ai-hero-canvas-host">
+        <div class="nero-ai-window-top">
+          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+          <span class="nero-ai-window-title">live-сценарий · демо</span>
+        </div>
+        <div class="nero-ai-window-body">
+          <div class="nero-ai-hero-canvas-wrap" aria-hidden="true">
+            <canvas id="ai-kvalifikaciya-lidov-hero-canvas" width="1200" height="800"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="lq-copy">
-    <h1 class="giant-seo">AI-квалификация лидов <span>без ручного разбора входящих</span></h1>
-    <p class="giant-seo-sub">Нейросеть оценивает заявки по скорингу, тегам и воронке — в CRM уходит только то, что готово к звонку менеджеру.</p>
-    <a class="telegram-button" href="<?php echo esc_url($primary_cta_url); ?>" target="_blank" rel="noopener noreferrer">Обсудить внедрение</a>
-  </div>
-
-  <div class="vl-ui-pill" aria-hidden="true">
-    <span>MQL</span>
-    <span>SQL</span>
-    <span>HOT</span>
-    <span>−40% шум</span>
-  </div>
-
-  <div class="vl-ui-tasks" aria-label="Этапы квалификации">
-    <div class="vl-ui-task"><span>1</span> Сбор заявок</div>
-    <div class="vl-ui-task"><span>2</span> Скоринг</div>
-    <div class="vl-ui-task"><span>3</span> Теги</div>
-    <div class="vl-ui-task"><span>4</span> Маршрут в CRM</div>
-    <div class="vl-ui-task"><span>5</span> Задача менеджеру</div>
-  </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("ai-kvalifikaciya-lidov-hero-canvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  let cw = 0, ch = 0, scale = 1, cx = 0, cy = 0, frame = 0;
-
-  function resizeCanvas() {
-    if (!canvas.parentElement) return;
-    canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-    canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-    cw = canvas.width;
-    ch = canvas.height;
-    cx = cw * 0.58;
-    cy = ch * 0.52;
-    scale = cw < 768 ? cw / 520 : Math.min(cw / 1100, ch / 820) * 1.35;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
-
-  const C = {
-    outline: "#0f172a",
-    cold: "#94a3b8",
-    warm: "#fbbf24",
-    hot: "#ef4444",
-    hub: "#e0f2fe",
-    hubStroke: "#0284c7",
-    slot: "#ecfdf5",
-    bubbleBg: "#ffffff",
-    agentYellow: "#eab308",
-    agentGreen: "#10b981",
-    agentBlue: "#3b82f6",
-    agentPink: "#ec4899",
-    agentPurple: "#8b5cf6"
-  };
-
-  function drawRR(ctx, x, y, w, h, r, fill, stroke) {
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
-    else ctx.rect(x, y, w, h);
-    ctx.fill();
-    if (stroke) {
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = stroke;
-      ctx.stroke();
-    }
-  }
-
-  class LeadRiver {
-    constructor() {
-      this.paths = [
-        { ox: 220, oy: -180, r: 140, start: Math.PI * 0.15, end: Math.PI * 0.95 },
-        { ox: 40, oy: -120, r: 110, start: Math.PI * 0.05, end: Math.PI * 0.75 }
-      ];
-    }
-    draw(ctx) {
-      this.paths.forEach((p, idx) => {
-        ctx.save();
-        ctx.strokeStyle = "rgba(148, 163, 184, 0.35)";
-        ctx.lineWidth = 3;
-        ctx.setLineDash([8, 10]);
-        ctx.beginPath();
-        ctx.arc(p.ox, p.oy, p.r, p.start, p.end);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        const t = (frame * 0.022 + idx * 0.33) % 1;
-        const ang = p.start + (p.end - p.start) * t;
-        const lx = p.ox + Math.cos(ang) * p.r;
-        const ly = p.oy + Math.sin(ang) * p.r;
-        const col = idx === 0 ? C.cold : C.warm;
-        drawRR(ctx, lx - 14, ly - 10, 28, 20, 4, col, C.outline);
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 7px Inter, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(idx ? "FORM" : "CHAT", lx, ly + 2);
-        ctx.restore();
-      });
-    }
-  }
-
-  class IntentRadar {
-    draw(ctx) {
-      const tags = ["бюджет", "срок", "ниша", "UTM"];
-      tags.forEach((tag, i) => {
-        const a = frame * 0.018 + (i / tags.length) * Math.PI * 2;
-        const rx = 120 + Math.cos(a) * 55;
-        const ry = -200 + Math.sin(a) * 28;
-        drawRR(ctx, rx - 22, ry - 8, 44, 16, 8, "rgba(255,255,255,0.9)", "#cbd5e1");
-        ctx.fillStyle = "#475569";
-        ctx.font = "600 8px Inter, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(tag, rx, ry + 3);
-      });
-    }
-  }
-
-  class CrmOutbox {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.glow = 0;
-    }
-    draw(ctx) {
-      this.glow = Math.max(0, this.glow - 0.02);
-      if (this.glow > 0) {
-        ctx.save();
-        ctx.globalAlpha = this.glow * 0.35;
-        drawRR(ctx, this.x - 8, this.y - 8, 96, 72, 12, C.hot, null);
-        ctx.restore();
-      }
-      drawRR(ctx, this.x, this.y, 80, 56, 8, C.slot, C.outline);
-      ctx.fillStyle = C.outline;
-      ctx.font = "bold 9px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("CRM", this.x + 40, this.y + 22);
-      ctx.fillStyle = "#059669";
-      ctx.font = "bold 8px Inter, sans-serif";
-      ctx.fillText("HOT →", this.x + 40, this.y + 38);
-    }
-    pulse() {
-      this.glow = 1;
-    }
-  }
-
-  class LeadScoringHub {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.hotY = 0;
-      this.hotVX = 0;
-      this.hotActive = false;
-    }
-    draw(ctx) {
-      const cycle = 240;
-      const prg = (frame * 0.042) % cycle;
-
-      ctx.lineJoin = "round";
-      drawRR(ctx, this.x - 70, this.y - 30, 140, 200, 10, "#f1f5f9", C.outline);
-
-      const stages = [
-        { y: 0, h: 50, label: "IN", col: "#e2e8f0" },
-        { y: 52, h: 45, label: "MQL", col: "#bae6fd" },
-        { y: 100, h: 45, label: "SQL", col: "#a7f3d0" },
-        { y: 148, h: 42, label: "HOT", col: "#fecaca" }
-      ];
-      stages.forEach((s, i) => {
-        const fillH = prg > 30 + i * 45 ? s.h : Math.max(0, (prg - 20 - i * 40) * 0.8);
-        drawRR(ctx, this.x - 50, this.y + s.y, 100, s.h, 6, "#fff", C.outline);
-        if (fillH > 4) {
-          drawRR(ctx, this.x - 46, this.y + s.y + s.h - fillH, 92, fillH, 4, s.col, null);
-        }
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 9px Inter, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(s.label, this.x, this.y + s.y + s.h / 2 + 3);
-      });
-
-      const score = Math.min(99, Math.floor((prg / cycle) * 99));
-      drawRR(ctx, this.x + 58, this.y + 20, 36, 120, 6, "#fff", C.outline);
-      const barH = (score / 99) * 100;
-      drawRR(ctx, this.x + 62, this.y + 120 - barH, 28, barH, 4, score > 72 ? C.hot : score > 40 ? C.warm : C.cold, null);
-      ctx.fillStyle = C.outline;
-      ctx.font = "bold 10px Inter, sans-serif";
-      ctx.fillText(score + "", this.x + 76, this.y + 8);
-
-      if (prg > 185 && prg < 220) {
-        if (!this.hotActive) {
-          this.hotActive = true;
-          this.hotY = this.y + 170;
-          this.hotVX = 0;
-        }
-        this.hotVX += 0.35;
-        this.hotY -= this.hotVX * 0.4;
-        const hx = this.x - 120 + (220 - prg) * 2.2;
-        drawRR(ctx, hx - 18, this.hotY - 12, 36, 24, 6, C.hot, C.outline);
-        ctx.fillStyle = "#fff";
-        ctx.font = "bold 9px Inter, sans-serif";
-        ctx.fillText("HOT", hx, this.hotY + 2);
-      } else if (prg >= 220) {
-        this.hotActive = false;
-        this.hotY = 0;
-        if (prg < 221) crm.pulse();
-      }
-    }
-  }
-
-  class Agent {
-    constructor(x, y, color, role, stepTrig, dialogs) {
-      this.x = x;
-      this.y = y;
-      this.baseX = x;
-      this.baseY = y;
-      this.color = color;
-      this.role = role;
-      this.timer = Math.random() * 100;
-      this.stepTrig = stepTrig;
-      this.dialogs = dialogs;
-      this.hitAnimation = 0;
-    }
-    draw(ctx) {
-      this.timer += 0.03;
-      const cycle = 240;
-      const prg = (frame * 0.042) % cycle;
-      let isMoving = false;
-      let carryType = null;
-      let faceDir = 1;
-      const targetX = 20;
-      const targetY = 60 + this.stepTrig * 0.15;
-
-      if (prg >= this.stepTrig && prg < this.stepTrig + 22) {
-        const local = prg - this.stepTrig;
-        if (local < 11) {
-          isMoving = true;
-          faceDir = 1;
-          carryType = this.color;
-          this.x = this.baseX + (targetX - this.baseX) * (local / 11);
-          this.y = this.baseY + (targetY - this.baseY) * (local / 11);
-        } else if (local < 14) {
-          this.x = targetX;
-          this.y = targetY;
-        } else {
-          isMoving = true;
-          faceDir = -1;
-          const back = (local - 14) / 8;
-          this.x = targetX - (targetX - this.baseX) * back;
-          this.y = targetY - (targetY - this.baseY) * back;
-        }
-      } else {
-        this.x = this.baseX;
-        this.y = this.baseY;
-        const chips = [-180, -60, 60];
-        chips.forEach((cxo) => {
-          const drift = ((frame * 0.025 + cxo) % 180) - 90;
-          if (Math.abs(drift - (this.x - cxo)) < 18) this.hitAnimation = Math.sin(frame * 0.25) * 6;
-        });
-        if (frame % 220 === 0 && Math.random() < 0.12) {
-          createBubble(this.x, this.y - 24, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 260);
-        }
-      }
-
-      const bob = isMoving ? Math.abs(Math.sin(this.timer * 3)) * 2 : Math.sin(this.timer * 1.4);
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.lineJoin = "round";
-      let legL = 0, legR = 0;
-      if (isMoving) {
-        const w = this.timer * 6;
-        legL = Math.sin(w) * 5;
-        legR = Math.sin(w + Math.PI) * 5;
-      }
-      drawRR(ctx, -10, -5 + Math.max(0, legL), 8, 14, 2, C.outline, null);
-      drawRR(ctx, -12, 5 + Math.max(0, legL), 12, 6, 2, C.outline, null);
-      drawRR(ctx, 2, -5 + Math.max(0, legR), 8, 14, 2, C.outline, null);
-      drawRR(ctx, 0, 5 + Math.max(0, legR), 12, 6, 2, C.outline, null);
-      drawRR(ctx, -15, -12 - bob, 30, 20, 6, this.color, C.outline);
-      const hx = 0, hy = -28 - bob;
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(hx, hy, 12, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = C.outline;
-      ctx.stroke();
-      ctx.save();
-      ctx.scale(faceDir, 1);
-      ctx.fillStyle = "#fff";
-      ctx.beginPath();
-      ctx.arc(hx + 4, hy - 2, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(hx - 4, hy - 2, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = C.outline;
-      ctx.beginPath();
-      ctx.arc(hx + 5, hy - 2, 2, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI * 2);
-      ctx.fill();
-      if (this.role === "1_architect") {
-        ctx.strokeStyle = C.outline;
-        ctx.strokeRect(hx + 1, hy - 5, 6, 6);
-        ctx.strokeRect(hx - 7, hy - 5, 6, 6);
-      } else if (this.role === "2_seo") {
-        drawRR(ctx, hx - 12, hy - 14, 24, 8, [6, 6, 0, 0], C.outline, null);
-      } else if (this.role === "3_coder") {
-        ctx.fillStyle = C.outline;
-        ctx.fillRect(hx - 8, hy - 10, 16, 3);
-        ctx.fillRect(hx - 6, hy - 6, 12, 3);
-      } else if (this.role === "4_designer") {
-        drawRR(ctx, hx - 14, hy - 12, 28, 6, 3, "#f43f5e", C.outline);
-      } else if (this.role === "5_deployer") {
-        ctx.strokeStyle = C.outline;
-        ctx.beginPath();
-        ctx.arc(hx, hy, 14, Math.PI, Math.PI * 2);
-        ctx.stroke();
-      }
-      ctx.restore();
-      if (carryType) drawRR(ctx, -18 * faceDir, -18 - bob, 16, 16, 2, carryType, C.outline);
-      ctx.restore();
-      if (!isMoving) this.hitAnimation *= 0.85;
-    }
-  }
-
-  const entities = [];
-  const bubbles = [];
-  const river = new LeadRiver();
-  const radar = new IntentRadar();
-  const hub = new LeadScoringHub(40, -80);
-  const crm = new CrmOutbox(-200, 40);
-
-  entities.push(river);
-  entities.push(radar);
-  entities.push(crm);
-  entities.push(hub);
-  entities.push(new Agent(-280, 100, C.agentYellow, "1_architect", 18, ["Порог MQL: 62", "Правила скоринга", "Сегмент B2B"]));
-  entities.push(new Agent(-160, 20, C.agentGreen, "2_seo", 58, ["UTM из рекламы", "Источник: Telegram", "Тег «срочно»"]));
-  entities.push(new Agent(-40, 110, C.agentBlue, "3_coder", 98, ["Webhook в CRM", "Поле score OK", "Дубль отсечён"]));
-  entities.push(new Agent(100, 30, C.agentPink, "4_designer", 138, ["HOT — красный", "Холодный — серый", "Карточка читаема"]));
-  entities.push(new Agent(180, 100, C.agentPurple, "5_deployer", 178, ["Задача менеджеру", "Слот CRM занят", "Шум отфильтрован"]));
-
-  function createBubble(x, y, text, customLife = 280) {
-    bubbles.push({ x, y, text, life: customLife, maxLife: customLife });
-  }
-
-  function engineloop() {
-    frame++;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-    entities.sort((a, b) => (a.y || 0) - (b.y || 0));
-    entities.forEach((e) => e.draw(ctx));
-
-    const prg = (frame * 0.042) % 240;
-    if (prg >= 16 && prg < 16.08) createBubble(-280, 60, "1. Правила скоринга");
-    if (prg >= 56 && prg < 56.08) createBubble(-160, -10, "2. Источник и UTM");
-    if (prg >= 96 && prg < 96.08) createBubble(-40, 70, "3. Интеграция CRM");
-    if (prg >= 136 && prg < 136.08) createBubble(100, 0, "4. Приоритет в UI");
-    if (prg >= 176 && prg < 176.08) createBubble(180, 70, "5. HOT в работу");
-    if (prg >= 200 && prg < 200.08) createBubble(40, 120, "Score 87 → менеджеру");
-
-    ctx.font = "bold 11px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    for (let i = bubbles.length - 1; i >= 0; i--) {
-      const bub = bubbles[i];
-      bub.life--;
-      if (bub.life <= 0) {
-        bubbles.splice(i, 1);
-        continue;
-      }
-      let alpha = Math.min(1, bub.life / 30);
-      if (bub.life > bub.maxLife - 10) alpha = (bub.maxLife - bub.life) / 10;
-      ctx.globalAlpha = alpha;
-      const tw = ctx.measureText(bub.text).width + 16;
-      const th = 20;
-      const bx = bub.x;
-      const by = bub.y - (bub.maxLife - bub.life) * 0.04;
-      drawRR(ctx, bx - tw / 2, by - th, tw, th, 6, C.bubbleBg, C.outline);
-      ctx.fillStyle = C.outline;
-      ctx.fillText(bub.text, bx, by - th / 2);
-      ctx.globalAlpha = 1;
-    }
-    ctx.restore();
-    requestAnimationFrame(engineloop);
-  }
-  document.fonts.ready.then(() => engineloop());
-});
-</script>
 </section>
 
 <section class="nero-ai-section nero-ai-section-tight ai-kvalifikaciya-intro" aria-label="Введение">
