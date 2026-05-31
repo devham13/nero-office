@@ -1,79 +1,86 @@
-# Новая дизайн-система Meta Journal / Neurinix для AI-страниц
+# Дизайн-система AI-лендингов Meta Journal
 
-Цель: все новые коммерческие страницы и главная страница должны собираться в визуальном стиле текущего `https://meta-journal.ru/`: тёмный премиальный AI/B2B интерфейс, стеклянные карточки, мягкие неоновые акценты, dashboard-блоки, hover-подсказки, схемы автоматизации, KPI и лёгкая анимация без визуального мусора.
+Цель: коммерческие страницы и главная в **одном визуальном языке** — тёмный премиальный AI/B2B интерфейс, glass-карточки, неоновые акценты, dashboard в hero, pill-шапка, лёгкая анимация.
 
-## Главные файлы
+## Файлы (источник правды)
 
-- `shared/longread-page-design-reference.css` — новый эталон CSS.
-- `shared/longread-page-reveal.js` — reveal, hover/tap tooltip, счётчики KPI.
-- `wordpress/front-page-neurinix-ai-home.php` — готовый шаблон главной страницы WordPress.
+| Файл | Назначение |
+| --- | --- |
+| `shared/longread-page-design-reference.css` | Токены, `.nero-ai-home-page`, hero, секции, проза, TOC, блок Бориса |
+| `shared/longread-page-kadence-layout.css` | Сброс Kadence: padding, **один скролл**, скрытие `#masthead` |
+| `shared/nero-ai-floating-header.css` + `.js` + `.inc.php` | Pill-шапка как на главной сайта |
+| `shared/longread-page-reveal.js` | Reveal, tooltips, KPI-счётчики |
+| `shared/longread-page-wordpress-bootstrap.inc.php` | `body.nero-ai-landing`, `nero_ai_echo_theme_styles()` |
+| `wordpress-theme/page-{slug}.php` | Готовый шаблон страницы |
+| `wordpress-theme/README.md` | Список файлов для деплоя в тему |
+
+При публикации копировать `shared/*` → активная тема Kadence (см. `wordpress-theme/README.md`).
 
 ## Корневая обёртка
 
-Каждая новая страница должна иметь:
-
 ```html
 <main id="primary" class="site-main nero-ai-home-page" role="main" tabindex="-1">
-  ...
+```
+
+- Класс **`nero-ai-home-page`** обязателен (не `metrika-skill-page`, не светлый `ym-*`).
+- На `<body>` через bootstrap: **`nero-ai-landing`**.
+
+## Шапка (pill)
+
+1. Подключить `longread-page-kadence-layout.css` — скрывает Kadence `#masthead`.
+2. После `get_header()` — `require .../nero-ai-floating-header.inc.php`.
+3. Задать **`$nero_ai_header_links`** — якоря **этой** страницы (не копировать меню главной).
+4. CTA: `$primary_cta_label` / `$primary_cta_url`, опционально `$secondary_*` (ghost-кнопка).
+5. Hero: отступ сверху **`clamp(108px, 14vh, 148px)`** под фиксированную шапку (уже в reference CSS).
+
+## Hero
+
+- **Не** светлый fullscreen-white-office / canvas hero по умолчанию.
+- Паттерн: **`nero-ai-hero`** + **`nero-ai-hero-grid`**: слева оффер и CTA, справа **`nero-ai-dashboard`** (метрики, live-поток задач).
+- Canvas от Алины — только если явно в handoff; иначе dashboard как на главной.
+
+## Лонгрид (тело)
+
+- Секции: **`nero-ai-section`**, чередование **`nero-ai-section-alt`**.
+- Текст: **`nero-ai-prose`** на `<section>` (таблицы, callout, steps — классы из reference CSS).
+- Введение после hero: **`nero-ai-intro-grid`** (лид слева + терминал/чипы справа).
+- Оглавление: **`nero-ai-toc`** (pill-ссылки по центру под вводным блоком).
+- Блок Бориса: обёртка **`nero-ai-boris-block`**, внутри HTML от Бориса без правки canvas/script.
+
+## Скролл (критично)
+
+- **Не** задавать `#primary.nero-ai-home-page { overflow-x: hidden; min-height: 100vh }` — даёт **двойной скролл**.
+- Использовать `longread-page-kadence-layout.css`: `overflow: visible` на main, `overflow-x: clip` на `html`/`body`.
+
+## CTA на странице
+
+- В контенте: **`nero-ai-btn-primary`** / **`nero-ai-btn-secondary`**.
+- Fallback якоря: `#audit-30-min`, `#vnedrenie-pod-kluch` (если env `PRIMARY_CTA_URL` пуст).
+
+## PHP-шаблон (скелет)
+
+```php
+require .../longread-page-wordpress-bootstrap.inc.php';
+get_header();
+require get_stylesheet_directory() . '/nero-ai-floating-header.inc.php';
+?>
+<style><?php nero_ai_echo_theme_styles(); ?></style>
+<main id="primary" class="site-main nero-ai-home-page" ...>
+  <!-- hero, секции, boris, faq -->
 </main>
+<?php nero_ai_echo_theme_scripts(); ?>
+<?php get_footer(); ?>
 ```
-
-Не использовать старый класс `metrika-skill-page` для новых коммерческих страниц. Новый базовый класс: `.nero-ai-home-page`. Все новые компоненты — с префиксом `.nero-ai-*`.
-
-## Визуальный стиль
-
-- Фон: тёмный `#050711` / `#080b17`, radial glow, тонкая grid-сетка.
-- Типографика: крупные H1/H2, tight letter-spacing, Inter/system fonts.
-- Карточки: glassmorphism, blur, border `rgba(255,255,255,.10)`, radius 18–34px.
-- Акценты: cyan `#79f2ff`, violet `#8b5cf6`, green `#22c55e`.
-- Анимация: только лёгкая — reveal, pulse live-pill, slow glow, flow-line, без перегруза.
-- CTA: `nero-ai-btn-primary` и `nero-ai-btn-secondary`.
-
-## Обязательная структура главной/коммерческой страницы
-
-1. Hero: оффер + CTA + справа dashboard/схема автоматизации.
-2. Боли бизнеса: заявки, CRM, звонки, ручной труд, скорость ответа.
-3. Услуги/что внедряем: AI-агенты, CRM, телефония, Make/n8n, RAG, аналитика.
-4. AI-операционный центр: путь заявки от входа до отчёта руководителю.
-5. Тренды 2026: agentic automation, AI в CRM, voice AI, RAG, human-in-the-loop, no-code/API.
-6. Процесс внедрения: аудит → сценарии → интеграции → тест → запуск.
-7. Ниши: онлайн-школы, медицина, недвижимость, e-commerce, B2B, сервисные компании.
-8. Результаты/KPI: без завышенных обещаний; использовать формулировки «потенциал», «пилот», «зависит от процесса».
-9. SEO-блок: естественные ключи по AI-автоматизации бизнеса.
-10. FAQ.
-11. Финальный CTA.
-
-## Интерактивность
-
-Для подсказок на hover/tap:
-
-```html
-<div class="nero-ai-card" data-nero-tooltip="Текст подсказки">...</div>
-```
-
-Для появления при скролле:
-
-```html
-<div class="nero-ai-reveal nero-ai-delay-1">...</div>
-```
-
-Для счётчиков:
-
-```html
-<strong data-nero-count="38" data-nero-prefix="−" data-nero-suffix="%">−0%</strong>
-```
-
-JS из `shared/longread-page-reveal.js` должен быть вставлен внизу страницы или подключён в теме.
-
-## Главное требование к агентам
-
-Новые страницы должны быть коммерческими: если новость про внедрение AI в бизнес, страница должна показывать, какую похожую услугу можно предложить клиенту: что автоматизировать, кому подходит, какую боль закрывает, как внедряется, какие интеграции нужны, какой CTA.
 
 ## Запреты
 
-- Не делать светлый «метрика»-дизайн для новых AI-страниц.
-- Не перегружать hero десятками объектов.
-- Не обещать точный ROI без расчёта.
-- Не удалять `main#primary`.
-- Не вставлять длинную простыню текста сразу после hero.
-- Не использовать классы Tailwind без собственного CSS.
+- Светлый «метрика»/ym-лонгрид для новых AI-страниц.
+- Kadence `#masthead` вместе с pill-шапкой (две шапки).
+- Двойной вертикальный скролл.
+- Удалять `main#primary`, ломать `<canvas>`/`<script>` hero и Бориса.
+- Tailwind-only классы без своего CSS в теме.
+
+## Эталон в проде
+
+- Главная: pill-шапка + тёмный hero-dashboard.
+- Лонгрид: `page-vnedrenie-ai-obrabotka-zayavok-s-sayta.php` (после синхронизации с `shared/`).

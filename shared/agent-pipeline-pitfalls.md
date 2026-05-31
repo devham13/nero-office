@@ -10,6 +10,9 @@
 |--------|---------|------------|
 | **Светлая полоса** между шапкой и тёмным/цветным hero | В `_single.scss` темы у `.site-main` задан **`padding-top: 120px`** (отступ под фиксированный header). Фон там — цвет фона контента (**светлый**). | В **каждом** шаблоне `page-{slug}.php` с полноэкранным hero добавлять сброс, как в **`page-vibecoding.php`**: селекторы `#primary, .site-main, .site-content, #content, .content-area { padding-top: 0 !important; margin-top: 0 !important; }` и при необходимости `style="padding-top:0"` на `<main id="primary">`. **Наташа** включает это в общий `<style>` страницы, если hero первый блок. |
 | Контент «уезжает» вниз на обычных страницах | То же правило не трогать глобально в `style.css` темы — только в шаблонах лонгридов с hero. | Локально в PHP-шаблоне страницы. |
+| **Две шапки** (Kadence + pill) | На лонгриде виден белый header темы и плавающее меню | `longread-page-kadence-layout.css` + `nero-ai-floating-header.inc.php`; body class **`nero-ai-landing`**. |
+| **Двойной вертикальный скролл** | `overflow-x: hidden` на `main` + `min-height: 100vh` превращает `overflow-y` в `auto` | `longread-page-kadence-layout.css`: `overflow: visible` на main, `overflow-x: clip` на html/body. |
+| **Светлый лонгрид** вместо главной | Наташа верстала в `ym-*` / metrika | Только **`nero-ai-home-page`** + `longread-page-design-reference.css`. |
 
 ---
 

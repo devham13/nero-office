@@ -1,0 +1,61 @@
+/**
+ * Kadence / WordPress layout overrides для AI-лендингов (.nero-ai-landing на body).
+ * Подключать ПЕРЕД longread-page-design-reference.css.
+ */
+
+.breadcrumbs,
+.breadcrumb,
+.breadcrumb-list,
+.breadcrumb-item,
+nav[aria-label="Хлебные крошки"],
+.woocommerce-breadcrumb,
+.rank-math-breadcrumb,
+.rank-math-breadcrumbs,
+.yoast-breadcrumb,
+.entry-header,
+.page-title-section {
+  display: none !important;
+}
+
+body.nero-ai-landing #primary,
+body.nero-ai-landing .site-main,
+body.nero-ai-landing .site-content,
+body.nero-ai-landing #content,
+body.nero-ai-landing .content-area {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Скрыть шапку Kadence — используется pill .nero-ai-header */
+body.nero-ai-landing #masthead,
+body.nero-ai-landing .site-header,
+body.nero-ai-landing header.site-header,
+body.nero-ai-landing .kadence-header,
+body.nero-ai-landing #mobile-header {
+  display: none !important;
+}
+
+/* Один скролл документа (не overflow-x:hidden на main — иначе второй скролл) */
+html {
+  overflow-x: clip;
+}
+body.nero-ai-landing {
+  overflow-x: clip;
+}
+body.nero-ai-landing #wrapper,
+body.nero-ai-landing #inner-wrap,
+body.nero-ai-landing .site,
+body.nero-ai-landing .site-content,
+body.nero-ai-landing .content-area,
+body.nero-ai-landing #content,
+body.nero-ai-landing .content-wrap,
+body.nero-ai-landing .entry-content-wrap,
+body.nero-ai-landing .entry-content {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+body.nero-ai-landing .content-area {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
