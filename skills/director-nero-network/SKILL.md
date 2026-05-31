@@ -60,16 +60,9 @@ description: Директор — Кирилл → Коля||Артём → Же
    - Task(alina) — «только **hero**; Canvas, CSS inline; светлый фон, тёмная типографика; новая сцена, чеклист отличий (skill Алины). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/alina.md`; не пиши в handoff.»
    - Task(boris) — «**блок в теле статьи, не hero** — продолжение или контраст к теме; **редакционная композиция** (сплит/сетка/карта, не узкая колонка по центру); свой canvas id и движок; якорь для Наташи (skill Бориса). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/boris.md`; не пиши в handoff.»
 9. **Снова прочитай** оба фрагмента и проверь маркеры `=== АЛИНА (HERO) ===` и `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`. Если одного нет — дозапускай только отсутствующего, не переходя к Наташе. После проверки Директор сам дописывает оба фрагмента в handoff в порядке: Алина → Борис.
-10. Task(natasha) — «полная страница: hero Алины → контент → **вставь блок Бориса** по якорю из handoff; сохрани все canvas/script и рекламу Артура; не затемняй hero; у всех `<img>` есть **alt**, у внешних ссылок с `target="_blank"` — **rel="noopener noreferrer"**»
-11. Task(yura) — «SSH/SCP/SFTP/FTP → page-{slug}.php, НЕ WP API. Сначала проверить `stylesheet/template` и получить реальный upload-путь через `get_stylesheet_directory()`; если env-пути отличаются, грузить в runtime-путь WordPress. Проверить права файла/каталогов, `_wp_page_template`, `post_excerpt = Description`, кэш и live HTML. После публикации записать `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, а если тема пришла от Кирилла — обновить `<PROJECT_ROOT>/shared/kirill-news-ledger.md` статусом `published` и URL; обязательно дописать блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` в handoff с URL и runtime-путём темы»
-12. **До QA** сделай быструю sanity-check проверку живого HTML и handoff: на URL должны быть уникальные маркеры кастомного шаблона (`{slug}-page`, hero-class, `canvas id`), а в `nero-network-handoff.md` должен быть блок `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Если блока Юры нет — не запускай Макса/Лёню, дозапусти Юру только на запись отчёта/журналов. Если HTML похож на дефолтный `page.php` (`<div class="container"><nav class="breadcrumbs">` и пустой `entry-content`) — это ещё **не публикация**, сразу возвращай на Юру с проверкой активной темы / `_wp_page_template` / кэша.
-13. **ПАРАЛЛЕЛЬНО** (два Task в одном сообщении — оба опираются на **уже опубликованный URL**, друг друга не ждут):
-   - Task(qa) — «Макс: hero, блок Бориса (если есть), canvas/script, контент, консоль, **проверка alt у img и имён ссылок** (баннер из AD_BANNER_* и др.). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/qa.md`; не пиши в handoff.»
-   - Task(lenya) — «Лёня: финальный Google+Yandex+GEO аудит URL; рекомендации Юре. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/lenya.md`; не пиши в handoff.» (если тип `lenya` недоступен — **generalPurpose** + skill **seo-auditor-lenya**)
-14. Директор читает `qa.md` и `lenya.md`, проверяет маркеры, переносит в handoff по одному блоку `=== МАКС (QA) ===` и `=== ЛЁНЯ (SEO-АУДИТ) ===`. Дубли одноимённых блоков запрещены.
-15. Прочитай файл:
-   - **Макс ✅ + Лёня ✅** → ссылку пользователю
-   - **если Макс ❌ или Лёня ❌** → Task(yura) с описанием проблем → снова **параллельно** Task(qa) + Task(lenya). Макс 2 попытки.
+10. Task(natasha) — полная страница → `wordpress/page-{slug}.php`; `=== НАТАША (HTML СТРАНИЦЫ) ===` ✅; без публикации.
+11. **Стоп по умолчанию** («запусти проект»): коммит, ledger `selected`, ответ slug + путь. Не вызывать yura/qa/lenya.
+12. **Фаза публикации** (только «опубликуй», `nero-publish-page`): Task(yura) → published-pages + ledger `published` → Task(qa)||Task(lenya) → до 2 циклов при ❌.
 
 ## Почему параллельно только эти пары
 
