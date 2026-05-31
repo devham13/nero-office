@@ -978,3 +978,15 @@
   .nero-ai-boris-block .boris-canvas-wrap,
   .nero-ai-boris-block canvas { min-height: 360px; }
 }
+
+.nero-ai-boris-block .boris-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nero-ai-boris-block .boris-pill--hot .boris-pill-dot { background: #ef4444; }
+.nero-ai-boris-block .boris-pill--warm .boris-pill-dot { background: #f59e0b; }
+.nero-ai-boris-block .boris-pill--cool .boris-pill-dot { background: #3b82f6; }
+.nero-ai-boris-block .boris-pill--junk .boris-pill-dot { background: #94a3b8; }
+
