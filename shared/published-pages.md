@@ -9,3 +9,4 @@
 | 2026-05-31 | ai-kvalifikaciya-lidov | /ai-kvalifikaciya-lidov/ | AI-квалификация лидов | page-ai-kvalifikaciya-lidov.php |
 | 2026-05-31 | ai-follow-up-menedzher-povtornye-kasaniya | /ai-follow-up-menedzher-povtornye-kasaniya/ | AI follow-up менеджер: повторные касания и дожим в CRM | page-ai-follow-up-menedzher-povtornye-kasaniya.php |
 | 2026-06-03 | ai-assistent-ropa-kontrol-sdelok-crm | /ai-assistent-ropa-kontrol-sdelok-crm/ | AI-ассистент РОПа: контроль сделок и рисков в CRM | page-ai-assistent-ropa-kontrol-sdelok-crm.php |
+| 2026-06-04 | ai-agent-vozvrat-poteryannyh-lidov | /ai-agent-vozvrat-poteryannyh-lidov/ | AI-агент для возврата потерянных лидов: реактивация CRM | page-ai-agent-vozvrat-poteryannyh-lidov.php |

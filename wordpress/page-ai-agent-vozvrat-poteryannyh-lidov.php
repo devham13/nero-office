@@ -46,9 +46,8 @@ require $theme_dir . '/nero-ai-floating-header.inc.php';
 
 ?>
 
-<style>
 <?php nero_ai_echo_theme_styles(); ?>
-
+<style>
 /* Page-specific: hero + intro */
 #crm-reactivation-hero {
   min-height: 100vh;
@@ -86,6 +85,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1">Начало контента</span>
 <section class="nero-ai-hero" id="crm-reactivation-hero" aria-labelledby="crm-reactivation-hero-title">
 <div class="nero-ai-container nero-ai-hero-grid">
     <div class="nero-ai-hero-copy nero-ai-reveal">
