@@ -247,6 +247,13 @@ def main() -> int:
             comment="Автоматическая запись после публикации",
         )
 
+        try:
+            from shared.indexnow_notifier import notify_indexnow
+        except ImportError:
+            from indexnow_notifier import notify_indexnow
+
+        notify_indexnow(public_url)
+
     print(f"Published: {public_url}")
     return 0
 
