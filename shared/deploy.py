@@ -225,11 +225,28 @@ def main() -> int:
         ssh.close()
 
     public_url = f"{public_site_url().rstrip('/')}/{slug}/"
+    live_ok = True
     if not args.skip_live_check:
         try:
             verify_live(public_url, slug)
         except (urllib.error.URLError, RuntimeError) as exc:
+            live_ok = False
             print(f"Live check warning: {exc}")
+
+    if live_ok:
+        try:
+            from shared.google_sheets_logger import log_publication_to_google_sheet
+        except ImportError:
+            from google_sheets_logger import log_publication_to_google_sheet
+
+        log_publication_to_google_sheet(
+            topic=args.title,
+            url=public_url,
+            slug=slug,
+            status="published",
+            agent="deploy.py",
+            comment="Автоматическая запись после публикации",
+        )
 
     print(f"Published: {public_url}")
     return 0
