@@ -8,3 +8,4 @@
 | 2026-05-31 | ai-obrabotka-zayavok-s-sayta | /ai-obrabotka-zayavok-s-sayta/ | AI-агент для обработки заявок с сайта | page-ai-obrabotka-zayavok-s-sayta.php |
 | 2026-05-31 | ai-kvalifikaciya-lidov | /ai-kvalifikaciya-lidov/ | AI-квалификация лидов | page-ai-kvalifikaciya-lidov.php |
 | 2026-05-31 | ai-follow-up-menedzher-povtornye-kasaniya | /ai-follow-up-menedzher-povtornye-kasaniya/ | AI follow-up менеджер: повторные касания и дожим в CRM | page-ai-follow-up-menedzher-povtornye-kasaniya.php |
+| 2026-06-03 | ai-assistent-ropa-kontrol-sdelok-crm | /ai-assistent-ropa-kontrol-sdelok-crm/ | AI-ассистент РОПа: контроль сделок и рисков в CRM | page-ai-assistent-ropa-kontrol-sdelok-crm.php |

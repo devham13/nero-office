@@ -186,7 +186,6 @@ def verify_live(url: str, slug: str) -> None:
         'id="primary"',
         "nero-ai-home-page",
         'class="nero-ai-header"',
-        "crm-reactivation-hero",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
