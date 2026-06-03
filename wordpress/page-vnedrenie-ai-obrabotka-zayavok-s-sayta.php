@@ -20,6 +20,11 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
     echo '<meta property="og:type" content="article" />' . "\n";
 }, 1);
 
+$nero_bootstrap = get_stylesheet_directory() . '/partials/nero-ai-longread-bootstrap.php';
+if (is_readable($nero_bootstrap)) {
+    require_once $nero_bootstrap;
+}
+
 get_header();
 ?>
 
@@ -198,7 +203,7 @@ get_header();
   min-height: min(980px, calc(100dvh - 1px));
   display: grid;
   align-items: center;
-  padding: clamp(72px, 9vw, 132px) 0 clamp(44px, 7vw, 86px);
+  padding: clamp(108px, 14vh, 148px) 0 clamp(44px, 7vw, 86px);
   isolation: isolate;
 }
 .nero-ai-hero::before {
@@ -733,28 +738,13 @@ nav[aria-label="Хлебные крошки"],
   margin-top: 0 !important;
 }
 
-/* Kadence transparent header: menu must stay visible on dark nero-ai hero */
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header {
-  z-index: 200;
+/* Шапка как на главной: скрываем Kadence, показываем .nero-ai-header */
+body.nero-ai-landing-shell #masthead,
+body.nero-ai-landing-shell #mobile-header {
+  display: none !important;
 }
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-main-header-wrap .site-header-row-container-inner,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .site-header-row-container-inner {
-  background: rgba(5, 7, 17, 0.92) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item > a,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-title,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-title a,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .menu-toggle-open,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .mobile-menu-label {
-  color: #e6edf7 !important;
-}
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item > a:hover,
-body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item.current-menu-item > a {
-  color: #79f2ff !important;
+body.nero-ai-landing-shell {
+  padding-top: 0 !important;
 }
 
 .vnedrenie-ai-hero-stage {
@@ -1012,6 +1002,12 @@ body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayt
 </style>
 
 <main id="primary" class="site-main vnedrenie-ai-obrabotka-zayavok-s-sayta-page nero-ai-home-page" role="main" tabindex="-1">
+<?php
+$nero_header = get_stylesheet_directory() . '/partials/nero-ai-site-header.php';
+if (is_readable($nero_header)) {
+    require $nero_header;
+}
+?>
 <section class="nero-ai-hero" id="lead-flow-dispatch" aria-labelledby="vnedrenie-ai-hero-title">
   <div class="nero-ai-container nero-ai-hero-grid">
     <div class="nero-ai-hero-copy nero-ai-reveal">

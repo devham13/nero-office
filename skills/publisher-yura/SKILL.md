@@ -126,6 +126,14 @@ get_header(); ?>
    - файл шаблона: `644`;
    - каталог темы и родительские каталоги до `wp-content/themes`: должны позволять веб-серверу обход (`755` или рабочий эквивалент хостинга).
 
+   **Для лонгридов `.nero-ai-home-page`** `shared/deploy.py` дополнительно заливает общие файлы шапки (как на главной):
+   - `assets/css/nero-ai-site-header.css`
+   - `assets/js/nero-ai-site-header.js`
+   - `partials/nero-ai-site-header.php`
+   - `partials/nero-ai-longread-bootstrap.php`
+
+   Live-проверка: в HTML есть `id="nero-ai-header"`, Kadence `#masthead` скрыт.
+
    Если файл есть на сервере, но WordPress всё равно отдаёт `page.php`, первым делом проверь: **не тот каталог**, права файла, права родительских каталогов.
 
    Пример FTP-паттерна:

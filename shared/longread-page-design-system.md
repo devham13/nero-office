@@ -72,7 +72,15 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 ## Hero на лонгридах (`.nero-ai-home-page`)
 
 - Первый экран **в том же тёмном стиле**, что и страница: секция `.nero-ai-hero`, типографика `.nero-ai-hero-copy`, CTA `.nero-ai-btn-*`, справа `.nero-ai-dashboard` с canvas внутри.
-- **Kadence transparent header:** на тёмном hero меню Kadence по умолчанию тёмное — в шаблоне страницы обязательно переопредели фон `#masthead` и цвет ссылок `.main-navigation a` (светлый текст + cyan hover), иначе меню «пропадает».
+- **Шапка как на главной:** на каждом лонгриде обязательна плавающая `.nero-ai-header` (pill-меню: Услуги, Как работает, Процесс…). Kadence `#masthead` / `#mobile-header` **скрываются** через body class `nero-ai-landing-shell`.
+- Общие файлы (деплоятся в тему через `deploy.py`):
+  - `shared/nero-ai-site-header.css`
+  - `shared/nero-ai-site-header.js`
+  - `wordpress/partials/nero-ai-site-header.php`
+  - `wordpress/partials/nero-ai-longread-bootstrap.php` — подключать **до** `get_header()` в `page-{slug}.php`.
+- В `<main>` сразу после открытия тега: `require get_stylesheet_directory() . '/partials/nero-ai-site-header.php'`.
+- Отступ hero сверху: `padding: clamp(108px, 14vh, 148px) 0 …` — зазор под фиксированную шапку.
+- **Запрещено** переопределять Kadence `#masthead` для «видимости меню» — это не то меню, что на главной.
 - **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
 - Canvas-анимация рисуется **на тёмном фоне** dashboard-shell; палитра — cyan/violet/green из `:root`.
 
