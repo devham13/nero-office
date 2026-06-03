@@ -45,6 +45,7 @@ URL: https://...
 Способ: FTP → page-{slug}.php в тему ${WP_THEME_SLUG}
 Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
+Google Таблица: строка N → колонка «Ссылка на сайт» = URL / ❌ не обновлено (причина)
 ```
 
 ## Главное правило

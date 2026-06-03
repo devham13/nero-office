@@ -4,6 +4,8 @@
 !.env.example
 **/*.local
 **/hosting-credentials.local
+google-service-account.json
+**/google-service-account.json
 *.credentials.local
 *.local.ps1
 *.local.sh

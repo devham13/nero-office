@@ -5,7 +5,7 @@ description: Директор — Кирилл → Коля||Артём → Же
 
 # Директор Nero Network Office Page
 
-Перед запуском пайплайна страницы **просмотри** `nero-network-office-page/shared/agent-pipeline-pitfalls.md` (типичные сбои: padding темы, Task Лёни, FTP vs API) — снижает повторные итерации.
+Перед запуском пайплайна страницы **просмотри** `shared/agent-pipeline-pitfalls.md` (типичные сбои: padding темы, Task Лёни, FTP vs API) — снижает повторные итерации.
 
 ## Файл обмена
 
@@ -39,7 +39,7 @@ description: Директор — Кирилл → Коля||Артём → Же
 
 ## Канонические журналы и фрагменты
 
-- published pages: `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
+- published pages: `<PROJECT_ROOT>/shared/published-pages.md`
 - ledger Кирилла: `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
 - временные фрагменты параллельных агентов: `<PROJECT_ROOT>/.cursor/nero-network-fragments/`
 
@@ -48,7 +48,7 @@ description: Директор — Кирилл → Коля||Артём → Же
 ## Алгоритм
 
 1. **Write** → `<PROJECT_ROOT>/.cursor/nero-network-handoff.md` — **полная перезапись** (одна строка: `# Nero Network — новая сессия`). Также очисти/перезапиши фрагменты текущей сессии в `<PROJECT_ROOT>/.cursor/nero-network-fragments/`. Без этого **не** запускать Task. Запрещены search_replace/apply_patch для «очистки».
-2. Если пользователь просит **новость дня / актуальный инфоповод / самую горячую тему** или не дал точную тему страницы — Task(kirill) — «сам найди свежую новость по нейросетям/автоматизации, перед выбором прочитай `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, не бери дубли, проверь Wordstat и лидовый потенциал, выбери одну тему; запиши `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`; добавь строку `selected` в `<PROJECT_ROOT>/shared/kirill-news-ledger.md`; НЕ текст».
+2. Если пользователь просит **новость дня / актуальный инфоповод / самую горячую тему** или не дал точную тему страницы — Task(kirill) — «сам найди свежую новость по нейросетям/автоматизации, перед выбором прочитай `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/published-pages.md`, не бери дубли, проверь Wordstat и лидовый потенциал, выбери одну тему; запиши `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`; добавь строку `selected` в `<PROJECT_ROOT>/shared/kirill-news-ledger.md`; НЕ текст».
 3. Если Кирилл запускался — перечитай `nero-network-handoff.md` и проверь `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`. Если блока нет, статус `❌ БЛОКЕР` или нет строки `selected` в `<PROJECT_ROOT>/shared/kirill-news-ledger.md`, не запускай Колю/Артёма.
 4. **ПАРАЛЛЕЛЬНО**:
    - Task(seo-kolya) — «Тема: явная тема пользователя или победитель Кирилла. Wordstat, ядро, мета, структура. НЕ текст. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/kolya.md`; не пиши в handoff.»
@@ -57,11 +57,11 @@ description: Директор — Кирилл → Коля||Артём → Же
 6. Task(zhenya) — «ядро Коли + research Артёма + при наличии победитель Кирилла → лонгрид 8k–20k+»
 7. Task(artur) — «добавь главный CTA из `${PRIMARY_CTA_URL}`, уместное упоминание `${SECONDARY_CTA_URL}` при наличии и нижний баннер из `AD_BANNER_*` **по шаблону из advertiser-artur** (`alt`, `rel`, размеры у `<img>`)»
 8. **ПАРАЛЛЕЛЬНО** (два Task в одном сообщении):
-   - Task(alina) — «только **hero**; Canvas, CSS inline; светлый фон, тёмная типографика; новая сцена, чеклист отличий (skill Алины). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/alina.md`; не пиши в handoff.»
+   - Task(alina) — «только **hero**; класс **`nero-ai-hero` без `--light`**; тёмная гамма ${SITE_BRAND} как в эталонном шаблоне follow-up; dashboard/Canvas справа; новая сцена, чеклист отличий (skill Алины). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/alina.md`; не пиши в handoff.»
    - Task(boris) — «**блок в теле статьи, не hero** — продолжение или контраст к теме; **редакционная композиция** (сплит/сетка/карта, не узкая колонка по центру); свой canvas id и движок; якорь для Наташи (skill Бориса). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/boris.md`; не пиши в handoff.»
 9. **Снова прочитай** оба фрагмента и проверь маркеры `=== АЛИНА (HERO) ===` и `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`. Если одного нет — дозапускай только отсутствующего, не переходя к Наташе. После проверки Директор сам дописывает оба фрагмента в handoff в порядке: Алина → Борис.
-10. Task(natasha) — «полная страница: hero Алины → контент → **вставь блок Бориса** по якорю из handoff; сохрани все canvas/script и рекламу Артура; не затемняй hero; у всех `<img>` есть **alt**, у внешних ссылок с `target="_blank"` — **rel="noopener noreferrer"**»
-11. Task(yura) — «SSH/SCP/SFTP/FTP → page-{slug}.php, НЕ WP API. Сначала проверить `stylesheet/template` и получить реальный upload-путь через `get_stylesheet_directory()`; если env-пути отличаются, грузить в runtime-путь WordPress. Проверить права файла/каталогов, `_wp_page_template`, `post_excerpt = Description`, кэш и live HTML. После публикации записать `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, а если тема пришла от Кирилла — обновить `<PROJECT_ROOT>/shared/kirill-news-ledger.md` статусом `published` и URL; обязательно дописать блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` в handoff с URL и runtime-путём темы»
+10. Task(natasha) — «полная страница: hero Алины (`nero-ai-hero` без `--light`) → контент → **вставь блок Бориса** по якорю из handoff; `nero_ai_echo_theme_styles()`; сохрани все canvas/script и рекламу Артура; **не** добавляй `nero-ai-hero--light`; у всех `<img>` есть **alt**, у внешних ссылок с `target="_blank"` — **rel="noopener noreferrer"**»
+11. Task(yura) — «**Автоматически после Наташи** (без отдельной команды deploy). SSH/SCP/SFTP/FTP → page-{slug}.php, НЕ WP API. Сначала проверить `stylesheet/template` и получить реальный upload-путь через `get_stylesheet_directory()`; если env-пути отличаются, грузить в runtime-путь WordPress. Проверить права файла/каталогов, `_wp_page_template`, `post_excerpt = Description`, кэш и live HTML. После публикации записать `<PROJECT_ROOT>/shared/published-pages.md`, а если тема пришла от Кирилла — обновить `<PROJECT_ROOT>/shared/kirill-news-ledger.md` статусом `published` и URL; обязательно дописать блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` в handoff с URL и runtime-путём темы»
 12. **До QA** сделай быструю sanity-check проверку живого HTML и handoff: на URL должны быть уникальные маркеры кастомного шаблона (`{slug}-page`, hero-class, `canvas id`), а в `nero-network-handoff.md` должен быть блок `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Если блока Юры нет — не запускай Макса/Лёню, дозапусти Юру только на запись отчёта/журналов. Если HTML похож на дефолтный `page.php` (`<div class="container"><nav class="breadcrumbs">` и пустой `entry-content`) — это ещё **не публикация**, сразу возвращай на Юру с проверкой активной темы / `_wp_page_template` / кэша.
 13. **ПАРАЛЛЕЛЬНО** (два Task в одном сообщении — оба опираются на **уже опубликованный URL**, друг друга не ждут):
    - Task(qa) — «Макс: hero, блок Бориса (если есть), canvas/script, контент, консоль, **проверка alt у img и имён ссылок** (баннер из AD_BANNER_* и др.). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/qa.md`; не пиши в handoff.»
@@ -90,9 +90,9 @@ description: Директор — Кирилл → Коля||Артём → Же
 - **Артёму**: «Deep research 2026. НЕ текст.»
 - **Жене**: «Лонгрид на основе данных Коли и Артёма.»
 - **Артуру**: «Главный оффер — `${PRIMARY_CTA_URL}`, вторичный — `${SECONDARY_CTA_URL}` только уместно по смыслу, баннер — только из `AD_BANNER_*` по **skill advertiser-artur** (обязательны `alt` и `rel` у баннера).»
-- **Алине**: «Только hero; CSS inline; светлый hero; новая сцена; чеклист отличий»
+- **Алине**: «Только hero; **`nero-ai-hero` без `--light`**; тёмный ${SITE_BRAND}; dashboard справа; новая сцена; чеклист отличий»
 - **Борису**: «Не hero; блок в статье; **сплит или сетка + подпись**, не квадрат по центру; продолжение или контраст к Алине; свои id; якорь для Наташи»
-- **Наташе**: «Hero Алины первым; вставь блок Бориса по handoff; не удаляй canvas/script (оба блока); реклама Артура; не затемняй hero; все `<img>` с **alt**; внешние `target="_blank"` с **rel="noopener noreferrer"**»
+- **Наташе**: «Hero Алины первым (`nero-ai-hero` без `--light`); `nero_ai_echo_theme_styles()`; вставь блок Бориса по handoff; не удаляй canvas/script (оба блока); не добавляй `--light`; реклама Артура; все `<img>` с **alt**; внешние `target="_blank"` с **rel="noopener noreferrer"**»
 - **Юре**: «Инфраструктура берётся из env/secrets; хостинг и тема задаются при установке. Публикация только в **`${WP_THEME_SLUG}`**; перед выкладкой подтвердить `stylesheet/template`, после — проверить живой HTML на маркеры кастомного шаблона. НЕ WP API.»
 - **Юре**: «Грузи в **активную тему**, потом проверь live HTML на **маркеры шаблона**; если в HTML дефолтный `page.php`, проверь `_wp_page_template` и кэш.»
 - **Максу**: «Браузер: hero, блок Бориса (если есть), все canvas/script, контент, консоль; **нет img без alt**, ссылки-картинки с осмысленным доступным именем»

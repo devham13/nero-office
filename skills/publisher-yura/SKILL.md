@@ -252,6 +252,7 @@ URL: https://...
 Способ: FTP → page-{slug}.php в тему
 Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
+Google Таблица: строка N → «Ссылка на сайт» = URL ✓ / ❌ (причина)
 ```
 
 Если не можешь записать блок Юры в handoff, **не пиши «готово»**: верни `❌ БЛОКЕР` с причиной. Директор не должен запускать Макса и Лёню без этого блока.

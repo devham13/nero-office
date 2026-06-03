@@ -184,8 +184,8 @@ def create_or_update_page(
 def verify_live(url: str, slug: str) -> None:
     markers = (
         'id="primary"',
-        f"{slug}-page",
-        "kpmg-gateway-hero-canvas",
+        "nero-ai-home-page",
+        'class="nero-ai-header"',
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
@@ -224,11 +224,35 @@ def main() -> int:
         ssh.close()
 
     public_url = f"{public_site_url().rstrip('/')}/{slug}/"
+    live_ok = True
     if not args.skip_live_check:
         try:
             verify_live(public_url, slug)
         except (urllib.error.URLError, RuntimeError) as exc:
+            live_ok = False
             print(f"Live check warning: {exc}")
+
+    if live_ok:
+        try:
+            from shared.google_sheets_logger import log_publication_to_google_sheet
+        except ImportError:
+            from google_sheets_logger import log_publication_to_google_sheet
+
+        log_publication_to_google_sheet(
+            topic=args.title,
+            url=public_url,
+            slug=slug,
+            status="published",
+            agent="deploy.py",
+            comment="Автоматическая запись после публикации",
+        )
+
+        try:
+            from shared.indexnow_notifier import notify_indexnow
+        except ImportError:
+            from indexnow_notifier import notify_indexnow
+
+        notify_indexnow(public_url)
 
     print(f"Published: {public_url}")
     return 0
