@@ -20,6 +20,8 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
     echo '<meta property="og:type" content="article" />' . "\n";
 }, 1);
 
+$brand = getenv('SITE_BRAND') ?: get_bloginfo('name') ?: '[REDACTED]';
+
 $nero_bootstrap = get_stylesheet_directory() . '/partials/nero-ai-longread-bootstrap.php';
 if (is_readable($nero_bootstrap)) {
     require_once $nero_bootstrap;
@@ -147,33 +149,6 @@ get_header();
 }
 
 .nero-ai-btn-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-.nero-ai-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1;
-  text-decoration: none !important;
-  transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
-}
-.nero-ai-btn:hover,
-.nero-ai-btn:focus-visible { transform: translateY(-2px); }
-.nero-ai-btn-primary {
-  color: #031018 !important;
-  background: linear-gradient(135deg, var(--nero-ai-primary), #a7f3d0);
-  box-shadow: 0 18px 42px rgba(121, 242, 255, 0.22);
-}
-.nero-ai-btn-secondary {
-  color: var(--nero-ai-text) !important;
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-.nero-ai-btn-secondary:hover { border-color: rgba(121, 242, 255, 0.36); background: rgba(121, 242, 255, 0.08); }
 
 .nero-ai-card {
   position: relative;
@@ -195,204 +170,6 @@ get_header();
   mask-composite: exclude;
   pointer-events: none;
   opacity: .75;
-}
-
-.nero-ai-hero {
-  position: relative;
-  min-height: min(980px, calc(100vh - 1px));
-  min-height: min(980px, calc(100dvh - 1px));
-  display: grid;
-  align-items: center;
-  padding: clamp(108px, 14vh, 148px) 0 clamp(44px, 7vw, 86px);
-  isolation: isolate;
-}
-.nero-ai-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(circle at 45% 30%, #000 0%, transparent 72%);
-  opacity: .55;
-  pointer-events: none;
-  z-index: -2;
-}
-.nero-ai-hero::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 16%;
-  width: 820px;
-  height: 820px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(121, 242, 255, .12), transparent 66%);
-  filter: blur(6px);
-  animation: neroAiGlow 8s ease-in-out infinite alternate;
-  z-index: -1;
-  pointer-events: none;
-}
-@keyframes neroAiGlow { from { opacity: .45; transform: translateX(-50%) scale(.96); } to { opacity: .86; transform: translateX(-50%) scale(1.06); } }
-
-.nero-ai-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
-  gap: clamp(28px, 4vw, 56px);
-  align-items: center;
-}
-.nero-ai-hero-copy h1 {
-  margin: 0;
-  max-width: 780px;
-  font-size: clamp(44px, 7.2vw, 94px);
-  line-height: .89;
-  letter-spacing: -0.075em;
-}
-.nero-ai-hero-lead {
-  margin: 24px 0 0;
-  max-width: 720px;
-  color: var(--nero-ai-soft) !important;
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.58;
-}
-.nero-ai-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 26px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.nero-ai-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 11px;
-  border: 1px solid rgba(255,255,255,.11);
-  border-radius: 999px;
-  background: rgba(255,255,255,.055);
-  color: #dce8f7;
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.nero-ai-hero .nero-ai-btn-row { margin-top: 34px; }
-
-.nero-ai-dashboard {
-  position: relative;
-  padding: 18px;
-  border-radius: 34px;
-  background: rgba(2, 6, 23, 0.42);
-  box-shadow: var(--nero-ai-shadow);
-  transform: perspective(1100px) rotateY(-3deg) rotateX(2deg);
-}
-.nero-ai-dashboard-shell {
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 26px;
-  background: linear-gradient(180deg, rgba(15, 23, 42, .95), rgba(6, 10, 24, .96));
-}
-.nero-ai-window-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.045);
-}
-.nero-ai-dots { display: flex; gap: 7px; }
-.nero-ai-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.22); }
-.nero-ai-dot:nth-child(1) { background: #fb7185; }
-.nero-ai-dot:nth-child(2) { background: #fbbf24; }
-.nero-ai-dot:nth-child(3) { background: #34d399; }
-.nero-ai-window-title { color: #cfe3f9; font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-.nero-ai-window-body { padding: 18px; }
-.nero-ai-dashboard-title {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-.nero-ai-dashboard-title h3 { margin: 0; font-size: 20px; letter-spacing: -0.03em; }
-.nero-ai-live-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 9px;
-  border-radius: 999px;
-  background: rgba(34,197,94,.10);
-  color: #bbf7d0;
-  font-size: 12px;
-  font-weight: 800;
-}
-.nero-ai-live-pill::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 0 6px rgba(34,197,94,.14);
-  animation: neroAiPulse 1.6s infinite;
-}
-@keyframes neroAiPulse { 0%, 100% { transform: scale(.86); opacity: .65; } 50% { transform: scale(1); opacity: 1; } }
-
-.nero-ai-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-.nero-ai-metric {
-  padding: 14px;
-  border: 1px solid rgba(255,255,255,.09);
-  border-radius: 18px;
-  background: rgba(255,255,255,.055);
-  transition: transform .22s ease, border-color .22s ease, background .22s ease;
-}
-.nero-ai-metric:hover,
-.nero-ai-metric:focus-within { transform: translateY(-3px); border-color: rgba(121,242,255,.34); background: rgba(121,242,255,.07); }
-.nero-ai-metric span { display: block; color: var(--nero-ai-muted); font-size: 12px; font-weight: 700; }
-.nero-ai-metric strong { display: block; margin-top: 7px; color: #fff; font-size: 24px; line-height: 1; }
-.nero-ai-metric small { display: block; margin-top: 6px; color: #9fb0c9; }
-
-.nero-ai-task-stream { margin-top: 16px; display: grid; gap: 10px; }
-.nero-ai-task {
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 11px;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
-  background: rgba(255,255,255,.04);
-  animation: neroAiTaskFloat 5s ease-in-out infinite;
-}
-.nero-ai-task:nth-child(2) { animation-delay: .6s; }
-.nero-ai-task:nth-child(3) { animation-delay: 1.2s; }
-.nero-ai-task:nth-child(4) { animation-delay: 1.8s; }
-@keyframes neroAiTaskFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-.nero-ai-task-icon {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 12px;
-  background: rgba(121,242,255,.12);
-  color: var(--nero-ai-primary);
-  font-size: 15px;
-}
-.nero-ai-task strong { display: block; color: #f8fafc; font-size: 13px; }
-.nero-ai-task span { color: var(--nero-ai-muted); font-size: 12px; }
-.nero-ai-status {
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: rgba(34,197,94,.11);
-  color: #bbf7d0;
-  font-size: 11px;
-  font-weight: 800;
-  white-space: nowrap;
 }
 
 .nero-ai-automation-map {
@@ -692,15 +469,12 @@ get_header();
 .nero-ai-delay-4 { transition-delay: .32s; }
 
 @media (max-width: 1100px) {
-  .nero-ai-hero-grid { grid-template-columns: 1fr; }
-  .nero-ai-dashboard { transform: none; }
-  .nero-ai-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .nero-ai-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nero-ai-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 820px) {
   .nero-ai-container { width: min(100% - 28px, var(--nero-ai-container)); }
-  .nero-ai-hero { min-height: auto; padding-top: 56px; }
-  .nero-ai-map-grid { grid-template-columns: 1fr; }
+    .nero-ai-map-grid { grid-template-columns: 1fr; }
   .nero-ai-ai-core { min-height: 210px; }
   .nero-ai-grid-2,
   .nero-ai-grid-3,
@@ -710,14 +484,10 @@ get_header();
   .nero-ai-flow-step { grid-template-columns: 1fr; }
   .nero-ai-process-item { grid-template-columns: 1fr; }
   .nero-ai-btn-row { align-items: stretch; }
-  .nero-ai-btn { width: 100%; }
+  .nero-ai-home-page .nero-ai-btn { width: 100%; }
 }
 @media (max-width: 520px) {
-  .nero-ai-dashboard { padding: 10px; border-radius: 24px; }
-  .nero-ai-window-body { padding: 13px; }
-  .nero-ai-task { grid-template-columns: 28px 1fr; }
-  .nero-ai-status { grid-column: 2; width: fit-content; }
-  .nero-ai-section { padding: 58px 0; }
+    .nero-ai-section { padding: 58px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .nero-ai-home-page *,
@@ -745,20 +515,6 @@ body.nero-ai-landing-shell #mobile-header {
 }
 body.nero-ai-landing-shell {
   padding-top: 0 !important;
-}
-
-.vnedrenie-ai-hero-stage {
-  position: relative;
-  min-height: clamp(360px, 42vw, 520px);
-  padding: 0 !important;
-  overflow: hidden;
-}
-.vnedrenie-ai-hero-stage canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .ym-container {
@@ -1008,478 +764,37 @@ if (is_readable($nero_header)) {
     require $nero_header;
 }
 ?>
-<section class="nero-ai-hero" id="lead-flow-dispatch" aria-labelledby="vnedrenie-ai-hero-title">
-  <div class="nero-ai-container nero-ai-hero-grid">
-    <div class="nero-ai-hero-copy nero-ai-reveal">
-      <p class="nero-ai-eyebrow">AI-агент · обработка заявок с сайта</p>
-      <h1 id="vnedrenie-ai-hero-title">AI-агент для обработки заявок с сайта: <span class="nero-ai-gradient-text">внедрение под ключ</span></h1>
-      <p class="nero-ai-hero-lead">AI отвечает за 5–15 секунд, квалифицирует лид и передаёт его в CRM — пока менеджеры спят, заявки не остывают</p>
-      <ul class="nero-ai-badges" aria-label="Этапы обработки заявок">
-        <li class="nero-ai-badge">Заявка с сайта</li>
-        <li class="nero-ai-badge">Ответ 5–15 сек</li>
-        <li class="nero-ai-badge">Квалификация</li>
-        <li class="nero-ai-badge">Карточка в CRM</li>
-        <li class="nero-ai-badge">Задача менеджеру</li>
-      </ul>
-      <div class="nero-ai-btn-row">
-        <a class="nero-ai-btn nero-ai-btn-primary" href="#final-cta-audit-title">Проверить, сколько заявок вы теряете</a>
-      </div>
-    </div>
-    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демонстрация потока заявок">
-      <div class="nero-ai-dashboard-shell">
-        <div class="nero-ai-window-top">
-          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
-          <span class="nero-ai-window-title">ночной поток лидов · демо</span>
-        </div>
-        <div class="nero-ai-window-body vnedrenie-ai-hero-stage">
-          <canvas id="vnedrenie-ai-zayavki-hero-canvas" aria-hidden="true"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<?php
+$hero_eyebrow = 'AI-агент · обработка заявок с сайта';
+$hero_title = 'AI-агент для обработки заявок с сайта: внедрение под ключ';
+$hero_title_id = 'vnedrenie-ai-hero-title';
+$hero_lead = 'AI отвечает за 5–15 секунд, квалифицирует лид и передаёт его в CRM — пока менеджеры спят, заявки не остывают';
+$hero_badges = ['Заявка с сайта', 'Ответ 5–15 сек', 'Квалификация', 'Карточка в CRM', 'Задача менеджеру'];
+$hero_primary_label = 'Проверить, сколько заявок вы теряете';
+$hero_primary_url = '#final-cta-audit-title';
+$hero_secondary_label = getenv('SECONDARY_CTA_LABEL') ?: 'Что можно автоматизировать';
+$hero_secondary_url = getenv('SECONDARY_CTA_URL') ?: home_url('/#services');
+$hero_dashboard_title = 'Поток заявок · ночной режим';
+$hero_dashboard_note = 'пример логики AI-агента · демонстрационные данные';
+$hero_metrics = [
+    ['value' => '12', 'label' => 'заявок за ночь'],
+    ['value' => '0:08', 'label' => 'среднее время ответа'],
+    ['value' => '3', 'label' => 'лида в CRM'],
+    ['value' => '−42%', 'label' => 'ручной первички*'],
+];
+$hero_feed = [
+    ['dot' => 'blue', 'text' => 'Новая заявка с формы сайта → AI ответ за 8 сек'],
+    ['dot' => 'green', 'text' => 'Лид квалифицирован (BANT) → карточка в CRM'],
+    ['dot' => 'amber', 'text' => 'Менеджеру поставлена задача «позвонить утром»'],
+    ['dot' => 'blue', 'text' => 'AI-рекомендация: связаться в течение 15 мин'],
+];
+$hero_partial = get_stylesheet_directory() . '/partials/nero-ai-longread-hero-shell.php';
+if (is_readable($hero_partial)) {
+    require $hero_partial;
+}
+?>
 
-<script id="vnedrenie-ai-zayavki-hero-engine">
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("vnedrenie-ai-zayavki-hero-canvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
 
-    let cw = 0, ch = 0, scale = 1;
-    let cx = 0, cy = 0;
-    let frame = 0;
-
-    function resizeCanvas() {
-        if (!canvas.parentElement) return;
-        canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-        canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-        cw = canvas.width;
-        ch = canvas.height;
-        cx = cw / 2 + 80;
-        cy = ch / 2 - 20;
-        scale = cw < 768 ? cw / 620 : Math.min(cw / 1100, ch / 780) * 1.35;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    const C = {
-        outline: "#79f2ff",
-        softIndigo: "#79f2ff",
-        softOrange: "#f59e0b",
-        hotGreen: "#22c55e",
-        cardBg: "rgba(17, 24, 39, 0.92)",
-        fieldMuted: "rgba(255,255,255,0.10)",
-        orbCore: "#6366f1",
-        orbGlow: "rgba(121, 242, 255, 0.22)",
-        streamDot: "#a5b4fc",
-        envelope: "rgba(245, 158, 11, 0.35)",
-        bubbleBg: "rgba(11, 16, 32, 0.96)",
-        crmCol: "rgba(255,255,255,0.06)",
-        agentYellow: "#eab308", agentGreen: "#22c55e", agentBlue: "#3b82f6",
-        agentPink: "#ec4899", agentPurple: "#8b5cf6"
-    };
-
-    function drawPolyRound(ctx, x, y, w, h, radius, fill, stroke) {
-        ctx.fillStyle = fill;
-        ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(x, y, w, h, radius);
-        else ctx.rect(x, y, w, h);
-        ctx.fill();
-        if (stroke) { ctx.lineWidth = 2; ctx.strokeStyle = stroke; ctx.stroke(); }
-    }
-
-    function bezierPoint(t, p0, p1, p2, p3) {
-        const u = 1 - t;
-        return {
-            x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x,
-            y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y
-        };
-    }
-
-    class LeadStreamPath {
-        constructor() {
-            this.paths = [
-                { p0:{x:-320,y:-80}, p1:{x:-180,y:-140}, p2:{x:-40,y:-60}, p3:{x:20,y:-20}, color:"#fde68a" },
-                { p0:{x:-320,y:10}, p1:{x:-160,y:-30}, p2:{x:0,y:20}, p3:{x:30,y:0}, color:"#bbf7d0" },
-                { p0:{x:-320,y:90}, p1:{x:-150,y:60}, p2:{x:-20,y:80}, p3:{x:25,y:40}, color:"#bfdbfe" }
-            ];
-        }
-        draw(ctx) {
-            const prg = (frame * 0.04) % 240;
-            this.paths.forEach((path, idx) => {
-                ctx.save();
-                ctx.strokeStyle = "rgba(121, 242, 255, 0.28)";
-                ctx.lineWidth = 2;
-                ctx.setLineDash([6, 8]);
-                ctx.beginPath();
-                ctx.moveTo(path.p0.x, path.p0.y);
-                ctx.bezierCurveTo(path.p1.x, path.p1.y, path.p2.x, path.p2.y, path.p3.x, path.p3.y);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                const offset = ((frame * 0.5 + idx * 80) % 240) / 240;
-                if (prg < 200) {
-                    const t = offset;
-                    const pt = bezierPoint(t, path.p0, path.p1, path.p2, path.p3);
-                    drawPolyRound(ctx, pt.x - 10, pt.y - 7, 20, 14, 3, path.color, C.outline);
-                    ctx.fillStyle = C.outline;
-                    ctx.font = "bold 7px sans-serif";
-                    ctx.textAlign = "center";
-                    ctx.fillText("лид", pt.x, pt.y + 2);
-                }
-                ctx.restore();
-            });
-        }
-    }
-
-    class SiteFormBeacon {
-        constructor(x, y) { this.x = x; this.y = y; }
-        draw(ctx) {
-            const pulse = 1 + Math.sin(frame * 0.08) * 0.06;
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            drawPolyRound(ctx, -55, -45, 110, 90, 10, C.cardBg, C.outline);
-            drawPolyRound(ctx, -45, -35, 90, 18, 6, C.fieldMuted, C.outline);
-            drawPolyRound(ctx, -45, -10, 90, 12, 4, "#f8fafc", C.outline);
-            drawPolyRound(ctx, -45, 6, 90, 12, 4, "#f8fafc", C.outline);
-            drawPolyRound(ctx, -20, 28, 60, 16, 8, C.softIndigo, C.outline);
-            ctx.fillStyle = "#fff";
-            ctx.font = "bold 8px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText("Оставить заявку", 10, 39);
-            ctx.beginPath();
-            ctx.arc(55, -50, 12 * pulse, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(249, 115, 22, 0.15)";
-            ctx.fill();
-            ctx.strokeStyle = C.softOrange;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-            ctx.fillStyle = C.softOrange;
-            ctx.font = "bold 9px sans-serif";
-            ctx.fillText("NEW", 55, -47);
-            ctx.restore();
-        }
-    }
-
-    class QualificationOrb {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-            this.handoffY = 0;
-            this.notifyAlpha = 0;
-        }
-        draw(ctx) {
-            const prg = (frame * 0.04) % 240;
-            ctx.save();
-            ctx.translate(this.x, this.y);
-
-            const glow = 1 + Math.sin(frame * 0.1) * 0.08;
-            ctx.beginPath();
-            ctx.arc(0, 0, 58 * glow, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(129, 140, 248, 0.12)";
-            ctx.fill();
-
-            drawPolyRound(ctx, -48, -48, 96, 96, 48, C.orbGlow, C.outline);
-            drawPolyRound(ctx, -32, -32, 64, 64, 32, C.orbCore, C.outline);
-            ctx.fillStyle = "#fff";
-            ctx.font = "900 14px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText("AI", 0, 6);
-
-            if (prg > 40 && prg < 130) {
-                const sec = Math.min(15, 5 + Math.floor((prg - 40) / 6));
-                ctx.fillStyle = C.hotGreen;
-                ctx.font = "bold 11px sans-serif";
-                ctx.fillText(sec + " сек", 0, -62);
-                drawPolyRound(ctx, -42, 58, 84, 36, 8, C.cardBg, C.outline);
-                const fields = ["Услуга ✓", "Бюджет ✓", "Срок ✓"];
-                fields.forEach((f, i) => {
-                    if (prg > 55 + i * 18) {
-                        ctx.fillStyle = C.outline;
-                        ctx.font = "bold 8px sans-serif";
-                        ctx.textAlign = "left";
-                        ctx.fillText(f, -34, 72 + i * 10);
-                    }
-                });
-            }
-
-            if (prg > 120 && prg < 200) {
-                this.handoffY = Math.min(80, (prg - 120) * 2.5);
-                drawPolyRound(ctx, 70, -20 + this.handoffY, 44, 32, 6, "#fef3c7", C.outline);
-                ctx.fillStyle = C.outline;
-                ctx.font = "bold 8px sans-serif";
-                ctx.textAlign = "center";
-                ctx.fillText("🔥", 92, -2 + this.handoffY);
-            }
-
-            if (prg >= 190) {
-                this.notifyAlpha = Math.min(1, (prg - 190) / 15);
-                ctx.globalAlpha = this.notifyAlpha;
-                drawPolyRound(ctx, -30, -90, 120, 22, 8, "#dcfce7", C.outline);
-                ctx.fillStyle = C.outline;
-                ctx.font = "bold 9px sans-serif";
-                ctx.textAlign = "center";
-                ctx.fillText("Задача: позвонить за 15 мин", 30, -75);
-                ctx.globalAlpha = 1;
-            }
-
-            ctx.restore();
-        }
-    }
-
-    class CrmKanbanDock {
-        constructor(x, y) { this.x = x; this.y = y; this.snap = 0; }
-        draw(ctx) {
-            const prg = (frame * 0.04) % 240;
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            drawPolyRound(ctx, -70, -70, 140, 150, 10, C.crmCol, C.outline);
-            ctx.fillStyle = C.outline;
-            ctx.font = "bold 10px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText("CRM", 0, -52);
-
-            const cols = ["Новый", "Горячий", "Задача"];
-            cols.forEach((label, i) => {
-                const colX = -48 + i * 34;
-                drawPolyRound(ctx, colX, -38, 30, 100, 4, "#fff", C.outline);
-                ctx.fillStyle = "#64748b";
-                ctx.font = "bold 6px sans-serif";
-                ctx.fillText(label, colX + 15, -28);
-            });
-
-            if (prg > 145) {
-                this.snap = Math.min(1, (prg - 145) / 20);
-                const cardY = -10 + (1 - this.snap) * 40;
-                drawPolyRound(ctx, -14, cardY, 28, 36, 4, "#fef3c7", C.outline);
-                if (this.snap > 0.8) {
-                    ctx.strokeStyle = C.hotGreen;
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(-18, cardY - 4, 36, 44);
-                }
-            }
-            ctx.restore();
-        }
-    }
-
-    class NightShiftClock {
-        constructor(x, y) { this.x = x; this.y = y; }
-        draw(ctx) {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            drawPolyRound(ctx, -36, -22, 72, 44, 10, C.cardBg, C.outline);
-            ctx.fillStyle = C.softIndigo;
-            ctx.font = "bold 14px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText("02:47", 0, 2);
-            ctx.fillStyle = "#64748b";
-            ctx.font = "bold 7px sans-serif";
-            ctx.fillText("ночь", 0, 14);
-            ctx.restore();
-        }
-    }
-
-    class ManagerSleepPod {
-        constructor(x, y) { this.x = x; this.y = y; }
-        draw(ctx) {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            drawPolyRound(ctx, -40, 0, 80, 28, 6, "#e2e8f0", C.outline);
-            drawPolyRound(ctx, -30, -18, 50, 22, 8, "#cbd5e1", C.outline);
-            ctx.fillStyle = "#94a3b8";
-            ctx.font = "bold 10px sans-serif";
-            ctx.textAlign = "center";
-            const zzz = "z".repeat(1 + Math.floor(frame / 30) % 3);
-            ctx.fillText(zzz, 20, -28);
-            ctx.restore();
-        }
-    }
-
-    class Agent {
-        constructor(x, y, color, role, stepTrig, dialogs) {
-            this.x = x; this.y = y; this.baseX = x; this.baseY = y;
-            this.color = color; this.role = role;
-            this.timer = Math.random() * 100;
-            this.stepTrig = stepTrig;
-            this.dialogs = dialogs;
-            this.hitAnimation = 0;
-        }
-        draw(ctx) {
-            this.timer += 0.03;
-            let isMoving = false;
-            let carryType = null;
-            let faceDir = 1;
-            const prg = (frame * 0.04) % 240;
-
-            const targets = {
-                "1_architect": { x: -260, y: -30 },
-                "2_seo": { x: -20, y: -70 },
-                "3_coder": { x: 10, y: 50 },
-                "4_designer": { x: 50, y: -40 },
-                "5_deployer": { x: 220, y: 20 }
-            };
-            const tgt = targets[this.role] || { x: 0, y: 0 };
-
-            if (prg >= this.stepTrig && prg < this.stepTrig + 22) {
-                const local = prg - this.stepTrig;
-                if (local < 11) {
-                    isMoving = true; faceDir = tgt.x > this.baseX ? 1 : -1;
-                    this.x = this.baseX + (tgt.x - this.baseX) * (local / 11);
-                    this.y = this.baseY + (tgt.y - this.baseY) * (local / 11);
-                    carryType = this.color;
-                } else if (local < 16) {
-                    this.x = tgt.x; this.y = tgt.y;
-                } else {
-                    isMoving = true; faceDir = tgt.x > this.baseX ? -1 : 1;
-                    this.x = tgt.x - (tgt.x - this.baseX) * ((local - 16) / 6);
-                    this.y = tgt.y - (tgt.y - this.baseY) * ((local - 16) / 6);
-                }
-            } else {
-                this.x = this.baseX; this.y = this.baseY;
-                carryType = prg >= this.stepTrig - 8 ? this.color : null;
-            }
-
-            if (!isMoving && frame % 220 === 0 && Math.random() < 0.12) {
-                createBubble(this.x, this.y - 24, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 260);
-            }
-
-            let bob = Math.abs(Math.sin(this.timer * 3)) * 2;
-            if (!isMoving) bob = Math.sin(this.timer * 1.5);
-
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.lineJoin = "round";
-            let legL = 0, legR = 0;
-            if (isMoving) {
-                const wp = this.timer * 6;
-                legL = Math.sin(wp) * 5; legR = Math.sin(wp + Math.PI) * 5;
-            }
-            drawPolyRound(ctx, -10, -5 + Math.max(0, legL), 8, 14, 2, C.outline, null);
-            drawPolyRound(ctx, -12, 5 + Math.max(0, legL), 12, 6, 2, C.outline, null);
-            drawPolyRound(ctx, 2, -5 + Math.max(0, legR), 8, 14, 2, C.outline, null);
-            drawPolyRound(ctx, 0, 5 + Math.max(0, legR), 12, 6, 2, C.outline, null);
-            drawPolyRound(ctx, -15, -12 - bob, 30, 20, 6, this.color, C.outline);
-            const hx = 0, hy = -28 - bob;
-            ctx.fillStyle = this.color;
-            ctx.beginPath(); ctx.arc(hx, hy, 12, 0, Math.PI * 2); ctx.fill();
-            ctx.lineWidth = 2; ctx.strokeStyle = C.outline; ctx.stroke();
-            ctx.save();
-            ctx.scale(faceDir, 1);
-            ctx.fillStyle = "#fff";
-            ctx.beginPath(); ctx.arc(hx + 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(hx - 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-            ctx.fillStyle = C.outline;
-            ctx.beginPath(); ctx.arc(hx + 5, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-            if (this.role === "1_architect") {
-                ctx.strokeStyle = C.outline; ctx.lineWidth = 1;
-                ctx.strokeRect(hx + 1, hy - 5, 6, 6); ctx.strokeRect(hx - 7, hy - 5, 6, 6);
-            } else if (this.role === "2_seo") {
-                drawPolyRound(ctx, hx - 12, hy - 14, 24, 8, [6, 6, 0, 0], C.outline, null);
-            } else if (this.role === "3_coder") {
-                ctx.fillStyle = C.outline;
-                ctx.beginPath(); ctx.moveTo(hx - 10, hy - 8); ctx.lineTo(hx - 14, hy - 18); ctx.lineTo(hx - 4, hy - 12);
-                ctx.lineTo(hx, hy - 20); ctx.lineTo(hx + 4, hy - 12); ctx.lineTo(hx + 12, hy - 16); ctx.lineTo(hx + 10, hy - 8); ctx.fill();
-            } else if (this.role === "4_designer") {
-                drawPolyRound(ctx, hx - 14, hy - 12, 28, 6, 3, "#f43f5e", C.outline);
-            } else if (this.role === "5_deployer") {
-                ctx.strokeStyle = C.outline; ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.arc(hx, hy, 14, Math.PI, Math.PI * 2); ctx.stroke();
-            }
-            ctx.restore();
-            if (carryType) drawPolyRound(ctx, -20 * faceDir, -18 - bob, 16, 16, 2, carryType, C.outline);
-            ctx.restore();
-        }
-    }
-
-    const entities = [];
-    const bubbles = [];
-    const ambientDots = Array.from({ length: 18 }, (_, i) => ({
-        x: (i * 47) % 400 - 200,
-        y: (i * 31) % 300 - 150,
-        sp: 0.2 + (i % 5) * 0.05
-    }));
-
-    entities.push(new LeadStreamPath());
-    entities.push(new SiteFormBeacon(-280, -20));
-    entities.push(new QualificationOrb(30, 0));
-    entities.push(new CrmKanbanDock(240, -10));
-    entities.push(new NightShiftClock(200, -120));
-    entities.push(new ManagerSleepPod(260, 90));
-    entities.push(new Agent(-180, 80, C.agentYellow, "1_architect", 18, [
-        "Сценарий квалификации...", "Форма → webhook", "Ночной поток настроен!"
-    ]));
-    entities.push(new Agent(-100, -60, C.agentGreen, "2_seo", 52, [
-        "Score: горячий!", "Тег amoCRM", "Бюджет в поле CRM"
-    ]));
-    entities.push(new Agent(-40, 100, C.agentBlue, "3_coder", 88, [
-        "Webhook 200 OK", "Bitrix24 REST", "Поля заполнены"
-    ]));
-    entities.push(new Agent(80, -80, C.agentPink, "4_designer", 118, [
-        "Карточка лида ✓", "История чата", "UI виджета ок"
-    ]));
-    entities.push(new Agent(160, 60, C.agentPurple, "5_deployer", 158, [
-        "Задача на 09:00", "Telegram пинг", "Лид не остыл!"
-    ]));
-
-    function createBubble(x, y, text, customLife = 300) {
-        bubbles.push({ x, y, text, life: customLife, maxLife: customLife });
-    }
-
-    function engineloop() {
-        frame++;
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.scale(scale, scale);
-
-        ambientDots.forEach(d => {
-            d.y -= d.sp;
-            if (d.y < -180) d.y = 180;
-            ctx.fillStyle = "rgba(121, 242, 255, 0.22)";
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, 2, 0, Math.PI * 2);
-            ctx.fill();
-        });
-
-        entities.sort((a, b) => (a.y || 0) - (b.y || 0));
-        entities.forEach(ent => ent.draw(ctx));
-
-        const prg = (frame * 0.04) % 240;
-        if (prg >= 12 && prg < 12.05) createBubble(-280, -40, "Заявка с сайта", 280);
-        if (prg >= 48 && prg < 48.05) createBubble(30, -70, "Ответ за 8 сек", 280);
-        if (prg >= 92 && prg < 92.05) createBubble(30, 50, "Бюджет уточнён", 280);
-        if (prg >= 148 && prg < 148.05) createBubble(240, -30, "Горячий → CRM", 280);
-        if (prg >= 198 && prg < 198.05) createBubble(260, 70, "Менеджер утром", 280);
-
-        ctx.font = "bold 11px Inter, sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.lineJoin = "round";
-        for (let i = bubbles.length - 1; i >= 0; i--) {
-            const bub = bubbles[i];
-            bub.life--;
-            if (bub.life <= 0) { bubbles.splice(i, 1); continue; }
-            let alpha = Math.min(1, bub.life / 30);
-            if (bub.life > bub.maxLife - 10) alpha = (bub.maxLife - bub.life) / 10;
-            ctx.globalAlpha = alpha;
-            const tw = ctx.measureText(bub.text).width + 16;
-            const th = 20;
-            const bx = bub.x;
-            const by = bub.y - (bub.maxLife - bub.life) * 0.05;
-            ctx.lineWidth = 2; ctx.strokeStyle = C.outline;
-            drawPolyRound(ctx, bx - tw / 2, by - th, tw, th, 6, C.bubbleBg, C.outline);
-            ctx.fillStyle = C.bubbleBg;
-            ctx.beginPath(); ctx.moveTo(bx - 4, by); ctx.lineTo(bx + 4, by); ctx.lineTo(bx, by + 5); ctx.fill(); ctx.stroke();
-            ctx.fillRect(bx - 3, by - 2, 6, 4);
-            ctx.fillStyle = C.outline;
-            ctx.fillText(bub.text, bx, by - th / 2);
-            ctx.globalAlpha = 1;
-        }
-        ctx.restore();
-        requestAnimationFrame(engineloop);
-    }
-    document.fonts.ready.then(() => engineloop());
-});
-</script>
 
   <section class="nero-ai-section-tight vnedrenie-ai-obrabotka-zayavok-s-sayta-intro" aria-label="Введение">
     <div class="nero-ai-container">

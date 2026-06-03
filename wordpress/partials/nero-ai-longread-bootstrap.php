@@ -17,13 +17,18 @@ add_filter('body_class', static function (array $classes): array {
 add_action('wp_head', static function (): void {
     $theme_dir = get_stylesheet_directory();
     $theme_uri = get_stylesheet_directory_uri();
-    $css_path = $theme_dir . '/assets/css/nero-ai-site-header.css';
+    $styles = [
+        'assets/css/nero-ai-site-header.css' => '1.0.1',
+        'assets/css/nero-ai-home-shell.css' => '1.0.0',
+        'assets/css/nero-ai-longread-ui-compat.css' => '1.0.0',
+    ];
 
-    if (!is_readable($css_path)) {
-        return;
+    foreach ($styles as $relative_path => $version) {
+        if (!is_readable($theme_dir . '/' . $relative_path)) {
+            continue;
+        }
+        echo '<link rel="stylesheet" href="' . esc_url($theme_uri . '/' . $relative_path . '?v=' . $version) . '" />' . "\n";
     }
-
-    echo '<link rel="stylesheet" href="' . esc_url($theme_uri . '/assets/css/nero-ai-site-header.css?v=1.0.0') . '" />' . "\n";
 }, 5);
 
 add_action('wp_footer', static function (): void {

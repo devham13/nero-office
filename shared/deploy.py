@@ -118,8 +118,11 @@ def deploy_shared_longread_assets(ssh: paramiko.SSHClient, theme_dir: str, repo_
     assets = [
         (repo_root / "shared" / "nero-ai-site-header.css", "assets/css/nero-ai-site-header.css"),
         (repo_root / "shared" / "nero-ai-site-header.js", "assets/js/nero-ai-site-header.js"),
+        (repo_root / "shared" / "nero-ai-home-shell.css", "assets/css/nero-ai-home-shell.css"),
+        (repo_root / "shared" / "nero-ai-longread-ui-compat.css", "assets/css/nero-ai-longread-ui-compat.css"),
         (repo_root / "wordpress" / "partials" / "nero-ai-site-header.php", "partials/nero-ai-site-header.php"),
         (repo_root / "wordpress" / "partials" / "nero-ai-longread-bootstrap.php", "partials/nero-ai-longread-bootstrap.php"),
+        (repo_root / "wordpress" / "partials" / "nero-ai-longread-hero-shell.php", "partials/nero-ai-longread-hero-shell.php"),
     ]
     for local_path, remote_rel in assets:
         if not local_path.exists():

@@ -71,17 +71,11 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 
 ## Hero на лонгридах (`.nero-ai-home-page`)
 
-- Первый экран **в том же тёмном стиле**, что и страница: секция `.nero-ai-hero`, типографика `.nero-ai-hero-copy`, CTA `.nero-ai-btn-*`, справа `.nero-ai-dashboard` с canvas внутри.
-- **Шапка как на главной:** на каждом лонгриде обязательна плавающая `.nero-ai-header` (pill-меню: Услуги, Как работает, Процесс…). Kadence `#masthead` / `#mobile-header` **скрываются** через body class `nero-ai-landing-shell`.
-- Общие файлы (деплоятся в тему через `deploy.py`):
-  - `shared/nero-ai-site-header.css`
-  - `shared/nero-ai-site-header.js`
-  - `wordpress/partials/nero-ai-site-header.php`
-  - `wordpress/partials/nero-ai-longread-bootstrap.php` — подключать **до** `get_header()` в `page-{slug}.php`.
-- В `<main>` сразу после открытия тега: `require get_stylesheet_directory() . '/partials/nero-ai-site-header.php'`.
-- Отступ hero сверху: `padding: clamp(108px, 14vh, 148px) 0 …` — зазор под фиксированную шапку.
-- **Запрещено** переопределять Kadence `#masthead` для «видимости меню» — это не то меню, что на главной.
-- **Не применяй** `.nero-ai-home-page a { color: inherit }` ко всей странице — только к контентным секциям (`section`, `.nero-ai-section` и т.д.), иначе текст шапки станет светлым на белом pill-bar.
+- **Единый эталон — live главная** (PUBLIC_SITE_HOST): обёртка `.nero-ai-home`, CSS `shared/nero-ai-home-shell.css`, hero-partial `wordpress/partials/nero-ai-longread-hero-shell.php`.
+- Hero **не** использует старый cyan-стиль (`--nero-ai-primary`, canvas в macOS-window, H1 94px, pill-eyebrow).
+- Разметка hero: `.nero-ai-h1`, `.nero-ai-lead`, `.nero-ai-badges`, `.nero-ai-btn--primary` / `--ghost`, dashboard `.nero-ai-dash-*` с пульсирующим «онлайн» (CSS `nero-ai-pulse`).
+- Тексты и метрики dashboard — **под тему страницы**, структура и анимации — **как на главной**.
+- Подключение: bootstrap грузит `nero-ai-home-shell.css` + `nero-ai-longread-ui-compat.css`; в `page-{slug}.php` — переменные hero + `require` partial.
 - **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
 - Canvas-анимация рисуется **на тёмном фоне** dashboard-shell; палитра — cyan/violet/green из `:root`.
 

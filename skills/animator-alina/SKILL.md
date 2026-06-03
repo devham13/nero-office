@@ -30,13 +30,13 @@ description: Аниматор Алина — hero с Canvas: каждый раз
 
 ### Лонгриды и коммерческие AI-страницы (`.nero-ai-home-page`)
 
-Если страница собирается по **`shared/longread-page-design-system.md`** (тёмный Nero AI / Meta Journal):
+Если страница собирается по **`shared/longread-page-design-system.md`**:
 
-1. Hero — секция **`.nero-ai-hero`**, не `fullscreen-white-office`.
-2. Слева: **`.nero-ai-hero-copy`**, **`.nero-ai-eyebrow`**, **`.nero-ai-gradient-text`**, **`.nero-ai-hero-lead`**, **`.nero-ai-badges`**, **`.nero-ai-btn-*`**.
-3. Справа: **`.nero-ai-dashboard` > `.nero-ai-dashboard-shell`**, canvas внутри **`.nero-ai-window-body`** (тёмный glass).
-4. Canvas рисуется **на тёмном фоне**; палитра — cyan `#79f2ff`, violet, green; не белые карточки на светлом градиенте.
-5. Эталон разметки: `wordpress/front-page.php` (hero grid) + canvas вместо статичного dashboard-body.
+1. Hero — **как на live главной** (`shared/nero-ai-home-shell.css` + `wordpress/partials/nero-ai-longread-hero-shell.php`), обёртка `.nero-ai-home`.
+2. **Запрещено** для hero: canvas в macOS-window, H1 94px, cyan-кнопки `nero-ai-btn-primary`, 3D-dashboard — это устаревший слой, не текущий бренд главной.
+3. Справа в hero: статичный **AI-операционный центр** `.nero-ai-dashboard` с `.nero-ai-dash-grid` и `.nero-ai-dash-feed` (пульс «онлайн» — CSS с главной).
+4. Canvas допустим **только** во втором блоке Бориса в теле статьи — не в hero.
+5. Шапка: `.nero-ai-header` + bootstrap partials (см. design-system §шапка).
 
 ### Legacy / отдельный бриф (вайбкодинг)
 
