@@ -81,6 +81,7 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 - В `<main>` сразу после открытия тега: `require get_stylesheet_directory() . '/partials/nero-ai-site-header.php'`.
 - Отступ hero сверху: `padding: clamp(108px, 14vh, 148px) 0 …` — зазор под фиксированную шапку.
 - **Запрещено** переопределять Kadence `#masthead` для «видимости меню» — это не то меню, что на главной.
+- **Не применяй** `.nero-ai-home-page a { color: inherit }` ко всей странице — только к контентным секциям (`section`, `.nero-ai-section` и т.д.), иначе текст шапки станет светлым на белом pill-bar.
 - **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
 - Canvas-анимация рисуется **на тёмном фоне** dashboard-shell; палитра — cyan/violet/green из `:root`.
 

@@ -81,7 +81,7 @@ get_header();
 .nero-ai-home-page *::before,
 .nero-ai-home-page *::after { box-sizing: border-box; }
 
-.nero-ai-home-page a { color: inherit; }
+.nero-ai-home-page :where(section, article, footer, aside, .nero-ai-section) a { color: inherit; }
 .nero-ai-home-page p { color: var(--nero-ai-muted); }
 .nero-ai-home-page h1,
 .nero-ai-home-page h2,

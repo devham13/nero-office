@@ -239,3 +239,27 @@ body.home {
 .nero-ai-header-cta--mobile {
   display: none;
 }
+
+/* На тёмных лонгридах правило .nero-ai-home-page a { color: inherit } ломает контраст шапки */
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-logo-text {
+  color: #0f172a !important;
+}
+
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-link {
+  color: #334155 !important;
+}
+
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-link:hover,
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-link:focus-visible {
+  color: #0f172a !important;
+  background: #fff;
+}
+
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-cta,
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-cta--mobile {
+  color: #fff !important;
+}
+
+main.nero-ai-home-page > .nero-ai-header .nero-ai-header-toggle-line {
+  background: #334155 !important;
+}
