@@ -72,6 +72,7 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 ## Hero на лонгридах (`.nero-ai-home-page`)
 
 - Первый экран **в том же тёмном стиле**, что и страница: секция `.nero-ai-hero`, типографика `.nero-ai-hero-copy`, CTA `.nero-ai-btn-*`, справа `.nero-ai-dashboard` с canvas внутри.
+- **Kadence transparent header:** на тёмном hero меню Kadence по умолчанию тёмное — в шаблоне страницы обязательно переопредели фон `#masthead` и цвет ссылок `.main-navigation a` (светлый текст + cyan hover), иначе меню «пропадает».
 - **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
 - Canvas-анимация рисуется **на тёмном фоне** dashboard-shell; палитра — cyan/violet/green из `:root`.
 

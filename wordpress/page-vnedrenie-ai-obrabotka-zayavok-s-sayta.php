@@ -733,6 +733,30 @@ nav[aria-label="Хлебные крошки"],
   margin-top: 0 !important;
 }
 
+/* Kadence transparent header: menu must stay visible on dark nero-ai hero */
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header {
+  z-index: 200;
+}
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-main-header-wrap .site-header-row-container-inner,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .site-header-row-container-inner {
+  background: rgba(5, 7, 17, 0.92) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item > a,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-title,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .site-title a,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .menu-toggle-open,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #mobile-header .mobile-menu-label {
+  color: #e6edf7 !important;
+}
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item > a:hover,
+body.transparent-header.page-template-page-vnedrenie-ai-obrabotka-zayavok-s-sayta-php #masthead .main-navigation .primary-menu-container > ul > li.menu-item.current-menu-item > a {
+  color: #79f2ff !important;
+}
+
 .vnedrenie-ai-hero-stage {
   position: relative;
   min-height: clamp(360px, 42vw, 520px);
