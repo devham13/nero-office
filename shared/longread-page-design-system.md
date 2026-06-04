@@ -69,6 +69,17 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 
 Новые страницы должны быть коммерческими: если новость про внедрение AI в бизнес, страница должна показывать, какую похожую услугу можно предложить клиенту: что автоматизировать, кому подходит, какую боль закрывает, как внедряется, какие интеграции нужны, какой CTA.
 
+## Hero на лонгридах (`.nero-ai-home-page`)
+
+- **Единый эталон — live главная** (PUBLIC_SITE_HOST): обёртка `.nero-ai-home`, CSS `shared/nero-ai-home-shell.css`, hero-partial `wordpress/partials/nero-ai-longread-hero-shell.php`.
+- Hero **не** использует старый cyan-стиль (`--nero-ai-primary`, canvas в macOS-window, H1 94px, pill-eyebrow).
+- Разметка hero: `.nero-ai-h1`, `.nero-ai-lead`, `.nero-ai-badges`, `.nero-ai-btn--primary` / `--ghost`, dashboard `.nero-ai-dash-*` с пульсирующим «онлайн» (CSS `nero-ai-pulse`).
+- Тексты и метрики dashboard — **под тему страницы**, структура и анимации — **как на главной**.
+- Подключение: bootstrap грузит `nero-ai-home-shell.css` + `nero-ai-longread-ui-compat.css`; в `page-{slug}.php` — переменные hero + `require` partial.
+- **Шапка:** `.nero-ai-header` + partials (см. `nero-ai-site-header.*`); Kadence `#masthead` скрыт через `nero-ai-landing-shell`.
+- **Меню лонгрида:** перед `require` шапки задай **`$nero_header_nav_links`** — якоря **этой страницы** (5–6 пунктов из оглавления Коли, короткие подписи). **`$nero_header_cta_label` / `$nero_header_cta_url`** — CTA страницы (часто `#demo-*` или `#final-cta-*`). Не используй пункты главной (`/#services`) на лонгридах.
+- **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
+
 ## Запреты
 
 - Не делать светлый «метрика»-дизайн для новых AI-страниц.

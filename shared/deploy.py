@@ -114,6 +114,25 @@ def upload_via_sftp(ssh: paramiko.SSHClient, local_path: Path, remote_file: str)
     run_remote(ssh, f"chmod 644 {shlex.quote(remote_file)}")
 
 
+def deploy_shared_longread_assets(ssh: paramiko.SSHClient, theme_dir: str, repo_root: Path) -> None:
+    assets = [
+        (repo_root / "shared" / "nero-ai-site-header.css", "assets/css/nero-ai-site-header.css"),
+        (repo_root / "shared" / "nero-ai-site-header.js", "assets/js/nero-ai-site-header.js"),
+        (repo_root / "shared" / "nero-ai-home-shell.css", "assets/css/nero-ai-home-shell.css"),
+        (repo_root / "shared" / "nero-ai-longread-ui-compat.css", "assets/css/nero-ai-longread-ui-compat.css"),
+        (repo_root / "wordpress" / "partials" / "nero-ai-site-header.php", "partials/nero-ai-site-header.php"),
+        (repo_root / "wordpress" / "partials" / "nero-ai-longread-bootstrap.php", "partials/nero-ai-longread-bootstrap.php"),
+        (repo_root / "wordpress" / "partials" / "nero-ai-longread-hero-shell.php", "partials/nero-ai-longread-hero-shell.php"),
+    ]
+    for local_path, remote_rel in assets:
+        if not local_path.exists():
+            print(f"Skip missing shared asset: {local_path}")
+            continue
+        remote_file = f"{theme_dir.rstrip('/')}/{remote_rel}"
+        print(f"Uploading shared asset to {remote_file}...")
+        upload_via_sftp(ssh, local_path, remote_file)
+
+
 def upload_via_ftp(local_path: Path, remote_file: str, remote_site_root: str) -> None:
     host = get_credential("FTP_HOST") or ssh_host()
     port = int(get_credential("FTP_PORT", "21") or "21")
@@ -185,7 +204,8 @@ def verify_live(url: str, slug: str) -> None:
     markers = (
         'id="primary"',
         f"{slug}-page",
-        "kpmg-gateway-hero-canvas",
+        'id="nero-ai-header"',
+        "nero-ai-header-nav",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
@@ -210,6 +230,9 @@ def main() -> int:
     ssh = connect_ssh()
     try:
         theme_dir = resolve_theme_directory(ssh, remote_site_root)
+        repo_root = Path(__file__).resolve().parent.parent
+        deploy_shared_longread_assets(ssh, theme_dir, repo_root)
+
         remote_file = f"{theme_dir.rstrip('/')}/{remote_filename}"
 
         print(f"Uploading via SFTP to {remote_file}...")
