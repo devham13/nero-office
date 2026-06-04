@@ -102,6 +102,12 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 
    Простая `div`-обёртка без `main#primary` недостаточна.
 
+   **Hero / первый экран (обязательно):**
+   - **ровно один** открывающий `<style>` перед inline-CSS; **запрещено** `<style>\n<style>`;
+   - **сразу после** `<style>` — сброс `#primary/.site-main { padding-top: 0 }`, hide breadcrumbs, fallback `.nero-ai-hero-grid` (см. **`agent-pipeline-pitfalls.md` §7б**);
+   - hero — **`nero-ai-longread-hero-shell.php`**, не canvas в первом экране;
+   - перед handoff: `python scripts/validate-page-template.py wordpress/page-{slug}.php`.
+
    **`<canvas>`** — если hero Алины и/или блок Бориса используют canvas (часто **два разных** id).
 3. **Блоки `<script>`** — в конце HTML. Каждый `<script>` на отдельном блоке:
    - Hero Canvas engine (JS от Алины)

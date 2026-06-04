@@ -100,6 +100,16 @@
 | Схлопнутая высота / «белый» hero | Не использовать Tailwind-only классы без своего CSS; hero — явный `min-height: 100vh` + `position: relative` в inline-стилях (см. §6 Алина). |
 | Правое выравнивание текста | По умолчанию для Configured WordPress Theme — **левое**; иначе только по явному ТЗ владельца. |
 
+### 7б. Hero: сломанная разметка первого экрана
+
+| Симптом | Причина | Что делать |
+|--------|---------|------------|
+| Hero «сыпется»: нет сетки, светлая полоса, CSS-текст на странице | **Дублирующий `<style>`** (`<style>\n<style>`) — браузер ломает парсинг inline-CSS; `#primary { padding-top: 0 }` не доходит | **Один** открывающий `<style>` на блок. Критичные правила (breadcrumbs hide, `#primary` reset, `.nero-ai-hero` grid) — **сразу после** `<style>`, не после 500+ строк design-reference. |
+| Hero без отступа под pill-шапку | Нет padding-top у `.nero-ai-hero` | Hero через **`nero-ai-longread-hero-shell.php`** + **`nero-ai-home-shell.css`**; fallback grid/padding в начале inline `<style>`. |
+| Копипаст design-reference | Natasha вставила `longread-page-design-reference.css` целиком и продублировала тег | Shared CSS через bootstrap; в шаблоне — page-specific стили. Перед handoff: `python3 scripts/validate-page-template.py wordpress/page-{slug}.php`. |
+| Shared CSS на проде старый | `deploy.py` без `--with-theme-assets` заливает только PHP | При hero/bootstrap-правках: `python3 shared/deploy.py ... --with-theme-assets`. |
+| CTA ведёт на `#demo`, а не в Telegram | `PRIMARY_CTA_URL` подменён demo-fallback; на хостинге `getenv()` часто пустой | Главный CTA — только `${PRIMARY_CTA_URL}` (Telegram). Demo — отдельная переменная `#demo-*`. `deploy.py` **запекает** блок `// deploy:cta-env` при публикации. |
+
 ---
 
 ## 8. Юра (публикация)
