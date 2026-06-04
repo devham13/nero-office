@@ -16,12 +16,30 @@ import paramiko
 from credentials import get_credential, public_site_url, require_credential
 
 
+ROOT = Path(__file__).resolve().parents[1]
+
+THEME_ASSET_MAP: list[tuple[Path, str]] = [
+    (ROOT / "shared" / "nero-ai-site-header.css", "assets/css/nero-ai-site-header.css"),
+    (ROOT / "shared" / "nero-ai-home-shell.css", "assets/css/nero-ai-home-shell.css"),
+    (ROOT / "shared" / "nero-ai-longread-ui-compat.css", "assets/css/nero-ai-longread-ui-compat.css"),
+    (ROOT / "shared" / "nero-ai-site-header.js", "assets/js/nero-ai-site-header.js"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-longread-bootstrap.php", "partials/nero-ai-longread-bootstrap.php"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-longread-hero-shell.php", "partials/nero-ai-longread-hero-shell.php"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-site-header.php", "partials/nero-ai-site-header.php"),
+]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Deploy a Nero Network page template safely.")
     parser.add_argument("--slug", required=True)
     parser.add_argument("--title", required=True)
     parser.add_argument("--description", required=True)
     parser.add_argument("--local-path", required=True)
+    parser.add_argument(
+        "--with-theme-assets",
+        action="store_true",
+        help="Upload shared CSS/JS and partials required by longread bootstrap.",
+    )
     parser.add_argument("--skip-live-check", action="store_true")
     return parser.parse_args()
 
@@ -182,18 +200,41 @@ def create_or_update_page(
 
 
 def verify_live(url: str, slug: str) -> None:
-    markers = (
+    import re
+
+    required_markers = (
         'id="primary"',
         f"{slug}-page",
-        "kpmg-gateway-hero-canvas",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
         html = response.read().decode("utf-8", errors="ignore")
-    missing = [marker for marker in markers if marker not in html]
+
+    missing = [marker for marker in required_markers if marker not in html]
     if missing:
         raise RuntimeError(f"Live page missing markers: {', '.join(missing)}")
+
+    if re.search(r"<style>\s*<style>", html, re.I):
+        raise RuntimeError("Live page has duplicate opening <style> (hero CSS will break)")
+
+    if "padding-top: 0" not in html and "padding-top:0" not in html.replace(" ", ""):
+        raise RuntimeError("Live page missing #primary padding reset in hero CSS")
+
     print(f"Live check OK: {url}")
+
+
+def upload_theme_assets(ssh: paramiko.SSHClient, theme_dir: str) -> None:
+    theme_root = theme_dir.rstrip("/")
+    uploaded = 0
+    for local_path, relative_remote in THEME_ASSET_MAP:
+        if not local_path.is_file():
+            print(f"Skip missing theme asset: {local_path.relative_to(ROOT)}")
+            continue
+        remote_file = f"{theme_root}/{relative_remote}"
+        print(f"Uploading theme asset: {relative_remote}")
+        upload_via_sftp(ssh, local_path, remote_file)
+        uploaded += 1
+    print(f"Theme assets uploaded: {uploaded}")
 
 
 def main() -> int:
@@ -211,6 +252,9 @@ def main() -> int:
     try:
         theme_dir = resolve_theme_directory(ssh, remote_site_root)
         remote_file = f"{theme_dir.rstrip('/')}/{remote_filename}"
+
+        if args.with_theme_assets:
+            upload_theme_assets(ssh, theme_dir)
 
         print(f"Uploading via SFTP to {remote_file}...")
         upload_via_sftp(ssh, local_path, remote_file)

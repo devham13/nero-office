@@ -35,6 +35,38 @@ get_header();
 ?>
 
 <style>
+/* CRITICAL: theme reset + hero shell — must be first (see agent-pipeline-pitfalls §hero-markup) */
+.breadcrumbs, .breadcrumb, .breadcrumb-list, .breadcrumb-item,
+nav[aria-label="Хлебные крошки"],
+.woocommerce-breadcrumb, .rank-math-breadcrumb, .rank-math-breadcrumbs, .yoast-breadcrumb,
+.entry-header, .page-title-section { display: none !important; }
+
+#primary, .site-main, .site-content, #content, .content-area {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+body.nero-ai-landing-shell #masthead,
+body.nero-ai-landing-shell #mobile-header {
+  display: none !important;
+}
+body.nero-ai-landing-shell {
+  padding-top: 0 !important;
+}
+
+.nero-ai-home .nero-ai-hero {
+  padding: clamp(108px, 14vh, 148px) 0 clamp(64px, 8vw, 80px);
+}
+.nero-ai-home .nero-ai-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .nero-ai-home .nero-ai-hero-grid { grid-template-columns: 1fr; }
+  .nero-ai-home .nero-ai-dashboard { order: -1; }
+}
 
 /* nero-ai-home-page design tokens */
 
@@ -497,26 +529,7 @@ get_header();
 }
 
 
-/* Page shell + theme reset */
-.breadcrumbs, .breadcrumb, .breadcrumb-list, .breadcrumb-item,
-nav[aria-label="Хлебные крошки"],
-.woocommerce-breadcrumb, .rank-math-breadcrumb, .rank-math-breadcrumbs, .yoast-breadcrumb,
-.entry-header, .page-title-section { display: none !important; }
-
-#primary, .site-main, .site-content, #content, .content-area {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
-/* Шапка как на главной: скрываем Kadence, показываем .nero-ai-header */
-body.nero-ai-landing-shell #masthead,
-body.nero-ai-landing-shell #mobile-header {
-  display: none !important;
-}
-body.nero-ai-landing-shell {
-  padding-top: 0 !important;
-}
-
+/* Page shell + theme reset — duplicated in shared CSS; kept for offline template readability */
 .ym-container {
   width: min(var(--nero-ai-container), calc(100% - 40px));
   margin: 0 auto;
