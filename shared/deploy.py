@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import argparse
 import ftplib
+import re
 import shlex
 import sys
+import tempfile
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -16,12 +18,31 @@ import paramiko
 from credentials import get_credential, public_site_url, require_credential
 
 
+ROOT = Path(__file__).resolve().parents[1]
+
+THEME_ASSET_MAP: list[tuple[Path, str]] = [
+    (ROOT / "shared" / "nero-ai-site-header.css", "assets/css/nero-ai-site-header.css"),
+    (ROOT / "shared" / "nero-ai-home-shell.css", "assets/css/nero-ai-home-shell.css"),
+    (ROOT / "shared" / "nero-ai-longread-ui-compat.css", "assets/css/nero-ai-longread-ui-compat.css"),
+    (ROOT / "shared" / "nero-ai-site-header.js", "assets/js/nero-ai-site-header.js"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-longread-bootstrap.php", "partials/nero-ai-longread-bootstrap.php"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-longread-hero-shell.php", "partials/nero-ai-longread-hero-shell.php"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-site-header.php", "partials/nero-ai-site-header.php"),
+    (ROOT / "wordpress" / "partials" / "nero-ai-cta-helpers.php", "partials/nero-ai-cta-helpers.php"),
+]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Deploy a Nero Network page template safely.")
     parser.add_argument("--slug", required=True)
     parser.add_argument("--title", required=True)
     parser.add_argument("--description", required=True)
     parser.add_argument("--local-path", required=True)
+    parser.add_argument(
+        "--with-theme-assets",
+        action="store_true",
+        help="Upload shared CSS/JS and partials required by longread bootstrap.",
+    )
     parser.add_argument("--skip-live-check", action="store_true")
     return parser.parse_args()
 
@@ -181,19 +202,93 @@ def create_or_update_page(
     return existing_id or out.strip()
 
 
+def php_quote(value: str) -> str:
+    return "'" + value.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def bake_cta_env(content: str) -> str:
+    """Replace deploy:cta-env block with literals from Cloud secrets (getenv often empty on host)."""
+    start = "// deploy:cta-env"
+    end = "// end:cta-env"
+    if start not in content or end not in content:
+        return content
+
+    primary_url = get_credential("PRIMARY_CTA_URL")
+    if not primary_url:
+        print("CTA bake skipped: PRIMARY_CTA_URL not set.")
+        return content
+
+    primary_label = get_credential("PRIMARY_CTA_LABEL") or "Бесплатный аудит"
+    secondary_label = get_credential("SECONDARY_CTA_LABEL") or "Что можно автоматизировать"
+    secondary_url = get_credential("SECONDARY_CTA_URL")
+    secondary_line = (
+        f"$secondary_cta_url = {php_quote(secondary_url)};"
+        if secondary_url
+        else "$secondary_cta_url = home_url('/#services');"
+    )
+
+    baked = f"""{start}
+$primary_cta_label = {php_quote(primary_label)};
+$primary_cta_url = {php_quote(primary_url)};
+$secondary_cta_label = {php_quote(secondary_label)};
+{secondary_line}
+{end}"""
+
+    pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+    print("Baked PRIMARY_CTA_URL into template for live publish.")
+    return pattern.sub(baked, content, count=1)
+
+
+def prepare_template_for_deploy(local_path: Path) -> tuple[Path, Path | None]:
+    original = local_path.read_text(encoding="utf-8")
+    content = bake_cta_env(original)
+    if content == original:
+        return local_path, None
+
+    tmp_path = Path(tempfile.mkstemp(suffix=local_path.suffix)[1])
+    tmp_path.write_text(content, encoding="utf-8")
+    return tmp_path, tmp_path
+
+
 def verify_live(url: str, slug: str) -> None:
-    markers = (
+    import re
+
+    required_markers = (
         'id="primary"',
         f"{slug}-page",
-        "kpmg-gateway-hero-canvas",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
         html = response.read().decode("utf-8", errors="ignore")
-    missing = [marker for marker in markers if marker not in html]
+
+    missing = [marker for marker in required_markers if marker not in html]
     if missing:
         raise RuntimeError(f"Live page missing markers: {', '.join(missing)}")
+
+    if re.search(r"<style>\s*<style>", html, re.I):
+        raise RuntimeError("Live page has duplicate opening <style> (hero CSS will break)")
+
+    if "padding-top: 0" not in html and "padding-top:0" not in html.replace(" ", ""):
+        raise RuntimeError("Live page missing #primary padding reset in hero CSS")
+
+    if not re.search(r"t\.me/|telegram\.me/", html, re.I):
+        raise RuntimeError("Live page missing Telegram contact link (PRIMARY_CTA_URL)")
+
     print(f"Live check OK: {url}")
+
+
+def upload_theme_assets(ssh: paramiko.SSHClient, theme_dir: str) -> None:
+    theme_root = theme_dir.rstrip("/")
+    uploaded = 0
+    for local_path, relative_remote in THEME_ASSET_MAP:
+        if not local_path.is_file():
+            print(f"Skip missing theme asset: {local_path.relative_to(ROOT)}")
+            continue
+        remote_file = f"{theme_root}/{relative_remote}"
+        print(f"Uploading theme asset: {relative_remote}")
+        upload_via_sftp(ssh, local_path, remote_file)
+        uploaded += 1
+    print(f"Theme assets uploaded: {uploaded}")
 
 
 def main() -> int:
@@ -207,13 +302,17 @@ def main() -> int:
     slug = args.slug
     remote_filename = f"page-{slug}.php"
 
+    deploy_path, tmp_path = prepare_template_for_deploy(local_path)
     ssh = connect_ssh()
     try:
         theme_dir = resolve_theme_directory(ssh, remote_site_root)
         remote_file = f"{theme_dir.rstrip('/')}/{remote_filename}"
 
+        if args.with_theme_assets:
+            upload_theme_assets(ssh, theme_dir)
+
         print(f"Uploading via SFTP to {remote_file}...")
-        upload_via_sftp(ssh, local_path, remote_file)
+        upload_via_sftp(ssh, deploy_path, remote_file)
 
         create_or_update_page(ssh, remote_site_root, slug, args.title, args.description)
 
@@ -222,6 +321,8 @@ def main() -> int:
         print("Cache flushed.")
     finally:
         ssh.close()
+        if tmp_path is not None:
+            tmp_path.unlink(missing_ok=True)
 
     public_url = f"{public_site_url().rstrip('/')}/{slug}/"
     if not args.skip_live_check:
