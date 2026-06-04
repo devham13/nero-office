@@ -89,6 +89,19 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
    }
    ```
    Важно: если после публикации breadcrumbs и зазор всё равно видны **вместе** с типовым контейнером страницы, это может быть уже не CSS, а неприменённый кастомный шаблон — тогда эскалация на Юру (активная тема / `_wp_page_template` / кэш), а не бесконечная правка стилей.
+   **Один скролл (критично):** **не** ставь `overflow-x: hidden` на `#primary`, `.nero-ai-home-page`, `.nero-ai-home`, `#inner-wrap` — это даёт **второй вертикальный scrollbar**. В начале `<style>` после сброса padding:
+   ```css
+   html { overflow-x: clip; }
+   body.nero-ai-landing-shell #inner-wrap,
+   body.nero-ai-landing-shell #wrapper,
+   body.nero-ai-landing-shell .content-area {
+     overflow: visible !important;
+     max-height: none !important;
+     height: auto !important;
+   }
+   #primary.nero-ai-home-page, .nero-ai-home-page { overflow: visible; }
+   ```
+   Горизонтальный клип — только на `html`/`body`; shared **`nero-ai-longread-ui-compat.css`** подключается через bootstrap. См. **`shared/agent-pipeline-pitfalls.md`** §7б. Перед handoff: **`python3 scripts/validate-page-template.py`** — FAIL при `overflow-x:hidden` на `.nero-ai-home-page`.
 2. **HTML-разметка** — основной контент страницы обязан быть внутри:
    ```html
    <main id="primary" class="site-main {slug}-page" role="main" tabindex="-1">

@@ -100,6 +100,14 @@
 | Схлопнутая высота / «белый» hero | Не использовать Tailwind-only классы без своего CSS; hero — явный `min-height: 100vh` + `position: relative` в inline-стилях (см. §6 Алина). |
 | Правое выравнивание текста | По умолчанию для Configured WordPress Theme — **левое**; иначе только по явному ТЗ владельца. |
 
+### 7б. Двойной скролл (два scrollbar)
+
+| Симптом | Причина | Что делать |
+|---------|---------|------------|
+| **Два вертикальных скроллбара** — один у окна, второй у `#primary` / `.nero-ai-home-page` | В CSS **`overflow-x: hidden`** на scroll-container (например `#primary.nero-ai-home-page` или `.nero-ai-home`) **неявно включает `overflow-y: auto`** → браузер делает внутренний scrollable box. | **Никогда** не ставить `overflow-x: hidden` на `#primary`, `.nero-ai-home-page`, `.nero-ai-home`, `#inner-wrap`. Для горизонтального клипа: **`html { overflow-x: clip; }`** и **`body.nero-ai-landing-shell { overflow-x: clip; overflow-y: auto; }`**. У контейнеров темы: **`overflow: visible !important`**. У `.nero-ai-home-page`: **`overflow: visible`**. |
+| Исправили в шаблоне, на проде всё ещё два скролла | Старый **`nero-ai-home-shell.css`** или inline critical CSS в кэше | **Юра:** `deploy.py --with-theme-assets`; в bootstrap bump версии `nero-ai-longread-ui-compat.css` / `nero-ai-home-shell.css`. **Макс:** в DevTools проверить computed `overflow-y` у `#primary` — должно быть `visible`, не `auto`. |
+| Регресс при новой странице | Наташа копирует эталон с `overflow-x: hidden` на корневой обёртке | Перед публикацией: **`python3 scripts/validate-page-template.py wordpress/page-{slug}.php`**. Эталон **`longread-page-design-reference.css`** — только `overflow: visible` на `.nero-ai-home-page`. Shared fix: **`shared/nero-ai-longread-ui-compat.css`**. |
+
 ---
 
 ## 8. Юра (публикация)
@@ -158,5 +166,6 @@
 - Блок Бориса дублирует hero / не на месте → **Борис** (логика сцены) или **Наташа** (якорь вставки).
 - Скрипты на странице текстом → **Юра** (не тот канал публикации или обёртка блока в WP).
 - Нет `alt` у баннера рекламный партнёр из env / «немая» ссылка-картинка → **Артур** (шаблон баннера) → **Наташа** (вёрстка) → **Юра** (перезаливка PHP).
+- **Два скроллбара** на лонгриде → **Наташа** (убрать `overflow-x:hidden` с `#primary`/`.nero-ai-home-page`, critical CSS как в §7б) → **Юра** (`--with-theme-assets`, bump версий CSS).
 
 Файл в плагине: `nero-network-office-page/shared/agent-pipeline-pitfalls.md`.

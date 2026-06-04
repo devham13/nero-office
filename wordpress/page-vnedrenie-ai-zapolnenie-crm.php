@@ -99,10 +99,41 @@ nav[aria-label="Хлебные крошки"],
   margin-top: 0 !important;
 }
 
-.nero-ai-home-page > .nero-ai-home .nero-ai-hero {
-  min-height: 100vh;
-  min-height: 100dvh;
-  position: relative;
+body.nero-ai-landing-shell #masthead,
+body.nero-ai-landing-shell #mobile-header {
+  display: none !important;
+}
+
+body.nero-ai-landing-shell {
+  padding-top: 0 !important;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body.nero-ai-landing-shell #inner-wrap,
+body.nero-ai-landing-shell #wrapper,
+body.nero-ai-landing-shell .content-area {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+.nero-ai-home .nero-ai-hero {
+  padding: clamp(108px, 14vh, 148px) 0 clamp(64px, 8vw, 80px);
+}
+
+.nero-ai-home .nero-ai-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .nero-ai-home .nero-ai-hero-grid { grid-template-columns: 1fr; }
+  .nero-ai-home .nero-ai-dashboard { order: -1; }
 }
 
 .nero-ai-hero-grid {
@@ -145,7 +176,7 @@ nav[aria-label="Хлебные крошки"],
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: visible;
   color: var(--nero-ai-text);
   background:
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),

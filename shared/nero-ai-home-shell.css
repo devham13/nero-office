@@ -14,7 +14,6 @@
   font-family: Inter, system-ui, -apple-system, sans-serif;
   color: var(--nero-text);
   background: var(--nero-bg);
-  overflow-x: hidden;
 }
 .nero-ai-home *,
 .nero-ai-home *::before,

@@ -19,8 +19,8 @@ add_action('wp_head', static function (): void {
     $theme_uri = get_stylesheet_directory_uri();
     $styles = [
         'assets/css/nero-ai-site-header.css' => '1.0.2',
-        'assets/css/nero-ai-home-shell.css' => '1.0.0',
-        'assets/css/nero-ai-longread-ui-compat.css' => '1.0.0',
+        'assets/css/nero-ai-home-shell.css' => '1.0.1',
+        'assets/css/nero-ai-longread-ui-compat.css' => '1.0.1',
     ];
 
     foreach ($styles as $relative_path => $version) {

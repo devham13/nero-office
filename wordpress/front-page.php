@@ -77,7 +77,7 @@ nav[aria-label="Хлебные крошки"], .woocommerce-breadcrumb,
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: visible;
   color: var(--nero-ai-text);
   background:
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),

@@ -1,6 +1,27 @@
 /**
  * Кнопки и контент лонгрида — те же стили, что на главной (.nero-ai-home).
  */
+
+/* Single scroll: overflow-x:hidden on #primary forces overflow-y:auto (double scrollbar). */
+html {
+  overflow-x: clip;
+}
+
+body.nero-ai-landing-shell {
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
+body.nero-ai-landing-shell #inner-wrap,
+body.nero-ai-landing-shell #wrapper,
+body.nero-ai-landing-shell .content-area,
+body.nero-ai-landing-shell #primary.nero-ai-home-page,
+body.nero-ai-landing-shell .site-main.nero-ai-home-page {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
 .nero-ai-home-page .nero-ai-btn {
   display: inline-flex;
   align-items: center;

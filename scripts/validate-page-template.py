@@ -41,13 +41,21 @@ def validate(path: Path) -> list[str]:
 
     style_blocks = re.findall(r"<style[^>]*>(.*?)</style>", text, re.I | re.S)
     if style_blocks:
-        head = style_blocks[0][:900]
+        first_style = style_blocks[0]
+        head = first_style[:900]
         if not re.search(r"padding-top\s*:\s*0", head, re.I):
             errors.append(
                 "first <style> block: move #primary padding reset immediately after opening <style>"
             )
-        if "nero-ai-hero-grid" not in head and "nero-ai-longread-hero-shell" in text:
+        if (
+            "nero-ai-hero-grid" not in first_style
+            and "nero-ai-longread-hero-shell" in text
+        ):
             errors.append("first <style> block: missing .nero-ai-hero-grid fallback for homepage hero")
+        if re.search(r"\.nero-ai-home-page[^{]*\{[^}]*overflow-x\s*:\s*hidden", text, re.I | re.S):
+            errors.append(
+                "overflow-x:hidden on .nero-ai-home-page causes double scroll (use overflow:visible + shared ui-compat)"
+            )
 
     return errors
 
