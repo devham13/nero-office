@@ -18,6 +18,12 @@ $hero_primary_label = $hero_primary_label ?? (getenv('PRIMARY_CTA_LABEL') ?: 'О
 $hero_primary_url = $hero_primary_url ?? (getenv('PRIMARY_CTA_URL') ?: '#audit');
 $hero_secondary_label = $hero_secondary_label ?? (getenv('SECONDARY_CTA_LABEL') ?: 'Что можно автоматизировать');
 $hero_secondary_url = $hero_secondary_url ?? (getenv('SECONDARY_CTA_URL') ?: home_url('/#services'));
+$hero_secondary_external = $hero_secondary_external ?? null;
+if ($hero_secondary_external === null && function_exists('nero_ai_external_link_attrs')) {
+    $hero_secondary_external = nero_ai_external_link_attrs($hero_secondary_url) !== '';
+} elseif ($hero_secondary_external === null) {
+    $hero_secondary_external = str_starts_with($hero_secondary_url, 'http') && !str_starts_with($hero_secondary_url, home_url());
+}
 $hero_dashboard_title = $hero_dashboard_title ?? 'AI-операционный центр';
 $hero_dashboard_note = $hero_dashboard_note ?? 'пример логики AI-системы · демонстрационные данные';
 $hero_metrics = $hero_metrics ?? [];
@@ -42,7 +48,7 @@ $hero_feed = $hero_feed ?? [];
           <?php endif; ?>
           <div class="nero-ai-cta-row">
             <a class="nero-ai-btn nero-ai-btn--primary" href="<?php echo esc_url($hero_primary_url); ?>"><?php echo esc_html($hero_primary_label); ?></a>
-            <a class="nero-ai-btn nero-ai-btn--ghost" href="<?php echo esc_url($hero_secondary_url); ?>"><?php echo esc_html($hero_secondary_label); ?></a>
+            <a class="nero-ai-btn nero-ai-btn--ghost" href="<?php echo esc_url($hero_secondary_url); ?>"<?php echo $hero_secondary_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($hero_secondary_label); ?></a>
           </div>
         </div>
         <div class="nero-ai-dashboard" aria-label="Демонстрация AI-обработки заявок">

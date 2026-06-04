@@ -21,15 +21,29 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 }, 1);
 
 $brand = getenv('SITE_BRAND') ?: get_bloginfo('name') ?: '';
-$primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Бесплатный аудит';
-$primary_cta_url = getenv('PRIMARY_CTA_URL') ?: '#demo-3-pisma';
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Что можно автоматизировать';
-$secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: home_url('/#services');
 
 $nero_bootstrap = get_stylesheet_directory() . '/partials/nero-ai-longread-bootstrap.php';
 if (is_readable($nero_bootstrap)) {
     require_once $nero_bootstrap;
 }
+
+$cta_helpers = get_stylesheet_directory() . '/partials/nero-ai-cta-helpers.php';
+if (is_readable($cta_helpers)) {
+    require_once $cta_helpers;
+}
+
+// deploy:cta-env
+$primary_cta_label = (function_exists('nero_ai_resolve_env') ? nero_ai_resolve_env('PRIMARY_CTA_LABEL') : (getenv('PRIMARY_CTA_LABEL') ?: '')) ?: 'Бесплатный аудит';
+$primary_cta_url = (function_exists('nero_ai_resolve_env') ? nero_ai_resolve_env('PRIMARY_CTA_URL') : (getenv('PRIMARY_CTA_URL') ?: '')) ?: '#audit';
+$secondary_cta_label = (function_exists('nero_ai_resolve_env') ? nero_ai_resolve_env('SECONDARY_CTA_LABEL') : (getenv('SECONDARY_CTA_LABEL') ?: '')) ?: 'Что можно автоматизировать';
+$secondary_cta_url = (function_exists('nero_ai_resolve_env') ? nero_ai_resolve_env('SECONDARY_CTA_URL') : (getenv('SECONDARY_CTA_URL') ?: '')) ?: home_url('/#services');
+// end:cta-env
+
+$demo_cta_label = 'Сгенерировать 3 письма';
+$demo_cta_url = '#demo-3-pisma';
+$primary_cta_external = function_exists('nero_ai_external_link_attrs')
+    ? nero_ai_external_link_attrs($primary_cta_url)
+    : ' target="_blank" rel="noopener noreferrer"';
 
 get_header();
 ?>
@@ -795,8 +809,8 @@ $nero_header_nav_links = [
     ['href' => '#anti-spam', 'label' => 'Без спама'],
     ['href' => '#faq', 'label' => 'FAQ'],
 ];
-$nero_header_cta_label = 'Сгенерировать 3 письма';
-$nero_header_cta_url = '#demo-3-pisma';
+$nero_header_cta_label = $primary_cta_label;
+$nero_header_cta_url = $primary_cta_url;
 $nero_header = get_stylesheet_directory() . '/partials/nero-ai-site-header.php';
 if (is_readable($nero_header)) {
     require $nero_header;
@@ -808,10 +822,11 @@ $hero_title = 'AI-персонализация B2B-писем — внедрен
 $hero_title_id = 'vnedrenie-ai-personalizaciya-b2b-pisem-hero-title';
 $hero_lead = 'AI персонализация писем для B2B: система анализирует компанию клиента и готовит релевантное персональное письмо — без массового спама';
 $hero_badges = ['B2B outreach', 'Enrichment', 'Human approve', 'Anti-spam', 'CRM'];
-$hero_primary_label = 'Сгенерировать 3 письма';
-$hero_primary_url = '#demo-3-pisma';
-$hero_secondary_label = $secondary_cta_label;
-$hero_secondary_url = $secondary_cta_url;
+$hero_primary_label = $demo_cta_label;
+$hero_primary_url = $demo_cta_url;
+$hero_secondary_label = $primary_cta_label;
+$hero_secondary_url = $primary_cta_url;
+$hero_secondary_external = $primary_cta_external !== '';
 $hero_dashboard_title = 'B2B outreach · персонализация писем';
 $hero_dashboard_note = 'пример логики AI-outreach · демонстрационные данные';
 $hero_metrics = [
@@ -854,6 +869,17 @@ if (is_readable($hero_partial)) {
       </div>
     </div>
   </section>
+
+  <div class="nero-ai-container nero-ai-prose nero-ai-reveal">
+    <aside class="nero-ai-card nero-ai-inline-cta" aria-label="Аудит outreach и персонализации">
+      <p class="nero-ai-eyebrow">Бесплатный аудит · 30 минут</p>
+      <h3>Разберём ваш outreach до внедрения AI-персонализации</h3>
+      <p>Шаблоны, CRM, источник базы, reply rate baseline и риски по 152-ФЗ/38-ФЗ — с ориентиром бюджета на пилот 50–200 контактов.</p>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_external; ?>><?php echo esc_html($primary_cta_label); ?></a>
+      </div>
+    </aside>
+  </div>
 
   <nav class="nero-ai-toc-wrap" aria-label="Оглавление">
     <ul class="nero-ai-toc nero-ai-reveal">
@@ -1367,7 +1393,7 @@ if (is_readable($hero_partial)) {
         <p class="nero-ai-eyebrow">Лид-магнит · 3 письма</p>
         <h3>Сгенерируйте 3 персональных B2B-письма по URL из вашего ICP</h3>
         <p>Увидите research brief, icebreaker, subject и body на реальных данных — без часов ручного research и без шаблонного спама.</p>
-        <div class="nero-ai-btn-row"><a class="nero-ai-btn nero-ai-btn-primary" href="#demo-3-pisma">Сгенерировать 3 письма</a></div>
+        <div class="nero-ai-btn-row"><a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($demo_cta_url); ?>"><?php echo esc_html($demo_cta_label); ?></a></div>
       </aside>
     </div>
   </section>
@@ -1460,7 +1486,7 @@ if (is_readable($hero_partial)) {
         <p class="nero-ai-eyebrow">Бесплатный аудит · 30 минут</p>
         <h3>Разберём ваш outreach до внедрения AI-персонализации</h3>
         <p>Посмотрим шаблоны, CRM, источник базы, reply rate baseline и риски по 152-ФЗ/38-ФЗ — с ориентиром бюджета на пилот 50–200 контактов.</p>
-        <div class="nero-ai-btn-row"><a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a></div>
+        <div class="nero-ai-btn-row"><a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_external; ?>><?php echo esc_html($primary_cta_label); ?></a></div>
       </aside>
     </div>
   </section>
@@ -1519,8 +1545,8 @@ if (is_readable($hero_partial)) {
         <h2 id="final-cta-audit-outreach">Сначала аудит outreach — потом внедрение под ключ</h2>
         <p>Nero Network не продаёт «ещё один SaaS для рассылок». Начинаем с диагностики: ICP, deliverability, CRM и ориентир чека 80–220 тыс. ₽ на систему с human-in-the-loop.</p>
         <div class="nero-ai-btn-row">
-          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
-          <a class="nero-ai-btn nero-ai-btn-primary" href="#demo-3-pisma">Сгенерировать 3 письма</a>
+          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_external; ?>><?php echo esc_html($primary_cta_label); ?></a>
+          <a class="nero-ai-btn nero-ai-btn-secondary" href="<?php echo esc_url($demo_cta_url); ?>"><?php echo esc_html($demo_cta_label); ?></a>
         </div>
       </section>
     </div>
