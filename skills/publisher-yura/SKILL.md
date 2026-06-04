@@ -126,6 +126,14 @@ get_header(); ?>
    - файл шаблона: `644`;
    - каталог темы и родительские каталоги до `wp-content/themes`: должны позволять веб-серверу обход (`755` или рабочий эквивалент хостинга).
 
+   **Для лонгридов `.nero-ai-home-page`** `shared/deploy.py` дополнительно заливает общие файлы шапки (как на главной):
+   - `assets/css/nero-ai-site-header.css`
+   - `assets/js/nero-ai-site-header.js`
+   - `partials/nero-ai-site-header.php`
+   - `partials/nero-ai-longread-bootstrap.php`
+
+   Live-проверка: в HTML есть `id="nero-ai-header"`, Kadence `#masthead` скрыт.
+
    Если файл есть на сервере, но WordPress всё равно отдаёт `page.php`, первым делом проверь: **не тот каталог**, права файла, права родительских каталогов.
 
    Пример FTP-паттерна:
@@ -272,6 +280,24 @@ URL: https://...
    - прочие page-level улучшения, которые можно внести при пересборке
 3. Перепубликуй страницу через тот же FTP → PHP-шаблон.
 4. Обнови файл обмена новым блоком публикации, чтобы Макс и Лёня прогнали страницу заново.
+
+## Google Таблица после публикации
+
+Если в handoff есть блок `=== КИРИЛЛ (ТЕМА ДНЯ ИЗ GOOGLE ТАБЛИЦЫ) ===` с **номером строки листа** (1 = заголовок, данные с 2):
+
+1. Запиши публичный URL **только** в колонку «${GOOGLE_SHEETS_LINK_COLUMN}» **этой строки** через **Google Sheets API** (основной способ):
+
+   ```bash
+   python scripts/update-google-sheet-link.py --row {N} --url "https://..."
+   ```
+
+   Env/secrets: `GOOGLE_SERVICE_ACCOUNT_BASE64`, `GOOGLE_SHEET_ID`, `GOOGLE_SHEETS_TAB` (или `GOOGLE_SHEETS_DEFAULT_SHEET`), `GOOGLE_SHEETS_LINK_COLUMN`. Сервисный аккаунт — **Editor** на таблице; в GCP включён **Google Sheets API**.
+
+2. **Не перезаписывай** уже заполненные ссылки в других строках. Скрипт по умолчанию **пропускает** ячейку с URL; `--force` — только если директор явно попросил исправить эту же строку.
+
+3. **Fallback (устаревший):** `GOOGLE_SHEETS_WEBHOOK_URL` + `GOOGLE_SHEETS_WEBHOOK_TOKEN` — только если API недоступен. Webhook часто даёт 401/403 из Cloud Agent.
+
+4. Если **и API, и webhook** недоступны — в блоке Юры: «Google Таблица не обновлена» + причина; директор сообщит владельцу.
 
 ## Субагент
 
