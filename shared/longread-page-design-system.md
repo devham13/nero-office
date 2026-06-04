@@ -77,6 +77,7 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 - Тексты и метрики dashboard — **под тему страницы**, структура и анимации — **как на главной**.
 - Подключение: bootstrap грузит `nero-ai-home-shell.css` + `nero-ai-longread-ui-compat.css`; в `page-{slug}.php` — переменные hero + `require` partial.
 - **Шапка:** `.nero-ai-header` + partials (см. `nero-ai-site-header.*`); Kadence `#masthead` скрыт через `nero-ai-landing-shell`.
+- **Меню лонгрида:** перед `require` шапки задай **`$nero_header_nav_links`** — якоря **этой страницы** (5–6 пунктов из оглавления Коли, короткие подписи). **`$nero_header_cta_label` / `$nero_header_cta_url`** — CTA страницы (часто `#demo-*` или `#final-cta-*`). Не используй пункты главной (`/#services`) на лонгридах.
 - **Запрещено** для новых AI-лонгридов: светлый `fullscreen-white-office`, `.giant-seo` на белом фоне — это старый эталон вайбкодинга, не текущий бренд Meta Journal / Nero.
 
 ## Запреты

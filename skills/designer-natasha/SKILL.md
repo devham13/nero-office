@@ -92,7 +92,7 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
    ```
    **Шапка как на главной (обязательно для `.nero-ai-home-page`):**
    - **до `get_header()`:** `require_once get_stylesheet_directory() . '/partials/nero-ai-longread-bootstrap.php';`
-   - **сразу после `<main …>`:** `require get_stylesheet_directory() . '/partials/nero-ai-site-header.php';`
+   - **сразу после `<main …>`:** задай `$nero_header_nav_links` (якоря **этой** страницы, 5–6 пунктов) + `$nero_header_cta_*`, затем `require …/nero-ai-site-header.php`.
    - Hero padding-top: `clamp(108px, 14vh, 148px)` — зазор под фиксированную `.nero-ai-header`.
    - Не стилизуй Kadence `#masthead` — на лонгридах показывается только `.nero-ai-header`.
    Важно: если после публикации breadcrumbs и зазор всё равно видны **вместе** с типовым контейнером страницы, это может быть уже не CSS, а неприменённый кастомный шаблон — тогда эскалация на Юру (активная тема / `_wp_page_template` / кэш), а не бесконечная правка стилей.

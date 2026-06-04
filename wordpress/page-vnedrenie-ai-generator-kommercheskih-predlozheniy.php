@@ -761,6 +761,16 @@ body.nero-ai-landing-shell {
 
 <main id="primary" class="site-main vnedrenie-ai-generator-kommercheskih-predlozheniy-page nero-ai-home-page" role="main" tabindex="-1">
 <?php
+$nero_header_nav_links = [
+    ['href' => '#b2b-poterya-sdelok', 'label' => 'Боль B2B'],
+    ['href' => '#chto-takoe-ai-generator-kp', 'label' => 'Продукт'],
+    ['href' => '#process-2-5-minut', 'label' => 'Процесс'],
+    ['href' => '#vnedrenie-pod-klyuch', 'label' => 'Внедрение'],
+    ['href' => '#cena-vnedreniya', 'label' => 'Стоимость'],
+    ['href' => '#faq', 'label' => 'FAQ'],
+];
+$nero_header_cta_label = 'Собрать пример КП';
+$nero_header_cta_url = '#demo-primer-kp';
 $nero_header = get_stylesheet_directory() . '/partials/nero-ai-site-header.php';
 if (is_readable($nero_header)) {
     require $nero_header;

@@ -759,6 +759,16 @@ body.nero-ai-landing-shell {
 
 <main id="primary" class="site-main vnedrenie-ai-obrabotka-zayavok-s-sayta-page nero-ai-home-page" role="main" tabindex="-1">
 <?php
+$nero_header_nav_links = [
+    ['href' => '#pochemu-zayavki-ostyvayut', 'label' => 'Почему остывают'],
+    ['href' => '#chto-takoe-ai-agent', 'label' => 'AI-агент'],
+    ['href' => '#kak-rabotaet-ai-obrabotka', 'label' => 'Как работает'],
+    ['href' => '#vnedrenie-pod-klyuch', 'label' => 'Внедрение'],
+    ['href' => '#skolko-stoit', 'label' => 'Стоимость'],
+    ['href' => '#faq', 'label' => 'FAQ'],
+];
+$nero_header_cta_label = 'Проверить, сколько заявок вы теряете';
+$nero_header_cta_url = '#final-cta-audit-title';
 $nero_header = get_stylesheet_directory() . '/partials/nero-ai-site-header.php';
 if (is_readable($nero_header)) {
     require $nero_header;
