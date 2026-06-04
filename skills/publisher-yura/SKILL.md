@@ -283,11 +283,21 @@ URL: https://...
 
 ## Google Таблица после публикации
 
-Если в handoff есть блок `=== КИРИЛЛ (ТЕМА ДНЯ ИЗ GOOGLE ТАБЛИЦЫ) ===` с номером строки:
+Если в handoff есть блок `=== КИРИЛЛ (ТЕМА ДНЯ ИЗ GOOGLE ТАБЛИЦЫ) ===` с **номером строки листа** (1 = заголовок, данные с 2):
 
-1. Запиши публичный URL **только** в колонку «${GOOGLE_SHEETS_LINK_COLUMN}» **этой строки** через `GOOGLE_SHEETS_WEBHOOK_URL` + `GOOGLE_SHEETS_WEBHOOK_TOKEN`.
-2. **Не перезаписывай** ссылки в других строках.
-3. Если webhook недоступен — верни в блоке Юры предупреждение «Google Таблица не обновлена»; директор сообщит владельцу.
+1. Запиши публичный URL **только** в колонку «${GOOGLE_SHEETS_LINK_COLUMN}» **этой строки** через **Google Sheets API** (основной способ):
+
+   ```bash
+   python scripts/update-google-sheet-link.py --row {N} --url "https://..."
+   ```
+
+   Env/secrets: `GOOGLE_SERVICE_ACCOUNT_BASE64`, `GOOGLE_SHEET_ID`, `GOOGLE_SHEETS_TAB` (или `GOOGLE_SHEETS_DEFAULT_SHEET`), `GOOGLE_SHEETS_LINK_COLUMN`. Сервисный аккаунт — **Editor** на таблице; в GCP включён **Google Sheets API**.
+
+2. **Не перезаписывай** уже заполненные ссылки в других строках. Скрипт по умолчанию **пропускает** ячейку с URL; `--force` — только если директор явно попросил исправить эту же строку.
+
+3. **Fallback (устаревший):** `GOOGLE_SHEETS_WEBHOOK_URL` + `GOOGLE_SHEETS_WEBHOOK_TOKEN` — только если API недоступен. Webhook часто даёт 401/403 из Cloud Agent.
+
+4. Если **и API, и webhook** недоступны — в блоке Юры: «Google Таблица не обновлена» + причина; директор сообщит владельцу.
 
 ## Субагент
 

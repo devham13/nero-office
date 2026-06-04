@@ -70,7 +70,7 @@ description: |
 
   Для каждой темы укажи:
 
-  * номер строки или идентификатор строки в Google Таблице;
+  * номер строки листа в Google Таблице (1 = заголовок, данные с 2);
   * направление;
   * узкая тема посадочной;
   * главный ключ/ядро;
@@ -148,7 +148,7 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 8. записываешь результат в handoff для Коли и Артёма;
 9. добавляешь выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`.
 
-**После публикации (Юра):** в Google Таблицу в колонку «${GOOGLE_SHEETS_LINK_COLUMN}» **только для выбранной строки** записывается публичный URL через `GOOGLE_SHEETS_WEBHOOK_URL` + `GOOGLE_SHEETS_WEBHOOK_TOKEN`. **Никогда не перезаписывай** уже заполненные ссылки в других строках.
+**После публикации (Юра):** в Google Таблицу в колонку «${GOOGLE_SHEETS_LINK_COLUMN}» **только для выбранной строки** записывается публичный URL через **Google Sheets API**: `python scripts/update-google-sheet-link.py --row {N} --url "https://..."` (см. skill **publisher-yura**). В handoff указывай **номер строки листа** (строка 1 = заголовок). **Никогда не перезаписывай** уже заполненные ссылки в других строках.
 
 ## Как работать
 

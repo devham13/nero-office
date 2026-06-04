@@ -34,7 +34,8 @@ is_background: false
 8. Установи/проверь `_wp_page_template = page-{slug}.php`, очисти object cache и внешний page cache.
 9. **Проверь live HTML, не только HTTP 200**: есть `main#primary`, `{slug}-page`, hero/canvas-маркеры; нет симптома дефолтного `page.php` с breadcrumbs и пустым `entry-content`.
 10. Если после публикации Лёня записал в файл обмена SEO/GEO-рекомендации — **исправь страницу и перепубликуй** с их учётом.
-11. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку со статусом `published`, публичным URL и проверкой. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
+11. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===` с номером строки листа — запиши URL в Google Таблицу: `python scripts/update-google-sheet-link.py --row {N} --url "https://..."`. Не перезаписывай другие строки; без `--force` скрипт не трогает уже заполненную ячейку.
+12. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/<PROJECT_SLUG>/shared/published-pages.md`. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку со статусом `published`, публичным URL и проверкой. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
 
 ```md
 === ЮРА (ПУБЛИКАЦИЯ) ===
@@ -43,7 +44,7 @@ URL: https://...
 Статус: опубликовано
 Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
 Способ: FTP → page-{slug}.php в тему ${WP_THEME_SLUG}
-Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
+Журнал публикаций: <PROJECT_ROOT>/<PROJECT_SLUG>/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
 ```
 

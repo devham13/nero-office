@@ -231,7 +231,47 @@ def check_ssh(config: dict[str, str]) -> CheckResult:
         return CheckResult("ssh", False, f"connection failed: {type(exc).__name__}")
 
 
-def shell_quote(value: str) -> str:
+def check_google_sheets(config: dict[str, str]) -> CheckResult:
+    names = (
+        "GOOGLE_SERVICE_ACCOUNT_BASE64",
+        "GOOGLE_SHEET_ID",
+        "GOOGLE_SHEETS_LINK_COLUMN",
+    )
+    if not all(present(config.get(name)) for name in names):
+        return CheckResult("google sheets", True, "skipped (not configured)")
+
+    tab = config.get("GOOGLE_SHEETS_TAB") or config.get("GOOGLE_SHEETS_DEFAULT_SHEET")
+    if not present(tab):
+        return CheckResult("google sheets", False, "missing GOOGLE_SHEETS_TAB or GOOGLE_SHEETS_DEFAULT_SHEET")
+
+    try:
+        import base64
+        import json
+
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+
+        sa_info = json.loads(base64.b64decode(config["GOOGLE_SERVICE_ACCOUNT_BASE64"]))
+        creds = service_account.Credentials.from_service_account_info(
+            sa_info,
+            scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"],
+        )
+        service = build("sheets", "v4", credentials=creds, cache_discovery=False)
+        header_range = f"'{tab}'!1:1"
+        service.spreadsheets().values().get(
+            spreadsheetId=config["GOOGLE_SHEET_ID"],
+            range=header_range,
+        ).execute()
+        return CheckResult("google sheets", True, "Sheets API read OK")
+    except ImportError:
+        return CheckResult("google sheets", False, "google-auth / google-api-python-client not installed")
+    except Exception as exc:
+        err = str(exc)
+        if "SERVICE_DISABLED" in err:
+            return CheckResult("google sheets", False, "Google Sheets API disabled in GCP project")
+        return CheckResult("google sheets", False, f"{type(exc).__name__}")
+
+
     return "'" + value.replace("'", "'\"'\"'") + "'"
 
 
@@ -265,7 +305,13 @@ def main() -> int:
     ]
 
     if args.network:
-        results.extend([check_url(config), check_host_alignment(config), check_ftp(config), check_ssh(config)])
+        results.extend([
+            check_url(config),
+            check_host_alignment(config),
+            check_ftp(config),
+            check_ssh(config),
+            check_google_sheets(config),
+        ])
 
     for result in results:
         print_result(result)
