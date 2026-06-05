@@ -99,6 +99,13 @@
 | Вступление по центру, без декора | Верстать по §«Введение сразу после hero» в **longread-page-design-system.md**; при необходимости `text-align: left !important`. |
 | Схлопнутая высота / «белый» hero | Не использовать Tailwind-only классы без своего CSS; hero — явный `min-height: 100vh` + `position: relative` в inline-стилях (см. §6 Алина). |
 | Правое выравнивание текста | По умолчанию для Configured WordPress Theme — **левое**; иначе только по явному ТЗ владельца. |
+| Нет **nero-ai-header** / пункты ведут на главную | Перед hero: `require` `partials/nero-ai-longread-bootstrap.php` + `$nero_header_nav_links` по якорям страницы + `partials/nero-ai-site-header.php`. См. commit `74b3c9f`. |
+
+### 7б. Двойной скролл
+
+| Симптом | Что делать |
+|---------|------------|
+| Два вертикальных скроллбара (body + `#primary`) | **Не** ставить `overflow-x: hidden` на `.nero-ai-home-page` / `#primary` — браузер включает `overflow-y: auto`. Вместо этого: `html { overflow-x: clip; }`, у Kadence-обёрток `overflow: visible !important; height: auto`, у `.nero-ai-home-page` — `overflow: visible; min-height: 0`. Подключить `nero-ai-longread-bootstrap.php` и `assets/css/nero-ai-longread-ui-compat.css`. См. `shared/nero-ai-longread-ui-compat.css`, commit `28a19bb`. |
 
 ---
 

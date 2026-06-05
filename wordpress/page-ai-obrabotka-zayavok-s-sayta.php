@@ -22,6 +22,11 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
     echo '<meta property="og:type" content="article" />' . "\n";
 }, 1);
 
+$nero_bootstrap = get_stylesheet_directory() . '/partials/nero-ai-longread-bootstrap.php';
+if (is_readable($nero_bootstrap)) {
+    require_once $nero_bootstrap;
+}
+
 get_header();
 ?>
 
@@ -56,10 +61,10 @@ get_header();
 
 #primary.nero-ai-home-page,
 .nero-ai-home-page {
-  min-height: 100vh;
+  min-height: 0;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: visible;
   color: var(--nero-ai-text);
   background:
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),
@@ -727,7 +732,36 @@ nav[aria-label="Хлебные крошки"],
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
-.ai-obrabotka-zayavok-s-sayta-page { margin: 0; padding: 0; overflow-x: hidden; }
+.ai-obrabotka-zayavok-s-sayta-page { margin: 0; padding: 0; overflow: visible; }
+
+body.nero-ai-landing-shell #masthead,
+body.nero-ai-landing-shell #mobile-header {
+  display: none !important;
+}
+body.nero-ai-landing-shell {
+  padding-top: 0 !important;
+}
+html {
+  overflow-x: clip;
+}
+body.nero-ai-landing-shell #inner-wrap,
+body.nero-ai-landing-shell #wrapper,
+body.nero-ai-landing-shell .content-area,
+body.nero-ai-landing-shell #content,
+body.nero-ai-landing-shell .content-wrap,
+body.nero-ai-landing-shell .entry-content-wrap,
+body.nero-ai-landing-shell .entry-content {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+body.nero-ai-landing-shell .content-area {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.nero-ai-hero {
+  padding-top: clamp(108px, 14vh, 148px);
+}
 
 /* Intro after hero */
 .ai-obrabotka-zayavok-s-sayta-intro {
@@ -887,6 +921,22 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main ai-obrabotka-zayavok-s-sayta-page nero-ai-home-page" role="main" tabindex="-1">
+<?php
+$nero_header_nav_links = [
+    ['href' => '#pochemu-zayavki-ostyvayut', 'label' => 'Почему остывают'],
+    ['href' => '#chto-takoe-ai-obrabotka', 'label' => 'AI-обработка'],
+    ['href' => '#kak-rabotaet-ai-agent', 'label' => 'Сценарий'],
+    ['href' => '#vnedrenie-ai-pod-klyuch', 'label' => 'Внедрение'],
+    ['href' => '#stoimost-vnedreniya', 'label' => 'Стоимость'],
+    ['href' => '#faq-ai-obrabotka', 'label' => 'FAQ'],
+];
+$nero_header_cta_label = $primary_cta_label;
+$nero_header_cta_url = '#audit-cta';
+$nero_header = get_stylesheet_directory() . '/partials/nero-ai-site-header.php';
+if (is_readable($nero_header)) {
+    require $nero_header;
+}
+?>
 
 <section class="nero-ai-hero" aria-labelledby="ai-obrabotka-hero-title">
   <div class="nero-ai-container nero-ai-hero-grid">

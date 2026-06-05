@@ -2,12 +2,10 @@
 
 ## 2026-06-05 — ai-obrabotka-zayavok-s-sayta
 
-- Юра: ✅ опубликовано — slug ai-obrabotka-zayavok-s-sayta (см. published-pages.md)
-- Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
-- Способ: SFTP → page-ai-obrabotka-zayavok-s-sayta.php в тему kadence (WP post ID 42)
-- QA (Макс): ✅ первый экран OK; hotfix reveal `<script>` — перезалито директором
-- SEO (Лёня): ✅ 86/100 (B+), критичных блокеров нет
-- URL: /ai-obrabotka-zayavok-s-sayta/ (см. published-pages.md)
+- ОШИБКА Кирилла: строка №1 таблицы уже имела URL-колонка таблицы → /vnedrenie-ai-obrabotka-zayavok-s-sayta/; канон — vnedrenie-*
+- Hotfix: nero-ai-header с якорями страницы, bootstrap, двойной скролл (overflow: visible + html clip)
+- Правила: agents/kirill.md + skill — проверка колонки URL-колонка таблицы
+- URL дубля: /ai-obrabotka-zayavok-s-sayta/ (не использовать для новых запусков)
 
 ## 2026-05-28 — kpmg-claude-vnedrenie-ai-276-tysyach
 
