@@ -12,7 +12,7 @@ import json
 import sys
 from pathlib import Path
 
-from credentials import get_credential, require_credential
+from credentials import get_credential, public_site_url, require_credential
 
 STATUS_VALUE = "Не использовано"
 STATUS_HEADER = "Статус"
@@ -60,9 +60,18 @@ def open_worksheet():
     return workbook.worksheet(tab) if tab else workbook.sheet1
 
 
-def public_path(slug: str) -> str:
+def public_page_url(slug: str) -> str:
+    base = public_site_url().rstrip("/")
     slug = slug.strip("/")
-    return f"/{slug}/"
+    return f"{base}/{slug}/"
+
+
+def link_points_to_slug(link: str, slug: str) -> bool:
+    normalized = link.strip()
+    if not normalized:
+        return False
+    slug = slug.strip("/")
+    return normalized.endswith(f"/{slug}/") or normalized.endswith(f"/{slug}")
 
 
 def main() -> int:
@@ -82,7 +91,7 @@ def main() -> int:
     if link_idx == status_idx:
         raise RuntimeError("Link column and Status column must be different.")
 
-    url_value = public_path(args.slug)
+    url_value = public_page_url(args.slug)
     link_cell = gspread.utils.rowcol_to_a1(args.row, link_idx + 1)
     status_cell = gspread.utils.rowcol_to_a1(args.row, status_idx + 1)
 
@@ -97,7 +106,7 @@ def main() -> int:
         return 0
 
     existing_link = worksheet.cell(args.row, link_idx + 1).value or ""
-    if existing_link.strip() and existing_link.strip() != url_value.strip():
+    if existing_link.strip() and not link_points_to_slug(existing_link, args.slug):
         print(
             f"Refusing to overwrite existing link in {link_cell}: {existing_link!r}",
             file=sys.stderr,

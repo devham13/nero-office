@@ -67,7 +67,7 @@
 
 Юра публикует только через SSH/SCP/SFTP/FTP как `page-{slug}.php` в активную тему `${WP_THEME_SLUG}`.
 
-После публикации темы из Google Таблицы Юра в **выбранной строке** заполняет **URL-колонку** (`/slug/`) и колонку **«Статус»** — фразу **`Не использовано`** (`shared/sheets_mark_published.py`).
+После публикации темы из Google Таблицы Юра в **выбранной строке** заполняет **URL-колонку** (полный URL `https://…/slug/`) и колонку **«Статус»** — фразу **`Не использовано`** (`shared/sheets_mark_published.py`).
 В Cursor Cloud сначала использовать SSH/SCP/SFTP; FTP использовать только если SSH/SCP/SFTP недоступны.
 WordPress API / REST API / MCP blob flow для страниц с `<script>` и `<canvas>` запрещён.
 
