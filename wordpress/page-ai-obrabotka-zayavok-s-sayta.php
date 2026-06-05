@@ -2085,6 +2085,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
 (function () {
   'use strict';
 
@@ -2156,7 +2157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     counters.forEach(animateCounter);
   }
 })();
-
+</script>
 
 <script type="application/ld+json">
 {
