@@ -54,7 +54,8 @@ get_header();
   --nero-ai-container: 1220px;
 }
 
-.ai-obrabotka-zayavok-s-sayta-content.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page {
+#primary.nero-ai-home-page,
+.nero-ai-home-page {
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -68,16 +69,16 @@ get_header();
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *,
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *::before,
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *::after { box-sizing: border-box; }
+.nero-ai-home-page *,
+.nero-ai-home-page *::before,
+.nero-ai-home-page *::after { box-sizing: border-box; }
 
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page a { color: inherit; }
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page p { color: var(--nero-ai-muted); }
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page h1,
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page h2,
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page h3,
-.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page h4 { color: var(--nero-ai-heading); letter-spacing: -0.045em; }
+.nero-ai-home-page a { color: inherit; }
+.nero-ai-home-page p { color: var(--nero-ai-muted); }
+.nero-ai-home-page h1,
+.nero-ai-home-page h2,
+.nero-ai-home-page h3,
+.nero-ai-home-page h4 { color: var(--nero-ai-heading); letter-spacing: -0.045em; }
 
 .nero-ai-container {
   width: min(var(--nero-ai-container), calc(100% - 40px));
@@ -711,9 +712,9 @@ get_header();
   .nero-ai-section { padding: 58px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *,
-  .ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *::before,
-  .ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .nero-ai-home-page *,
+  .nero-ai-home-page *::before,
+  .nero-ai-home-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .nero-ai-reveal { opacity: 1; transform: none; }
 }
 
@@ -727,74 +728,127 @@ nav[aria-label="Хлебные крошки"],
   margin-top: 0 !important;
 }
 .ai-obrabotka-zayavok-s-sayta-page { margin: 0; padding: 0; overflow-x: hidden; }
-#lead-dispatch-hero.fullscreen-white-office.ai-lead-hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-}
 
 /* Intro after hero */
 .ai-obrabotka-zayavok-s-sayta-intro {
   padding: clamp(48px, 6vw, 72px) 0 clamp(28px, 4vw, 40px);
-  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #050711 85%);
 }
-.ai-obrabotka-zayavok-s-sayta-intro-grid {
+.ai-obrabotka-zayavok-s-sayta-intro__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
   gap: clamp(24px, 4vw, 40px);
   align-items: start;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-copy {
+.ai-obrabotka-zayavok-s-sayta-intro__text {
   text-align: left !important;
-  border-left: 4px solid transparent;
-  border-image: linear-gradient(180deg, #06b6d4, #8b5cf6) 1;
-  padding-left: clamp(16px, 2.5vw, 24px);
+  border-left: 4px solid var(--nero-ai-primary);
+  padding-left: clamp(18px, 3vw, 28px);
 }
-.ai-obrabotka-zayavok-s-sayta-intro-copy p {
+.ai-obrabotka-zayavok-s-sayta-intro__text p {
   text-align: left !important;
-  color: #0f172a;
+  margin: 0 0 16px;
   font-size: clamp(16px, 1.6vw, 18px);
   line-height: 1.65;
+  color: var(--nero-ai-soft) !important;
+}
+.ai-obrabotka-zayavok-s-sayta-intro__text p:last-child { margin-bottom: 0; }
+.ai-obrabotka-zayavok-s-sayta-intro__lead {
+  font-size: clamp(17px, 1.8vw, 20px) !important;
+  color: var(--nero-ai-heading) !important;
+  font-weight: 650;
+}
+.ai-obrabotka-zayavok-s-sayta-intro__terminal {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.ai-obrabotka-zayavok-s-sayta-intro__terminal-head {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.ai-obrabotka-zayavok-s-sayta-intro__terminal-head span {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+}
+.ai-obrabotka-zayavok-s-sayta-intro__terminal-head span:nth-child(1) { background: #fb7185; }
+.ai-obrabotka-zayavok-s-sayta-intro__terminal-head span:nth-child(2) { background: #fbbf24; }
+.ai-obrabotka-zayavok-s-sayta-intro__terminal-head span:nth-child(3) { background: #34d399; }
+.ai-obrabotka-zayavok-s-sayta-intro__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal {
-  border-radius: 18px;
-  border: 1px solid #e2e8f0;
-  background: #0f172a;
-  color: #e2e8f0;
-  padding: 16px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+.ai-obrabotka-zayavok-s-sayta-intro__chips li {
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(121,242,255,.22);
+  background: rgba(121,242,255,.08);
+  color: var(--nero-ai-primary) !important;
+  font-size: 12px;
+  font-weight: 700;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal-top {
-  display: flex; gap: 6px; margin-bottom: 12px;
+.ai-obrabotka-zayavok-s-sayta-intro__metric {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal-top span {
-  width: 9px; height: 9px; border-radius: 50%; background: #64748b;
+.ai-obrabotka-zayavok-s-sayta-intro__metric div {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
 }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal-top span:nth-child(1) { background: #fb7185; }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal-top span:nth-child(2) { background: #fbbf24; }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal-top span:nth-child(3) { background: #34d399; }
-.ai-obrabotka-zayavok-s-sayta-intro-terminal pre {
-  margin: 0; font: 12px/1.5 ui-monospace, monospace; white-space: pre-wrap;
+.ai-obrabotka-zayavok-s-sayta-intro__metric strong {
+  display: block;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-chips {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+.ai-obrabotka-zayavok-s-sayta-intro__metric span {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--nero-ai-muted);
+  font-weight: 700;
 }
-.ai-obrabotka-zayavok-s-sayta-intro-chip {
-  padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
-  background: rgba(6, 182, 212, 0.12); color: #0e7490; border: 1px solid rgba(6, 182, 212, 0.25);
+.nero-ai-toc-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 clamp(36px, 5vw, 52px);
 }
-.ai-obrabotka-zayavok-s-sayta-toc-wrap { text-align: center; padding: 8px 0 0; }
 .nero-ai-toc {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-  margin: 24px auto 0; padding: 0; list-style: none; max-width: 980px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 980px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .nero-ai-toc a {
-  display: inline-flex; padding: 8px 14px; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.14); color: #dce8f7 !important;
-  text-decoration: none !important; font-size: 13px; font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  color: var(--nero-ai-soft) !important;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: border-color .2s, background .2s;
 }
-.nero-ai-toc a:hover { border-color: rgba(121,242,255,.4); background: rgba(121,242,255,.08); }
+.nero-ai-toc a:hover,
+.nero-ai-toc a:focus-visible {
+  border-color: rgba(121,242,255,.36);
+  background: rgba(121,242,255,.08);
+}
 .nero-ai-prose { max-width: 820px; }
 .nero-ai-prose h3 { margin: 28px 0 12px; font-size: clamp(20px, 2.4vw, 24px); }
 .nero-ai-prose p, .nero-ai-prose li { font-size: 16px; line-height: 1.68; }
@@ -826,206 +880,108 @@ nav[aria-label="Хлебные крошки"],
   text-decoration: underline; text-underline-offset: 3px;
 }
 @media (max-width: 900px) {
-  .ai-obrabotka-zayavok-s-sayta-intro-grid { grid-template-columns: 1fr; }
+  .ai-obrabotka-zayavok-s-sayta-intro__grid { grid-template-columns: 1fr; }
 }
 
 
 </style>
 
-<main id="primary" class="site-main ai-obrabotka-zayavok-s-sayta-page" role="main" tabindex="-1">
+<main id="primary" class="site-main ai-obrabotka-zayavok-s-sayta-page nero-ai-home-page" role="main" tabindex="-1">
 
-<section id="lead-dispatch-hero" class="fullscreen-white-office ai-lead-hero">
-<style>
-.fullscreen-white-office.ai-lead-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  background: linear-gradient(165deg, #ffffff 0%, #f1f5f9 45%, #eef2ff 100%);
-}
-.ai-lead-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
-}
-.ai-lead-hero .giant-seo {
-  position: absolute;
-  left: clamp(16px, 4vw, 60px);
-  bottom: clamp(80px, 12vh, 140px);
-  z-index: 3;
-  max-width: min(720px, 58vw);
-  font-size: clamp(32px, 4.8vw, 68px);
-  font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: -2px;
-  color: #0f172a;
-  margin: 0;
-}
-.ai-lead-hero .giant-seo span {
-  display: block;
-  background: linear-gradient(90deg, #06b6d4, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ai-lead-hero .giant-seo-sub {
-  position: absolute;
-  left: clamp(16px, 4vw, 60px);
-  bottom: clamp(24px, 4vh, 48px);
-  z-index: 3;
-  max-width: min(640px, 55vw);
-  font-size: clamp(15px, 1.8vw, 20px);
-  line-height: 1.55;
-  color: rgba(15, 23, 42, 0.72);
-  margin: 0;
-}
-.ai-lead-hero .telegram-button {
-  position: absolute;
-  top: clamp(20px, 4vh, 48px);
-  right: clamp(16px, 4vw, 60px);
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  background: #0f172a;
-  color: #fff !important;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: transform 0.2s;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-}
-.ai-lead-hero .telegram-button:hover { transform: translateY(-2px); }
-.ai-lead-hero .vl-ui-tasks {
-  position: absolute;
-  left: clamp(16px, 3vw, 48px);
-  top: clamp(100px, 16vh, 200px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 3;
-}
-.ai-lead-hero .vl-ui-task {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-.ai-lead-hero .vl-ui-task span {
-  width: 26px;
-  height: 26px;
-  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-  color: #fff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-.ai-lead-hero .vl-ui-pill {
-  position: absolute;
-  top: clamp(20px, 4vh, 48px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  z-index: 3;
-  max-width: 90vw;
-}
-.ai-lead-hero .vl-ui-pill span {
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.ai-lead-hero canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-@media (max-width: 900px) {
-  .ai-lead-hero .giant-seo { max-width: 92vw; bottom: 120px; }
-  .ai-lead-hero .giant-seo-sub { max-width: 92vw; }
-  .ai-lead-hero .vl-ui-tasks { display: none; }
-}
-</style>
-
-<canvas id="ai-lead-hub-canvas" aria-hidden="true"></canvas>
-
-<div class="vl-ui-pill">
-  <span>5–15 сек ответ</span>
-  <span>Квалификация лида</span>
-  <span>amoCRM / Битрикс24</span>
-</div>
-
-<a class="telegram-button" href="#audit-cta">Проверить, сколько заявок вы теряете</a>
-
-<div class="vl-ui-tasks">
-  <div class="vl-ui-task"><span>1</span> Аудит потерь заявок</div>
-  <div class="vl-ui-task"><span>2</span> Пилот на одном канале</div>
-  <div class="vl-ui-task"><span>3</span> RAG и сценарии</div>
-  <div class="vl-ui-task"><span>4</span> CRM-интеграция</div>
-  <div class="vl-ui-task"><span>5</span> Автоответ 24/7</div>
-</div>
-
-<h1 class="giant-seo">AI-обработка заявок с сайта:<span>внедрение агента под ключ</span></h1>
-<p class="giant-seo-sub">Отвечаем на заявки за 5–15 секунд, квалифицируем лид и передаём в CRM — без найма дополнительных менеджеров</p>
-</section>
-
-<div class="ai-obrabotka-zayavok-s-sayta-content nero-ai-home-page">
-
-<section class="ai-obrabotka-zayavok-s-sayta-intro" aria-label="Введение">
-  <div class="nero-ai-container">
-    <div class="ai-obrabotka-zayavok-s-sayta-intro-grid">
-      <div class="ai-obrabotka-zayavok-s-sayta-intro-copy">
-        <p><strong>Коротко:</strong> AI-агент для первичной обработки заявок — это слой автоматизации между формой, виджетом или мессенджером и CRM. Он отвечает за 5–15 секунд, уточняет детали, квалифицирует лид и передаёт горячую карточку менеджеру.</p>
-        <p>Ниже — как это работает, для кого подходит, сколько стоит и какие риски учесть до запуска.</p>
+<section class="nero-ai-hero" aria-labelledby="ai-obrabotka-hero-title">
+  <div class="nero-ai-container nero-ai-hero-grid">
+    <div class="nero-ai-hero-copy nero-ai-reveal">
+      <p class="nero-ai-eyebrow">AI-агент · обработка заявок с сайта</p>
+      <h1 id="ai-obrabotka-hero-title">AI-обработка заявок с сайта: <span class="nero-ai-gradient-text">внедрение агента под ключ</span></h1>
+      <p class="nero-ai-hero-lead">Отвечаем на заявки за 5–15 секунд, квалифицируем лид и передаём в CRM — без найма дополнительных менеджеров</p>
+      <ul class="nero-ai-badges" aria-label="Этапы внедрения">
+        <li class="nero-ai-badge">Заявка с сайта</li>
+        <li class="nero-ai-badge">Ответ 5–15 сек</li>
+        <li class="nero-ai-badge">Квалификация</li>
+        <li class="nero-ai-badge">Карточка в CRM</li>
+        <li class="nero-ai-badge">Задача менеджеру</li>
+      </ul>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+        <a class="nero-ai-btn nero-ai-btn-secondary" href="<?php echo esc_url($secondary_cta_url); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($secondary_cta_label); ?></a>
       </div>
-      <div class="ai-obrabotka-zayavok-s-sayta-intro-terminal nero-ai-reveal" aria-hidden="true">
-        <div class="ai-obrabotka-zayavok-s-sayta-intro-terminal-top"><span></span><span></span><span></span></div>
-        <pre>webhook → AI-агент → CRM
-├─ ответ: 8 сек
-├─ поля: имя, телефон, запрос
-├─ статус: hot_lead
-└─ задача: перезвонить</pre>
-        <div class="ai-obrabotka-zayavok-s-sayta-intro-chips">
-          <span class="ai-obrabotka-zayavok-s-sayta-intro-chip">5–15 сек</span>
-          <span class="ai-obrabotka-zayavok-s-sayta-intro-chip">human_review</span>
-          <span class="ai-obrabotka-zayavok-s-sayta-intro-chip">amoCRM / B24</span>
+    </div>
+
+    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демонстрация AI-обработки заявок">
+      <div class="nero-ai-dashboard-shell">
+        <div class="nero-ai-window-top">
+          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+          <span class="nero-ai-window-title">пример логики AI-агента · демо</span>
+        </div>
+        <div class="nero-ai-window-body">
+          <div class="nero-ai-dashboard-title">
+            <h3>Поток заявок · ночной режим</h3>
+            <span class="nero-ai-live-pill">live</span>
+          </div>
+          <div class="nero-ai-metrics-grid">
+            <div class="nero-ai-metric" data-nero-tooltip="AI фиксирует заявку с формы и отвечает за секунды, пока менеджеры офлайн.">
+              <span>Заявок за ночь</span><strong>12</strong><small>пример</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="Цель — сократить ожидание: автоответ, квалификация и задача менеджеру запускаются сразу.">
+              <span>Средний ответ</span><strong>0:08</strong><small>минуты</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="Горячие лиды попадают в CRM с полями и тегами без ручного копирования.">
+              <span>Лидов в CRM</span><strong>3</strong><small>за смену</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="Демонстрационная метрика: эффект зависит от процесса и интеграций.">
+              <span>Ручная первичка</span><strong>−42%</strong><small>потенциал пилота</small>
+            </div>
+          </div>
+          <div class="nero-ai-task-stream" aria-label="Живой поток заявок">
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">↳</span><div><strong>Новая заявка с формы</strong><span>AI ответ за 8 сек</span></div><span class="nero-ai-status">готово</span></div>
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">CRM</span><div><strong>Лид квалифицирован</strong><span>Карточка и теги в CRM</span></div><span class="nero-ai-status">готово</span></div>
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">AI</span><div><strong>Задача менеджеру</strong><span>Позвонить утром</span></div><span class="nero-ai-status">новое</span></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="ai-obrabotka-zayavok-s-sayta-toc-wrap">
-      <nav aria-label="Оглавление">
-        <ul class="nero-ai-toc"><li><a href="#pochemu-zayavki-ostyvayut">Почему заявки остывают</a></li><li><a href="#chto-takoe-ai-obrabotka">Что такое AI-обработка</a></li><li><a href="#kak-rabotaet-ai-agent">Сценарий за 5–15 секунд</a></li><li><a href="#vnedrenie-ai-pod-klyuch">Внедрение под ключ</a></li><li><a href="#integraciya-crm">Интеграция с CRM</a></li><li><a href="#dlya-kogo-podhodit">Для кого подходит</a></li><li><a href="#keisy-primery">Кейсы и примеры</a></li><li><a href="#stoimost-vnedreniya">Стоимость</a></li><li><a href="#riski-kontrol-kachestva">Риски и ПДн</a></li><li><a href="#faq-ai-obrabotka">FAQ</a></li><li><a href="#audit-cta">Аудит потерь заявок</a></li></ul>
-      </nav>
+  </div>
+</section>
+
+<section class="nero-ai-section-tight ai-obrabotka-zayavok-s-sayta-intro" aria-label="Введение">
+  <div class="nero-ai-container">
+    <div class="ai-obrabotka-zayavok-s-sayta-intro__grid nero-ai-reveal">
+      <div class="ai-obrabotka-zayavok-s-sayta-intro__text">
+        <p class="ai-obrabotka-zayavok-s-sayta-intro__lead"><strong>Коротко:</strong> AI-агент для первичной обработки заявок — это слой автоматизации между формой, виджетом или мессенджером и CRM. Он отвечает за 5–15 секунд, уточняет детали, квалифицирует лид и передаёт горячую карточку менеджеру.</p>
+        <p>Заявки с сайта не ждут рабочего дня. Ниже — как это работает, для кого подходит, сколько стоит и какие риски учесть до запуска.</p>
+      </div>
+      <div class="ai-obrabotka-zayavok-s-sayta-intro__terminal nero-ai-reveal nero-ai-delay-1" aria-hidden="true">
+        <div class="ai-obrabotka-zayavok-s-sayta-intro__terminal-head"><span></span><span></span><span></span></div>
+        <ul class="ai-obrabotka-zayavok-s-sayta-intro__chips">
+          <li>5–15 сек ответ</li>
+          <li>amoCRM / Битрикс24</li>
+          <li>Telegram 24/7</li>
+          <li>human_review</li>
+        </ul>
+        <div class="ai-obrabotka-zayavok-s-sayta-intro__metric">
+          <div><strong data-nero-count="21" data-nero-prefix="×">×0</strong><span>падение шанса при ответе &gt;30 мин</span></div>
+          <div><strong data-nero-count="78" data-nero-suffix="%">0%</strong><span>выбирают первого ответившего</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<nav class="nero-ai-toc-wrap" aria-label="Оглавление">
+  <ul class="nero-ai-toc nero-ai-reveal">
+    <li><a href="#pochemu-zayavki-ostyvayut">Почему заявки остывают</a></li>
+    <li><a href="#chto-takoe-ai-obrabotka">Что такое AI-обработка</a></li>
+    <li><a href="#kak-rabotaet-ai-agent">Сценарий за 5–15 секунд</a></li>
+    <li><a href="#vnedrenie-ai-pod-klyuch">Внедрение под ключ</a></li>
+    <li><a href="#integraciya-crm">Интеграция с CRM</a></li>
+    <li><a href="#dlya-kogo-podhodit">Для кого подходит</a></li>
+    <li><a href="#keisy-primery">Кейсы и примеры</a></li>
+    <li><a href="#stoimost-vnedreniya">Стоимость</a></li>
+    <li><a href="#riski-kontrol-kachestva">Риски и ПДн</a></li>
+    <li><a href="#faq-ai-obrabotka">FAQ</a></li>
+    <li><a href="#audit-cta">Аудит потерь заявок</a></li>
+  </ul>
+</nav>
 
 <section class="nero-ai-section" id="pochemu-zayavki-ostyvayut"><div class="nero-ai-container"><div class="nero-ai-section-head nero-ai-left nero-ai-reveal"><h2>Почему заявки с сайта остывают без быстрого ответа</h2>
 </div>
@@ -1179,7 +1135,7 @@ nav[aria-label="Хлебные крошки"],
   <div class="boris-lead-copy">
     <p class="boris-eyebrow">Оркестрация · не просто чат</p>
     <h3 class="boris-kicker">Заявка превращается в карточку CRM за секунды</h3>
-    <p class="boris-bridge">Пока на hero видна «боль остывания», здесь — механика решения: один входящий пакет проходит webhook, AI-агент и попадает менеджеру уже с полями квалификации.</p>
+    <p class="boris-bridge">В hero — оффер и дашборд потока заявок; здесь — механика решения: один входящий пакет проходит webhook, AI-агент и попадает менеджеру уже с полями квалификации.</p>
     <ul class="boris-points">
       <li>Форма или виджет отправляет payload без ручного копирования</li>
       <li>Агент извлекает контакт, запрос и срочность — по одному уточнению</li>
@@ -1597,499 +1553,13 @@ nav[aria-label="Хлебные крошки"],
 </div>
 </div></div></section>
 
-</div>
-
 </main>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("ai-lead-hub-canvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-
-  let cw = 0, ch = 0, scale = 1, cx = 0, cy = 0, frame = 0;
-
-  function resizeCanvas() {
-    if (!canvas.parentElement) return;
-    canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-    canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-    cw = canvas.width;
-    ch = canvas.height;
-    cx = cw / 2;
-    cy = ch / 2 - 20;
-    scale = cw < 768 ? cw / 620 : Math.min(cw / 1050, ch / 820) * 1.35;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
-
-  const C = {
-    outline: "#0f172a",
-    wave: "#94a3b8",
-    waveGlow: "#06b6d4",
-    nexusCore: "#e0f2fe",
-    nexusRing: "#8b5cf6",
-    nexusHot: "#22c55e",
-    formBg: "#ffffff",
-    formField: "#f1f5f9",
-    envelope: "#fef3c7",
-    envelopeHot: "#bbf7d0",
-    crmPipe: "#cbd5e1",
-    crmHot: "#10b981",
-    timer: "#06b6d4",
-    bubbleBg: "#ffffff",
-    agentYellow: "#eab308",
-    agentGreen: "#10b981",
-    agentBlue: "#3b82f6",
-    agentPink: "#ec4899",
-    agentPurple: "#8b5cf6"
-  };
-
-  function drawPolyRound(ctx, x, y, w, h, radius, fill, stroke) {
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(x, y, w, h, radius);
-    else ctx.rect(x, y, w, h);
-    ctx.fill();
-    if (stroke) {
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = stroke;
-      ctx.stroke();
-    }
-  }
-
-  function drawHex(ctx, x, y, r, fill, stroke) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const a = (Math.PI / 3) * i - Math.PI / 6;
-      const px = x + Math.cos(a) * r;
-      const py = y + Math.sin(a) * r;
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    }
-    ctx.closePath();
-    ctx.fillStyle = fill;
-    ctx.fill();
-    if (stroke) {
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = stroke;
-      ctx.stroke();
-    }
-  }
-
-  class InboundWave {
-    constructor() {
-      this.paths = [
-        { y0: -200, amp: 55, phase: 0 },
-        { y0: -170, amp: 40, phase: Math.PI }
-      ];
-    }
-    draw(ctx) {
-      const spd = frame * 0.045;
-      this.paths.forEach((p, idx) => {
-        ctx.save();
-        ctx.strokeStyle = idx === 0 ? C.waveGlow : C.wave;
-        ctx.lineWidth = 2;
-        ctx.globalAlpha = 0.35;
-        ctx.beginPath();
-        for (let x = -320; x <= 320; x += 8) {
-          const t = (x + 320) / 640;
-          const y = p.y0 + Math.sin(t * 4 + spd + p.phase) * p.amp;
-          if (x === -320) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-        const dotT = (spd * 0.35 + idx * 0.33) % 1;
-        const dotX = -320 + dotT * 640;
-        const dotY = p.y0 + Math.sin(dotT * 4 + spd + p.phase) * p.amp;
-        drawPolyRound(ctx, dotX - 9, dotY - 7, 18, 14, 3, C.envelope, C.outline);
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 7px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("заявка", dotX, dotY + 2);
-        ctx.restore();
-      });
-    }
-  }
-
-  class SiteFormEmitter {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.pulse = 0;
-    }
-    draw(ctx) {
-      this.pulse = Math.sin(frame * 0.08) * 3;
-      drawPolyRound(ctx, this.x - 70, this.y - 35, 140, 70, 8, C.formBg, C.outline);
-      drawPolyRound(ctx, this.x - 60, this.y - 28, 120, 14, 4, C.formField, C.outline);
-      drawPolyRound(ctx, this.x - 60, this.y - 8, 120, 14, 4, C.formField, C.outline);
-      drawPolyRound(ctx, this.x - 60, this.y + 12, 55, 16, 6, "#06b6d4", C.outline);
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 8px sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("Отправить", this.x - 32, this.y + 23);
-      ctx.strokeStyle = C.waveGlow;
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = 0.4 + Math.abs(this.pulse) * 0.1;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y + 40, 12 + this.pulse, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    }
-  }
-
-  class CRMTunnel {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.cardY = 0;
-      this.flash = 0;
-    }
-    draw(ctx, cycle) {
-      drawPolyRound(ctx, this.x - 35, this.y - 60, 70, 120, 10, C.crmPipe, C.outline);
-      ctx.fillStyle = "#64748b";
-      ctx.font = "bold 9px sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("CRM", this.x, this.y - 48);
-      for (let i = 0; i < 4; i++) {
-        drawPolyRound(ctx, this.x - 28, this.y - 35 + i * 22, 56, 16, 4, "#f8fafc", C.outline);
-      }
-      if (cycle > 200) {
-        const local = cycle - 200;
-        this.cardY = Math.min(local * 4, 55);
-        this.flash = Math.max(0, 1 - local / 35);
-        drawPolyRound(ctx, this.x - 24, this.y - 20 + this.cardY, 48, 22, 5, C.envelopeHot, C.outline);
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 7px sans-serif";
-        ctx.fillText("HOT", this.x, this.y - 6 + this.cardY);
-        if (this.flash > 0) {
-          ctx.save();
-          ctx.globalAlpha = this.flash * 0.5;
-          ctx.strokeStyle = C.crmHot;
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y + this.cardY, 40, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.restore();
-        }
-      } else {
-        this.cardY = 0;
-        this.flash = 0;
-      }
-    }
-  }
-
-  class QualificationNexus {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.ringSpin = 0;
-    }
-    draw(ctx) {
-      const cycle = (frame * 0.04) % 240;
-      this.ringSpin += 0.02;
-
-      drawHex(ctx, this.x, this.y, 52, C.nexusCore, C.outline);
-      ctx.strokeStyle = C.nexusRing;
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = 0.5;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 62 + Math.sin(frame * 0.06) * 4, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-
-      ctx.fillStyle = C.outline;
-      ctx.font = "bold 10px sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("AI", this.x, this.y - 4);
-      ctx.font = "8px sans-serif";
-      ctx.fillText("квалификация", this.x, this.y + 8);
-
-      const fill = Math.min(cycle / 160, 1);
-      ctx.strokeStyle = cycle > 110 ? C.nexusHot : C.timer;
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 72, -Math.PI / 2, -Math.PI / 2 + fill * Math.PI * 2);
-      ctx.stroke();
-
-      if (cycle > 45 && cycle < 120) {
-        const fields = ["Имя", "Телефон", "Запрос"];
-        fields.forEach((f, i) => {
-          if (cycle > 45 + i * 22) {
-            drawPolyRound(ctx, this.x - 42, this.y - 95 + i * 18, 84, 12, 3, "#fff", C.outline);
-            ctx.fillStyle = "#64748b";
-            ctx.font = "7px sans-serif";
-            ctx.textAlign = "left";
-            ctx.fillText(f, this.x - 36, this.y - 86 + i * 18);
-          }
-        });
-      }
-
-      if (cycle > 125 && cycle < 195) {
-        const bob = Math.sin(frame * 0.15) * 3;
-        drawPolyRound(ctx, this.x - 55, this.y + 78 + bob, 110, 28, 8, "#fff", C.outline);
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 8px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("Уточним срочность?", this.x, this.y + 96 + bob);
-      }
-
-      if (cycle > 175 && cycle < 210) {
-        drawPolyRound(ctx, this.x - 30, this.y - 18, 60, 16, 6, C.nexusHot, C.outline);
-        ctx.fillStyle = "#fff";
-        ctx.font = "bold 8px sans-serif";
-        ctx.fillText("hot lead", this.x, this.y - 6);
-      }
-
-      const timerSec = 5 + Math.floor((Math.sin(frame * 0.05) + 1) * 5);
-      ctx.strokeStyle = C.timer;
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = 0.25 + Math.abs(Math.sin(frame * 0.1)) * 0.35;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 88, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = C.timer;
-      ctx.font = "bold 9px sans-serif";
-      ctx.fillText(timerSec + " сек", this.x, this.y + 108);
-    }
-  }
-
-  class Agent {
-    constructor(x, y, color, role, stepTrig, dialogs, targetX, targetY) {
-      this.x = x;
-      this.y = y;
-      this.baseX = x;
-      this.baseY = y;
-      this.color = color;
-      this.role = role;
-      this.timer = Math.random() * 100;
-      this.stepTrig = stepTrig;
-      this.dialogs = dialogs;
-      this.targetX = targetX;
-      this.targetY = targetY;
-      this.hitAnimation = 0;
-    }
-
-    draw(ctx) {
-      this.timer += 0.03;
-      let isMoving = false;
-      let carryType = null;
-      let faceDir = 1;
-      const prg = (frame * 0.04) % 240;
-
-      if (prg >= this.stepTrig && prg < this.stepTrig + 28) {
-        const local = prg - this.stepTrig;
-        if (local < 12) {
-          isMoving = true;
-          faceDir = this.targetX > this.baseX ? 1 : -1;
-          carryType = this.color;
-          const t = local / 12;
-          this.x = this.baseX + (this.targetX - this.baseX) * t;
-          this.y = this.baseY + (this.targetY - this.baseY) * t - Math.sin(t * Math.PI) * 18;
-        } else if (local < 18) {
-          this.x = this.targetX;
-          this.y = this.targetY;
-        } else {
-          isMoving = true;
-          faceDir = this.targetX > this.baseX ? -1 : 1;
-          const t = (local - 18) / 10;
-          this.x = this.targetX + (this.baseX - this.targetX) * t;
-          this.y = this.targetY + (this.baseY - this.targetY) * t;
-        }
-      } else {
-        this.x = this.baseX;
-        this.y = this.baseY;
-        carryType = prg >= this.stepTrig - 12 ? this.color : null;
-      }
-
-      if (!isMoving && frame % 220 === 0 && Math.random() < 0.12) {
-        createBubble(this.x, this.y - 24, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 260);
-      }
-
-      const bob = isMoving ? Math.abs(Math.sin(this.timer * 4)) * 2 : Math.sin(this.timer * 1.5);
-
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.lineJoin = "round";
-
-      let legL = 0, legR = 0;
-      if (isMoving) {
-        const wp = this.timer * 6;
-        legL = Math.sin(wp) * 5;
-        legR = Math.sin(wp + Math.PI) * 5;
-      }
-      drawPolyRound(ctx, -10, -5 + Math.max(0, legL), 8, 14, 2, C.outline, null);
-      drawPolyRound(ctx, -12, 5 + Math.max(0, legL), 12, 6, 2, C.outline, null);
-      drawPolyRound(ctx, 2, -5 + Math.max(0, legR), 8, 14, 2, C.outline, null);
-      drawPolyRound(ctx, 0, 5 + Math.max(0, legR), 12, 6, 2, C.outline, null);
-      drawPolyRound(ctx, -15, -12 - bob, 30, 20, 6, this.color, C.outline);
-
-      const hx = 0, hy = -28 - bob;
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(hx, hy, 12, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = C.outline;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.scale(faceDir, 1);
-      ctx.fillStyle = "#fff";
-      ctx.beginPath();
-      ctx.arc(hx + 4, hy - 2, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(hx - 4, hy - 2, 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = C.outline;
-      ctx.beginPath();
-      ctx.arc(hx + 5, hy - 2, 2, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI * 2);
-      ctx.fill();
-
-      if (this.role === "1_architect") {
-        ctx.strokeStyle = C.outline;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(hx + 1, hy - 5, 6, 6);
-        ctx.strokeRect(hx - 7, hy - 5, 6, 6);
-      } else if (this.role === "2_seo") {
-        drawPolyRound(ctx, hx - 12, hy - 14, 24, 8, [6, 6, 0, 0], C.outline, null);
-      } else if (this.role === "3_coder") {
-        ctx.fillStyle = C.outline;
-        ctx.beginPath();
-        ctx.moveTo(hx - 8, hy - 10);
-        ctx.lineTo(hx - 12, hy - 18);
-        ctx.lineTo(hx, hy - 14);
-        ctx.lineTo(hx + 10, hy - 18);
-        ctx.lineTo(hx + 8, hy - 10);
-        ctx.fill();
-      } else if (this.role === "4_designer") {
-        drawPolyRound(ctx, hx - 14, hy - 12, 28, 6, 3, "#f43f5e", C.outline);
-      } else if (this.role === "5_deployer") {
-        ctx.strokeStyle = C.outline;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(hx, hy, 14, Math.PI, Math.PI * 2);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      if (carryType) {
-        drawPolyRound(ctx, -18 * faceDir, -18 - bob, 14, 14, 2, carryType, C.outline);
-      }
-      ctx.restore();
-    }
-  }
-
-  const entities = [];
-  const bubbles = [];
-  const wave = new InboundWave();
-  const emitter = new SiteFormEmitter(-180, -150);
-  const nexus = new QualificationNexus(20, 10);
-  const crm = new CRMTunnel(230, 20);
-
-  entities.push(wave);
-  entities.push(emitter);
-  entities.push(nexus);
-  entities.push(crm);
-  entities.push(new Agent(-260, 120, C.agentYellow, "1_architect", 18, [
-    "Карта каналов формы", "Пилот на виджете", "Схема воронки готова"
-  ], -200, -60));
-  entities.push(new Agent(-120, 140, C.agentGreen, "2_seo", 58, [
-    "Интент в заявке", "Ключ: ai обработка", "LSI в диалоге"
-  ], -10, -70));
-  entities.push(new Agent(40, 130, C.agentBlue, "3_coder", 98, [
-    "Webhook поймал!", "JSON в оркестратор", "n8n триггер сработал"
-  ], 20, -55));
-  entities.push(new Agent(150, 125, C.agentPink, "4_designer", 138, [
-    "Тон ответа 5 сек", "Виджет на лендинге", "UI диалога ок"
-  ], 30, 55));
-  entities.push(new Agent(260, 115, C.agentPurple, "5_deployer", 198, [
-    "Карточка в amoCRM", "Тег: AI-агент", "Менеджер уведомлён"
-  ], 210, 0));
-
-  function createBubble(x, y, text, customLife = 280) {
-    bubbles.push({ x, y, text, life: customLife, maxLife: customLife });
-  }
-
-  function drawPulseGrid(ctx) {
-    const prg = (frame * 0.04) % 240;
-    if (prg < 200) return;
-    ctx.save();
-    ctx.strokeStyle = C.crmHot;
-    ctx.lineWidth = 1;
-    for (let r = 0; r < 3; r++) {
-      const rad = ((prg - 200) * 3 + r * 25) % 90;
-      ctx.globalAlpha = 1 - rad / 90;
-      ctx.beginPath();
-      ctx.arc(20, 10, 80 + rad, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function engineloop() {
-    frame++;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-
-    const cycle = (frame * 0.04) % 240;
-
-    drawPulseGrid(ctx);
-
-    entities.sort((a, b) => (a.y || 0) - (b.y || 0));
-    entities.forEach((ent) => {
-      if (ent instanceof CRMTunnel) ent.draw(ctx, cycle);
-      else ent.draw(ctx);
-    });
-
-    if (cycle >= 12 && cycle < 12.05) createBubble(-180, -100, "Заявка с формы сайта");
-    if (cycle >= 52 && cycle < 52.05) createBubble(-10, -90, "Ответ за 8 секунд");
-    if (cycle >= 100 && cycle < 100.05) createBubble(20, -30, "Парсим поля лида");
-    if (cycle >= 145 && cycle < 145.05) createBubble(30, 70, "Квалификация: hot");
-    if (cycle >= 205 && cycle < 205.05) createBubble(230, -20, "Передано в CRM");
-
-    ctx.font = "bold 11px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    for (let i = bubbles.length - 1; i >= 0; i--) {
-      const bub = bubbles[i];
-      bub.life--;
-      if (bub.life <= 0) {
-        bubbles.splice(i, 1);
-        continue;
-      }
-      let alpha = Math.min(1, bub.life / 30);
-      if (bub.life > bub.maxLife - 10) alpha = (bub.maxLife - bub.life) / 10;
-      ctx.globalAlpha = alpha;
-      const tw = ctx.measureText(bub.text).width + 16;
-      const th = 20;
-      const by = bub.y - (bub.maxLife - bub.life) * 0.04;
-      drawPolyRound(ctx, bub.x - tw / 2, by - th, tw, th, 6, C.bubbleBg, C.outline);
-      ctx.fillStyle = C.outline;
-      ctx.fillText(bub.text, bub.x, by - th / 2);
-      ctx.globalAlpha = 1;
-    }
-
-    ctx.restore();
-    requestAnimationFrame(engineloop);
-  }
-
-  document.fonts.ready.then(() => engineloop());
-});
-</script>
 
 <script>
 (function () {
   'use strict';
 
-  var root = document.querySelector('.ai-obrabotka-zayavok-s-sayta-content.nero-ai-home-page');
+  var root = document.querySelector('.nero-ai-home-page');
   if (!root) return;
 
   var revealItems = root.querySelectorAll('.nero-ai-reveal');
