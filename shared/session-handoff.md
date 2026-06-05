@@ -1,3 +1,11 @@
+## 2026-06-05 — vnedrenie-ai-sekretar-zapis-klientov
+
+- Тема: Google Таблица строка №11 — AI-секретарь для записи клиентов на услуги
+- Юра: опубликовано через SFTP + WP-CLI (post ID 100), тема kadence
+- URL: /vnedrenie-ai-sekretar-zapis-klientov/
+- Google Таблица строка №11: URL-колонка /vnedrenie-ai-sekretar-zapis-klientov/, Статус «Не использовано»
+- Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
+
 # Session Handoff
 
 ## 2026-06-05 — vnedrenie-ai-golosovoy-menedzher-vhodashchie-zvonki
