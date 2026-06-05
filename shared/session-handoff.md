@@ -1,5 +1,12 @@
 # Session Handoff
 
+## 2026-06-05 — vnedrenie-ai-golosovoy-menedzher-vhodashchie-zvonki
+
+- Юра: опубликовано через SFTP + WP-CLI (post ID 99), тема kadence
+- URL: /vnedrenie-ai-golosovoy-menedzher-vhodashchie-zvonki/
+- Google Таблица строка №10: обновлена через Sheets API
+- Следующий шаг: QA (Макс) + SEO-аудит (Лёня)
+
 ## 2026-06-05 — ai-obrabotka-zayavok-s-sayta
 
 - ОШИБКА Кирилла: строка №1 таблицы уже имела URL-колонка таблицы → /vnedrenie-ai-obrabotka-zayavok-s-sayta/; канон — vnedrenie-*
