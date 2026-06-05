@@ -2,10 +2,12 @@
 
 ## 2026-06-05 — vnedrenie-ai-golosovoy-menedzher-vhodashchie-zvonki
 
+- Тема: Google Таблица строка №10 — AI-менеджер для входящих звонков
 - Юра: опубликовано через SFTP + WP-CLI (post ID 99), тема kadence
 - URL: /vnedrenie-ai-golosovoy-menedzher-vhodashchie-zvonki/
 - Google Таблица строка №10: обновлена через Sheets API
-- Следующий шаг: QA (Макс) + SEO-аудит (Лёня)
+- QA (Макс): ✅ всё ок — hero, header якоря, 2 canvas, без двойного скролла
+- Лёня: ✅ критичных доработок нет; опционально og:image, Twitter Card
 
 ## 2026-06-05 — ai-obrabotka-zayavok-s-sayta
 
