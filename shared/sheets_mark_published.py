@@ -79,6 +79,9 @@ def main() -> int:
     link_idx = column_index(header, link_col_name, ("url", "ссылка", "страниц"))
     status_idx = column_index(header, STATUS_HEADER, ("статус",))
 
+    if link_idx == status_idx:
+        raise RuntimeError("Link column and Status column must be different.")
+
     url_value = public_path(args.slug)
     link_cell = gspread.utils.rowcol_to_a1(args.row, link_idx + 1)
     status_cell = gspread.utils.rowcol_to_a1(args.row, status_idx + 1)
@@ -86,6 +89,8 @@ def main() -> int:
     print(f"Sheet row: {args.row}")
     print(f"Link column ({header[link_idx]}): {link_cell} -> {url_value}")
     print(f"Status column ({header[status_idx]}): {status_cell} -> {STATUS_VALUE}")
+    if abs(status_idx - link_idx) > 1:
+        print("Note: link and status columns are not adjacent — updating cells separately.")
 
     if args.dry_run:
         print("Dry run: no changes written.")
@@ -99,9 +104,12 @@ def main() -> int:
         )
         return 3
 
-    worksheet.update(
-        range_name=f"{link_cell}:{status_cell}",
-        values=[[url_value, STATUS_VALUE]],
+    # Columns are not always adjacent (e.g. URL col 18, empty col 19, Статус col 20).
+    worksheet.batch_update(
+        [
+            {"range": link_cell, "values": [[url_value]]},
+            {"range": status_cell, "values": [[STATUS_VALUE]]},
+        ],
         value_input_option="USER_ENTERED",
     )
     print("Google Sheet updated.")
