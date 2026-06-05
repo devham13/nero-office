@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import ftplib
+import os
 import shlex
 import sys
 import urllib.error
@@ -14,6 +15,42 @@ from pathlib import Path
 import paramiko
 
 from credentials import get_credential, public_site_url, require_credential
+
+
+def php_string(value: str) -> str:
+    return "'" + value.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def prepare_template_for_upload(local_path: Path) -> tuple[Path, bool]:
+    """Bake deploy-time CTA env into a temp copy for upload (git template keeps getenv)."""
+    import re
+    import tempfile
+
+    content = local_path.read_text(encoding="utf-8")
+    changed = False
+    for env_key, var in (
+        ("PRIMARY_CTA_LABEL", "primary_cta_label"),
+        ("PRIMARY_CTA_URL", "primary_cta_url"),
+        ("SECONDARY_CTA_LABEL", "secondary_cta_label"),
+        ("SECONDARY_CTA_URL", "secondary_cta_url"),
+    ):
+        val = get_credential(env_key)
+        if not val:
+            continue
+        pattern = rf"\${var} = getenv\('{env_key}'\) \?: [^;]+;"
+        replacement = f"${var} = {php_string(val)};"
+        if re.search(pattern, content):
+            content = re.sub(pattern, replacement, content, count=1)
+            changed = True
+
+    if not changed:
+        return local_path, False
+
+    fd, tmp_name = tempfile.mkstemp(suffix=".php", prefix="deploy-")
+    tmp = Path(tmp_name)
+    os.close(fd)
+    tmp.write_text(content, encoding="utf-8")
+    return tmp, True
 
 
 def parse_args() -> argparse.Namespace:
@@ -208,12 +245,15 @@ def main() -> int:
     remote_filename = f"page-{slug}.php"
 
     ssh = connect_ssh()
+    upload_path = local_path
+    temp_upload = False
     try:
+        upload_path, temp_upload = prepare_template_for_upload(local_path)
         theme_dir = resolve_theme_directory(ssh, remote_site_root)
         remote_file = f"{theme_dir.rstrip('/')}/{remote_filename}"
 
         print(f"Uploading via SFTP to {remote_file}...")
-        upload_via_sftp(ssh, local_path, remote_file)
+        upload_via_sftp(ssh, upload_path, remote_file)
 
         create_or_update_page(ssh, remote_site_root, slug, args.title, args.description)
 
@@ -222,6 +262,8 @@ def main() -> int:
         print("Cache flushed.")
     finally:
         ssh.close()
+        if temp_upload and upload_path.exists():
+            upload_path.unlink()
 
     public_url = f"{public_site_url().rstrip('/')}/{slug}/"
     if not args.skip_live_check:
