@@ -34,16 +34,21 @@ is_background: false
 8. Установи/проверь `_wp_page_template = page-{slug}.php`, очисти object cache и внешний page cache.
 9. **Проверь live HTML, не только HTTP 200**: есть `main#primary`, `{slug}-page`, hero/canvas-маркеры; нет симптома дефолтного `page.php` с breadcrumbs и пустым `entry-content`.
 10. Если после публикации Лёня записал в файл обмена SEO/GEO-рекомендации — **исправь страницу и перепубликуй** с их учётом.
-11. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку со статусом `published`, публичным URL и проверкой. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
+11. **Обнови Google Таблицу** для строки, которую выбрал Кирилл (номер строки — в блоке Кирилла):
+    - **URL-колонка таблицы** — публичный путь `/slug/`;
+    - **колонка «Статус»** — **`Не использовано`**.
+    Скрипт: `python3 shared/sheets_mark_published.py --row <номер_строки> --slug <slug>` (или webhook / Sheets API). **Только одна строка.** Не перезаписывай ссылки в других строках.
+12. **Запиши** результат в файл обмена и `<PROJECT_ROOT>/shared/published-pages.md`. Если в handoff есть блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`, добавь в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` строку со статусом `published`, публичным URL и проверкой. Перед записью проверь, что блока `=== ЮРА (ПУБЛИКАЦИЯ) ===` ещё нет; если есть — обнови один блок, не создавай дубль:
 
 ```md
 === ЮРА (ПУБЛИКАЦИЯ) ===
 ## Публикация от Юры
 URL: https://...
 Статус: опубликовано
+Google Таблица: строка №<номер> — URL-колонка ✓, колонка «Статус» = «Не использовано» ✓
 Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
 Способ: FTP → page-{slug}.php в тему ${WP_THEME_SLUG}
-Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
+Журнал публикаций: <PROJECT_ROOT>/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
 ```
 

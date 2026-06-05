@@ -152,7 +152,7 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 - **URL-колонка таблицы** — публичный путь страницы (`/slug/`);
 - **колонка «Статус»** — фраза **`Не использовано`**.
 
-Использовать webhook из env или `shared/google_sheets_publish_row.py`. **Никогда не перезаписывай** уже заполненные ссылки в других строках.
+Использовать webhook из env или `shared/sheets_mark_published.py`. **Никогда не перезаписывай** уже заполненные ссылки в других строках.
 
 ## Как работать
 
@@ -162,7 +162,7 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 
 и
 
-`<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
+`<PROJECT_ROOT>/shared/published-pages.md`
 
 Затем прочитай Google Таблицу:
 
@@ -214,7 +214,7 @@ Google Таблица: https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdF
 Коммерческий оффер из Google Таблицы: ...
 CTA из Google Таблицы: ...
 
-Дубль проверен по `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`: да
+Дубль проверен по `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/published-pages.md`: да
 
 Почему это даст лиды: ...
 
@@ -267,7 +267,7 @@ H1_КАНДИДАТ: ...
 
 Не выбирать тему без лидового потенциала для Nero Network.
 
-Не выбирать тему, которая уже есть в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` или `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`.
+Не выбирать тему, которая уже есть в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` или `<PROJECT_ROOT>/shared/published-pages.md`.
 
 Не забывать записывать выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md`.
 
