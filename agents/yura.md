@@ -40,12 +40,17 @@ is_background: false
 === ЮРА (ПУБЛИКАЦИЯ) ===
 ## Публикация от Юры
 URL: https://...
+Slug: ...
+Строка Google Таблицы (из reserve): ...
 Статус: опубликовано
 Проверка: custom template ✓, main#primary ✓, canvas ✓, script ✓, meta description ✓
 Способ: FTP → page-{slug}.php в тему ${WP_THEME_SLUG}
 Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
+Передача google-table-manager: URL + slug + row для фазы publish
 ```
+
+12. **Передай данные google-table-manager** (фаза `publish`): в блоке `=== ЮРА (ПУБЛИКАЦИЯ) ===` укажи URL, slug и номер строки из `=== GOOGLE-TABLE-MANAGER ===`. Директор после тебя запускает google-table-manager; при недоступности таблицы публикация **не откатывается**.
 
 ## Главное правило
 
