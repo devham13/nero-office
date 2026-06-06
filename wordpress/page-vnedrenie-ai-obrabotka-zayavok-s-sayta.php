@@ -37,7 +37,7 @@ body[class*="page-template-page-"] #inner-wrap {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
-body[class*="page-template-page-"] #inner-wrap > main.site-main[class*="-page"] {
+body[class*="page-template-page-"] #inner-wrap > main.site-main[class*="-page"]:not(.nero-ai-home-page) {
   display: block !important;
   max-width: none !important;
   width: 100% !important;
@@ -45,6 +45,31 @@ body[class*="page-template-page-"] #inner-wrap > main.site-main[class*="-page"] 
   padding: 0 !important;
   box-shadow: none !important;
   background: transparent !important;
+}
+
+/* Тёмные nero-ai лендинги: Kadence content-style-boxed даёт белую «коробку» */
+body[class*="page-template-page-"] #inner-wrap > main.site-main.nero-ai-home-page,
+body[class*="page-template-page-"] #inner-wrap > main.site-main[class*="-page"].nero-ai-home-page {
+  display: block !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  color: #e6edf7 !important;
+  background:
+    radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),
+    radial-gradient(circle at 86% 12%, rgba(139, 92, 246, 0.22), transparent 34rem),
+    radial-gradient(circle at 60% 90%, rgba(34, 197, 94, 0.08), transparent 35rem),
+    linear-gradient(180deg, #050711 0%, #080b17 52%, #050711 100%) !important;
+}
+
+body[class*="page-template-page-"].content-style-boxed #inner-wrap:has(.nero-ai-home-page),
+body[class*="page-template-page-"] #inner-wrap:has(.nero-ai-home-page) {
+  background: #050711 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 body[class*="page-template-page-"] .content-area,
 body[class*="page-template-page-"] #inner-wrap.content-area {
@@ -139,7 +164,7 @@ nav[aria-label="Хлебные крошки"],
     radial-gradient(circle at 12% 7%, rgba(121, 242, 255, 0.18), transparent 28rem),
     radial-gradient(circle at 86% 12%, rgba(139, 92, 246, 0.22), transparent 34rem),
     radial-gradient(circle at 60% 90%, rgba(34, 197, 94, 0.08), transparent 35rem),
-    linear-gradient(180deg, #050711 0%, #080b17 52%, #050711 100%);
+    linear-gradient(180deg, #050711 0%, #080b17 52%, #050711 100%) !important;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
