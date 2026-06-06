@@ -224,6 +224,7 @@ def cmd_reserve() -> int:
 
 
 def cmd_publish(row: int, url: str, slug: str) -> int:
+    """Write publication URL/slug/date/comment. Does not update «Статус» column."""
     published_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     payload = {
         "action": "publish",
@@ -260,12 +261,12 @@ def cmd_publish(row: int, url: str, slug: str) -> int:
         ws = gspread.authorize(creds).open_by_key(sheet_id).worksheet(_sheet_tab())
         headers = ws.row_values(1)
         link_col = _link_header()
+        # Do not update «Статус» on publish — it stays «Не использовано» from reserve.
         updates: dict[str, str] = {
             link_col: url,
             "Slug": slug,
             "Дата публикации": published_at,
             "Комментарий": PUBLISH_COMMENT,
-            "Статус": "Опубликовано",
         }
         for header, value in updates.items():
             if header in headers:

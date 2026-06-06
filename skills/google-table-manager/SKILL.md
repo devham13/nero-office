@@ -57,7 +57,8 @@ Legacy (не удалять из env, если уже настроены): `GOOG
    - «Slug» — если столбец есть;
    - «Дата публикации» — текущие дата/время UTC или локаль сайта;
    - «Комментарий» = `Опубликовано через Nero Network pipeline`.
-4. Обнови фрагмент `google-table-manager.md` (фаза publish).
+4. **Не меняй** столбец **«Статус»** — он остаётся `Не использовано`. Не пиши `Опубликовано` в «Статус».
+5. Обнови фрагмент `google-table-manager.md` (фаза publish).
 
 ### Если таблица недоступна (publish)
 
@@ -70,7 +71,7 @@ Legacy (не удалять из env, если уже настроены): `GOOG
 Если задан `GOOGLE_SHEETS_WEBHOOK_URL`, `google_sheets_logger.py` отправляет JSON:
 
 - `reserve`: `{"action":"reserve","sheet":"...","link_column":"..."}`
-- `publish`: `{"action":"publish","row":16,"url":"...","slug":"...","comment":"..."}`
+- `publish`: `{"action":"publish","row":16,"url":"...","slug":"...","comment":"..."}` — **без** поля `status`; webhook не должен менять столбец «Статус»
 
 Токен — в заголовке `X-Webhook-Token` или поле `token` (без логирования).
 

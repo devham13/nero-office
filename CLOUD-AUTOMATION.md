@@ -8,7 +8,7 @@
 
 `google-table-manager (reserve) → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → schema-markup → internal-linker → Юра → google-table-manager (publish) → indexator → Макс → Лёня`
 
-google-table-manager резервирует тему из Google Таблицы; Кирилл оформляет угол и Wordstat; после Юры google-table-manager записывает URL в таблицу.
+google-table-manager резервирует тему из Google Таблицы (статус «Не использовано»); Кирилл оформляет угол и Wordstat; после Юры google-table-manager записывает URL в столбец ссылки (`GOOGLE_SHEETS_LINK_COLUMN`), **не меняя** столбец «Статус».
 
 ## Канонические файлы
 

@@ -72,7 +72,7 @@ description: Директор — google-table-manager → Кирилл → Ко
 15. Task(internal-linker) — «Перелинковка: 3–7 исходящих + 1–5 incoming рекомендаций. `shared/internal_linking.py`, только published URL. Фрагмент `internal-linker.md`, маркер `=== INTERNAL-LINKER ===`.»
 16. Прочитай `internal-linker.md`, перенеси `=== INTERNAL-LINKER ===` в handoff.
 17. Task(yura) — «Вставь internal links + JSON-LD в page-{slug}.php; SSH/FTP; проверить ссылки 200; ld+json; блок `=== ЮРА (ПУБЛИКАЦИЯ) ===`.»
-18. Task(google-table-manager) — фаза `publish`: «Запиши URL/slug в строку таблицы (`shared/google_sheets_logger.py publish`). Обнови фрагмент и `=== GOOGLE-TABLE-MANAGER ===`. Warning, если таблица недоступна — публикацию не откатывать.»
+18. Task(google-table-manager) — фаза `publish`: «Запиши URL/slug в строку таблицы (`shared/google_sheets_logger.py publish`). **Не меняй** столбец «Статус» (остаётся `Не использовано`). Обнови фрагмент и `=== GOOGLE-TABLE-MANAGER ===`. Warning, если таблица недоступна — публикацию не откатывать.»
 19. **До indexator** sanity-check: live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===` + обновлённый `=== GOOGLE-TABLE-MANAGER ===` (publish). Если блока Юры нет — дозапусти Юру.
 20. Task(indexator) — «Проверь индексационную готовность URL из Юры: HTTP 200, robots, noindex, canonical, sitemap, IndexNow (`shared/indexnow_notifier.py`). Фрагмент `indexator.md`, маркер `=== INDEXATOR ===`. Ошибка IndexNow — warning, не откатывать публикацию.»
 21. Прочитай `indexator.md`, перенеси `=== INDEXATOR ===` в handoff. При блокере indexator — не запускай QA с вердиктом ✅; верни на Юру/Наташу.
@@ -100,7 +100,7 @@ description: Директор — google-table-manager → Кирилл → Ко
 - **Коле**: «ТОЛЬКО ядро. НЕ текст.»
 - **google-table-manager (reserve)**: «Первая пустая ссылка в таблице, антидубли, статус Не использовано.»
 - **Кириллу**: «Тема от google-table-manager; Wordstat и угол. НЕ текст.»
-- **google-table-manager (publish)**: «URL/slug в ту же строку после Юры.»
+- **google-table-manager (publish)**: «URL/slug в ту же строку после Юры; не менять «Статус».»
 - **indexator**: «HTTP/robots/noindex/canonical/sitemap + IndexNow. Блокер при noindex.»
 - **Артёму**: «Deep research 2026. НЕ текст.»
 - **Жене**: «Лонгрид на основе данных Коли и Артёма.»
