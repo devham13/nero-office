@@ -12,6 +12,27 @@ $primary_cta_url = getenv('PRIMARY_CTA_URL') ?: '#audit-cta';
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Дополнительные материалы';
 $secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '#services';
 
+$brand = getenv('SITE_BRAND') ?: get_bloginfo('name') ?: 'Блог';
+$custom_logo_id = get_theme_mod('custom_logo');
+$nero_logo_url = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'thumbnail') : '';
+if (!$nero_logo_url) {
+    $nero_logo_url = get_site_icon_url(96) ?: content_url('uploads/2026/05/cropped-photo_2025-01-06_18-24-31.jpg');
+}
+$home_url = home_url('/');
+$primary_cta_target = str_starts_with($primary_cta_url, 'http') ? ' target="_blank" rel="noopener noreferrer"' : '';
+$page_nav_links = [
+    ['label' => 'Потери заявок', 'href' => '#poterya-zayavok'],
+    ['label' => 'AI-агент', 'href' => '#chto-takoe-agent'],
+    ['label' => 'Сценарий', 'href' => '#kak-rabotaet'],
+    ['label' => 'Внедрение', 'href' => '#vnedrenie'],
+    ['label' => 'CRM', 'href' => '#crm'],
+    ['label' => 'Цена', 'href' => '#cena'],
+    ['label' => 'Кейсы', 'href' => '#keisy'],
+    ['label' => 'Риски', 'href' => '#riski'],
+    ['label' => 'FAQ', 'href' => '#faq'],
+    ['label' => 'Аудит', 'href' => '#audit-cta'],
+];
+
 add_filter('document_title_parts', static function (array $parts) use ($page_seo_title): array {
     $parts['title'] = $page_seo_title;
     return $parts;
@@ -892,7 +913,260 @@ nav[aria-label="Хлебные крошки"],
 .nero-ai-kpi-mini { padding: 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); text-align: center; }
 .nero-ai-kpi-mini strong { display: block; color: var(--nero-ai-primary); font-size: 22px; }
 .nero-ai-kpi-mini span { display: block; margin-top: 6px; font-size: 12px; color: var(--nero-ai-muted); }
+/* Nero AI floating pill header (homepage reference) */
+/* Скрыть шапку Kadence на главной */
+body.home #masthead,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) #masthead,
+body.home .site-header,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) .site-header,
+body.home header.site-header,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) header.site-header,
+body.home .kadence-header,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) .kadence-header,
+body.home #mobile-header,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) #mobile-header {
+  display: none !important;
+}
+body.home,
+body[class*="page-template-page-"]:has(.nero-ai-home-page) {
+  padding-top: 0 !important;
+}
+
+/* Плавающая шапка pill (как на главной) */
+.nero-ai-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99990;
+  pointer-events: none;
+  padding: 14px 16px 0;
+}
+.nero-ai-header-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+.nero-ai-header-bar {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px 10px 18px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.nero-ai-header.is-scrolled .nero-ai-header-bar {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.nero-ai-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nero-ai-header-logo-img {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+}
+.nero-ai-header-logo-text {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: #0f172a;
+}
+.nero-ai-header-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+.nero-ai-header-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nero-ai-header-link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.nero-ai-header-link:hover,
+.nero-ai-header-link:focus-visible {
+  background: #fff;
+  color: #0f172a;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.nero-ai-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.nero-ai-header-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff !important;
+  text-decoration: none;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.nero-ai-header-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.55);
+}
+.nero-ai-header-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+}
+.nero-ai-header-toggle-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #334155;
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.nero-ai-header.is-open .nero-ai-header-toggle-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nero-ai-header.is-open .nero-ai-header-toggle-line:nth-child(2) { opacity: 0; }
+.nero-ai-header.is-open .nero-ai-header-toggle-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+@media (max-width: 1024px) {
+  .nero-ai-header-pill { display: none; }
+  .nero-ai-header-toggle { display: flex; }
+  .nero-ai-header-nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 16px;
+    right: 16px;
+    flex: none;
+    display: none;
+  }
+  .nero-ai-header.is-open .nero-ai-header-nav { display: block; }
+  .nero-ai-header-pill--mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+  .nero-ai-header.is-open .nero-ai-header-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: transparent;
+    padding: 0;
+  }
+  .nero-ai-header.is-open .nero-ai-header-link {
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+  .nero-ai-header-shell { position: relative; }
+  .nero-ai-header-actions > .nero-ai-header-cta { display: none; }
+  .nero-ai-header-cta--mobile { display: none; }
+  .nero-ai-header.is-open .nero-ai-header-cta--mobile {
+    display: inline-flex;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+.nero-ai-header-cta--mobile { display: none; }
+
+
+body[class*="page-template-page-"]:has(.nero-ai-home-page) .nero-ai-header-pill {
+  gap: 2px;
+  padding: 4px;
+}
+body[class*="page-template-page-"]:has(.nero-ai-home-page) .nero-ai-header-link {
+  padding: 8px 10px;
+  font-size: 12px;
+}
+@media (min-width: 1200px) {
+  body[class*="page-template-page-"]:has(.nero-ai-home-page) .nero-ai-header-link {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+body[class*="page-template-page-"]:has(.nero-ai-home-page) .nero-ai-hero {
+  padding-top: clamp(108px, 14vh, 148px) !important;
+}
+
 </style>
+
+
+<header class="nero-ai-header" id="nero-ai-header" role="banner">
+  <div class="nero-ai-header-shell">
+    <div class="nero-ai-header-bar">
+      <a class="nero-ai-header-logo" href="<?php echo esc_url($home_url); ?>" aria-label="<?php echo esc_attr($brand); ?> — на главную">
+        <img class="nero-ai-header-logo-img" src="<?php echo esc_url($nero_logo_url); ?>" width="42" height="42" alt="" decoding="async" />
+        <span class="nero-ai-header-logo-text"><?php echo esc_html($brand); ?></span>
+      </a>
+      <nav class="nero-ai-header-nav" id="nero-ai-header-nav" aria-label="Навигация по странице">
+        <div class="nero-ai-header-pill">
+<?php foreach ($page_nav_links as $nav_link) : ?>
+          <a class="nero-ai-header-link" href="<?php echo esc_attr($nav_link['href']); ?>"><?php echo esc_html($nav_link['label']); ?></a>
+<?php endforeach; ?>
+          <a class="nero-ai-header-cta nero-ai-header-cta--mobile" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_target; ?>><?php echo esc_html($primary_cta_label); ?></a>
+        </div>
+      </nav>
+      <div class="nero-ai-header-actions">
+        <a class="nero-ai-header-cta" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_target; ?>><?php echo esc_html($primary_cta_label); ?></a>
+        <button type="button" class="nero-ai-header-toggle" id="nero-ai-header-toggle" aria-expanded="false" aria-controls="nero-ai-header-nav">
+          <span class="nero-ai-header-toggle-line" aria-hidden="true"></span>
+          <span class="nero-ai-header-toggle-line" aria-hidden="true"></span>
+          <span class="nero-ai-header-toggle-line" aria-hidden="true"></span>
+          <span class="screen-reader-text">Меню</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
 <main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-obrabotka-zayavok-s-sayta-page" role="main" tabindex="-1">
 <span id="main" tabindex="-1" class="screen-reader-text" aria-hidden="true"></span>
@@ -1832,6 +2106,58 @@ nav[aria-label="Хлебные крошки"],
     }
   ]
 }
+</script>
+<script>
+/**
+ * Nero AI floating pill header — toggle, scroll state, smooth anchor scroll.
+ */
+(function () {
+  'use strict';
+
+  function initHeader() {
+    var header = document.getElementById('nero-ai-header');
+    var toggle = document.getElementById('nero-ai-header-toggle');
+    var nav = document.getElementById('nero-ai-header-nav');
+    if (!header) return;
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', function () {
+        var open = header.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          header.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    window.addEventListener('scroll', function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    document.querySelectorAll('.nero-ai-header-link[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var id = link.getAttribute('href').slice(1);
+        var target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          var offset = (header.offsetHeight || 80) + 20;
+          var top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeader);
+  } else {
+    initHeader();
+  }
+})();
+
 </script>
 <!-- /wp:html -->
 
