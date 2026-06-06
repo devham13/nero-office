@@ -74,7 +74,7 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 
 Финальный HTML, который ты пишешь в файл обмена, **должен быть пригоден для публикации в WordPress**. Для этого:
 
-1. **Один блок `<style>`** — весь CSS (и hero, и контент) в начале. **Обязательно включи** скрытие хлебных крошек и лишних элементов темы:
+1. **Один блок `<style>`** — весь CSS (и hero, и контент) в начале. **Первым** вставь **`shared/kadence-page-isolation.css`** (без него ломается шапка/меню Kadence). **Обязательно включи** скрытие хлебных крошек и лишних элементов темы:
    ```css
    .breadcrumbs, .breadcrumb, .breadcrumb-list, .breadcrumb-item,
    nav[aria-label="Хлебные крошки"],

@@ -30,6 +30,63 @@ get_header();
 
 <!-- wp:html -->
 <style>
+/* === Nero Network: изоляция кастомных page-{slug}.php от Kadence === */
+body[class*="page-template-page-"] #inner-wrap {
+  max-width: none !important;
+  width: 100% !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+body[class*="page-template-page-"] #inner-wrap > main.site-main[class*="-page"] {
+  display: block !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+body[class*="page-template-page-"] .content-area,
+body[class*="page-template-page-"] #inner-wrap.content-area {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+html,
+body[class*="page-template-page-"] {
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+  height: auto !important;
+}
+body[class*="page-template-page-"] #inner-wrap,
+body[class*="page-template-page-"] #inner-wrap.content-area {
+  overflow: visible !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+main.site-main[class*="-page"],
+.site-main[class*="-page"] {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+body[class*="page-template-page-"] #mobile-drawer,
+body[class*="page-template-page-"] .mobile-drawer,
+body[class*="page-template-page-"] #masthead,
+body[class*="page-template-page-"] .site-header-wrap {
+  max-width: none;
+}
+.nero-ai-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+  z-index: 0;
+}
+
 .breadcrumbs, .breadcrumb, .breadcrumb-list, .breadcrumb-item,
 nav[aria-label="Хлебные крошки"],
 .woocommerce-breadcrumb, .rank-math-breadcrumb, .rank-math-breadcrumbs, .yoast-breadcrumb,

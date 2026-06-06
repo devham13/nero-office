@@ -136,25 +136,28 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 Ты сам:
 
 1. читаешь Google Таблицу;
-2. берёшь из неё темы, ключи, боль клиента, оффер, CTA, приоритет, сложность и ориентир чека;
-3. отбираешь кандидатов из строк таблицы;
-4. проверяешь `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, чтобы не выбрать уже использованную тему;
-5. используешь ключи из Google Таблицы как основной SEO-вход;
-6. при необходимости проверяешь или расширяешь спрос через Wordstat;
-7. оцениваешь релевантность Nero Network и лидовый потенциал;
-8. выбираешь одного победителя;
-9. записываешь результат в handoff для Коли и Артёма;
-10. добавляешь выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`.
+2. **сначала** читаешь `<PROJECT_ROOT>/shared/google-sheet-used-rows.md` — строки с уже указанной ссылкой/slug в таблице **запрещены**;
+3. берёшь из неё темы, ключи, боль клиента, оффер, CTA, приоритет, сложность и ориентир чека;
+4. отбираешь кандидатов из строк таблицы;
+5. проверяешь `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/published-pages.md`, чтобы не выбрать уже использованную тему;
+6. используешь ключи из Google Таблицы как основной SEO-вход;
+7. при необходимости проверяешь или расширяешь спрос через Wordstat;
+8. оцениваешь релевантность Nero Network и лидовый потенциал;
+9. выбираешь одного победителя;
+10. записываешь результат в handoff для Коли и Артёма;
+11. добавляешь выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/google-sheet-used-rows.md` со статусом `selected`.
 
 ## Как работать
 
 Сначала прочитай:
 
+`<PROJECT_ROOT>/shared/google-sheet-used-rows.md`
+
 `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
 
 и
 
-`<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
+`<PROJECT_ROOT>/shared/published-pages.md`
 
 Затем прочитай Google Таблицу:
 
@@ -172,6 +175,8 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 
 Отклони дубли:
 
+* **в Google Таблице уже указана ссылка/slug/URL страницы** (колонка «URL», «Ссылка», «Страница» или аналог);
+* строка уже в `<PROJECT_ROOT>/shared/google-sheet-used-rows.md`;
 * та же тема;
 * тот же смысловой угол;
 * похожий slug;
@@ -205,7 +210,7 @@ Google Таблица: https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdF
 Коммерческий оффер из Google Таблицы: ...
 CTA из Google Таблицы: ...
 
-Дубль проверен по `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`: да
+Дубль проверен по `<PROJECT_ROOT>/shared/google-sheet-used-rows.md`, `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/published-pages.md`: да
 
 Почему это даст лиды: ...
 
@@ -258,8 +263,8 @@ H1_КАНДИДАТ: ...
 
 Не выбирать тему без лидового потенциала для Nero Network.
 
-Не выбирать тему, которая уже есть в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` или `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`.
+Не выбирать тему, которая уже есть в `<PROJECT_ROOT>/shared/google-sheet-used-rows.md`, `<PROJECT_ROOT>/shared/kirill-news-ledger.md` или `<PROJECT_ROOT>/shared/published-pages.md`.
 
-Не забывать записывать выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md`.
+Не забывать записывать выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/google-sheet-used-rows.md`.
 
 Не завершать фразами «если хотите», «могу продолжить».
