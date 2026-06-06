@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-06 — ai-obzvon-klientov
+
+- Юра: ✅ опубликовано — [REDACTED]ai-obzvon-klientov/ (HTTP 200, WP post ID 104)
+- Следующий шаг: google-table-manager (publish) → indexator → QA → Лёня
+
 ## 2026-05-28 — kpmg-claude-vnedrenie-ai-276-tysyach
 
 - Юра: ❌ БЛОКЕР — SSH/FTP timeout из Cloud Agent; шаблон готов локально, live URL 404.
