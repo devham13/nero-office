@@ -1,6 +1,6 @@
 ---
 name: director-nero-network
-description: Директор — google-table-manager → Кирилл → Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → mobile-agent → Макс → Лёня. Луп исправления Юра↔indexator↔mobile-agent↔(Макс||Лёня) (макс 2 попытки).
+description: Директор — google-table-manager → Кирилл → Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → content-rewriter-humanizer → Наташа → Юра → google-table-manager → indexator → mobile-agent → Макс → Лёня. Луп исправления Юра↔indexator↔mobile-agent↔(Макс||Лёня) (макс 2 попытки).
 ---
 
 # Директор Nero Network Office Page
@@ -26,6 +26,7 @@ description: Директор — google-table-manager → Кирилл → Ко
 - `artur`: `agents/artur.md` + `skills/advertiser-artur/SKILL.md`;
 - `alina`: `agents/alina.md` + `skills/animator-alina/SKILL.md`;
 - `boris`: `agents/boris.md` + `skills/animator-boris/SKILL.md`;
+- `content-rewriter-humanizer`: `agents/content-rewriter-humanizer.md` + `skills/content-rewriter-humanizer/SKILL.md`;
 - `natasha`: `agents/natasha.md` + `skills/designer-natasha/SKILL.md`;
 - `yura`: `agents/yura.md` + `skills/publisher-yura/SKILL.md`;
 - `indexator`: `agents/indexator.md` + `skills/indexator/SKILL.md`;
@@ -47,11 +48,11 @@ description: Директор — google-table-manager → Кирилл → Ко
 - ledger Кирилла: `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
 - временные фрагменты параллельных агентов: `<PROJECT_ROOT>/.cursor/nero-network-fragments/`
 
-**Правило гонок:** параллельные агенты не пишут напрямую в `nero-network-handoff.md`. Они пишут каждый в свой фрагмент (`kolya.md`, `artyom.md`, `snippet-agent.md`, `alina.md`, `boris.md`, `indexator.md`, `mobile-agent.md`, `qa.md`, `lenya.md`). Директор после завершения пары читает оба фрагмента и сам дописывает их в `nero-network-handoff.md` в фиксированном порядке. Если агент всё-таки написал в handoff напрямую, Директор проверяет, что в итоговом файле **ровно один** блок каждого типа; дубли — ошибка протокола.
+**Правило гонок:** параллельные агенты не пишут напрямую в `nero-network-handoff.md`. Они пишут каждый в свой фрагмент (`kolya.md`, `artyom.md`, `snippet-agent.md`, `alina.md`, `boris.md`, `content-rewriter-humanizer.md`, `indexator.md`, `mobile-agent.md`, `qa.md`, `lenya.md`). Директор после завершения пары читает оба фрагмента и сам дописывает их в `nero-network-handoff.md` в фиксированном порядке. Если агент всё-таки написал в handoff напрямую, Директор проверяет, что в итоговом файле **ровно один** блок каждого типа; дубли — ошибка протокола.
 
 ## Алгоритм
 
-1. **Write** → `<PROJECT_ROOT>/.cursor/nero-network-handoff.md` — **полная перезапись** (одна строка: `# Nero Network — новая сессия`). Также очисти/перезапиши фрагменты текущей сессии в `<PROJECT_ROOT>/.cursor/nero-network-fragments/` (включая `google-table-manager.md`, `snippet-agent.md`, `indexator.md`, `mobile-agent.md`). Без этого **не** запускать Task. Запрещены search_replace/apply_patch для «очистки».
+1. **Write** → `<PROJECT_ROOT>/.cursor/nero-network-handoff.md` — **полная перезапись** (одна строка: `# Nero Network — новая сессия`). Также очисти/перезапиши фрагменты текущей сессии в `<PROJECT_ROOT>/.cursor/nero-network-fragments/` (включая `google-table-manager.md`, `snippet-agent.md`, `content-rewriter-humanizer.md`, `indexator.md`, `mobile-agent.md`). Без этого **не** запускать Task. Запрещены search_replace/apply_patch для «очистки».
 2. Task(google-table-manager) — фаза `reserve`: «Найди первую строку с пустой столбец ссылки, проверь дубли по `shared/published-pages.md` и `shared/kirill-news-ledger.md`, поставь «Не использовано», запиши фрагмент `google-table-manager.md` с маркером `=== GOOGLE-TABLE-MANAGER ===`. При недоступности таблицы — warning.»
 3. Прочитай фрагмент `google-table-manager.md`, перенеси `=== GOOGLE-TABLE-MANAGER ===` в handoff. Если `❌ БЛОКЕР` без fallback — не запускай Кирилла.
 4. Task(kirill) — «Тема из `=== GOOGLE-TABLE-MANAGER ===`. Не читай таблицу при успешном reserve. Wordstat, угол, дубли; `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`; `selected` в ledger; НЕ текст.»
@@ -67,19 +68,21 @@ description: Директор — google-table-manager → Кирилл → Ко
 12. **ПАРАЛЛЕЛЬНО** (два Task в одном сообщении):
    - Task(alina) — «только **hero**; Canvas, CSS inline; светлый фон, тёмная типографика; новая сцена, чеклист отличий (skill Алины). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/alina.md`; не пиши в handoff.»
    - Task(boris) — «**блок в теле статьи, не hero** — продолжение или контраст к теме; **редакционная композиция** (сплит/сетка/карта, не узкая колонка по центру); свой canvas id и движок; якорь для Наташи (skill Бориса). Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/boris.md`; не пиши в handoff.»
-13. **Снова прочитай** оба фрагмента и проверь маркеры `=== АЛИНА (HERO) ===` и `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`. Если одного нет — дозапускай только отсутствующего, не переходя к Наташе. После проверки Директор сам дописывает оба фрагмента в handoff в порядке: Алина → Борис.
-14. Task(natasha) — «полная страница: hero Алины → контент → **вставь блок Бориса** по якорю; SEO meta из `=== SNIPPET-AGENT ===`; сохрани canvas/script и рекламу Артура; alt/rel у ссылок»
-15. Task(yura) — «SSH/SCP/SFTP/FTP → page-{slug}.php с `$page_seo_*` из snippet-agent; НЕ WP API. post_excerpt = Description, кэш, live HTML + meta/og»
-16. Task(google-table-manager) — фаза `publish`: «Запиши URL/slug в строку таблицы (`shared/google_sheets_logger.py publish`).»
-17. **До indexator** sanity-check: live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Если блока Юры нет — дозапусти Юру.
-18. Task(indexator) — «HTTP 200, robots, noindex, canonical, sitemap, IndexNow. Фрагмент `indexator.md`.»
-19. Прочитай `indexator.md`, перенеси `=== INDEXATOR ===` в handoff. При блокере — не запускай mobile-agent/QA с ✅.
-20. Task(mobile-agent) — «Mobile 360/390/430px. Фрагмент `mobile-agent.md`. Блокер первого экрана = стоп.»
-21. Прочитай `mobile-agent.md`, перенеси `=== MOBILE-AGENT ===` в handoff.
-22. Task(qa) — «Макс: snippet-agent meta + indexator + mobile-agent; hero, canvas, консоль. Фрагмент `qa.md`.»
-23. Task(lenya) — «Лёня: SEO-аудит URL. Фрагмент `lenya.md`.»
-24. Директор читает `qa.md` и `lenya.md`, переносит блоки QA и Лёни. Дубли запрещены.
-25. Прочитай файл:
+13. **Снова прочитай** оба фрагмента и проверь маркеры `=== АЛИНА (HERO) ===` и `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`. Если одного нет — дозапускай только отсутствующего, не переходя к humanizer. После проверки Директор сам дописывает оба фрагмента в handoff в порядке: Алина → Борис.
+14. Task(content-rewriter-humanizer) — «Очеловечь текст Артура + hero Алины; убери воду/AI-шаблоны; усиль CTA; без новых фактов. Фрагмент `content-rewriter-humanizer.md`, маркер `=== CONTENT-REWRITER-HUMANIZER ===`.»
+15. Прочитай `content-rewriter-humanizer.md`, перенеси блок в handoff. При блокере — не запускай Наташу.
+16. Task(natasha) — «полная страница: hero Алины → **humanized-текст** → блок Бориса; SEO meta из snippet-agent; не суши копирайт; canvas/script и реклама Артура»
+17. Task(yura) — «SSH/SCP/SFTP/FTP → page-{slug}.php с `$page_seo_*` из snippet-agent; НЕ WP API. post_excerpt = Description, кэш, live HTML + meta/og»
+18. Task(google-table-manager) — фаза `publish`: «Запиши URL/slug в строку таблицы (`shared/google_sheets_logger.py publish`).»
+19. **До indexator** sanity-check: live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Если блока Юры нет — дозапусти Юру.
+20. Task(indexator) — «HTTP 200, robots, noindex, canonical, sitemap, IndexNow. Фрагмент `indexator.md`.»
+21. Прочитай `indexator.md`, перенеси `=== INDEXATOR ===` в handoff. При блокере — не запускай mobile-agent/QA с ✅.
+22. Task(mobile-agent) — «Mobile 360/390/430px. Фрагмент `mobile-agent.md`. Блокер первого экрана = стоп.»
+23. Прочитай `mobile-agent.md`, перенеси `=== MOBILE-AGENT ===` в handoff.
+24. Task(qa) — «Макс: humanizer-текст + snippet meta + indexator + mobile-agent; hero, canvas, консоль. Фрагмент `qa.md`.»
+25. Task(lenya) — «Лёня: SEO-аудит URL. Фрагмент `lenya.md`.»
+26. Директор читает `qa.md` и `lenya.md`, переносит блоки QA и Лёни. Дубли запрещены.
+27. Прочитай файл:
    - **Макс ✅ + Лёня ✅** → ссылку пользователю
    - **если Макс ❌ или Лёня ❌** → Task(yura) → indexator → Task(mobile-agent) → Task(qa) → Task(lenya). Макс 2 попытки.
 
@@ -93,7 +96,7 @@ description: Директор — google-table-manager → Кирилл → Ко
 
 Важно: параллель безопасна только потому, что агенты пишут в **разные фрагменты**, а не одновременно в один handoff.
 
-**Нельзя** распараллелить без риска: **snippet-agent** (нужны Коля+Артём), **Женя** (нужны snippet-agent+ядро), **Артур** (нужен лонгрид), **Наташа** (нужны hero+Борис+текст), **Юра** (нужен финальный HTML от Наташи). snippet-agent → Женя → Артур последовательно; Наташа и Юра — после визуальных блоков.
+**Нельзя** распараллелить без риска: **snippet-agent**, **Женя**, **Артур**, **content-rewriter-humanizer** (нужны Алина+Борис+текст Артура), **Наташа**, **Юра**. Цепочка: snippet-agent → Женя → Артур → Алина||Борис → humanizer → Наташа → Юра.
 
 ## Критичные промпты
 
@@ -109,7 +112,8 @@ description: Директор — google-table-manager → Кирилл → Ко
 - **Артуру**: «Главный оффер — `${PRIMARY_CTA_URL}`, вторичный — `${SECONDARY_CTA_URL}` только уместно по смыслу, баннер — только из `AD_BANNER_*` по **skill advertiser-artur** (обязательны `alt` и `rel` у баннера).»
 - **Алине**: «Только hero; CSS inline; светлый hero; новая сцена; чеклист отличий»
 - **Борису**: «Не hero; блок в статье; **сплит или сетка + подпись**, не квадрат по центру; продолжение или контраст к Алине; свои id; якорь для Наташи»
-- **Наташе**: «Hero Алины первым; вставь блок Бориса по handoff; не удаляй canvas/script (оба блока); реклама Артура; не затемняй hero; все `<img>` с **alt**; внешние `target="_blank"` с **rel="noopener noreferrer"**»
+- **content-rewriter-humanizer**: «Очеловечь Артур + hero Алины; убери воду; усиль CTA; без ложных гарантий; фрагмент content-rewriter-humanizer.md»
+- **Наташе**: «Hero Алины + humanized-текст + Борис; не суши копирайт; SEO meta из snippet-agent; не удаляй canvas/script; alt/rel у ссылок»
 - **Юре**: «Инфраструктура берётся из env/secrets; хостинг и тема задаются при установке. Публикация только в **`${WP_THEME_SLUG}`**; перед выкладкой подтвердить `stylesheet/template`, после — проверить живой HTML на маркеры кастомного шаблона. НЕ WP API.»
 - **Юре**: «Грузи в **активную тему**, потом проверь live HTML на **маркеры шаблона**; если в HTML дефолтный `page.php`, проверь `_wp_page_template` и кэш.»
 - **Максу**: «Браузер: hero, блок Бориса (если есть), все canvas/script, контент, консоль; **нет img без alt**, ссылки-картинки с осмысленным доступным именем»

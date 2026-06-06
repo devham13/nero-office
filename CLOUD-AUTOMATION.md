@@ -6,7 +6,7 @@
 
 Полный пайплайн:
 
-`google-table-manager (reserve) → Кирилл → Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager (publish) → indexator → mobile-agent → Макс → Лёня`
+`google-table-manager (reserve) → Кирилл → Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → content-rewriter-humanizer → Наташа → Юра → google-table-manager (publish) → indexator → mobile-agent → Макс → Лёня`
 
 google-table-manager резервирует тему из Google Таблицы; Кирилл оформляет угол и Wordstat; после Юры google-table-manager записывает URL в таблицу.
 
@@ -116,7 +116,7 @@ agent worker start --pool --pool-name nero-network --idle-release-timeout 600
 3. Очисти фрагменты текущей сессии в <PROJECT_ROOT>/.cursor/nero-network-fragments/.
 4. Запусти Кирилла: он должен сам найти одну лучшую свежую новость по нейросетям/автоматизации, проверить Wordstat, проверить дубли по <PROJECT_ROOT>/shared/kirill-news-ledger.md и <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md, записать selected в ledger и блок === КИРИЛЛ (НОВОСТЬ ДНЯ) === в handoff.
 5. Если Кирилл не нашёл недублирующуюся тему, остановись и запиши блокер.
-6. Далее выполни цепочку: Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager (publish) → indexator → mobile-agent → Макс → Лёня.
+6. Далее выполни цепочку: Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → content-rewriter-humanizer → Наташа → Юра → google-table-manager (publish) → indexator → mobile-agent → Макс → Лёня.
 7. Параллельные агенты не пишут напрямую в handoff: они пишут во фрагменты <PROJECT_ROOT>/.cursor/nero-network-fragments/, а Директор переносит блоки в handoff без дублей.
 8. Юра публикует только SSH/SCP/SFTP/FTP как `page-{slug}.php` в активную тему `${WP_THEME_SLUG}`; в Cloud сначала SSH/SCP/SFTP, НЕ WordPress API / REST API / MCP blob flow.
 9. До QA проверь, что в handoff есть === ЮРА (ПУБЛИКАЦИЯ) === и live HTML содержит main#primary, {slug}-page, hero/canvas-маркеры.
@@ -131,6 +131,7 @@ agent worker start --pool --pool-name nero-network --idle-release-timeout 600
 - самому вставлять рекламу вместо Артура;
 - самому публиковать вместо Юры;
 - самому готовить SEO-сниппеты вместо snippet-agent;
+- самому очеловечивать текст вместо content-rewriter-humanizer;
 - самому проверять mobile вместо mobile-agent;
 - самому делать QA/SEO-аудит вместо Макса и Лёни;
 - объединять несколько ролей в один `generalPurpose` Task;

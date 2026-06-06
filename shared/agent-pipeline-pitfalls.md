@@ -143,6 +143,20 @@
 
 ---
 
+## 7б. Content-rewriter-humanizer (после Алины и Бориса)
+
+| Сложность | Как избежать |
+|-----------|----------------|
+| Наташа вернула сухой AI-текст | Верстать только из `=== CONTENT-REWRITER-HUMANIZER ===`; см. `shared/humanizer_rules.md`. |
+| Humanizer добавил ложные обещания | Без «гарантируем», «100%»; QA + будущий **legal-risk-guard** после humanizer. |
+| Потеряны SEO-ключи | Humanizer сохраняет кластер Коли; QA проверяет естественное вхождение. |
+| Нет блока humanizer | Без `=== CONTENT-REWRITER-HUMANIZER ===` Наташа не запускается. |
+| **conversion-optimizer** (когда в пайплайне) | Берёт humanized-текст как базу, не сырой лонгрид Жени. |
+
+Утилиты: `shared/content_humanizer.py`, `shared/humanizer_rules.md`.
+
+---
+
 ## 8а. Snippet-agent (SEO-сниппеты после Коли и Артёма)
 
 | Сложность | Как избежать |

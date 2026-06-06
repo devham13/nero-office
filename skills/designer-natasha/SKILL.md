@@ -70,6 +70,13 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 
 Юра после публикации проверяет наличие `<meta name="description"` в live HTML.
 
+## Текст от humanizer
+
+- Верстай копирайт из `=== CONTENT-REWRITER-HUMANIZER ===`.
+- **Не** возвращай сухой шаблон Жени/Артура.
+- Hero: не ломай canvas/script; обновляй только текстовые узлы по humanized Hero.
+- См. `shared/humanizer_rules.md`.
+
 ## Субагент
 
 - Используй модель текущей сессии / наследование модели.

@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → snippet-agent → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → mobile-agent → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → snippet-agent → zhenya → artur → alina || boris → content-rewriter-humanizer → natasha → yura → google-table-manager → indexator → mobile-agent → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -33,6 +33,7 @@
 - Parent Cloud Agent сам верстает страницу вместо отдельного Task `natasha` / `generalPurpose` с ролью Наташи.
 - Parent Cloud Agent сам вставляет рекламу вместо отдельного Task `artur` / `generalPurpose` с ролью Артура.
 - Parent Cloud Agent сам готовит SEO-сниппеты вместо отдельного Task `snippet-agent` / `generalPurpose` с ролью snippet-agent.
+- Parent Cloud Agent сам очеловечивает текст вместо отдельного Task `content-rewriter-humanizer` / `generalPurpose` с ролью content-rewriter-humanizer.
 - Parent Cloud Agent сам проверяет мобильную версию вместо отдельного Task `mobile-agent` / `generalPurpose` с ролью mobile-agent.
 - Cloud Agent публикует без блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`.
 - Cloud Agent создаёт короткую статью вместо лонгрида 8k–20k+ знаков.
@@ -55,6 +56,7 @@
 - `snippet-agent.md`
 - `alina.md`
 - `boris.md`
+- `content-rewriter-humanizer.md`
 - `qa.md`
 - `lenya.md`
 
@@ -69,6 +71,7 @@
 - `=== АРТУР (CTA И РЕКЛАМА) ===`
 - `=== АЛИНА (HERO) ===`
 - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
+- `=== CONTENT-REWRITER-HUMANIZER ===`
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
 - `=== INDEXATOR ===`
