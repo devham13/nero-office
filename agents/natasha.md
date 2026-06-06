@@ -42,7 +42,7 @@ CSS через **`nero_ai_echo_theme_styles()`** в PHP; reveal: **`longread-pag
 <script>...Hero Canvas engine от Алины...</script>
 <script>...Canvas engine Бориса, если вынесен отдельно...</script>
 <script>...Reveal IntersectionObserver...</script>
-<script type="application/ld+json">...JSON-LD...</script>
+<!-- SCHEMA-MARKUP:INSERT — JSON-LD вставит schema-markup → Юра -->
 ```
 
 1. **Запиши** готовый HTML в файл обмена, сохранив служебные данные:
@@ -57,6 +57,8 @@ SLUG: ...
 ## Передача пайплайну
 SLUG: ...
 JSON-LD готовит **schema-markup** после Наташи; оставь `<!-- SCHEMA-MARKUP:INSERT -->` перед `</main>`.
+Внутренние ссылки готовит **internal-linker** после schema-markup; оставь `<!-- INTERNAL-LINKS:INSERT -->` в теле лонгрида (1–2 места).
+При пересборке проверяй, что ссылки из internal-linker вставлены **естественно** и не ломают текст.
 Контент содержит <script> (hero engine + reveal) и <canvas>.
 ```
 

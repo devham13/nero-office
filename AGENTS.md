@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → schema-markup → yura → google-table-manager → indexator → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → schema-markup → internal-linker → yura → google-table-manager → indexator → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -33,6 +33,7 @@
 - Parent Cloud Agent сам верстает страницу вместо отдельного Task `natasha` / `generalPurpose` с ролью Наташи.
 - Parent Cloud Agent сам вставляет рекламу вместо отдельного Task `artur` / `generalPurpose` с ролью Артура.
 - Parent Cloud Agent сам генерирует JSON-LD вместо отдельного Task `schema-markup` / `generalPurpose` с ролью schema-markup.
+- Parent Cloud Agent сам подбирает внутренние ссылки вместо отдельного Task `internal-linker` / `generalPurpose` с ролью internal-linker.
 - Cloud Agent публикует без блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`.
 - Cloud Agent создаёт короткую статью вместо лонгрида 8k–20k+ знаков.
 
@@ -52,6 +53,7 @@
 - `alina.md`
 - `boris.md`
 - `schema-markup.md`
+- `internal-linker.md`
 - `qa.md`
 - `lenya.md`
 
@@ -67,6 +69,7 @@
 - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
 - `=== SCHEMA-MARKUP ===`
+- `=== INTERNAL-LINKER ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
 - `=== INDEXATOR ===`
 - `=== МАКС (QA) ===`

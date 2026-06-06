@@ -113,6 +113,7 @@ if (!is_readable($nero_ai_floating)) {
     </div>
   </section>
 
+  <!-- INTERNAL-LINKS:INSERT — внутренние ссылки из === INTERNAL-LINKER === (Юра) -->
   <!-- SCHEMA-MARKUP: вставить JSON-LD из === SCHEMA-MARKUP === перед публикацией (Юра) -->
   <!-- <script type="application/ld+json">...</script> -->
 

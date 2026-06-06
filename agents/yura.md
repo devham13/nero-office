@@ -60,7 +60,13 @@ Slug: ...
 - `Путь шаблона`: runtime-путь к `page-{slug}.php` в теме `${WP_THEME_SLUG}`.
 Директор после google-table-manager запускает **indexator** для проверки индексации и IndexNow.
 
-14. **Вставь Schema.org JSON-LD** из `=== SCHEMA-MARKUP ===` в `page-{slug}.php` **до публикации**:
+14. **Вставь внутренние ссылки** из `=== INTERNAL-LINKER ===` в тело `page-{slug}.php` **до публикации**:
+- вставь готовые `<a href="...">` по placement из фрагмента;
+- не дублируй URL; не ставь ссылки подряд;
+- после вставки проверь каждый URL (HTTP 200, не 404);
+- не ссылайся на wp-admin, черновики, search.
+
+15. **Вставь Schema.org JSON-LD** из `=== SCHEMA-MARKUP ===` в `page-{slug}.php` **до публикации**:
 - возьми готовый блок `<script type="application/ld+json">...</script>`;
 - вставь перед `</main>` или перед `<?php get_footer(); ?>`;
 - не ломай PHP-синтаксис и не дублируй второй ld+json;
