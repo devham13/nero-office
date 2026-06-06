@@ -48,9 +48,17 @@ Slug: ...
 Журнал публикаций: <PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md updated
 Журнал Кирилла: <PROJECT_ROOT>/shared/kirill-news-ledger.md updated / not applicable
 Передача google-table-manager: URL + slug + row для фазы publish
+Передача indexator: public_url + slug + HTTP live-check + путь page-{slug}.php
 ```
 
 12. **Передай данные google-table-manager** (фаза `publish`): в блоке `=== ЮРА (ПУБЛИКАЦИЯ) ===` укажи URL, slug и номер строки из `=== GOOGLE-TABLE-MANAGER ===`. Директор после тебя запускает google-table-manager; при недоступности таблицы публикация **не откатывается**.
+
+13. **Передай данные indexator:** в том же блоке укажи:
+- `public_url` (публичный HTTPS URL);
+- `slug`;
+- `HTTP live-check`: статус и краткий результат (200, маркеры шаблона);
+- `Путь шаблона`: runtime-путь к `page-{slug}.php` в теме `${WP_THEME_SLUG}`.
+Директор после google-table-manager запускает **indexator** для проверки индексации и IndexNow.
 
 ## Главное правило
 

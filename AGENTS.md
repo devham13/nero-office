@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → qa || lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -45,6 +45,7 @@
 Параллельные роли пишут только во фрагменты:
 
 - `google-table-manager.md`
+- `indexator.md`
 - `kolya.md`
 - `artyom.md`
 - `alina.md`
@@ -64,6 +65,7 @@
 - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
+- `=== INDEXATOR ===`
 - `=== МАКС (QA) ===`
 - `=== ЛЁНЯ (SEO-АУДИТ) ===`
 
@@ -80,7 +82,8 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 - **Не спрашивай** у пользователя подтверждение на: deploy, SSH/FTP, `pip`/`npm install`, QA в браузере/curl, SEO-аудит, повторную публикацию, правку env/шаблона после аудита.
 - **Не останавливайся** на «могу продолжить?» / «разрешите выполнить?» — доводи пайплайн до **URL** или **блокера с причиной**.
 - Если **Task/subagent прерван** (timeout, interrupt): директор **сам** завершает этап инструментами (`deploy.py`, curl, IndexLift, правка PHP) и при необходимости перепубликует; затем пишет фрагменты `qa.md` / `lenya.md`.
-- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **Макс||Лёня** (параллельно или последовательно инструментами, если Task недоступен).
+- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **indexator**, затем **Макс (QA)**, затем **Лёня** (последовательно или инструментами, если Task недоступен).
+- Если **indexator** вернул блокер (noindex, robots, HTTP ≠ 200, критичный canonical) — QA не должен пропускать страницу.
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
 
