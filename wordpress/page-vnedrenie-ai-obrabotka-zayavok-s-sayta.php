@@ -810,755 +810,87 @@ nav[aria-label="Хлебные крошки"],
 .nero-ai-kpi-mini { padding: 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); text-align: center; }
 .nero-ai-kpi-mini strong { display: block; color: var(--nero-ai-primary); font-size: 22px; }
 .nero-ai-kpi-mini span { display: block; margin-top: 6px; font-size: 12px; color: var(--nero-ai-muted); }
-#ai-lead-hero.fullscreen-white-office { min-height: 100vh; min-height: 100dvh; position: relative; }
-
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-obrabotka-zayavok-s-sayta-page" role="main" tabindex="-1">
 <span id="main" tabindex="-1" class="screen-reader-text" aria-hidden="true"></span>
-<section id="ai-lead-hero" class="fullscreen-white-office ai-lead-hero" aria-labelledby="ai-lead-h1">
-<style>
-.fullscreen-white-office {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  background: #f8fafc;
-}
-.ai-lead-hero {
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(139, 92, 246, 0.06), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(249, 115, 22, 0.05), transparent 45%),
-    linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-}
-.ai-lead-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 1;
-}
-#ai-lead-night-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.ai-lead-hero-copy {
-  position: absolute;
-  left: clamp(16px, 4vw, 56px);
-  bottom: clamp(80px, 12vh, 140px);
-  max-width: min(640px, 92vw);
-  z-index: 4;
-}
-.giant-seo {
-  font-size: clamp(32px, 4.8vw, 68px);
-  font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: -2px;
-  color: #0f172a;
-  margin: 0;
-}
-.giant-seo span {
-  display: block;
-  background: linear-gradient(90deg, #6366f1, #f97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.giant-seo-sub {
-  font-size: clamp(15px, 1.8vw, 20px);
-  line-height: 1.55;
-  color: rgba(15, 23, 42, 0.72);
-  margin-top: 18px;
-  max-width: 580px;
-}
-.telegram-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 22px;
-  padding: 12px 22px;
-  background: #0f172a;
-  color: #fff !important;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
-}
-.telegram-button:hover { transform: translateY(-2px); }
-.vl-ui-tasks {
-  position: absolute;
-  left: clamp(16px, 4vw, 56px);
-  top: clamp(72px, 10vh, 120px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 4;
-}
-.vl-ui-task {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(6px);
-}
-.vl-ui-task span {
-  width: 26px;
-  height: 26px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: #fff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-.vl-ui-pill {
-  position: absolute;
-  right: clamp(16px, 4vw, 56px);
-  bottom: clamp(24px, 5vh, 48px);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-  z-index: 4;
-  max-width: min(420px, 90vw);
-}
-.vl-ui-pill span {
-  padding: 9px 16px;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-@media (max-width: 768px) {
-  .vl-ui-tasks { display: none; }
-  .ai-lead-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: clamp(72px, 12vh, 96px) clamp(16px, 4vw, 24px) clamp(20px, 4vh, 32px);
-    box-sizing: border-box;
-  }
-  .ai-lead-hero-copy {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    order: 1;
-    margin-bottom: 14px;
-    max-width: 100%;
-  }
-  .vl-ui-pill {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    transform: none;
-    order: 2;
-    justify-content: flex-start;
-    max-width: 100%;
-    gap: 8px;
-  }
-  .vl-ui-pill span {
-    padding: 7px 12px;
-    font-size: 11px;
-  }
-}
-@media (max-width: 900px) and (min-width: 769px) {
-  .vl-ui-pill { bottom: clamp(48px, 8vh, 72px); }
-  .ai-lead-hero-copy { bottom: clamp(120px, 16vh, 180px); }
-}
-</style>
+<section class="nero-ai-hero" aria-labelledby="vnedrenie-ai-hero-title">
+  <div class="nero-ai-container nero-ai-hero-grid">
+    <div class="nero-ai-hero-copy nero-ai-reveal">
+      <p class="nero-ai-eyebrow">AI для лидов · внедрение под ключ</p>
+      <h1 id="vnedrenie-ai-hero-title">AI-агент для обработки заявок с сайта: <span class="nero-ai-gradient-text">внедрение под ключ</span></h1>
+      <p class="nero-ai-hero-lead">Ответ за 5–15 секунд вместо часов ожидания — AI квалифицирует заявку и передаёт горячий лид в CRM, пока менеджеры офлайн.</p>
+      <ul class="nero-ai-badges" aria-label="Возможности">
+        <li class="nero-ai-badge">24/7</li>
+        <li class="nero-ai-badge">5–15 сек</li>
+        <li class="nero-ai-badge">amoCRM</li>
+        <li class="nero-ai-badge">Битрикс24</li>
+        <li class="nero-ai-badge">Telegram</li>
+        <li class="nero-ai-badge">human handoff</li>
+      </ul>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+        <a class="nero-ai-btn nero-ai-btn-secondary" href="#audit-cta">Проверить потери заявок</a>
+      </div>
+    </div>
 
-<canvas id="ai-lead-night-canvas" aria-hidden="true"></canvas>
+    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демо AI-обработки заявок с сайта">
+      <div class="nero-ai-dashboard-shell">
+        <div class="nero-ai-window-top">
+          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+          <span class="nero-ai-window-title">ночная смена AI · demo</span>
+        </div>
+        <div class="nero-ai-window-body">
+          <div class="nero-ai-dashboard-title">
+            <h3>Центр обработки заявок</h3>
+            <span class="nero-ai-live-pill">live 24/7</span>
+          </div>
+          <div class="nero-ai-metrics-grid">
+            <div class="nero-ai-metric" data-nero-tooltip="Доля обращений с сайта вне рабочего времени — типичный сценарий для AI-агента первого контакта.">
+              <span>Ночные заявки</span><strong>12</strong><small>за сегодня</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="Целевой SLA первого ответа: 5–15 секунд вместо часов ожидания менеджера.">
+              <span>Ответ AI</span><strong>8 сек</strong><small>P90 пилота</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="AI задаёт уточняющие вопросы и маркирует hot/warm/cold до передачи человеку.">
+              <span>Квалифицировано</span><strong>9</strong><small>из 12</small>
+            </div>
+            <div class="nero-ai-metric" data-nero-tooltip="Каждая заявка попадает в CRM с контекстом диалога — без стикеров и потерь.">
+              <span>Запись в CRM</span><strong>100%</strong><small>amoCRM / B24</small>
+            </div>
+          </div>
 
-<div class="vl-ui-tasks" aria-label="Этапы обработки заявки">
-  <div class="vl-ui-task"><span>1</span> Заявка с формы</div>
-  <div class="vl-ui-task"><span>2</span> AI за 5–15 сек</div>
-  <div class="vl-ui-task"><span>3</span> Квалификация</div>
-  <div class="vl-ui-task"><span>4</span> Запись в CRM</div>
-  <div class="vl-ui-task"><span>5</span> Алерт менеджеру</div>
-</div>
+          <div class="nero-ai-task-stream" aria-label="Поток заявок">
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">01</span><div><strong>Заявка с формы · 02:47</strong><span>Менеджеры офлайн</span></div><span class="nero-ai-status">новое</span></div>
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">AI</span><div><strong>Ответ за 8 секунд</strong><span>Уточняющий вопрос + скоринг</span></div><span class="nero-ai-status">готово</span></div>
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">CRM</span><div><strong>Лид в amoCRM</strong><span>Теги: hot · ночная заявка</span></div><span class="nero-ai-status">готово</span></div>
+            <div class="nero-ai-task"><span class="nero-ai-task-icon">TG</span><div><strong>Алерт менеджеру</strong><span>Контекст + задача до 10:00</span></div><span class="nero-ai-status">отправлено</span></div>
+          </div>
 
-<div class="ai-lead-hero-copy">
-  <h1 id="ai-lead-h1" class="giant-seo">
-    AI-агент для обработки заявок с сайта:
-    <span>внедрение под ключ</span>
-  </h1>
-  <p class="giant-seo-sub">Ответ за 5–15 секунд вместо часов ожидания — AI квалифицирует заявку и передаёт горячий лид в CRM, пока менеджеры офлайн</p>
-  <a class="telegram-button" href="#audit-cta">Проверить потери заявок</a>
-</div>
-
-<div class="vl-ui-pill" aria-label="Метрики">
-  <span>24/7</span>
-  <span>5–15 сек</span>
-  <span>amoCRM</span>
-  <span>Битрикс24</span>
-</div>
-
-<script id="ai-lead-night-engine">
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("ai-lead-night-canvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-
-  let cw = 0, ch = 0, scale = 1, cx = 0, cy = 0, frame = 0;
-
-  function resizeCanvas() {
-    if (!canvas.parentElement) return;
-    canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-    canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-    cw = canvas.width;
-    ch = canvas.height;
-    cx = cw / 2;
-    cy = ch / 2 + 20;
-    scale = cw < 768 ? cw / 560 : Math.min(cw / 980, ch / 760) * 1.35;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
-
-  const C = {
-    outline: "#0f172a",
-    softLine: "#cbd5e1",
-    portalGlow: "#6366f1",
-    riverData: "#38bdf8",
-    cardCold: "#e2e8f0",
-    cardWarm: "#fde68a",
-    cardHot: "#fca5a5",
-    nexusCore: "#8b5cf6",
-    nexusRing: "#c4b5fd",
-    crmGreen: "#10b981",
-    crmBody: "#f8fafc",
-    moon: "#fef3c7",
-    windowGlass: "rgba(226, 232, 240, 0.5)",
-    agentYellow: "#eab308",
-    agentGreen: "#10b981",
-    agentBlue: "#3b82f6",
-    agentPink: "#ec4899",
-    agentPurple: "#8b5cf6",
-    bubbleBg: "#ffffff",
-    telegramBlue: "#0ea5e9"
-  };
-
-  function drawPolyRound(ctx, x, y, w, h, radius, fill, stroke) {
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(x, y, w, h, radius);
-    else ctx.rect(x, y, w, h);
-    ctx.fill();
-    if (stroke) {
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = stroke;
-      ctx.stroke();
-    }
-  }
-
-  class NightSkyWindow {
-    constructor(x, y) { this.x = x; this.y = y; }
-    draw(ctx) {
-      drawPolyRound(ctx, this.x, this.y, 220, 90, 10, C.windowGlass, C.outline);
-      ctx.save();
-      ctx.beginPath();
-      if (ctx.roundRect) ctx.roundRect(this.x, this.y, 220, 90, 10);
-      else ctx.rect(this.x, this.y, 220, 90);
-      ctx.clip();
-      ctx.fillStyle = "#e0e7ff";
-      ctx.fillRect(this.x, this.y, 220, 90);
-      for (let i = 0; i < 8; i++) {
-        ctx.fillStyle = "#fff";
-        ctx.beginPath();
-        ctx.arc(this.x + 30 + i * 22, this.y + 20 + (i % 3) * 12, 1.2, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.fillStyle = C.moon;
-      ctx.beginPath();
-      ctx.arc(this.x + 170, this.y + 28, 14, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = C.outline;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      ctx.restore();
-      ctx.fillStyle = C.outline;
-      ctx.font = "bold 9px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("02:47 — менеджеры офлайн", this.x + 110, this.y + 78);
-    }
-  }
-
-  class SiteFormPortal {
-    constructor(x, y) { this.x = x; this.y = y; this.pulse = 0; }
-    draw(ctx) {
-      this.pulse = (Math.sin(frame * 0.08) + 1) * 0.5;
-      ctx.save();
-      ctx.globalAlpha = 0.15 + this.pulse * 0.2;
-      ctx.fillStyle = C.portalGlow;
-      ctx.beginPath();
-      ctx.arc(this.x + 50, this.y + 55, 55 + this.pulse * 8, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-      drawPolyRound(ctx, this.x, this.y, 100, 110, 8, "#fff", C.outline);
-      drawPolyRound(ctx, this.x + 8, this.y + 8, 84, 18, [6, 6, 0, 0], "#e2e8f0", C.outline);
-      drawPolyRound(ctx, this.x + 12, this.y + 32, 76, 10, 2, C.cardCold, C.softLine);
-      drawPolyRound(ctx, this.x + 12, this.y + 48, 76, 10, 2, C.cardCold, C.softLine);
-      drawPolyRound(ctx, this.x + 12, this.y + 64, 48, 10, 2, C.cardCold, C.softLine);
-      drawPolyRound(ctx, this.x + 12, this.y + 82, 36, 14, 4, C.nexusCore, C.outline);
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 8px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("Отправить", this.x + 30, this.y + 92);
-    }
-  }
-
-  class WebhookRiver {
-    constructor() {
-      this.pathY = 30;
-    }
-    draw(ctx) {
-      const prg = (frame * 0.035) % 240;
-      ctx.lineWidth = 3;
-      ctx.setLineDash([8, 6]);
-      ctx.strokeStyle = C.riverData;
-      ctx.beginPath();
-      ctx.moveTo(-280, this.pathY + 20);
-      ctx.bezierCurveTo(-120, this.pathY - 30, 40, this.pathY + 50, 180, this.pathY);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      const cards = [
-        { offset: 0, color: C.cardCold, label: "form" },
-        { offset: 80, color: C.cardWarm, label: "chat" },
-        { offset: 160, color: C.cardHot, label: "hot" }
-      ];
-      cards.forEach((card) => {
-        let t = ((prg * 1.2 + card.offset) % 240) / 240;
-        if (t > 0.85) return;
-        const bx = -280 + t * 460;
-        const by = this.pathY + 20 + Math.sin(t * Math.PI * 2) * 18 - t * 15;
-        drawPolyRound(ctx, bx, by, 22, 16, 3, card.color, C.outline);
-        if (t > 0.55 && t < 0.75) {
-          ctx.fillStyle = C.outline;
-          ctx.font = "bold 7px Inter, sans-serif";
-          ctx.fillText("JSON", bx + 11, by + 10);
-        }
-      });
-    }
-  }
-
-  class ResponseChrono {
-    constructor(x, y) { this.x = x; this.y = y; }
-    draw(ctx) {
-      const prg = (frame * 0.035) % 240;
-      let sec = 15;
-      if (prg >= 55 && prg < 145) {
-        sec = Math.max(5, 15 - Math.floor((prg - 55) / 9));
-      } else if (prg >= 145) {
-        sec = 5;
-      }
-      drawPolyRound(ctx, this.x, this.y, 72, 28, 14, "#fff", C.outline);
-      ctx.fillStyle = sec <= 8 ? "#ef4444" : C.crmGreen;
-      ctx.beginPath();
-      ctx.arc(this.x + 14, this.y + 14, 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = C.outline;
-      ctx.font = "bold 11px Inter, sans-serif";
-      ctx.textAlign = "left";
-      ctx.fillText(sec + " сек", this.x + 26, this.y + 18);
-    }
-  }
-
-  class QualificationNexus {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.orbit = 0;
-    }
-    draw(ctx) {
-      const prg = (frame * 0.035) % 240;
-      this.orbit += 0.04;
-
-      for (let r = 0; r < 3; r++) {
-        ctx.strokeStyle = C.nexusRing;
-        ctx.lineWidth = 1.5;
-        ctx.globalAlpha = 0.35 - r * 0.08;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 48 + r * 18, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-      ctx.globalAlpha = 1;
-
-      ctx.fillStyle = C.nexusCore;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 36, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = C.outline;
-      ctx.stroke();
-
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 10px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("AI", this.x, this.y - 4);
-      ctx.font = "8px Inter, sans-serif";
-      ctx.fillText("NEXUS", this.x, this.y + 8);
-
-      for (let i = 0; i < 4; i++) {
-        const ang = this.orbit + (i * Math.PI) / 2;
-        const ox = this.x + Math.cos(ang) * 58;
-        const oy = this.y + Math.sin(ang) * 38;
-        ctx.fillStyle = ["#a7f3d0", "#93c5fd", "#fbcfe8", "#fde68a"][i];
-        ctx.beginPath();
-        ctx.arc(ox, oy, 5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = C.outline;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-
-      if (prg >= 55 && prg < 145) {
-        const lines = Math.min(4, Math.floor((prg - 55) / 22));
-        for (let i = 0; i < lines; i++) {
-          drawPolyRound(ctx, this.x - 42, this.y - 55 + i * 12, 84, 8, 2, "#fff", C.softLine);
-        }
-        ctx.fillStyle = C.outline;
-        ctx.font = "7px Inter, sans-serif";
-        ctx.fillText("квалификация...", this.x, this.y + 52);
-      }
-
-      if (prg >= 145 && prg < 210) {
-        ctx.fillStyle = "#ef4444";
-        ctx.font = "bold 12px Inter, sans-serif";
-        ctx.fillText("HOT", this.x, this.y - 58);
-      }
-    }
-  }
-
-  class CRMVault {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.cardSlide = 0;
-      this.flash = 0;
-    }
-    draw(ctx) {
-      const prg = (frame * 0.035) % 240;
-      drawPolyRound(ctx, this.x, this.y, 110, 130, 8, C.crmBody, C.outline);
-      drawPolyRound(ctx, this.x + 8, this.y + 8, 94, 22, [6, 6, 0, 0], C.crmGreen, C.outline);
-      ctx.fillStyle = "#fff";
-      ctx.font = "bold 9px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("CRM", this.x + 55, this.y + 22);
-
-      for (let i = 0; i < 3; i++) {
-        drawPolyRound(ctx, this.x + 12, this.y + 38 + i * 28, 86, 22, 4, "#fff", C.softLine);
-        ctx.fillStyle = C.softLine;
-        ctx.fillRect(this.x + 18, this.y + 46 + i * 28, 50, 3);
-        ctx.fillRect(this.x + 18, this.y + 52 + i * 28, 35, 3);
-      }
-
-      if (prg >= 145 && prg < 220) {
-        this.cardSlide = Math.min(1, (prg - 145) / 35);
-        const cx = this.x + 55 - (1 - this.cardSlide) * 120;
-        const cy = this.y + 70 - (1 - this.cardSlide) * 40;
-        drawPolyRound(ctx, cx - 28, cy - 18, 56, 36, 4, C.cardHot, C.outline);
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 8px Inter, sans-serif";
-        ctx.fillText("Лид #847", cx, cy);
-        ctx.fillStyle = "#ef4444";
-        ctx.fillText("HOT", cx, cy + 10);
-        if (this.cardSlide >= 0.95) this.flash = 12;
-      } else {
-        this.cardSlide = 0;
-      }
-
-      if (this.flash > 0) {
-        ctx.save();
-        ctx.globalAlpha = this.flash / 12 * 0.35;
-        ctx.fillStyle = C.crmGreen;
-        ctx.beginPath();
-        ctx.arc(this.x + 55, this.y + 70, 50, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-        this.flash--;
-      }
-    }
-  }
-
-  class TelegramPulse {
-    constructor(x, y) { this.x = x; this.y = y; }
-    draw(ctx) {
-      const prg = (frame * 0.035) % 240;
-      if (prg < 160 || prg > 230) return;
-      const pulse = (Math.sin(frame * 0.2) + 1) * 0.5;
-      ctx.save();
-      ctx.globalAlpha = 0.2 + pulse * 0.3;
-      ctx.fillStyle = C.telegramBlue;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, 22 + pulse * 6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-      drawPolyRound(ctx, this.x - 16, this.y - 16, 32, 32, 16, C.telegramBlue, C.outline);
-      ctx.fillStyle = "#fff";
-      ctx.beginPath();
-      ctx.moveTo(this.x - 6, this.y + 2);
-      ctx.lineTo(this.x + 8, this.y - 6);
-      ctx.lineTo(this.x + 2, this.y + 2);
-      ctx.lineTo(this.x + 6, this.y + 8);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
-
-  class ManagerSleepPod {
-    constructor(x, y) { this.x = x; this.y = y; }
-    draw(ctx) {
-      drawPolyRound(ctx, this.x, this.y, 90, 50, 6, "#fff", C.outline);
-      ctx.fillStyle = C.outline;
-      ctx.font = "8px Inter, sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("Менеджеры", this.x + 45, this.y + 14);
-      for (let i = 0; i < 3; i++) {
-        ctx.fillStyle = C.softLine;
-        ctx.beginPath();
-        ctx.arc(this.x + 22 + i * 22, this.y + 32, 8, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      const prg = (frame * 0.035) % 240;
-      if (prg < 200) {
-        ctx.fillStyle = C.outline;
-        ctx.font = "bold 10px Inter, sans-serif";
-        ctx.fillText("Zzz", this.x + 68, this.y + 28 + Math.sin(frame * 0.1) * 2);
-      } else {
-        ctx.fillStyle = C.crmGreen;
-        ctx.font = "bold 8px Inter, sans-serif";
-        ctx.fillText("Утро!", this.x + 45, this.y + 42);
-      }
-    }
-  }
-
-  class Agent {
-    constructor(x, y, color, role, stepTrig, dialogs) {
-      this.x = x;
-      this.y = y;
-      this.baseX = x;
-      this.baseY = y;
-      this.color = color;
-      this.role = role;
-      this.timer = Math.random() * 100;
-      this.stepTrig = stepTrig;
-      this.dialogs = dialogs;
-      this.hitAnimation = 0;
-    }
-
-    draw(ctx) {
-      this.timer += 0.03;
-      let isMoving = false;
-      let carryType = null;
-      let faceDir = 1;
-
-      const prg = (frame * 0.035) % 240;
-      let targetX = 0;
-      let targetY = -20;
-
-      if (this.role === "1_architect") { targetX = -200; targetY = 10; }
-      else if (this.role === "2_seo") { targetX = -60; targetY = -50; }
-      else if (this.role === "3_coder") { targetX = 30; targetY = 30; }
-      else if (this.role === "4_designer") { targetX = -120; targetY = 40; }
-      else if (this.role === "5_deployer") { targetX = 200; targetY = 20; }
-
-      if (prg >= this.stepTrig && prg < this.stepTrig + 28) {
-        const localPrg = prg - this.stepTrig;
-        if (localPrg < 12) {
-          isMoving = true;
-          faceDir = targetX > this.baseX ? 1 : -1;
-          carryType = this.color;
-          this.x = this.baseX + (targetX - this.baseX) * (localPrg / 12);
-          this.y = this.baseY + (targetY - this.baseY) * (localPrg / 12);
-        } else if (localPrg < 16) {
-          this.x = targetX;
-          this.y = targetY;
-        } else {
-          isMoving = true;
-          faceDir = targetX > this.baseX ? -1 : 1;
-          this.x = targetX - (targetX - this.baseX) * ((localPrg - 16) / 12);
-          this.y = targetY - (targetY - this.baseY) * ((localPrg - 16) / 12);
-        }
-      } else {
-        this.x = this.baseX;
-        this.y = this.baseY;
-        carryType = prg >= this.stepTrig - 8 ? this.color : null;
-      }
-
-      if (!isMoving && frame % 220 === 0 && Math.random() < 0.12) {
-        createBubble(this.x, this.y - 22, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 220);
-      }
-
-      let bob = Math.sin(this.timer * 1.5) * (isMoving ? 2 : 1);
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.lineJoin = "round";
-
-      let legL = 0, legR = 0;
-      if (isMoving) {
-        const walkPhase = this.timer * 6;
-        legL = Math.sin(walkPhase) * 5;
-        legR = Math.sin(walkPhase + Math.PI) * 5;
-      }
-      drawPolyRound(ctx, -10, -5 + Math.max(0, legL), 8, 14, 2, C.outline, null);
-      drawPolyRound(ctx, -12, 5 + Math.max(0, legL), 12, 6, 2, C.outline, null);
-      drawPolyRound(ctx, 2, -5 + Math.max(0, legR), 8, 14, 2, C.outline, null);
-      drawPolyRound(ctx, 0, 5 + Math.max(0, legR), 12, 6, 2, C.outline, null);
-
-      drawPolyRound(ctx, -15, -12 - bob, 30, 20, 6, this.color, C.outline);
-
-      let hx = 0, hy = -28 - bob;
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(hx, hy, 12, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = C.outline;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.scale(faceDir, 1);
-      ctx.fillStyle = "#fff";
-      ctx.beginPath(); ctx.arc(hx + 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(hx - 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = C.outline;
-      ctx.beginPath(); ctx.arc(hx + 5, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-
-      if (this.role === "1_architect") {
-        ctx.strokeStyle = C.outline; ctx.lineWidth = 1;
-        ctx.strokeRect(hx + 1, hy - 5, 6, 6);
-        ctx.strokeRect(hx - 7, hy - 5, 6, 6);
-      } else if (this.role === "2_seo") {
-        drawPolyRound(ctx, hx - 12, hy - 14, 24, 8, [6, 6, 0, 0], C.outline, null);
-      } else if (this.role === "3_coder") {
-        ctx.fillStyle = C.outline;
-        ctx.fillRect(hx - 8, hy - 10, 16, 3);
-        ctx.fillRect(hx - 6, hy - 6, 12, 3);
-      } else if (this.role === "4_designer") {
-        drawPolyRound(ctx, hx - 14, hy - 12, 28, 6, 3, "#f43f5e", C.outline);
-      } else if (this.role === "5_deployer") {
-        ctx.strokeStyle = C.outline; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.arc(hx, hy, 14, Math.PI, Math.PI * 2); ctx.stroke();
-      }
-      ctx.restore();
-
-      if (carryType) {
-        drawPolyRound(ctx, -18 * faceDir, -18 - bob, 14, 14, 2, carryType, C.outline);
-      }
-      ctx.restore();
-    }
-  }
-
-  const entities = [];
-  const bubbles = [];
-
-  entities.push(new NightSkyWindow(120, -200));
-  entities.push(new WebhookRiver());
-  entities.push(new SiteFormPortal(-260, -30));
-  entities.push(new QualificationNexus(0, -60));
-  entities.push(new ResponseChrono(-38, -110));
-  entities.push(new CRMVault(220, -50));
-  entities.push(new TelegramPulse(290, -90));
-  entities.push(new ManagerSleepPod(200, 100));
-
-  entities.push(new Agent(-320, 80, C.agentYellow, "1_architect", 18, [
-    "Webhook на форму...", "Схема intake готова", "Портал ловит ночные лиды"
-  ]));
-  entities.push(new Agent(-240, 130, C.agentGreen, "2_seo", 52, [
-    "UTM: yandex/cpc", "Тег «ночная заявка»", "Источник в CRM"
-  ]));
-  entities.push(new Agent(-100, 60, C.agentBlue, "3_coder", 88, [
-    "n8n → OpenAI → CRM", "JSON полей лида", "Guardrails включены"
-  ]));
-  entities.push(new Agent(-180, 150, C.agentPink, "4_designer", 118, [
-    "Виджет чата на сайте", "152-ФЗ чекбокс", "UX «ответ за секунды»"
-  ]));
-  entities.push(new Agent(-40, 110, C.agentPurple, "5_deployer", 158, [
-    "amoCRM complex API", "Telegram-алерт hot", "Пилот на проде"
-  ]));
-
-  function createBubble(x, y, text, customLife = 280) {
-    bubbles.push({ x, y, text, life: customLife, maxLife: customLife });
-  }
-
-  function engineloop() {
-    frame++;
-    ctx.clearRect(0, 0, cw, ch);
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-
-    entities.sort((a, b) => (a.y || 0) - (b.y || 0));
-    entities.forEach((ent) => ent.draw(ctx));
-
-    const prg = (frame * 0.035) % 240;
-    if (prg >= 12 && prg < 12.05) createBubble(-260, -20, "1. Заявка с формы");
-    if (prg >= 58 && prg < 58.05) createBubble(-10, -90, "2. AI за 5–15 сек");
-    if (prg >= 98 && prg < 98.05) createBubble(0, -120, "3. Квалификация BANT");
-    if (prg >= 148 && prg < 148.05) createBubble(220, -70, "4. Запись в CRM");
-    if (prg >= 188 && prg < 188.05) createBubble(290, -100, "5. Telegram менеджеру");
-
-    ctx.font = "bold 11px Inter, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.lineJoin = "round";
-
-    for (let i = bubbles.length - 1; i >= 0; i--) {
-      const bub = bubbles[i];
-      bub.life--;
-      if (bub.life <= 0) { bubbles.splice(i, 1); continue; }
-      let alpha = Math.min(1, bub.life / 30);
-      if (bub.life > bub.maxLife - 10) alpha = (bub.maxLife - bub.life) / 10;
-      ctx.globalAlpha = alpha;
-      const tw = ctx.measureText(bub.text).width + 16;
-      const th = 20;
-      const bx = bub.x;
-      const by = bub.y - (bub.maxLife - bub.life) * 0.04;
-      drawPolyRound(ctx, bx - tw / 2, by - th, tw, th, 6, C.bubbleBg, C.outline);
-      ctx.fillStyle = C.bubbleBg;
-      ctx.beginPath();
-      ctx.moveTo(bx - 4, by);
-      ctx.lineTo(bx + 4, by);
-      ctx.lineTo(bx, by + 5);
-      ctx.fill();
-      ctx.strokeStyle = C.outline;
-      ctx.stroke();
-      ctx.fillStyle = C.outline;
-      ctx.fillText(bub.text, bx, by - th / 2);
-      ctx.globalAlpha = 1;
-    }
-
-    ctx.restore();
-    requestAnimationFrame(engineloop);
-  }
-
-  document.fonts.ready.then(() => engineloop());
-});
-</script>
+          <div class="nero-ai-automation-map" aria-label="Схема обработки заявки">
+            <p class="nero-ai-map-title">Путь заявки: сайт → AI → CRM</p>
+            <div class="nero-ai-map-grid">
+              <div class="nero-ai-people">
+                <div class="nero-ai-person" data-nero-tooltip="Посетитель оставляет заявку ночью или в выходные — не ждёт до понедельника."><span class="nero-ai-person-figure"></span><div><span>Клиент</span><small>форма / чат</small></div></div>
+                <div class="nero-ai-person" data-nero-tooltip="Менеджер получает подготовленный hot-лид с резюме диалога, а не сырую форму."><span class="nero-ai-person-figure"></span><div><span>Менеджер</span><small>готовый контекст</small></div></div>
+              </div>
+              <div class="nero-ai-ai-core">
+                <span class="nero-ai-core-ring"></span><span class="nero-ai-core-ring"></span><span class="nero-ai-flow-line"></span><span class="nero-ai-flow-line"></span>
+                <div class="nero-ai-core-chip"><div><strong>AI</strong><span>агент</span></div></div>
+              </div>
+              <div class="nero-ai-processes">
+                <div class="nero-ai-process-node" data-nero-tooltip="Webhook за &lt;1 сек: форма, виджет, мессенджер."><div><span>Webhook</span><small>приём</small></div></div>
+                <div class="nero-ai-process-node" data-nero-tooltip="Structured output: lead_type, urgency, manager_summary."><div><span>Квалификация</span><small>5–15 сек</small></div></div>
+                <div class="nero-ai-process-node" data-nero-tooltip="POST /api/v4/leads/complex или crm.lead.add + Telegram-алерт."><div><span>CRM</span><small>запись + задача</small></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 
 <section class="nero-ai-section nero-ai-section-tight vnedrenie-ai-intro-section" aria-label="Введение">
   <div class="nero-ai-container">
