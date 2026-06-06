@@ -20,10 +20,52 @@ add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_descr
 	echo '<meta property="og:type" content="article" />' . "\n";
 }, 1 );
 
+
+$brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
+$primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Аудит amoCRM';
+$primary_cta_url = getenv('PRIMARY_CTA_URL') ?: '#cta';
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
+$secondary_cta_url = '#kak-rabotaet';
+
+$nero_ai_header_links = [
+    ['label' => 'Как работает', 'href' => '#kak-rabotaet'],
+    ['label' => 'Сценарии AI', 'href' => '#scenarii'],
+    ['label' => 'Кейсы', 'href' => '#keisy'],
+    ['label' => 'Стоимость', 'href' => '#ceny'],
+    ['label' => 'FAQ', 'href' => '#faq'],
+];
+
+$nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
+if (!is_readable($nero_ai_bootstrap)) {
+    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
+}
+require $nero_ai_bootstrap;
+
 get_header();
+
+$nero_ai_floating = get_stylesheet_directory() . '/nero-ai-floating-header.inc.php';
+if (!is_readable($nero_ai_floating)) {
+    require dirname(__DIR__) . '/shared/theme-canonical/nero-ai-floating-header.inc.php';
+} else {
+    require $nero_ai_floating;
+}
+
 ?>
 
+<?php nero_ai_echo_theme_styles(); ?>
+
 <style>
+/* Скрыть шапку Kadence — используем nero-ai-floating-header как на главной */
+body.nero-ai-landing #masthead,
+body.nero-ai-landing .site-header,
+body.nero-ai-landing header.site-header,
+body.nero-ai-landing #mobile-header {
+  display: none !important;
+}
+body.nero-ai-landing {
+  padding-top: 0 !important;
+}
+
 /* =====================================================
    VNA PAGE — GLOBAL RESETS
    ===================================================== */
@@ -460,412 +502,51 @@ nav[aria-label="Хлебные крошки"],
 .nero-ai-delay-3{transition-delay:.36s;}
 </style>
 
-<main id="primary" class="site-main vnedrenie-ai-amocrm-page" role="main" tabindex="-1">
+<main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-amocrm-page" role="main" tabindex="-1">
 
-<!-- ========= АЛИНА: HERO BLOCK START ========= -->
-<nav class="amo-sticky-nav" id="amo-sticky-nav" role="navigation" aria-label="Навигация по странице">
-  <div class="amo-sticky-nav__inner">
-    <a href="#" class="amo-sticky-nav__logo" aria-label="Nero Network — на главную">
-      Nero<span>Network</span>
-    </a>
-    <ul class="amo-sticky-nav__links" role="list">
-      <li><a href="#kak-rabotaet">Как работает</a></li>
-      <li><a href="#scenarii">Сценарии AI</a></li>
-      <li><a href="#keisy">Кейсы</a></li>
-      <li><a href="#ceny">Стоимость</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <a href="#cta" class="amo-sticky-nav__cta">Аудит amoCRM</a>
-    <button class="amo-sticky-nav__burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="amo-sticky-nav">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<section class="amo-hero" id="hero" aria-label="AI-агент для amoCRM — первый экран">
-
-<style>
-/* ============================================
-   AMO-HERO: STICKY NAV + HERO — ВСЕ СТИЛИ
-   canvas id: amocrm-ai-canvas
-   ============================================ */
-
-.amo-sticky-nav *, .amo-hero * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* --- Sticky Nav --- */
-.amo-sticky-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid #e2e8f0;
-  transition: box-shadow 0.3s;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-.amo-sticky-nav.amo-scrolled {
-  box-shadow: 0 4px 24px rgba(15,23,42,0.09);
-}
-.amo-sticky-nav__inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.amo-sticky-nav__logo {
-  font-size: 17px;
-  font-weight: 800;
-  color: #0f172a;
-  text-decoration: none;
-  letter-spacing: -0.5px;
-  flex-shrink: 0;
-  line-height: 1;
-}
-.amo-sticky-nav__logo span { color: #f97316; }
-.amo-sticky-nav__links {
-  display: flex;
-  list-style: none;
-  gap: 4px;
-  flex: 1;
-  justify-content: center;
-}
-.amo-sticky-nav__links li a {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #475569;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: color 0.18s, background 0.18s;
-  white-space: nowrap;
-}
-.amo-sticky-nav__links li a:hover { color: #0f172a; background: #f1f5f9; }
-.amo-sticky-nav__cta {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 20px;
-  background: #f97316;
-  color: #fff !important;
-  text-decoration: none;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: transform 0.18s, box-shadow 0.18s;
-  flex-shrink: 0;
-}
-.amo-sticky-nav__cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(249,115,22,0.4);
-}
-.amo-sticky-nav__burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  margin-left: auto;
-}
-.amo-sticky-nav__burger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #0f172a;
-  border-radius: 2px;
-  transition: transform 0.25s, opacity 0.25s;
-}
-
-/* --- Hero Section --- */
-.amo-hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  min-height: 100dvh;
-  background: #f8fafc;
-  display: flex;
-  align-items: flex-start;
-  padding-top: 64px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* Background grid */
-.amo-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(226,232,240,0.55) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(226,232,240,0.55) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Canvas */
-#amocrm-ai-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-/* Content overlay */
-.amo-hero__content {
-  position: relative;
-  z-index: 3;
-  max-width: 640px;
-  padding: clamp(36px, 8vh, 96px) clamp(20px, 5vw, 72px);
-}
-
-.amo-hero__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(249,115,22,0.09);
-  border: 1px solid rgba(249,115,22,0.22);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #ea580c;
-  margin-bottom: 18px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-.amo-hero__badge::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: #f97316;
-  border-radius: 50%;
-  animation: amo-blink 2s infinite;
-}
-@keyframes amo-blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.75); }
-}
-
-.amo-hero__h1 {
-  font-size: clamp(30px, 4.2vw, 64px);
-  font-weight: 900;
-  line-height: 1.07;
-  letter-spacing: -1.5px;
-  color: #0f172a;
-  margin-bottom: 20px;
-}
-.amo-h1-accent {
-  display: block;
-  background: linear-gradient(95deg, #f97316 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.amo-hero__sub {
-  font-size: clamp(15px, 1.75vw, 19px);
-  line-height: 1.62;
-  color: rgba(15,23,42,0.66);
-  margin-bottom: 32px;
-  max-width: 540px;
-}
-
-.amo-hero__cta-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 36px;
-}
-.amo-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.18s, box-shadow 0.18s;
-  white-space: nowrap;
-  font-family: inherit;
-}
-.amo-btn:hover { transform: translateY(-2px); }
-.amo-btn--primary {
-  background: #0f172a;
-  color: #fff !important;
-  box-shadow: 0 4px 18px rgba(15,23,42,0.18);
-}
-.amo-btn--primary:hover { box-shadow: 0 8px 28px rgba(15,23,42,0.28); }
-.amo-btn--ghost {
-  background: rgba(255,255,255,0.88);
-  color: #334155 !important;
-  border: 1.5px solid #e2e8f0;
-  backdrop-filter: blur(6px);
-}
-.amo-btn--ghost:hover { background: #fff; border-color: #cbd5e1; }
-
-.amo-hero__trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.amo-hero__trust span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  background: rgba(255,255,255,0.88);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-}
-.amo-hero__trust span::before {
-  content: '✓';
-  color: #22c55e;
-  font-weight: 800;
-  font-size: 11px;
-}
-
-/* Right panel: workflow steps */
-.amo-hero__steps {
-  position: absolute;
-  right: clamp(14px, 4vw, 56px);
-  top: clamp(88px, 14vh, 180px);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-.amo-step {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 11px 15px;
-  background: rgba(255,255,255,0.93);
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.055);
-  backdrop-filter: blur(6px);
-  white-space: nowrap;
-}
-.amo-step__num {
-  width: 27px; height: 27px;
-  background: #f97316;
-  color: #fff;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-/* Bottom pills */
-.amo-hero__pills {
-  position: absolute;
-  bottom: clamp(18px, 4vh, 48px);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 3;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 16px;
-}
-.amo-hero__pills span {
-  padding: 8px 15px;
-  background: rgba(255,255,255,0.92);
-  border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #334155;
-  box-shadow: 0 2px 7px rgba(0,0,0,0.045);
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .amo-hero__steps { display: none; }
-}
-@media (max-width: 768px) {
-  .amo-sticky-nav__links { display: none; }
-  .amo-sticky-nav__burger { display: flex; }
-  .amo-hero__h1 { letter-spacing: -1px; }
-  .amo-hero__pills span { font-size: 11px; padding: 7px 11px; }
-}
-@media (max-width: 480px) {
-  .amo-hero__content { padding: 32px 16px; }
-}
-</style>
-
-  <canvas id="amocrm-ai-canvas" aria-hidden="true"></canvas>
-
-  <div class="amo-hero__content">
-    <div class="amo-hero__badge">AI × amoCRM</div>
-    <h1 class="amo-hero__h1">
-      AI-агент для amoCRM:
-      <span class="amo-h1-accent">автоматизация продаж под ключ</span>
-    </h1>
-    <p class="amo-hero__sub">
-      Внедрим AI в вашу amoCRM — сделки создаются сами, задачи ставятся автоматически, менеджеры только продают
-    </p>
-    <div class="amo-hero__cta-group">
-      <a href="#cta" class="amo-btn amo-btn--primary">Аудит amoCRM бесплатно</a>
-      <a href="#kak-rabotaet" class="amo-btn amo-btn--ghost">Как это работает →</a>
+<!-- HERO: nero-ai shell (канонический дизайн главной) -->
+  <section class="nero-ai-hero" id="hero" aria-labelledby="hero-amocrm-title">
+    <div class="nero-ai-container nero-ai-hero-grid">
+      <div class="nero-ai-hero-copy nero-ai-reveal">
+        <p class="nero-ai-eyebrow"><?php echo esc_html($brand); ?> · ai amocrm</p>
+        <h1 id="hero-amocrm-title">AI-агент для amoCRM: <span class="nero-ai-gradient-text">автоматизация продаж под ключ</span></h1>
+        <p class="nero-ai-hero-lead">Внедрим AI в вашу amoCRM — сделки создаются сами, задачи ставятся автоматически, менеджеры только продают</p>
+        <ul class="nero-ai-badges" aria-label="Ключевые возможности">
+          <li class="nero-ai-badge">Сделки в CRM</li>
+          <li class="nero-ai-badge">Задачи авто</li>
+          <li class="nero-ai-badge">Итоги звонков</li>
+          <li class="nero-ai-badge">Воронка 24/7</li>
+        </ul>
+        <div class="nero-ai-btn-row">
+          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+          <a class="nero-ai-btn nero-ai-btn-secondary" href="#kak-rabotaet">Как это работает</a>
+        </div>
+      </div>
+      <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демо: AI и amoCRM">
+        <div class="nero-ai-dashboard-shell">
+          <div class="nero-ai-window-top">
+            <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+            <span class="nero-ai-window-title">amoCRM · демо</span>
+          </div>
+          <div class="nero-ai-window-body">
+            <div class="nero-ai-dashboard-title"><h3>AI-операционный центр</h3><span class="nero-ai-live-pill">онлайн</span></div>
+            <div class="nero-ai-metrics-grid">
+              <div class="nero-ai-metric"><span>Лиды</span><strong>24</strong><small>входящих</small></div>
+              <div class="nero-ai-metric"><span>Ответ</span><strong>5 сек</strong><small>первичный</small></div>
+              <div class="nero-ai-metric"><span>CRM</span><strong>auto</strong><small>сделки</small></div>
+              <div class="nero-ai-metric"><span>Рутина</span><strong>−38%</strong><small>меньше</small></div>
+            </div>
+            <div class="nero-ai-task-stream">
+              <div class="nero-ai-task"><span class="nero-ai-task-icon">IN</span><div><strong>Заявка</strong><span>сайт / мессенджер</span></div><span class="nero-ai-status">готово</span></div>
+              <div class="nero-ai-task"><span class="nero-ai-task-icon">AI</span><div><strong>Квалификация</strong><span>скоринг лида</span></div><span class="nero-ai-status">готово</span></div>
+              <div class="nero-ai-task"><span class="nero-ai-task-icon">CRM</span><div><strong>Сделка</strong><span>задача менеджеру</span></div><span class="nero-ai-status">новое</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="amo-hero__trust">
-      <span>220 000+ компаний на amoCRM</span>
-      <span>ROI 340% за 3 мес.</span>
-      <span>Ответ за 5 сек.</span>
-    </div>
-  </div>
+  </section>
 
-  <div class="amo-hero__steps" role="list" aria-label="Этапы работы AI-агента">
-    <div class="amo-step" role="listitem">
-      <span class="amo-step__num">01</span>
-      <span>Заявка → AI за 5 сек</span>
-    </div>
-    <div class="amo-step" role="listitem">
-      <span class="amo-step__num">02</span>
-      <span>Карточка заполнена авто</span>
-    </div>
-    <div class="amo-step" role="listitem">
-      <span class="amo-step__num">03</span>
-      <span>Задача поставлена в CRM</span>
-    </div>
-    <div class="amo-step" role="listitem">
-      <span class="amo-step__num">04</span>
-      <span>Воронка под контролем 24/7</span>
-    </div>
-  </div>
-
-  <div class="amo-hero__pills" aria-hidden="true">
-    <span>ai amocrm</span>
-    <span>внедрение ai amocrm</span>
-    <span>ai агент amocrm под ключ</span>
-  </div>
-
-</section>
-<!-- ========= АЛИНА: HERO BLOCK END ========= -->
 
 <!-- ====================================================
      КОНТЕНТНАЯ ЧАСТЬ СТРАНИЦЫ
@@ -1898,494 +1579,6 @@ nav[aria-label="Хлебные крошки"],
 </div><!-- /.vna-content -->
 
 <!-- ====================================================
-     HERO ANIMATION ENGINE (АЛИНА)
-     ==================================================== -->
-<script>
-/**
- * amoCRM AI Animation Engine
- * World: CRM Dispatch Center (Диспетчерский центр продаж)
- * canvas id: amocrm-ai-canvas  (НЕ vibe-factory-canvas)
- * Classes: LeadChannel (↔ Conveyor), CrmAiCore (↔ WebsiteTerminal), SalesFunnel (новый)
- * Phases: intake → process → qualify → dealwon (НЕ load→build→launch)
- * Finale: +1 СДЕЛКА flash (НЕ ракета/ZIP)
- */
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("amocrm-ai-canvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-
-    let cw = 0, ch = 0, scale = 1;
-    let cx = 0, cy = 0;
-    let frame = 0;
-
-    function resizeCanvas() {
-        if (!canvas.parentElement) return;
-        canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-        canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-        cw = canvas.width;
-        ch = canvas.height;
-        cx = cw / 2;
-        cy = (ch / 2) + 50;
-        if (cw < 768) scale = cw / 600;
-        else scale = Math.min(cw / 1000, ch / 820) * 1.45;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    const C = {
-        outline:     '#0f172a',
-        agentYellow: '#eab308',
-        agentGreen:  '#10b981',
-        agentBlue:   '#3b82f6',
-        agentPink:   '#ec4899',
-        agentPurple: '#8b5cf6',
-        bubbleBg:    '#ffffff',
-        aiCore:      '#1e293b',
-        aiAccent:    '#38bdf8',
-        crmOrange:   '#f97316',
-        dealGreen:   '#22c55e',
-    };
-
-    function drawPolyRound(ctx, x, y, w, h, r, fill, stroke) {
-        ctx.fillStyle = fill;
-        ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
-        else ctx.rect(x, y, w, h);
-        ctx.fill();
-        if (stroke) { ctx.lineWidth = 2; ctx.strokeStyle = stroke; ctx.stroke(); }
-    }
-
-    class LeadChannel {
-        constructor(x, y, w) {
-            this.x = x; this.y = y; this.w = w;
-        }
-        draw(ctx) {
-            const { x, y, w } = this;
-            drawPolyRound(ctx, x, y - 13, w, 26, 13, '#f1f5f9', '#e2e8f0');
-            drawPolyRound(ctx, x + 8, y - 6, w - 16, 12, 6, '#e8eef5', null);
-            ctx.fillStyle = '#94a3b8';
-            ctx.font = 'bold 9px Inter, sans-serif';
-            ctx.textAlign = 'left';
-            ctx.fillText('ВХОДЯЩИЕ ЗАЯВКИ', x + 8, y - 20);
-            const speed = 0.36;
-            const srcs   = ['TG',  'WA',     'ВК',     'АВ',     'СЙТ'];
-            const colors = ['#0088cc','#25d366','#4c75a3','#ff6163','#f97316'];
-            const total  = w + 50;
-            for (let i = 0; i < 5; i++) {
-                const off = (frame * speed + i * (total / 5)) % total;
-                const bx  = x + off - 25;
-                if (bx >= x && bx <= x + w - 18) {
-                    drawPolyRound(ctx, bx, y - 9, 30, 18, 9, colors[i], null);
-                    ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 8px Inter, sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(srcs[i], bx + 15, y + 1);
-                }
-            }
-            ctx.fillStyle = '#64748b';
-            ctx.beginPath();
-            ctx.moveTo(x + w + 10, y);
-            ctx.lineTo(x + w,      y - 7);
-            ctx.lineTo(x + w,      y + 7);
-            ctx.fill();
-        }
-    }
-
-    class CrmAiCore {
-        constructor(x, y) {
-            this.x = x; this.y = y;
-        }
-        draw(ctx) {
-            const prg = (frame * 0.05) % 200;
-            const active = prg > 22 && prg < 188;
-            const x = this.x, y = this.y;
-            drawPolyRound(ctx, x - 30, y + 5, 60, 58, 8, C.aiCore, C.outline);
-            ctx.strokeStyle = '#2d3f58';
-            ctx.lineWidth = 1;
-            for (let i = 0; i < 4; i++) {
-                ctx.beginPath();
-                ctx.moveTo(x - 24, y + 18 + i * 9);
-                ctx.lineTo(x + 24, y + 18 + i * 9);
-                ctx.stroke();
-            }
-            const ledCols = ['#22c55e', '#f97316', '#38bdf8'];
-            for (let i = 0; i < 3; i++) {
-                const on = active && ((frame + i * 11) % (28 + i * 7) < 20);
-                ctx.fillStyle = on ? ledCols[i] : '#1a2535';
-                ctx.beginPath();
-                ctx.arc(x - 10 + i * 10, y + 10, 3.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            if (active) {
-                const bp = Math.min(1, (prg - 22) / 130);
-                drawPolyRound(ctx, x - 24, y + 43, 48, 6, 3, '#0f172a', null);
-                drawPolyRound(ctx, x - 24, y + 43, 48 * bp, 6, 3, '#22c55e', null);
-            }
-            drawPolyRound(ctx, x - 22, y - 33, 44, 32, 7, C.aiCore, C.outline);
-            const eyeC = active
-                ? (Math.sin(frame * 0.11) > 0 ? '#38bdf8' : '#0ea5e9')
-                : '#475569';
-            ctx.fillStyle = eyeC;
-            ctx.beginPath(); ctx.arc(x - 9, y - 17, 5.5, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(x + 9, y - 17, 5.5, 0, Math.PI * 2); ctx.fill();
-            ctx.fillStyle = '#f8fafc';
-            ctx.beginPath(); ctx.arc(x - 8, y - 17, 2.2, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(x + 10, y - 17, 2.2, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = active ? '#22c55e' : '#475569';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.arc(x, y - 9, 7, 0.15 * Math.PI, 0.85 * Math.PI);
-            ctx.stroke();
-            ctx.strokeStyle = C.outline;
-            ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(x, y - 33); ctx.lineTo(x, y - 50); ctx.stroke();
-            const antOff = active ? Math.sin(frame * 0.13) * 3 : 0;
-            ctx.fillStyle = C.crmOrange;
-            ctx.beginPath(); ctx.arc(x, y - 52 + antOff, 5.5, 0, Math.PI * 2); ctx.fill();
-            ctx.strokeStyle = C.outline; ctx.lineWidth = 1.5; ctx.stroke();
-            if (active) {
-                for (let r = 0; r < 3; r++) {
-                    const ph = ((frame * 0.05) + r * 0.35) % 1;
-                    const rr = 18 + ph * 68;
-                    const ra = (1 - ph) * 0.28;
-                    ctx.globalAlpha = ra;
-                    ctx.strokeStyle = '#38bdf8';
-                    ctx.lineWidth = 1.5;
-                    ctx.beginPath(); ctx.arc(x, y - 10, rr, 0, Math.PI * 2); ctx.stroke();
-                    ctx.globalAlpha = 1;
-                }
-            }
-            if (active && prg > 48) {
-                const dashOff = -(frame * 0.75) % 20;
-                ctx.strokeStyle = C.crmOrange;
-                ctx.lineWidth = 2;
-                ctx.setLineDash([8, 6]);
-                ctx.lineDashOffset = dashOff;
-                ctx.globalAlpha = 0.6;
-                ctx.beginPath();
-                ctx.moveTo(x + 32, y - 8);
-                ctx.bezierCurveTo(x + 100, y - 8, 55, -95, 52, -95);
-                ctx.stroke();
-                ctx.setLineDash([]);
-                ctx.globalAlpha = 1;
-                ctx.globalAlpha = 0.7;
-                ctx.fillStyle = C.crmOrange;
-                ctx.beginPath();
-                ctx.moveTo(52, -88);
-                ctx.lineTo(44, -100);
-                ctx.lineTo(60, -100);
-                ctx.fill();
-                ctx.globalAlpha = 1;
-            }
-        }
-    }
-
-    class Agent {
-        constructor(x, y, color, role, stepTrig, dialogs) {
-            this.x = x; this.y = y; this.baseX = x; this.baseY = y;
-            this.color = color; this.role = role;
-            this.timer = Math.random() * 100;
-            this.stepTrig = stepTrig;
-            this.dialogs  = dialogs;
-        }
-
-        draw(ctx) {
-            this.timer += 0.03;
-            let isMoving = false, carryType = null, faceDir = 1;
-            const prg = (frame * 0.05) % 200;
-            const targets = {
-                '1_architect': { x: -78, y: -5 },
-                '2_seo':       { x: -78, y: 10 },
-                '3_coder':     { x: -78, y: 22 },
-                '4_designer':  { x: 130, y: -35 },
-                '5_deployer':  { x: 150, y: -88 },
-            };
-            const { x: targetX, y: targetY } = targets[this.role];
-            if (prg >= this.stepTrig && prg < this.stepTrig + 25) {
-                const lp = prg - this.stepTrig;
-                if (lp < 10) {
-                    isMoving = true; faceDir = 1; carryType = this.color;
-                    this.x = this.baseX + (targetX - this.baseX) * (lp / 10);
-                    this.y = this.baseY + (targetY - this.baseY) * (lp / 10);
-                } else if (lp < 15) {
-                    isMoving = false; faceDir = 1; this.x = targetX; this.y = targetY;
-                } else {
-                    isMoving = true; faceDir = -1;
-                    this.x = targetX - (targetX - this.baseX) * ((lp - 15) / 10);
-                    this.y = targetY - (targetY - this.baseY) * ((lp - 15) / 10);
-                }
-            } else {
-                this.x = this.baseX; this.y = this.baseY; isMoving = false;
-                carryType = prg >= this.stepTrig - 10 ? this.color : null;
-            }
-            if (!isMoving && frame % 200 === 0 && Math.random() < 0.1) {
-                createBubble(this.x, this.y - 22, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 250);
-            }
-            const bob = isMoving
-                ? Math.abs(Math.sin(this.timer * 3)) * 2
-                : Math.sin(this.timer * 1.5) * 1;
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.lineJoin = 'round';
-            let legL = 0, legR = 0;
-            if (isMoving) {
-                const wp = this.timer * 6;
-                legL = Math.sin(wp) * 5; legR = Math.sin(wp + Math.PI) * 5;
-            }
-            drawPolyRound(ctx, -10, -5 + Math.max(0, legL), 8, 14, 2, C.outline, null);
-            drawPolyRound(ctx, -12,  5 + Math.max(0, legL), 12, 6, 2, C.outline, null);
-            drawPolyRound(ctx,   2, -5 + Math.max(0, legR), 8, 14, 2, C.outline, null);
-            drawPolyRound(ctx,   0,  5 + Math.max(0, legR), 12, 6, 2, C.outline, null);
-            drawPolyRound(ctx, -15, -12 - bob, 30, 20, 6, this.color, C.outline);
-            const hx = 0, hy = -28 - bob;
-            ctx.fillStyle = this.color;
-            ctx.beginPath(); ctx.arc(hx, hy, 12, 0, Math.PI * 2); ctx.fill();
-            ctx.lineWidth = 2; ctx.strokeStyle = C.outline; ctx.stroke();
-            ctx.save();
-            ctx.scale(faceDir, 1);
-            ctx.fillStyle = '#fff';
-            ctx.beginPath(); ctx.arc(hx + 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(hx - 4, hy - 2, 4, 0, Math.PI * 2); ctx.fill();
-            ctx.fillStyle = C.outline;
-            ctx.beginPath(); ctx.arc(hx + 5, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI * 2); ctx.fill();
-            if (this.role === '1_architect') {
-                drawPolyRound(ctx, hx - 14, hy - 13, 28, 8, [6,6,0,0], C.crmOrange, null);
-                drawPolyRound(ctx, hx - 7,  hy - 8,  14, 3, 1.5, '#fff', null);
-            } else if (this.role === '2_seo') {
-                ctx.strokeStyle = C.outline; ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.arc(hx, hy, 14, Math.PI, 0); ctx.stroke();
-                drawPolyRound(ctx, hx - 16, hy - 2, 4, 8, 2, C.outline, null);
-                drawPolyRound(ctx, hx + 12, hy - 2, 4, 8, 2, C.outline, null);
-            } else if (this.role === '3_coder') {
-                drawPolyRound(ctx, hx - 8, hy - 8, 16, 11, 3, C.aiCore, null);
-                ctx.fillStyle = C.aiAccent;
-                ctx.font = 'bold 6px monospace';
-                ctx.textAlign = 'center';
-                ctx.fillText('AI', hx, hy - 1);
-            } else if (this.role === '4_designer') {
-                ctx.strokeStyle = C.outline; ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(hx - 8, hy - 13); ctx.lineTo(hx + 8, hy - 13);
-                ctx.lineTo(hx + 4, hy - 6);  ctx.lineTo(hx - 4, hy - 6);
-                ctx.closePath(); ctx.stroke();
-            } else if (this.role === '5_deployer') {
-                ctx.strokeStyle = C.outline; ctx.lineWidth = 1.5;
-                ctx.beginPath(); ctx.arc(hx - 5, hy - 2, 5, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.arc(hx + 5, hy - 2, 5, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(hx - 16, hy - 2); ctx.lineTo(hx - 10, hy - 2); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(hx + 10,  hy - 2); ctx.lineTo(hx + 16, hy - 2); ctx.stroke();
-            }
-            ctx.restore();
-            if (carryType) {
-                drawPolyRound(ctx, -19 * faceDir, -18 - bob, 18, 13, 3, carryType, C.outline);
-                ctx.fillStyle = 'rgba(255,255,255,0.55)';
-                ctx.fillRect((-19 + 3) * faceDir, -16 - bob, 9, 2);
-                ctx.fillRect((-19 + 3) * faceDir, -12 - bob, 6, 2);
-            }
-            ctx.restore();
-        }
-    }
-
-    function drawSalesFunnel(ctx) {
-        const prg = (frame * 0.05) % 200;
-        const x = 130, y = -95;
-        const stages = [
-            { label: 'Входящие', w: 162, bg: '#eff6ff', border: '#93c5fd', count: 12, clr: '#3b82f6' },
-            { label: 'В работе',  w: 118, bg: '#ecfdf5', border: '#6ee7b7', count: 7,  clr: '#10b981' },
-            { label: 'Закрыто',   w: 74,  bg: '#f0fdf4', border: '#4ade80', count: 3,  clr: '#22c55e' },
-        ];
-        const stH = 52, gap = 8;
-        const totalH = stages.length * stH + (stages.length - 1) * gap;
-        ctx.fillStyle = 'rgba(226,232,240,0.28)';
-        ctx.beginPath();
-        ctx.moveTo(x - 90, y - 5);
-        ctx.lineTo(x + 90, y - 5);
-        ctx.lineTo(x + 48, y + totalH + 10);
-        ctx.lineTo(x - 48, y + totalH + 10);
-        ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = '#94a3b8';
-        ctx.font = 'bold 9px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('ВОРОНКА ПРОДАЖ', x, y - 14);
-        stages.forEach((st, i) => {
-            if (prg < 28 + i * 38) return;
-            const sy = y + i * (stH + gap);
-            const hw = st.w / 2;
-            drawPolyRound(ctx, x - hw, sy, st.w, stH, 10, st.bg, st.border);
-            ctx.fillStyle = '#334155';
-            ctx.font = 'bold 12px Inter, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(st.label, x, sy + 16);
-            const bw = 32;
-            drawPolyRound(ctx, x + hw - bw - 7, sy + 7, bw, 18, 9, st.clr, null);
-            ctx.fillStyle = '#fff';
-            ctx.font = 'bold 10px Inter, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`${st.count}`, x + hw - bw / 2 - 7, sy + 16);
-            if (prg > 58 + i * 38) {
-                const cw2 = st.w - 30;
-                const cx2 = x - cw2 / 2;
-                const cy2 = sy + 27 + Math.sin(frame * 0.019 + i * 1.3) * 2.5;
-                drawPolyRound(ctx, cx2, cy2, cw2, 19, 4, '#fff', '#e2e8f0');
-                ctx.fillStyle = '#cbd5e1';
-                ctx.fillRect(cx2 + 7, cy2 + 5, Math.round(cw2 * 0.52), 3);
-                ctx.fillRect(cx2 + 7, cy2 + 11, Math.round(cw2 * 0.36), 3);
-                ctx.fillStyle = st.clr;
-                ctx.beginPath();
-                ctx.arc(cx2 + cw2 - 10, cy2 + 9.5, 4.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        });
-        if (prg > 85) {
-            ctx.strokeStyle = '#cbd5e1';
-            ctx.lineWidth = 1.5;
-            ctx.setLineDash([4, 4]);
-            ctx.globalAlpha = 0.45;
-            ctx.beginPath();
-            ctx.moveTo(x, y + totalH + 10);
-            ctx.lineTo(x, y + totalH + 30);
-            ctx.stroke();
-            ctx.setLineDash([]);
-            ctx.globalAlpha = 1;
-            ctx.fillStyle = '#b0bec5';
-            ctx.globalAlpha = 0.45;
-            ctx.beginPath();
-            ctx.moveTo(x, y + totalH + 36);
-            ctx.lineTo(x - 6, y + totalH + 27);
-            ctx.lineTo(x + 6, y + totalH + 27);
-            ctx.fill();
-            ctx.globalAlpha = 1;
-        }
-        if (prg >= 163 && prg < 200) {
-            const fp = prg - 163;
-            const alpha = Math.max(0, 1 - fp / 30);
-            const riseY = fp * 2.9;
-            ctx.save();
-            ctx.globalAlpha = alpha;
-            const gr = ctx.createRadialGradient(x, y + totalH + 18, 0, x, y + totalH + 18, 55 + fp * 1.6);
-            gr.addColorStop(0, 'rgba(34, 197, 94, 0.28)');
-            gr.addColorStop(1, 'rgba(34, 197, 94, 0)');
-            ctx.fillStyle = gr;
-            ctx.beginPath();
-            ctx.arc(x, y + totalH + 18, 55 + fp * 1.6, 0, Math.PI * 2);
-            ctx.fill();
-            const ty = y + totalH + 22 - riseY;
-            ctx.font = '900 22px Inter, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 5;
-            ctx.fillStyle = '#16a34a';
-            ctx.strokeText('+1 СДЕЛКА', x, ty);
-            ctx.fillText('+1 СДЕЛКА', x, ty);
-            ctx.restore();
-        }
-    }
-
-    const entities = [];
-    const bubbles  = [];
-
-    entities.push(new LeadChannel(-360, -82, 270));
-    entities.push(new CrmAiCore(-78, 0));
-    entities.push(new Agent(-330, 62, C.agentYellow, '1_architect', 15, [
-        "Аудит воронки", "Мало конверсий!", "Воронка готова!"
-    ]));
-    entities.push(new Agent(-215, 132, C.agentGreen, '2_seo', 55, [
-        "Webhook пришёл!", "TG подключён", "Интеграция OK"
-    ]));
-    entities.push(new Agent(-188, 48, C.agentBlue, '3_coder', 95, [
-        "Заполняю карточку", "AI работает", "Лид обработан!"
-    ]));
-    entities.push(new Agent(18, 128, C.agentPink, '4_designer', 135, [
-        "Бюджет: 500к ₽", "Лид горячий!", "Задача создана"
-    ]));
-    entities.push(new Agent(98, 42, C.agentPurple, '5_deployer', 172, [
-        "ROI: 340%!", "Ноль висяков", "Сделка закрыта!"
-    ]));
-
-    function createBubble(x, y, text, life = 300) {
-        bubbles.push({ x, y, text, life, maxLife: life });
-    }
-
-    function engineloop() {
-        frame++;
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.scale(scale, scale);
-        entities.sort((a, b) => (a.y || 0) - (b.y || 0));
-        entities.forEach(e => e.draw(ctx));
-        drawSalesFunnel(ctx);
-        const prg = (frame * 0.05) % 200;
-        if (prg >= 14   && prg < 14.05)  createBubble(-330,  8, "1. Входящая заявка");
-        if (prg >= 54   && prg < 54.05)  createBubble(-215, 80, "2. Канал подключён");
-        if (prg >= 94   && prg < 94.05)  createBubble(-188,  -5, "3. AI обрабатывает");
-        if (prg >= 134  && prg < 134.05) createBubble(18,   78, "4. Лид квалифицирован");
-        if (prg >= 171  && prg < 171.05) createBubble(98,   -8, "5. Сделка закрыта!");
-        ctx.font = 'bold 11px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.lineJoin = 'round';
-        for (let i = bubbles.length - 1; i >= 0; i--) {
-            const b = bubbles[i];
-            b.life--;
-            if (b.life <= 0) { bubbles.splice(i, 1); continue; }
-            let alpha = Math.min(1, b.life / 30);
-            if (b.life > b.maxLife - 10) alpha = (b.maxLife - b.life) / 10;
-            ctx.globalAlpha = alpha;
-            const tw = ctx.measureText(b.text).width + 16;
-            const th = 20;
-            const bx = b.x;
-            const by = b.y - (b.maxLife - b.life) * 0.05;
-            ctx.lineWidth = 2; ctx.strokeStyle = C.outline;
-            drawPolyRound(ctx, bx - tw / 2, by - th, tw, th, 6, C.bubbleBg, C.outline);
-            ctx.fillStyle = C.bubbleBg;
-            ctx.beginPath(); ctx.moveTo(bx - 4, by); ctx.lineTo(bx + 4, by); ctx.lineTo(bx, by + 6); ctx.fill(); ctx.stroke();
-            ctx.fillRect(bx - 3, by - 2, 6, 4);
-            ctx.fillStyle = C.outline;
-            ctx.fillText(b.text, bx, by - th / 2);
-            ctx.globalAlpha = 1;
-        }
-        ctx.restore();
-        requestAnimationFrame(engineloop);
-    }
-
-    document.fonts.ready.then(() => engineloop());
-});
-
-/* Sticky nav scroll behaviour */
-(function () {
-    const nav = document.getElementById('amo-sticky-nav');
-    if (!nav) return;
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 10) nav.classList.add('amo-scrolled');
-        else nav.classList.remove('amo-scrolled');
-    }, { passive: true });
-
-    const burger = nav.querySelector('.amo-sticky-nav__burger');
-    const links  = nav.querySelector('.amo-sticky-nav__links');
-    if (burger && links) {
-        burger.addEventListener('click', function () {
-            const open = burger.getAttribute('aria-expanded') === 'true';
-            burger.setAttribute('aria-expanded', String(!open));
-            links.style.display = open ? '' : 'flex';
-            links.style.flexDirection = 'column';
-            links.style.position = 'absolute';
-            links.style.top = '64px';
-            links.style.left = '0';
-            links.style.right = '0';
-            links.style.background = '#fff';
-            links.style.padding = '16px 24px';
-            links.style.borderBottom = '1px solid #e2e8f0';
-            links.style.zIndex = '999';
-        });
-    }
-})();
-</script>
-
-<!-- ====================================================
      FAQ ACCORDION
      ==================================================== -->
 <script>
@@ -2514,4 +1707,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </main>
 
+<?php nero_ai_echo_theme_scripts(); ?>
 <?php get_footer(); ?>

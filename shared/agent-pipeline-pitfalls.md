@@ -59,13 +59,28 @@
 
 ---
 
+## 5б. Дизайн первого экрана (канон с 2026-06)
+
+| Сложность | Как избежать |
+|-----------|----------------|
+| Старый дизайн: `amo-sticky-nav`, `ym-sticky-nav`, бренд **Nero Network** в шапке | **Запрещено.** Шапка — только `nero-ai-floating-header.inc.php` из активной темы (бренд из `SITE_BRAND`, как на главной `${WP_SITE_URL}`). |
+| Кастомный `<header>` / sticky-nav вместо темы | **Запрещено.** `get_header()` + pill-шапка из темы; Kadence `#masthead` скрывается классом `body.nero-ai-landing`. |
+| Hero не как на главной | Hero — секция **`.nero-ai-hero`** внутри **`.nero-ai-home-page`**, дашборд справа (см. `shared/templates/current-page-template.php`, `shared/theme-canonical/nero-ai-longread-hero-shell.php`). |
+| Внутреннее меню ломает мобильное меню темы | Якоря страницы — только в **`$nero_ai_header_links`**; не дублировать отдельным `<nav>` в hero. |
+| Наташа собирает из `longread-page-design-reference.css` (ym-*) без bootstrap | Сначала **`longread-page-wordpress-bootstrap.inc.php`** + **`nero_ai_echo_theme_styles()`**; эталон визуала — **главная**, не metrika-skill. |
+
+**Канонический шаблон генерации:** `shared/templates/current-page-template.php`.
+
+---
+
 ## 6. Алина (hero Canvas)
 
 | Сложность | Как избежать |
 |-----------|----------------|
 | Визуально **как вайбкодинг**, только другие слова | Skill **animator-alina**: эталон — **каркас движка**, не макет; обязательны **новая сцена**, **новые фазы цикла**, **чеклист отличий** (≥6 строк). |
-| **Тёмный** full-screen hero без запроса | По умолчанию — **светлый фон + тёмная типографика**; тёмный hero — только если владелец **явно** попросил. |
-| Стили hero не подхватились | Весь CSS hero — **inline** в `<style>` в секции hero; не полагаться на `style.css` темы. |
+| **Sticky-nav / логотип / меню в hero** | **Запрещено** — это зона темы. Алина даёт только контент **`.nero-ai-hero`**: H1, lead, badges, демо-дашборд (метрики/лента). |
+| **Тёмный** full-screen hero без запроса | Hero в **тёмной системе `.nero-ai-home-page`** как на главной; не светлый legacy-hero. |
+| Стили hero не подхватились | Наташа подключает CSS через **`nero_ai_echo_theme_styles()`**; Алина не вставляет `amo-*` / `ym-sticky-nav`. |
 
 ---
 
