@@ -29,6 +29,13 @@ is_background: false
 
 См. `shared/mobile_checks.md`, `skills/mobile-agent/SKILL.md`.
 
+## SEO-сниппеты (snippet-agent)
+
+1. **Прочитай** `=== SNIPPET-AGENT ===` в handoff — Selected SEO Title, Description, OpenGraph.
+2. При правке `page-{slug}.php` в цикле исправлений используй **`$page_seo_title`** и **`$page_seo_description`** из snippet-agent (см. `shared/templates/current-page-template.php`, `shared/snippet_tools.py`).
+3. Не подменяй Title/Description своими формулировками без согласования с Директором.
+4. Передай Наташе/Юре актуальные meta, если менял PHP-оболочку страницы.
+
 ## Запреты
 
 - Не делать полноэкранный первый экран (это Алина).

@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → mobile-agent → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → snippet-agent → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → mobile-agent → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -32,6 +32,7 @@
 - Parent Cloud Agent сам делает блок статьи вместо отдельного Task `boris` / `generalPurpose` с ролью Бориса.
 - Parent Cloud Agent сам верстает страницу вместо отдельного Task `natasha` / `generalPurpose` с ролью Наташи.
 - Parent Cloud Agent сам вставляет рекламу вместо отдельного Task `artur` / `generalPurpose` с ролью Артура.
+- Parent Cloud Agent сам готовит SEO-сниппеты вместо отдельного Task `snippet-agent` / `generalPurpose` с ролью snippet-agent.
 - Parent Cloud Agent сам проверяет мобильную версию вместо отдельного Task `mobile-agent` / `generalPurpose` с ролью mobile-agent.
 - Cloud Agent публикует без блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`.
 - Cloud Agent создаёт короткую статью вместо лонгрида 8k–20k+ знаков.
@@ -51,6 +52,7 @@
 - `mobile-agent.md`
 - `kolya.md`
 - `artyom.md`
+- `snippet-agent.md`
 - `alina.md`
 - `boris.md`
 - `qa.md`
@@ -62,6 +64,7 @@
 - `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`
 - `=== КОЛЯ (SEO-ЯДРО) ===`
 - `=== АРТЁМ (RESEARCH) ===`
+- `=== SNIPPET-AGENT ===`
 - `=== ЖЕНЯ (ЛОНГРИД) ===`
 - `=== АРТУР (CTA И РЕКЛАМА) ===`
 - `=== АЛИНА (HERO) ===`

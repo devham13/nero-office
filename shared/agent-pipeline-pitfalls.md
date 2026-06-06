@@ -143,6 +143,20 @@
 
 ---
 
+## 8а. Snippet-agent (SEO-сниппеты после Коли и Артёма)
+
+| Сложность | Как избежать |
+|-----------|----------------|
+| Женя пишет свой Title/Description | Финальные сниппеты — только из `=== SNIPPET-AGENT ===`; Женя копирует Selected Title/Description. |
+| Дубли Title между страницами | snippet-agent сверяет `shared/published-pages.md`; QA проверяет уникальность. |
+| Кликбейт / ложные обещания | Запрещены «гарантированный рост», неподтверждённые цифры; QA сверяет meta с контентом. |
+| Пустой meta на проде | Наташа/Юра: `$page_seo_title`, `$page_seo_description` из snippet-agent в `page-{slug}.php`. |
+| schema-markup (когда в пайплайне) | `description` в WebPage/Article/Service = **Selected Meta Description** из `=== SNIPPET-AGENT ===`, не выдумывать заново. |
+
+Утилиты: `shared/snippet_tools.py`.
+
+---
+
 ## 8б. Mobile-agent (мобильная версия после indexator)
 
 | Сложность | Как избежать |

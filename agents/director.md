@@ -1,7 +1,7 @@
 ---
 name: director
 description: |
-  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → mobile-agent → Макс → Лёня. Handoff, FTP, индексация, mobile, QA и SEO-аудит по рельсам.
+  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → snippet-agent → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → mobile-agent → Макс → Лёня. Handoff, сниппеты, FTP, индексация, mobile, QA и SEO-аудит по рельсам.
 model: inherit
 is_background: false
 ---
@@ -16,7 +16,7 @@ is_background: false
 
 ## Cloud Task fallback
 
-Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `yura`, `indexator`, `mobile-agent`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
+Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `snippet-agent`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `yura`, `indexator`, `mobile-agent`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
 
 Правило fallback:
 
@@ -37,7 +37,7 @@ is_background: false
 Канонические журналы:
 
 - `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
-- `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
+- `<PROJECT_ROOT>/shared/published-pages.md`
 
 Параллельные агенты пишут не в handoff, а в отдельные фрагменты:
 
@@ -58,7 +58,7 @@ is_background: false
 ## Полная цепочка страницы-лонгрида
 
 1. **Сбрось handoff**.
-2. **Если пользователь просит новость дня / актуальный инфоповод / самую горячую тему или не даёт точную тему страницы** — сначала **Task**(`kirill`) — «Сам найди сегодняшнюю лучшую новость по нейросетям, AI-инструментам, автоматизации, Cursor, MCP, Make, SEO/GEO или контент-заводам. Перед выбором прочитай `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, не бери уже выбранные/опубликованные новости. Проверь спрос через Wordstat, оцени лидовый потенциал Nero Network, выбери одну тему. Запиши выбранную новость в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`. Не пиши текст. Не удаляй чужие секции handoff, добавь только блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`».
+2. **Если пользователь просит новость дня / актуальный инфоповод / самую горячую тему или не даёт точную тему страницы** — сначала **Task**(`kirill`) — «Сам найди сегодняшнюю лучшую новость по нейросетям, AI-инструментам, автоматизации, Cursor, MCP, Make, SEO/GEO или контент-заводам. Перед выбором прочитай `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/shared/published-pages.md`, не бери уже выбранные/опубликованные новости. Проверь спрос через Wordstat, оцени лидовый потенциал Nero Network, выбери одну тему. Запиши выбранную новость в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`. Не пиши текст. Не удаляй чужие секции handoff, добавь только блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`».
 3. **Если Кирилл запускался, перечитай handoff** и проверь маркер `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`.
   Если блок отсутствует, `Статус: ❌ БЛОКЕР` или в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` нет строки `selected` по выбранной новости, не запускай Колю и Артёма. Дозапусти Кирилла или выдай блокер пользователю.
 4. **Параллельно в одном сообщении**:
@@ -67,27 +67,29 @@ is_background: false
 5. **Прочитай фрагменты `kolya.md` и `artyom.md`, перенеси их в handoff**, затем проверь оба маркера:
   - `=== КОЛЯ (SEO-ЯДРО) ===`
   - `=== АРТЁМ (RESEARCH) ===`
-   Если одного блока нет, не запускай Женю. Дозапусти только отсутствующего агента.
-6. **Task**(`zhenya`) — «Прочитай блоки Коли и Артёма, а если есть — блок Кирилла с победившей новостью и лидовой гипотезой. Напиши лонгрид 8k–20k+ знаков. Сохрани мета, `SLUG`, `H1_для_hero`, `ПОДЗАГОЛОВОК_HERO`. Обнови handoff блоком `=== ЖЕНЯ (ЛОНГРИД) ===`, не удаляя служебные данные».
-7. **Task**(`artur`) — «Прочитай лонгрид Жени. Добавь рекламные блоки и CTA: главный оффер `${PRIMARY_CTA_URL}`, уместное упоминание `${SECONDARY_CTA_URL}`, нижний баннер из AD_BANNER_* строго по skill advertiser-artur (`alt`, `rel`, размеры). Обнови handoff блоком `=== АРТУР (CTA И РЕКЛАМА) ===`, не теряя мета и slug».
-8. **Параллельно в одном сообщении**:
+   Если одного блока нет, не запускай snippet-agent. Дозапусти только отсутствующего агента.
+6. **Task**(`snippet-agent`) — «SEO Title/Description/OG/social preview из ядра Коли и research Артёма. 3 варианта, выбери лучший. Фрагмент `snippet-agent.md`, маркер `=== SNIPPET-AGENT ===`. Без кликбейта.»
+7. **Прочитай `snippet-agent.md`, перенеси `=== SNIPPET-AGENT ===` в handoff.** При блокере — не запускай Женю.
+8. **Task**(`zhenya`) — «Прочитай Коля, Артём, snippet-agent и при наличии Кирилла. Лонгрид 8k–20k+; Title/Description из snippet-agent. Блок `=== ЖЕНЯ (ЛОНГРИД) ===`.»
+9. **Task**(`artur`) — «Прочитай лонгрид Жени. Добавь рекламные блоки и CTA: главный оффер `${PRIMARY_CTA_URL}`, уместное упоминание `${SECONDARY_CTA_URL}`, нижний баннер из AD_BANNER_* строго по skill advertiser-artur (`alt`, `rel`, размеры). Обнови handoff блоком `=== АРТУР (CTA И РЕКЛАМА) ===`, не теряя мета и slug».
+10. **Параллельно в одном сообщении**:
   - **Task**(`alina`) — «Только hero: Canvas, inline CSS, светлый фон, тёмная типографика, новый мир/сцена, паспорт мира, чеклист отличий. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/alina.md`; не пиши в handoff.»
   - **Task**(`boris`) — «Визуальный блок в теле статьи, не hero: сплит/сетка/карта, свой canvas id и script, продолжение или контраст к Алине, якорь для Наташи. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/boris.md`; не пиши в handoff.»
    Если тип `boris` недоступен в Cursor, используй `generalPurpose` с полным промптом по skill `animator-boris`.
-9. **Прочитай фрагменты `alina.md` и `boris.md`, перенеси их в handoff**, затем проверь оба маркера:
+11. **Прочитай фрагменты `alina.md` и `boris.md`, перенеси их в handoff**, затем проверь оба маркера:
   - `=== АЛИНА (HERO) ===`
   - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
    Если одного блока нет, дозапусти только отсутствующего агента. Не переходи к Наташе без обоих визуальных блоков.
-10. **Task**(`natasha`) — «Собери полную страницу: hero Алины первым → введение слева+декор → контент → блок Бориса по якорю → FAQ/CTA/рекламный партнёр из env. Не удаляй canvas/script Алины и Бориса. Не затемняй hero без явного ТЗ. Все `<img>` с `alt`, внешние `target="_blank"` с `rel="noopener noreferrer"`. Обязателен `main#primary`, сброс padding под header, скрытие breadcrumbs. Запиши блок `=== НАТАША (HTML СТРАНИЦЫ) ===` и `Передача Юре`».
-11. **Task**(`yura`) — «Опубликуй через SSH/SCP/SFTP/FTP как `page-{slug}.php` в фиксированную активную тему `${WP_THEME_SLUG}`. НЕ WordPress API. Сначала проверь `stylesheet/template` и получи реальный upload-путь через `get_stylesheet_directory()`; если `SSH_THEME_PATH`/`REMOTE_WP_THEMES` отличаются, грузить в runtime-путь WordPress, а не в env-подсказку. Проверь права файла `644` и доступность каталогов. Создай/обнови страницу, выставь `_wp_page_template`, `post_excerpt = Description`, сбрось кэш. После публикации проверь live HTML на `main#primary`, `{slug}-page`, hero/canvas-маркеры. Запиши `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`. Если страница была выбрана Кириллом, добавь/обнови запись в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `published` и публичным URL. Только потом запиши один блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` с URL и runtime-путём темы».
-12. **Task**(`google-table-manager`) — фаза `publish`: запись URL/slug в Google Таблицу (`shared/google_sheets_logger.py`). Фрагмент `google-table-manager.md`.
-13. **Быстрый sanity-check до indexator:** live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Без блока Юры или маркеров шаблона — дозапусти Юру.
-14. **Task**(`indexator`) — индексационная готовность + IndexNow. Фрагмент `indexator.md`, маркер `=== INDEXATOR ===`. При блокере — не запускай mobile-agent/QA с ✅.
-15. **Task**(`mobile-agent`) — мобильная проверка 360/390/430px: шапка, меню, hero, H1, CTA, horizontal scroll. Фрагмент `mobile-agent.md`, маркер `=== MOBILE-AGENT ===`. При блокере первого экрана — **стоп пайплайна**.
-16. **Параллельно в одном сообщении**:
+12. **Task**(`natasha`) — «Собери полную страницу: hero Алины первым → введение слева+декор → контент → блок Бориса по якорю → FAQ/CTA; SEO meta из `=== SNIPPET-AGENT ===` в PHP-шаблон. Не удаляй canvas/script Алины и Бориса. Не затемняй hero без явного ТЗ. Все `<img>` с `alt`, внешние `target="_blank"` с `rel="noopener noreferrer"`. Обязателен `main#primary`, сброс padding под header, скрытие breadcrumbs. Запиши блок `=== НАТАША (HTML СТРАНИЦЫ) ===` и `Передача Юре`».
+13. **Task**(`yura`) — «Опубликуй через SSH/SCP/SFTP/FTP как `page-{slug}.php` в активную тему из env WP_THEME_SLUG. НЕ WordPress API. Сначала проверь `stylesheet/template` и получи реальный upload-путь через `get_stylesheet_directory()`; если `SSH_THEME_PATH`/`REMOTE_WP_THEMES` отличаются, грузить в runtime-путь WordPress, а не в env-подсказку. Проверь права файла `644` и доступность каталогов. Создай/обнови страницу, выставь `_wp_page_template`, `post_excerpt = Description`, сбрось кэш. После публикации проверь live HTML на `main#primary`, `{slug}-page`, hero/canvas-маркеры. Запиши `<PROJECT_ROOT>/shared/published-pages.md`. Если страница была выбрана Кириллом, добавь/обнови запись в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `published` и публичным URL. Только потом запиши один блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` с URL и runtime-путём темы».
+14. **Task**(`google-table-manager`) — фаза `publish`: запись URL/slug в Google Таблицу (`shared/google_sheets_logger.py`). Фрагмент `google-table-manager.md`.
+15. **Быстрый sanity-check до indexator:** live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Без блока Юры или маркеров шаблона — дозапусти Юру.
+16. **Task**(`indexator`) — индексационная готовность + IndexNow. Фрагмент `indexator.md`, маркер `=== INDEXATOR ===`. При блокере — не запускай mobile-agent/QA с ✅.
+17. **Task**(`mobile-agent`) — мобильная проверка 360/390/430px: шапка, меню, hero, H1, CTA, horizontal scroll. Фрагмент `mobile-agent.md`, маркер `=== MOBILE-AGENT ===`. При блокере первого экрана — **стоп пайплайна**.
+18. **Параллельно в одном сообщении**:
   - **Task**(`qa`) — «Макс: учти indexator + mobile-agent; браузер, hero, canvas/script, console, mobile. Фрагмент `qa.md`.»
   - **Task**(`lenya`) — «Лёня: SEO-аудит URL. Фрагмент `lenya.md`.» (fallback: generalPurpose + seo-auditor-lenya)
-17. **Прочитай фрагменты `qa.md` и `lenya.md`, перенеси в handoff**:
+19. **Прочитай фрагменты `qa.md` и `lenya.md`, перенеси в handoff**:
   - если Макс ✅ и Лёня ✅ — выдай ссылку;
   - если Макс ❌ или Лёня ❌ — **Task**(`yura`) → indexator → mobile-agent → **Task**(`qa`) + **Task**(`lenya`);
   - максимум 2 цикла. При блокере mobile-agent — не завершай пайплайн успешно.
@@ -99,6 +101,7 @@ is_background: false
 - `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`
 - `=== КОЛЯ (SEO-ЯДРО) ===`
 - `=== АРТЁМ (RESEARCH) ===`
+- `=== SNIPPET-AGENT ===`
 - `=== ЖЕНЯ (ЛОНГРИД) ===`
 - `=== АРТУР (CTA И РЕКЛАМА) ===`
 - `=== АЛИНА (HERO) ===`

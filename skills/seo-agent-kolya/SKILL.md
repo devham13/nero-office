@@ -42,7 +42,19 @@ description: SEO-семантик Коля — ТОЛЬКО Wordstat/MCP KV (~10
 
 **Не использовать** `wordstat_get_dynamics`, `wordstat_get_regions`, `wordstat_get_regions_tree` без явного запроса.
 
-## Нормы мета
+## Передача snippet-agent
+
+После ядра передай **snippet-agent** (не Жене напрямую финальные сниппеты):
+
+- главный ключ;
+- дополнительные ключи (топ кластера);
+- интент страницы;
+- рекомендации по Title/Description (черновики из Wordstat);
+- SLUG, H1_для_hero.
+
+Финальные SEO Title/Description выбирает **snippet-agent** (`=== SNIPPET-AGENT ===`).
+
+## Нормы мета (черновики для snippet-agent)
 
 | Элемент         | Ориентир          |
 | --------------- | ----------------- |
