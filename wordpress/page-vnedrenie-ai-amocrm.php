@@ -52,7 +52,7 @@ if (!is_readable($nero_ai_floating)) {
 
 ?>
 
-<?php nero_ai_echo_theme_styles(); ?>
+<?php nero_ai_echo_theme_styles(['nero-ai-longread-ui-compat.css']); ?>
 
 <style>
 /* Скрыть шапку Kadence — используем nero-ai-floating-header как на главной */
