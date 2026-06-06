@@ -127,42 +127,35 @@ is_background: false
 
 ## Твоя задача
 
-Самостоятельно выбери одну лучшую тему для коммерческой страницы на основе данных из Google Таблицы:
+Оформи **одну** коммерческую тему дня для пайплайна. Тему **не выбираешь из таблицы сам**, если **google-table-manager** уже выполнил фазу `reserve`.
 
-https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw-ls/edit?usp=sharing
+Порядок входа:
 
-Пользователь не обязан давать тебе тему вручную.
+1. Прочитай handoff: блок `=== GOOGLE-TABLE-MANAGER ===` (тема, строка таблицы, поля строки).
+2. Если блока нет или статус `⚠️ WARNING` / `❌ БЛОКЕР` — только тогда fallback: читай Google Таблицу по `GOOGLE_SHEET_ID` из env (без печати ID и URL с токенами).
+3. Проверь новостной/коммерческий угол, Wordstat и дубли по:
+   - `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
+   - `<PROJECT_ROOT>/shared/published-pages.md`
+4. Уточни slug, H1, hero-подзаголовок и SEO-вход для Коли и research для Артёма.
+5. Запиши блок `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===` в handoff.
+6. Добавь строку в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`.
 
-Ты сам:
-
-1. читаешь Google Таблицу;
-2. берёшь из неё темы, ключи, боль клиента, оффер, CTA, приоритет, сложность и ориентир чека;
-3. отбираешь кандидатов из строк таблицы;
-4. проверяешь `<PROJECT_ROOT>/shared/kirill-news-ledger.md` и `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`, чтобы не выбрать уже использованную тему;
-5. используешь ключи из Google Таблицы как основной SEO-вход;
-6. при необходимости проверяешь или расширяешь спрос через Wordstat;
-7. оцениваешь релевантность Nero Network и лидовый потенциал;
-8. выбираешь одного победителя;
-9. записываешь результат в handoff для Коли и Артёма;
-10. добавляешь выбранную тему в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `selected`.
+**Не дублируй** работу google-table-manager: не перебирай таблицу и не ставь «Не использовано», если reserve уже успешен.
 
 ## Как работать
 
 Сначала прочитай:
 
-`<PROJECT_ROOT>/shared/kirill-news-ledger.md`
+- handoff: `=== GOOGLE-TABLE-MANAGER ===`
+- `<PROJECT_ROOT>/shared/kirill-news-ledger.md`
+- `<PROJECT_ROOT>/shared/published-pages.md`
 
-и
-
-`<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`
-
-Затем прочитай Google Таблицу:
-
-https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw-ls/edit?usp=sharing
+Данные строки (направление, тема, ключи, боль, оффер, CTA) бери из блока google-table-manager. Прямой доступ к Google Таблице — **только** при отсутствии успешного reserve.
 
 Не используй WebSearch и WebFetch для самостоятельного поиска новости дня.
 
-Не ищи свежую новость вместо темы из Google Таблицы.
+Не ищи свежую новость вместо темы из таблицы / google-table-manager.
+
 
 Используй WebSearch/WebFetch только если нужно уточнить факты по уже выбранной теме из Google Таблицы или проверить источник тренда, указанный в таблице.
 
@@ -185,7 +178,7 @@ https://docs.google.com/spreadsheets/d/10U4gH09L3uJqtxKdFM2_XH7LxRI39TNzEMGHWlCw
 Допиши в файл обмена:
 
 ```markdown
-=== КИРИЛЛ (ТЕМА ДНЯ ИЗ GOOGLE ТАБЛИЦЫ) ===
+=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===
 Статус: ✅ ГОТОВО
 
 ## Победитель
@@ -245,7 +238,7 @@ CTA из Google Таблицы: ...
 SLUG_КАНДИДАТ: ...
 H1_КАНДИДАТ: ...
 ПОДЗАГОЛОВОК_HERO_КАНДИДАТ: ...
-ПАЙПЛАЙН: Кирилл выбрал тему из Google Таблицы → следующий шаг: Коля||Артём
+ПАЙПЛАЙН: google-table-manager зарезервировал тему → Кирилл оформил угол → следующий шаг: Коля||Артём
 ```
 
 ## Запреты

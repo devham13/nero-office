@@ -10,7 +10,9 @@
 
 Директор запускает роли:
 
-`kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → qa || lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → qa || lenya`
+
+`google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
 Если Cloud API не принимает имена `kirill`, `seo-kolya`, `artyom` и т.д. как `Task` types, используй **fallback через отдельные `generalPurpose` Task**:
 
@@ -42,6 +44,7 @@
 
 Параллельные роли пишут только во фрагменты:
 
+- `google-table-manager.md`
 - `kolya.md`
 - `artyom.md`
 - `alina.md`
@@ -51,6 +54,7 @@
 
 Директор переносит фрагменты в handoff и проверяет маркеры:
 
+- `=== GOOGLE-TABLE-MANAGER ===`
 - `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===`
 - `=== КОЛЯ (SEO-ЯДРО) ===`
 - `=== АРТЁМ (RESEARCH) ===`
@@ -76,7 +80,7 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 - **Не спрашивай** у пользователя подтверждение на: deploy, SSH/FTP, `pip`/`npm install`, QA в браузере/curl, SEO-аудит, повторную публикацию, правку env/шаблона после аудита.
 - **Не останавливайся** на «могу продолжить?» / «разрешите выполнить?» — доводи пайплайн до **URL** или **блокера с причиной**.
 - Если **Task/subagent прерван** (timeout, interrupt): директор **сам** завершает этап инструментами (`deploy.py`, curl, IndexLift, правка PHP) и при необходимости перепубликует; затем пишет фрагменты `qa.md` / `lenya.md`.
-- После **Юры** всегда запускай **Макс||Лёня** (параллельно или последовательно инструментами, если Task недоступен).
+- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **Макс||Лёня** (параллельно или последовательно инструментами, если Task недоступен).
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
 
