@@ -86,7 +86,8 @@ nav[aria-label="Хлебные крошки"],
   --vna-surface:rgba(255,255,255,.072);--vna-surface2:rgba(255,255,255,.108);
   --vna-text:#e6edf7;--vna-muted:#9aa8bd;--vna-soft:#c7d2e5;--vna-heading:#fff;
   --vna-border:rgba(255,255,255,.10);--vna-border-s:rgba(255,255,255,.18);
-  --vna-accent:#f97316;--vna-violet:#8b5cf6;--vna-green:#22c55e;--vna-cyan:#79f2ff;
+  --vna-accent:#79f2ff;--vna-violet:#8b5cf6;--vna-green:#22c55e;--vna-cyan:#79f2ff;
+  --vna-btn-from:#2563eb;--vna-btn-to:#7c3aed;
   --vna-shadow:0 24px 72px rgba(0,0,0,.4);
   --vna-r:18px;--vna-r-lg:24px;
   --vna-container:1220px;
@@ -137,7 +138,7 @@ nav[aria-label="Хлебные крошки"],
 .vna-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   padding:6px 14px;border-radius:999px;
-  background:rgba(249,115,22,.09);border:1px solid rgba(249,115,22,.22);
+  background:rgba(121,242,255,.08);border:1px solid rgba(121,242,255,.22);
   font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   color:var(--vna-accent);margin-bottom:14px;
 }
@@ -153,7 +154,8 @@ nav[aria-label="Хлебные крошки"],
    ===================================================== */
 .vna-intro{
   padding:clamp(40px,5vw,72px) 0 clamp(40px,5vw,64px);
-  background:linear-gradient(180deg,#f8fafc 0%,#111827 100%);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 .vna-intro-grid{
   display:grid;grid-template-columns:1fr 340px;
@@ -170,23 +172,24 @@ nav[aria-label="Хлебные крошки"],
 .vna-intro-text p{
   text-align:left!important;
   font-size:clamp(14.5px,1.55vw,16.5px);line-height:1.8;
-  color:#475569;margin-bottom:1em;
+  color:var(--vna-muted);margin-bottom:1em;
 }
-.vna-intro-text p:last-child{margin-bottom:0;color:#334155;}
+.vna-intro-text p:last-child{margin-bottom:0;color:var(--vna-soft);}
 .vna-intro-kpi{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;
 }
 .vna-kpi-card{
-  background:#fff;border:1px solid #e2e8f0;border-radius:14px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;
   padding:16px 14px;text-align:center;
-  box-shadow:0 4px 18px rgba(15,23,42,.07);
+  box-shadow:0 8px 28px rgba(0,0,0,.25);
+  backdrop-filter:blur(12px);
 }
 .vna-kpi-card .kv{
   font-size:clamp(20px,2.5vw,26px);font-weight:900;
-  color:#0f172a;letter-spacing:-.04em;line-height:1;margin-bottom:5px;
+  color:var(--vna-heading);letter-spacing:-.04em;line-height:1;margin-bottom:5px;
 }
-.vna-kpi-card .kl{font-size:11px;font-weight:600;color:#64748b;line-height:1.4;}
-.vna-kpi-card .ks{font-size:10px;color:#94a3b8;margin-top:4px;}
+.vna-kpi-card .kl{font-size:11px;font-weight:600;color:var(--vna-muted);line-height:1.4;}
+.vna-kpi-card .ks{font-size:10px;color:#64748b;margin-top:4px;}
 @media(max-width:900px){
   .vna-intro-grid{grid-template-columns:1fr;gap:36px;}
   .vna-intro-kpi{grid-template-columns:repeat(4,1fr);}
@@ -209,8 +212,8 @@ nav[aria-label="Хлебные крошки"],
   transition:border-color .2s,color .2s,background .2s;
 }
 .vna-toc a:hover{
-  border-color:rgba(249,115,22,.42);color:var(--vna-accent);
-  background:rgba(249,115,22,.08);
+  border-color:rgba(121,242,255,.42);color:var(--vna-accent);
+  background:rgba(121,242,255,.08);
 }
 
 /* =====================================================
@@ -223,7 +226,7 @@ nav[aria-label="Хлебные крошки"],
   box-shadow:0 14px 40px rgba(0,0,0,.22);
   transition:border-color .22s,transform .22s;
 }
-.vna-card:hover{border-color:rgba(249,115,22,.28);transform:translateY(-2px);}
+.vna-card:hover{border-color:rgba(121,242,255,.28);transform:translateY(-2px);}
 .vna-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .vna-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 @media(max-width:768px){
@@ -259,7 +262,7 @@ nav[aria-label="Хлебные крошки"],
   margin-bottom:14px;
 }
 .vna-level-card.l1 .vna-level-badge{background:rgba(34,197,94,.15);color:var(--vna-green);}
-.vna-level-card.l2 .vna-level-badge{background:rgba(249,115,22,.15);color:var(--vna-accent);}
+.vna-level-card.l2 .vna-level-badge{background:rgba(121,242,255,.15);color:var(--vna-accent);}
 .vna-level-card.l3 .vna-level-badge{background:rgba(139,92,246,.15);color:var(--vna-violet);}
 .vna-level-card h3{font-size:17px;margin-bottom:10px;}
 .vna-level-card p{font-size:14px;margin:0;}
@@ -274,10 +277,10 @@ nav[aria-label="Хлебные крошки"],
   margin-bottom:14px;transition:border-color .2s;
 }
 .vna-scenario:last-child{margin-bottom:0;}
-.vna-scenario:hover{border-color:rgba(249,115,22,.3);}
+.vna-scenario:hover{border-color:rgba(121,242,255,.3);}
 .vna-sc-icon{
   flex-shrink:0;width:44px;height:44px;border-radius:12px;
-  background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.22);
+  background:rgba(121,242,255,.12);border:1px solid rgba(121,242,255,.22);
   display:flex;align-items:center;justify-content:center;font-size:20px;
 }
 .vna-scenario h3{font-size:17px;margin-bottom:8px;}
@@ -290,8 +293,8 @@ nav[aria-label="Хлебные крошки"],
 .vna-table{width:100%;border-collapse:collapse;font-size:14px;}
 .vna-table th{
   padding:13px 16px;text-align:left;
-  background:rgba(249,115,22,.1);color:var(--vna-accent);font-weight:700;
-  border-bottom:1px solid rgba(249,115,22,.25);white-space:nowrap;
+  background:rgba(121,242,255,.1);color:var(--vna-accent);font-weight:700;
+  border-bottom:1px solid rgba(121,242,255,.25);white-space:nowrap;
 }
 .vna-table td{
   padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.05);
@@ -356,7 +359,7 @@ nav[aria-label="Хлебные крошки"],
   position:absolute;left:-32px;top:4px;
   width:16px;height:16px;border-radius:50%;
   background:var(--vna-accent);
-  box-shadow:0 0 0 4px rgba(249,115,22,.2);
+  box-shadow:0 0 0 4px rgba(121,242,255,.2);
 }
 .vna-tl-item h3{font-size:17px;margin-bottom:8px;}
 .vna-tl-item p{font-size:14.5px;margin:0;}
@@ -372,9 +375,9 @@ nav[aria-label="Хлебные крошки"],
   border-radius:20px;padding:26px 22px;
   transition:border-color .22s,transform .22s;
 }
-.vna-price-card:hover{border-color:rgba(249,115,22,.35);transform:translateY(-3px);}
+.vna-price-card:hover{border-color:rgba(121,242,255,.35);transform:translateY(-3px);}
 .vna-price-card.vna-featured{
-  border-color:rgba(249,115,22,.45);background:rgba(249,115,22,.07);
+  border-color:rgba(121,242,255,.45);background:rgba(121,242,255,.07);
 }
 .vna-price-card .tier{
   font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
@@ -434,15 +437,15 @@ nav[aria-label="Хлебные крошки"],
    ===================================================== */
 .ym-cta-block{
   border-radius:20px;padding:36px 40px;margin:32px 0;
-  background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(139,92,246,.1));
-  border:1px solid rgba(249,115,22,.3);text-align:center;
+  background:linear-gradient(135deg,rgba(121,242,255,.12),rgba(139,92,246,.1));
+  border:1px solid rgba(121,242,255,.3);text-align:center;
 }
 .ym-cta-block--dual{
-  background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(249,115,22,.1));
+  background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(121,242,255,.1));
   border-color:rgba(34,197,94,.3);
 }
 .ym-cta-block--footer-final{
-  background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(249,115,22,.08));
+  background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(121,242,255,.08));
   border-color:rgba(139,92,246,.3);
 }
 .ym-cta-block__icon{font-size:36px;margin-bottom:14px;}
@@ -461,16 +464,17 @@ nav[aria-label="Хлебные крошки"],
   text-decoration:none!important;transition:transform .2s,box-shadow .2s;
 }
 .ym-btn:hover{transform:translateY(-2px);}
-.ym-btn--accent{
-  background:var(--vna-accent);color:#fff!important;
-  box-shadow:0 8px 24px rgba(249,115,22,.3);
+.ym-btn--accent,
+.nero-ai-home-page .ym-btn--accent{
+  background:linear-gradient(135deg,var(--vna-btn-from),var(--vna-btn-to));color:#fff!important;
+  box-shadow:0 8px 32px rgba(59,130,246,.35);
 }
-.ym-btn--accent:hover{box-shadow:0 12px 36px rgba(249,115,22,.45);}
+.ym-btn--accent:hover{box-shadow:0 12px 36px rgba(59,130,246,.45);}
 .ym-btn--ghost{
   background:rgba(255,255,255,.08);color:var(--vna-text)!important;
   border:1.5px solid rgba(255,255,255,.18);
 }
-.ym-btn--ghost:hover{border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.08);}
+.ym-btn--ghost:hover{border-color:rgba(121,242,255,.4);background:rgba(59,130,246,.12);}
 .ym-cta-block__btn{margin-top:4px;}
 @media(max-width:600px){.ym-cta-block{padding:28px 20px;}}
 
@@ -553,11 +557,12 @@ nav[aria-label="Хлебные крошки"],
      ==================================================== -->
 <div class="vna-content">
 
-  <!-- INTRO: первый контентный блок — левое выравнивание -->
-  <section class="vna-intro" id="intro">
-    <div class="vna-cnt">
-      <div class="vna-intro-grid">
-        <div class="vna-intro-text">
+  <!-- INTRO: второй экран — тёмный, как на главной -->
+  <section class="vna-intro nero-ai-section nero-ai-section-tight" id="intro" aria-label="Введение">
+    <div class="vna-cnt nero-ai-container">
+      <div class="vna-intro-grid nero-ai-intro-grid nero-ai-reveal">
+        <div class="vna-intro-text nero-ai-intro-text">
+          <p class="nero-ai-eyebrow">Лонгрид · ai amocrm</p>
           <p>Согласно исследованию J'son & Partners Consulting (ноябрь 2025 — январь 2026, выборка — 1 000 компаний), до <strong>70% рабочего времени</strong> менеджеров по продажам уходит на рутину: внести контакт, обновить статус сделки, записать итоги звонка, поставить задачу на перезвон. При этом <strong>85% российских компаний</strong> уже видят ценность AI для CRM — но только <strong>19,2%</strong> используют AI-ассистентов регулярно.</p>
           <p>Разрыв между пониманием и реальным внедрением измеряется тысячами потерянных сделок ежемесячно. AI-агент для amoCRM закрывает этот разрыв на уровне архитектуры: система подключается к CRM через API, получает события через webhooks и самостоятельно выполняет задачи, которые раньше делали менеджеры вручную. Менеджеры переключаются на то, что действительно требует живого человека, — переговоры и закрытие сделок.</p>
         </div>
@@ -754,7 +759,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="ym-cta-block__body">
         <p class="ym-cta-block__headline">Хотите AI-агента для своей amoCRM?</p>
         <p class="ym-cta-block__sub">Проверим вашу воронку, покажем, что можно автоматизировать прямо сейчас. Бесплатно, за 2–3 рабочих дня.</p>
-        <a href="#cta" class="ym-btn ym-btn--accent ym-cta-block__btn">Получить бесплатный аудит</a>
+        <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent ym-cta-block__btn">Получить бесплатный аудит</a>
       </div>
     </div>
   </div>
@@ -1291,8 +1296,8 @@ nav[aria-label="Хлебные крошки"],
         <p class="ym-cta-block__headline">Хотите таких же результатов?</p>
         <p class="ym-cta-block__sub">ROI 340% за 3 месяца, ×2 выручки за 9 месяцев, ноль «забытых» лидов — это реальные кейсы наших клиентов. Следующий может быть ваш.</p>
         <div class="ym-cta-block__actions">
-          <a href="#cta" class="ym-btn ym-btn--accent">Получить бесплатный аудит</a>
-          <a href="#etapy" class="ym-btn ym-btn--ghost">Как проходит внедрение →</a>
+          <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent">Получить бесплатный аудит</a>
+          <a href="#etapy" class="nero-ai-btn nero-ai-btn-secondary ym-btn ym-btn--ghost">Как проходит внедрение →</a>
         </div>
       </div>
     </div>
@@ -1544,7 +1549,7 @@ nav[aria-label="Хлебные крошки"],
   <!-- ================================================
        ФИНАЛЬНЫЙ CTA
        ================================================ -->
-  <section class="vna-section" id="cta" style="background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(139,92,246,.08));">
+  <section class="vna-section" id="cta" style="background:linear-gradient(135deg,rgba(121,242,255,.08),rgba(139,92,246,.08));">
     <div class="vna-cnt" style="text-align:center;">
       <span class="vna-eyebrow">Первый шаг бесплатно</span>
       <h2 style="font-size:clamp(28px,4.2vw,52px);margin:14px auto 16px;max-width:700px;">
@@ -1559,7 +1564,7 @@ nav[aria-label="Хлебные крошки"],
         <li>Стек и бюджет под ваш поток</li>
         <li>Без обязательств</li>
       </ul>
-      <a href="#cta" class="ym-btn ym-btn--accent" style="font-size:16px;padding:16px 36px;">
+      <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" style="font-size:16px;padding:16px 36px;">
         Получить бесплатный аудит amoCRM
       </a>
     </div>
@@ -1571,7 +1576,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="ym-cta-block__body">
         <p class="ym-cta-block__headline">Готовы автоматизировать amoCRM?</p>
         <p class="ym-cta-block__sub">Бесплатный аудит — первый шаг. Покажем, что прямо сейчас теряет ваш отдел продаж, и как это исправить за 2–3 недели.</p>
-        <a href="#cta" class="ym-btn ym-btn--accent">Проверить amoCRM бесплатно</a>
+        <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent">Проверить amoCRM бесплатно</a>
       </div>
     </div>
   </div>
