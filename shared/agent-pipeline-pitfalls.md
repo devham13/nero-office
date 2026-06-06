@@ -87,6 +87,7 @@
 |-----------|----------------|
 | Белая полоса под шапкой / **другая шапка / нет меню** | В начале `<style>` шаблона **обязателен** блок `shared/kadence-page-isolation.css` (inner-wrap, overflow, masthead). Без него Kadence ломает header/drawer. |
 | **Вся страница белая** на `nero-ai-home-page` | Isolation `background: transparent !important` на `#inner-wrap > main.site-main[class*="-page"]` перебивает тёмный gradient. В isolation: `:not(.nero-ai-home-page)` + отдельный блок с gradient `!important` и `#inner-wrap:has(.nero-ai-home-page)`. |
+| Hero стал **тёмным** после сборки | Не переопределять фон/текст hero глобальными правилами `{slug}-page`; hero — зона Алины. |
 | Сломанные `<script>` / `<canvas>` | Публиковать как **PHP в тему** (Юра), не через WP REST с «очисткой» HTML. |
 | Пропал **блок Бориса** или второй canvas | Проверить порядок: hero → контент → **Борис** по якорю; внизу страницы — **два** script-движка (hero + Борис), если оба блока есть. |
 | **Второй блок** (введение сразу после hero) — центр / нет ритма | Skill **designer-natasha**: текст вступления **слева**, сетка «текст + декор», акцент слева; **не** только два центрированных абзаца. См. **`longread-page-design-system.md`** §«Введение сразу после hero». |
