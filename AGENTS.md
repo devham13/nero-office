@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → schema-markup → yura → google-table-manager → indexator → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -32,6 +32,7 @@
 - Parent Cloud Agent сам делает блок статьи вместо отдельного Task `boris` / `generalPurpose` с ролью Бориса.
 - Parent Cloud Agent сам верстает страницу вместо отдельного Task `natasha` / `generalPurpose` с ролью Наташи.
 - Parent Cloud Agent сам вставляет рекламу вместо отдельного Task `artur` / `generalPurpose` с ролью Артура.
+- Parent Cloud Agent сам генерирует JSON-LD вместо отдельного Task `schema-markup` / `generalPurpose` с ролью schema-markup.
 - Cloud Agent публикует без блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`.
 - Cloud Agent создаёт короткую статью вместо лонгрида 8k–20k+ знаков.
 
@@ -50,6 +51,7 @@
 - `artyom.md`
 - `alina.md`
 - `boris.md`
+- `schema-markup.md`
 - `qa.md`
 - `lenya.md`
 
@@ -64,6 +66,7 @@
 - `=== АЛИНА (HERO) ===`
 - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
+- `=== SCHEMA-MARKUP ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
 - `=== INDEXATOR ===`
 - `=== МАКС (QA) ===`

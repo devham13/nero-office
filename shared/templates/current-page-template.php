@@ -113,6 +113,9 @@ if (!is_readable($nero_ai_floating)) {
     </div>
   </section>
 
+  <!-- SCHEMA-MARKUP: вставить JSON-LD из === SCHEMA-MARKUP === перед публикацией (Юра) -->
+  <!-- <script type="application/ld+json">...</script> -->
+
 </main>
 
 <?php nero_ai_echo_theme_scripts(); ?>

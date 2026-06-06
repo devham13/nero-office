@@ -54,9 +54,10 @@ SLUG: ...
 ВНИМАНИЕ: контент содержит <script> и <canvas> — при публикации обернуть в <!-- wp:html -->
 [полный HTML код страницы]
 
-## Передача Юре
+## Передача пайплайну
 SLUG: ...
-Контент содержит <script> (hero engine + reveal) и <canvas>. Обязательно обернуть в <!-- wp:html --> при публикации.
+JSON-LD готовит **schema-markup** после Наташи; оставь `<!-- SCHEMA-MARKUP:INSERT -->` перед `</main>`.
+Контент содержит <script> (hero engine + reveal) и <canvas>.
 ```
 
 ## Запреты

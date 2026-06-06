@@ -60,6 +60,13 @@ Slug: ...
 - `Путь шаблона`: runtime-путь к `page-{slug}.php` в теме `${WP_THEME_SLUG}`.
 Директор после google-table-manager запускает **indexator** для проверки индексации и IndexNow.
 
+14. **Вставь Schema.org JSON-LD** из `=== SCHEMA-MARKUP ===` в `page-{slug}.php` **до публикации**:
+- возьми готовый блок `<script type="application/ld+json">...</script>`;
+- вставь перед `</main>` или перед `<?php get_footer(); ?>`;
+- не ломай PHP-синтаксис и не дублируй второй ld+json;
+- если блока schema-markup нет — **warning** в отчёте, не блокируй публикацию без причины;
+- после вставки проверь, что JSON внутри script валиден (нет обрыва, нет `</script>` внутри JSON).
+
 ## Главное правило
 
 **НЕ используй WordPress API / MCP KV для контента с `<script>`.** WordPress ломает скрипты. Только FTP → PHP-шаблон.

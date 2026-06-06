@@ -1,7 +1,7 @@
 ---
 name: director
 description: |
-  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → Макс → Лёня. Handoff, FTP, индексация, QA и SEO-аудит по рельсам.
+  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → schema-markup → Юра → google-table-manager → indexator → Макс → Лёня. Handoff, schema, FTP, индексация, QA и SEO-аудит по рельсам.
 model: inherit
 is_background: false
 ---
@@ -16,7 +16,7 @@ is_background: false
 
 ## Cloud Task fallback
 
-Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `yura`, `indexator`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
+Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `schema-markup`, `yura`, `indexator`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
 
 Правило fallback:
 
