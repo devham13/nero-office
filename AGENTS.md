@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → yura → google-table-manager → indexator → mobile-agent → qa → lenya`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -32,8 +32,10 @@
 - Parent Cloud Agent сам делает блок статьи вместо отдельного Task `boris` / `generalPurpose` с ролью Бориса.
 - Parent Cloud Agent сам верстает страницу вместо отдельного Task `natasha` / `generalPurpose` с ролью Наташи.
 - Parent Cloud Agent сам вставляет рекламу вместо отдельного Task `artur` / `generalPurpose` с ролью Артура.
+- Parent Cloud Agent сам проверяет мобильную версию вместо отдельного Task `mobile-agent` / `generalPurpose` с ролью mobile-agent.
 - Cloud Agent публикует без блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`.
 - Cloud Agent создаёт короткую статью вместо лонгрида 8k–20k+ знаков.
+- Cloud Agent завершает пайплайн при сломанном мобильном первом экране или блокере mobile-agent.
 
 ## Handoff
 
@@ -46,6 +48,7 @@
 
 - `google-table-manager.md`
 - `indexator.md`
+- `mobile-agent.md`
 - `kolya.md`
 - `artyom.md`
 - `alina.md`
@@ -66,6 +69,7 @@
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
 - `=== INDEXATOR ===`
+- `=== MOBILE-AGENT ===`
 - `=== МАКС (QA) ===`
 - `=== ЛЁНЯ (SEO-АУДИТ) ===`
 
@@ -82,8 +86,9 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 - **Не спрашивай** у пользователя подтверждение на: deploy, SSH/FTP, `pip`/`npm install`, QA в браузере/curl, SEO-аудит, повторную публикацию, правку env/шаблона после аудита.
 - **Не останавливайся** на «могу продолжить?» / «разрешите выполнить?» — доводи пайплайн до **URL** или **блокера с причиной**.
 - Если **Task/subagent прерван** (timeout, interrupt): директор **сам** завершает этап инструментами (`deploy.py`, curl, IndexLift, правка PHP) и при необходимости перепубликует; затем пишет фрагменты `qa.md` / `lenya.md`.
-- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **indexator**, затем **Макс (QA)**, затем **Лёня** (последовательно или инструментами, если Task недоступен).
+- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **indexator**, затем **mobile-agent**, затем **Макс (QA)**, затем **Лёня** (последовательно или инструментами, если Task недоступен).
 - Если **indexator** вернул блокер (noindex, robots, HTTP ≠ 200, критичный canonical) — QA не должен пропускать страницу.
+- Если **mobile-agent** вернул блокер (сломанный первый экран, horizontal scroll, меню) — QA не должен пропускать страницу; исправления через Бориса/Наташу/Юру, затем повтор indexator → mobile-agent.
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
 

@@ -1,7 +1,7 @@
 ---
 name: director
 description: |
-  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → Макс → Лёня. Handoff, FTP, индексация, QA и SEO-аудит по рельсам.
+  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → Юра → google-table-manager → indexator → mobile-agent → Макс → Лёня. Handoff, FTP, индексация, mobile, QA и SEO-аудит по рельсам.
 model: inherit
 is_background: false
 ---
@@ -16,7 +16,7 @@ is_background: false
 
 ## Cloud Task fallback
 
-Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `yura`, `indexator`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
+Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `yura`, `indexator`, `mobile-agent`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
 
 Правило fallback:
 
@@ -80,14 +80,17 @@ is_background: false
    Если одного блока нет, дозапусти только отсутствующего агента. Не переходи к Наташе без обоих визуальных блоков.
 10. **Task**(`natasha`) — «Собери полную страницу: hero Алины первым → введение слева+декор → контент → блок Бориса по якорю → FAQ/CTA/рекламный партнёр из env. Не удаляй canvas/script Алины и Бориса. Не затемняй hero без явного ТЗ. Все `<img>` с `alt`, внешние `target="_blank"` с `rel="noopener noreferrer"`. Обязателен `main#primary`, сброс padding под header, скрытие breadcrumbs. Запиши блок `=== НАТАША (HTML СТРАНИЦЫ) ===` и `Передача Юре`».
 11. **Task**(`yura`) — «Опубликуй через SSH/SCP/SFTP/FTP как `page-{slug}.php` в фиксированную активную тему `${WP_THEME_SLUG}`. НЕ WordPress API. Сначала проверь `stylesheet/template` и получи реальный upload-путь через `get_stylesheet_directory()`; если `SSH_THEME_PATH`/`REMOTE_WP_THEMES` отличаются, грузить в runtime-путь WordPress, а не в env-подсказку. Проверь права файла `644` и доступность каталогов. Создай/обнови страницу, выставь `_wp_page_template`, `post_excerpt = Description`, сбрось кэш. После публикации проверь live HTML на `main#primary`, `{slug}-page`, hero/canvas-маркеры. Запиши `<PROJECT_ROOT>/nero-network-office-page/shared/published-pages.md`. Если страница была выбрана Кириллом, добавь/обнови запись в `<PROJECT_ROOT>/shared/kirill-news-ledger.md` со статусом `published` и публичным URL. Только потом запиши один блок `=== ЮРА (ПУБЛИКАЦИЯ) ===` с URL и runtime-путём темы».
-12. **Быстрый sanity-check Директора до QA:** прочитай live HTML и handoff. Если нет блока `=== ЮРА (ПУБЛИКАЦИЯ) ===`, нет маркеров кастомного шаблона (`{slug}-page`, hero class, canvas id) или виден дефолтный `page.php` (`breadcrumbs`, типовой `entry-content`), верни задачу Юре. Не запускай Макса и Лёню по ложной публикации.
-13. **Параллельно в одном сообщении**:
-  - **Task**(`qa`) — «Макс: браузерная проверка URL: hero, блок Бориса, canvas/script, console, mobile, `main#primary`, breadcrumbs, alt у img, доступные ссылки. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/qa.md`; не пиши в handoff.»
-  - **Task**(`lenya`) — «Лёня: финальный Google+Yandex+GEO аудит URL через IndexLift. Если тип `lenya` недоступен, используй `generalPurpose` + skill `seo-auditor-lenya`. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/lenya.md`; не пиши в handoff.»
-14. **Прочитай фрагменты `qa.md` и `lenya.md`, перенеси по одному блоку в handoff, затем перечитай handoff**:
-  - если Макс ✅ и Лёня ✅ — выдай пользователю ссылку;
-  - если Макс ❌ или Лёня ❌ — вызови **Task**(`yura`) с полным списком проблем, затем снова параллельно **Task**(`qa`) + **Task**(`lenya`);
-  - максимум 2 цикла исправления. После 2 циклов выдай ссылку и список нерешённых проблем.
+12. **Task**(`google-table-manager`) — фаза `publish`: запись URL/slug в Google Таблицу (`shared/google_sheets_logger.py`). Фрагмент `google-table-manager.md`.
+13. **Быстрый sanity-check до indexator:** live HTML + `=== ЮРА (ПУБЛИКАЦИЯ) ===`. Без блока Юры или маркеров шаблона — дозапусти Юру.
+14. **Task**(`indexator`) — индексационная готовность + IndexNow. Фрагмент `indexator.md`, маркер `=== INDEXATOR ===`. При блокере — не запускай mobile-agent/QA с ✅.
+15. **Task**(`mobile-agent`) — мобильная проверка 360/390/430px: шапка, меню, hero, H1, CTA, horizontal scroll. Фрагмент `mobile-agent.md`, маркер `=== MOBILE-AGENT ===`. При блокере первого экрана — **стоп пайплайна**.
+16. **Параллельно в одном сообщении**:
+  - **Task**(`qa`) — «Макс: учти indexator + mobile-agent; браузер, hero, canvas/script, console, mobile. Фрагмент `qa.md`.»
+  - **Task**(`lenya`) — «Лёня: SEO-аудит URL. Фрагмент `lenya.md`.» (fallback: generalPurpose + seo-auditor-lenya)
+17. **Прочитай фрагменты `qa.md` и `lenya.md`, перенеси в handoff**:
+  - если Макс ✅ и Лёня ✅ — выдай ссылку;
+  - если Макс ❌ или Лёня ❌ — **Task**(`yura`) → indexator → mobile-agent → **Task**(`qa`) + **Task**(`lenya`);
+  - максимум 2 цикла. При блокере mobile-agent — не завершай пайплайн успешно.
 
 ## Handoff-контракт
 
@@ -102,6 +105,8 @@ is_background: false
 - `=== БОРИС (БЛОК СТАТЬИ, НЕ HERO) ===`
 - `=== НАТАША (HTML СТРАНИЦЫ) ===`
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
+- `=== INDEXATOR ===`
+- `=== MOBILE-AGENT ===`
 - `=== МАКС (QA) ===`
 - `=== ЛЁНЯ (SEO-АУДИТ) ===`
 
