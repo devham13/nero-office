@@ -10,7 +10,7 @@
 
 Директор запускает роли:
 
-`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → schema-markup → internal-linker → yura → google-table-manager → indexator → qa → lenya`
+`google-table-manager → kirill → seo-kolya || artyom → zhenya → artur → alina || boris → natasha → schema-markup → internal-linker → yura → google-table-manager → indexator → qa → lenya → vk-publisher`
 
 `google-table-manager` запускается **дважды**: фаза `reserve` (до Кирилла) и фаза `publish` (после Юры, запись URL в таблицу).
 
@@ -56,6 +56,7 @@
 - `internal-linker.md`
 - `qa.md`
 - `lenya.md`
+- `vk-publisher.md`
 
 Директор переносит фрагменты в handoff и проверяет маркеры:
 
@@ -74,6 +75,7 @@
 - `=== INDEXATOR ===`
 - `=== МАКС (QA) ===`
 - `=== ЛЁНЯ (SEO-АУДИТ) ===`
+- `=== VK-PUBLISHER ===`
 
 ## Публикация
 
@@ -88,7 +90,8 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 - **Не спрашивай** у пользователя подтверждение на: deploy, SSH/FTP, `pip`/`npm install`, QA в браузере/curl, SEO-аудит, повторную публикацию, правку env/шаблона после аудита.
 - **Не останавливайся** на «могу продолжить?» / «разрешите выполнить?» — доводи пайплайн до **URL** или **блокера с причиной**.
 - Если **Task/subagent прерван** (timeout, interrupt): директор **сам** завершает этап инструментами (`deploy.py`, curl, IndexLift, правка PHP) и при необходимости перепубликует; затем пишет фрагменты `qa.md` / `lenya.md`.
-- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **indexator**, затем **Макс (QA)**, затем **Лёня** (последовательно или инструментами, если Task недоступен).
+- После **Юры** запускай **google-table-manager** (фаза `publish`), затем **indexator**, затем **Макс (QA)**, затем **Лёня**, затем **vk-publisher** (последовательно или инструментами, если Task недоступен).
+- **vk-publisher** публикует пост ВК только если в тексте есть `public_url` из блока Юры/QA; без ссылки на страницу `wall.post` не вызывать.
 - Если **indexator** вернул блокер (noindex, robots, HTTP ≠ 200, критичный canonical) — QA не должен пропускать страницу.
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
@@ -100,5 +103,5 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 В коммит должны попадать только устойчивые артефакты:
 
 - обновления правил/skills/agents;
-- журналы `shared/published-pages.md`, `shared/session-handoff.md`, `shared/kirill-news-ledger.md`;
+- журналы `shared/published-pages.md`, `shared/session-handoff.md`, `shared/kirill-news-ledger.md`, `shared/vk-posts-ledger.md`;
 - если страница опубликована, обязательно шаблон `wordpress-theme/page-{slug}.php` или другой воспроизводимый файл шаблона, принятый в этом репозитории.
