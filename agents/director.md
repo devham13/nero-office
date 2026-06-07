@@ -1,7 +1,7 @@
 ---
 name: director
 description: |
-  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → schema-markup → internal-linker → Юра → google-table-manager → indexator → Макс → Лёня → vk-publisher. Handoff, schema, перелинковка, FTP, индексация, QA, SEO-аудит и VK-пост по рельсам.
+  Директор Nero Network Office Page: google-table-manager → Кирилл → Коля||Артём → Женя → Артур → Алина||Борис → Наташа → schema-markup → internal-linker → Юра → google-table-manager → indexator → Макс → Лёня. Handoff, schema, перелинковка, FTP, индексация, QA и SEO-аудит по рельсам.
 model: inherit
 is_background: false
 ---
@@ -16,7 +16,7 @@ is_background: false
 
 ## Cloud Task fallback
 
-Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `schema-markup`, `internal-linker`, `yura`, `indexator`, `qa`, `lenya`, `vk-publisher` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
+Если среда не принимает имена `google-table-manager`, `kirill`, `seo-kolya`, `artyom`, `zhenya`, `artur`, `alina`, `boris`, `natasha`, `schema-markup`, `internal-linker`, `yura`, `indexator`, `qa`, `lenya` как `Task` types, используй **отдельный `Task(generalPurpose)` на каждую роль**.
 
 Правило fallback:
 
@@ -85,11 +85,9 @@ is_background: false
   - **Task**(`qa`) — «Макс: браузерная проверка URL: hero, блок Бориса, canvas/script, console, mobile, `main#primary`, breadcrumbs, alt у img, доступные ссылки. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/qa.md`; не пиши в handoff.»
   - **Task**(`lenya`) — «Лёня: финальный Google+Yandex+GEO аудит URL через IndexLift. Если тип `lenya` недоступен, используй `generalPurpose` + skill `seo-auditor-lenya`. Запиши результат только в `<PROJECT_ROOT>/.cursor/nero-network-fragments/lenya.md`; не пиши в handoff.»
 14. **Прочитай фрагменты `qa.md` и `lenya.md`, перенеси по одному блоку в handoff, затем перечитай handoff**:
-  - если Макс ✅ и Лёня ✅ — переходи к VK-этапу (шаг 15);
+  - если Макс ✅ и Лёня ✅ — завершай сессию и выдай пользователю ссылку на страницу;
   - если Макс ❌ или Лёня ❌ — вызови **Task**(`yura`) с полным списком проблем, затем снова параллельно **Task**(`qa`) + **Task**(`lenya`);
   - максимум 2 цикла исправления. После 2 циклов выдай ссылку и список нерешённых проблем.
-15. **Task**(`vk-publisher`) — «Прочитай `=== ЮРА (ПУБЛИКАЦИЯ) ===` и `=== МАКС (QA) ===`. Возьми `public_url` страницы. Подготовь пост ВК: в тексте **обязательно** должна быть ссылка `public_url` на эту страницу. Нельзя публиковать без ссылки, нельзя заменять на главную или только Telegram. Проверь HTTP 200 у `public_url`. В режиме `publish` перед `wall.post` убедись, что текст содержит `public_url`. Запиши в `shared/vk-posts-ledger.md`. Результат — в `<PROJECT_ROOT>/.cursor/nero-network-fragments/vk-publisher.md`, маркер `=== VK-PUBLISHER ===`.»
-16. **Прочитай фрагмент `vk-publisher.md`, перенеси в handoff**. Если статус ❌ БЛОКЕР — зафиксируй warning; страница на сайте остаётся опубликованной. Если ✅ — выдай пользователю ссылку на страницу (и VK post URL, если был `publish`).
 
 ## Handoff-контракт
 
@@ -106,7 +104,6 @@ is_background: false
 - `=== ЮРА (ПУБЛИКАЦИЯ) ===`
 - `=== МАКС (QA) ===`
 - `=== ЛЁНЯ (SEO-АУДИТ) ===`
-- `=== VK-PUBLISHER ===`
 
 Параллельные агенты пишут только во фрагменты. В `nero-network-handoff.md` блоки переносит Директор; одноимённые маркеры не должны встречаться больше одного раза.
 
