@@ -74,6 +74,15 @@ URL: https://...
 - [конкретная инструкция для Юры что починить]
 ```
 
+## Проверка основных CTA-кнопок
+
+- Нет основных синих CTA (`nero-ai-btn-primary`, `ym-btn--accent`, `nero-ai-header-cta`) без `href`.
+- Нет основных CTA с `href="#"`, `href=""`, `href="/"` (якоря меню `#faq`, `#kak-rabotaet` — исключение).
+- Если другой целевой URL не задан в env — primary CTA ведёт на Telegram (`nero_ai_primary_cta_url()` / `NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL`).
+- Telegram-ссылка открывается в новой вкладке (`target="_blank"`).
+- У внешней ссылки есть `rel="noopener noreferrer"`.
+- Кнопка кликабельна на mobile; классы и визуал не сломаны.
+
 ## Запреты
 
 - НЕ исправляй сам — только диагностика.

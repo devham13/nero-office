@@ -12,8 +12,9 @@ if (!isset($nero_ai_header_links) || !is_array($nero_ai_header_links)) {
     $nero_ai_header_links = [];
 }
 $brand = $brand ?? (get_bloginfo('name') ?: 'AI-автоматизация');
-$primary_cta_label = $primary_cta_label ?? 'Аудит потерь за 30 минут';
-$primary_cta_url = $primary_cta_url ?? '#audit-30-min';
+$primary_cta_label = $primary_cta_label ?? 'Написать в Telegram';
+$primary_cta_url = $primary_cta_url ?? (function_exists('nero_ai_primary_cta_url') ? nero_ai_primary_cta_url() : (defined('NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL') ? NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL : ''));
+$primary_cta_attrs = function_exists('nero_ai_primary_cta_link_attrs') ? nero_ai_primary_cta_link_attrs($primary_cta_url) : '';
 $logo_src = '';
 $custom_logo_id = get_theme_mod('custom_logo');
 if ($custom_logo_id) {
@@ -50,7 +51,7 @@ $home = home_url('/');
           <?php foreach ($nero_ai_header_links as $item) : ?>
             <a class="nero-ai-header-link" href="<?php echo esc_url($item['href'] ?? '#'); ?>"><?php echo esc_html($item['label'] ?? ''); ?></a>
           <?php endforeach; ?>
-          <a class="nero-ai-header-cta nero-ai-header-cta--mobile" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+          <a class="nero-ai-header-cta nero-ai-header-cta--mobile" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
         </div>
       </nav>
 
@@ -58,7 +59,7 @@ $home = home_url('/');
         <?php if (!empty($secondary_cta_label) && !empty($secondary_cta_url)) : ?>
           <a class="nero-ai-header-cta nero-ai-header-cta--ghost" href="<?php echo esc_url($secondary_cta_url); ?>"><?php echo esc_html($secondary_cta_label); ?></a>
         <?php endif; ?>
-        <a class="nero-ai-header-cta" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+        <a class="nero-ai-header-cta" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
         <button type="button" class="nero-ai-header-toggle" id="nero-ai-header-toggle" aria-expanded="false" aria-controls="nero-ai-header-nav">
           <span class="nero-ai-header-toggle-line" aria-hidden="true"></span>
           <span class="nero-ai-header-toggle-line" aria-hidden="true"></span>

@@ -121,6 +121,7 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
    - у **каждого** `<img>` укажи **`alt`** (кратко по смыслу на русском; для декора — `alt=""`);
    - ссылки, которые оборачивают только картинку, получают доступное имя через **`alt`** изображения;
    - для `target="_blank"` на внешних URL добавляй **`rel="noopener noreferrer"`**;
+   - основные синие CTA (`nero-ai-btn-primary`, `ym-btn--accent`) по умолчанию ведут на Telegram через `nero_ai_primary_cta_url()`; не оставляй action-CTA с `href="#"`;
    - баннер из AD_BANNER_* вставляй **только** по актуальному фрагменту из **advertiser-artur** (с `alt` и `rel`).
 
 ## Выход

@@ -42,10 +42,11 @@ add_action(
     1
 );
 
-// --- CTA из env ---
+// --- CTA из env (primary → Telegram по умолчанию) ---
 $brand               = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
-$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Обсудить внедрение';
-$primary_cta_url     = getenv('PRIMARY_CTA_URL') ?: '#cta';
+$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Написать в Telegram';
+$primary_cta_url     = nero_ai_primary_cta_url();
+$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
 $secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#kak-rabotaet';
 
@@ -88,7 +89,7 @@ if (!is_readable($nero_ai_floating)) {
           <li class="nero-ai-badge">Тег 2</li>
         </ul>
         <div class="nero-ai-btn-row">
-          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
           <a class="nero-ai-btn nero-ai-btn-secondary" href="<?php echo esc_url($secondary_cta_url); ?>"><?php echo esc_html($secondary_cta_label); ?></a>
         </div>
       </div>

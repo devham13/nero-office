@@ -22,10 +22,6 @@ add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_descr
 
 
 $brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
-$primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Аудит amoCRM';
-$primary_cta_url = getenv('PRIMARY_CTA_URL') ?: '#cta';
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
-$secondary_cta_url = '#kak-rabotaet';
 
 $nero_ai_header_links = [
     ['label' => 'Как работает', 'href' => '#kak-rabotaet'],
@@ -40,6 +36,12 @@ if (!is_readable($nero_ai_bootstrap)) {
     $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+$primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Написать в Telegram';
+$primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
+$primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
+$secondary_cta_url = '#kak-rabotaet';
 
 get_header();
 
@@ -522,7 +524,7 @@ nav[aria-label="Хлебные крошки"],
           <li class="nero-ai-badge">Воронка 24/7</li>
         </ul>
         <div class="nero-ai-btn-row">
-          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"><?php echo esc_html($primary_cta_label); ?></a>
+          <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
           <a class="nero-ai-btn nero-ai-btn-secondary" href="#kak-rabotaet">Как это работает</a>
         </div>
       </div>
@@ -759,7 +761,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="ym-cta-block__body">
         <p class="ym-cta-block__headline">Хотите AI-агента для своей amoCRM?</p>
         <p class="ym-cta-block__sub">Проверим вашу воронку, покажем, что можно автоматизировать прямо сейчас. Бесплатно, за 2–3 рабочих дня.</p>
-        <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent ym-cta-block__btn">Получить бесплатный аудит</a>
+        <a href="<?php echo esc_url($primary_cta_url); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent ym-cta-block__btn"<?php echo $primary_cta_attrs; ?>>Получить бесплатный аудит</a>
       </div>
     </div>
   </div>
@@ -1296,7 +1298,7 @@ nav[aria-label="Хлебные крошки"],
         <p class="ym-cta-block__headline">Хотите таких же результатов?</p>
         <p class="ym-cta-block__sub">ROI 340% за 3 месяца, ×2 выручки за 9 месяцев, ноль «забытых» лидов — это реальные кейсы наших клиентов. Следующий может быть ваш.</p>
         <div class="ym-cta-block__actions">
-          <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent">Получить бесплатный аудит</a>
+          <a href="<?php echo esc_url($primary_cta_url); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent"<?php echo $primary_cta_attrs; ?>>Получить бесплатный аудит</a>
           <a href="#etapy" class="nero-ai-btn nero-ai-btn-secondary ym-btn ym-btn--ghost">Как проходит внедрение →</a>
         </div>
       </div>
@@ -1564,7 +1566,7 @@ nav[aria-label="Хлебные крошки"],
         <li>Стек и бюджет под ваш поток</li>
         <li>Без обязательств</li>
       </ul>
-      <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" style="font-size:16px;padding:16px 36px;">
+      <a href="<?php echo esc_url($primary_cta_url); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" style="font-size:16px;padding:16px 36px;"<?php echo $primary_cta_attrs; ?>>
         Получить бесплатный аудит amoCRM
       </a>
     </div>
@@ -1576,7 +1578,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="ym-cta-block__body">
         <p class="ym-cta-block__headline">Готовы автоматизировать amoCRM?</p>
         <p class="ym-cta-block__sub">Бесплатный аудит — первый шаг. Покажем, что прямо сейчас теряет ваш отдел продаж, и как это исправить за 2–3 недели.</p>
-        <a href="#cta" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent">Проверить amoCRM бесплатно</a>
+        <a href="<?php echo esc_url($primary_cta_url); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent"<?php echo $primary_cta_attrs; ?>>Проверить amoCRM бесплатно</a>
       </div>
     </div>
   </div>

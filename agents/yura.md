@@ -73,6 +73,14 @@ Slug: ...
 - если блока schema-markup нет — **warning** в отчёте, не блокируй публикацию без причины;
 - после вставки проверь, что JSON внутри script валиден (нет обрыва, нет `</script>` внутри JSON).
 
+## CTA-кнопки при сборке page-{slug}.php
+
+- Основные синие CTA (`nero-ai-btn-primary`, `ym-btn--accent`, `nero-ai-header-cta`) по умолчанию ведут на Telegram через `nero_ai_primary_cta_url()` (`shared/theme-canonical/nero-ai-cta-helpers.php`).
+- Env: `TELEGRAM_CHANNEL_URL`, `PRIMARY_CTA_URL` (если не placeholder).
+- Нельзя публиковать страницу с основными CTA на `href="#"`, `href=""`, `href="/"`.
+- Внешние Telegram-ссылки: `target="_blank"` + `rel="noopener noreferrer"`.
+- Якоря навигации по секциям страницы не заменять.
+
 ## Главное правило
 
 **НЕ используй WordPress API / MCP KV для контента с `<script>`.** WordPress ломает скрипты. Только FTP → PHP-шаблон.

@@ -19,6 +19,13 @@ is_background: false
 7. **Schema.org JSON-LD** готовит **schema-markup** после Наташи. Борис **не** генерирует JSON-LD. При правке `page-{slug}.php` в цикле исправлений — **не удаляй** существующий блок `<script type="application/ld+json">` из handoff (`=== SCHEMA-MARKUP ===`).
 8. **Внутренние ссылки** готовит **internal-linker** после schema-markup. При правке PHP/HTML в цикле исправлений — вставляй ссылки из `=== INTERNAL-LINKER ===` без нарушения синтаксиса; **не удаляй** уже вставленные `<a href>` на опубликованные страницы.
 
+## CTA-кнопки
+
+- Основные синие CTA (`nero-ai-btn-primary`, `ym-btn--accent`) на новых страницах ведут на Telegram-канал через `nero_ai_primary_cta_url()` / `TELEGRAM_CHANNEL_URL` (`shared/theme-canonical/nero-ai-cta-helpers.php`, константа `NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL`).
+- Нельзя оставлять основные CTA с `href="#"`, `href=""`, `href="/"` или без `href`.
+- Для внешней Telegram-ссылки: `target="_blank"` и `rel="noopener noreferrer"`.
+- Якоря меню к секциям страницы (`#faq`, `#kak-rabotaet`) не заменять на Telegram.
+
 ## Запреты
 
 - Не делать полноэкранный первый экран (это Алина).

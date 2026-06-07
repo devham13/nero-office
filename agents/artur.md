@@ -91,6 +91,13 @@ H1_для_hero: ...
 - Меню по секциям — только список **`$nero_ai_header_links`** (якоря к id на странице); шапку собирает Наташа из темы.
 - Hero — логика **`.nero-ai-hero`** (H1, CTA, дашборд), не legacy-светлый блок.
 
+## CTA-кнопки (обязательно)
+
+- Основные синие CTA в HTML-блоках для Наташи ведут на Telegram через `${TELEGRAM_CHANNEL_URL}` / `nero_ai_primary_cta_url()` (или `${PRIMARY_CTA_URL}` из env, если задан и не placeholder).
+- Нельзя оставлять CTA с `href="#"`, `href=""`, `href="/"` или без `href`.
+- Внешние ссылки: `target="_blank"` + `rel="noopener noreferrer"`.
+- Вторичные якоря к секциям (`#etapy`, `#faq`) — оставлять как есть.
+
 ## Запреты
 
 - НЕ превращай страницу в рекламную помойку.

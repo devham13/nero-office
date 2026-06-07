@@ -91,6 +91,8 @@ get_header(); ?>
 
    Если Наташа прислала HTML без такого `main`, добавь его сам перед публикацией.
 
+   **CTA-кнопки:** в `page-{slug}.php` подключай `nero_ai_primary_cta_url()` из `shared/theme-canonical/nero-ai-cta-helpers.php` (через bootstrap). Основные синие CTA по умолчанию ведут на Telegram. Нельзя публиковать action-CTA с `href="#"`, `href=""`, `href="/"`. Внешние ссылки — `target="_blank"` + `rel="noopener noreferrer"`.
+
 3. **Сохрани PHP-файл локально** как `page-{slug}.php` во временную директорию.
 
 4. **Перед выгрузкой подтверди фиксированную тему WordPress и реальный путь активной темы.**

@@ -4,6 +4,11 @@
  * Добавляет body.nero-ai-landing и хелпер чтения CSS/JS из активной темы.
  */
 
+$nero_ai_cta_helpers = __DIR__ . '/nero-ai-cta-helpers.php';
+if (is_readable($nero_ai_cta_helpers)) {
+    require_once $nero_ai_cta_helpers;
+}
+
 if (!function_exists('nero_ai_landing_body_class')) {
     add_filter('body_class', static function (array $classes): array {
         if (!in_array('nero-ai-landing', $classes, true)) {

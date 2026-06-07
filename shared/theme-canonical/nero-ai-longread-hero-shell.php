@@ -14,8 +14,16 @@ $hero_title = $hero_title ?? '';
 $hero_title_id = $hero_title_id ?? 'nero-ai-hero-title';
 $hero_lead = $hero_lead ?? '';
 $hero_badges = $hero_badges ?? [];
-$hero_primary_label = $hero_primary_label ?? (getenv('PRIMARY_CTA_LABEL') ?: 'Обсудить внедрение');
-$hero_primary_url = $hero_primary_url ?? (getenv('PRIMARY_CTA_URL') ?: '#audit');
+$hero_primary_label = $hero_primary_label ?? (getenv('PRIMARY_CTA_LABEL') ?: 'Написать в Telegram');
+$hero_primary_url = $hero_primary_url ?? (function_exists('nero_ai_primary_cta_url') ? nero_ai_primary_cta_url() : (defined('NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL') ? NERO_AI_DEFAULT_TELEGRAM_CHANNEL_URL : ''));
+$hero_primary_attrs = '';
+if (function_exists('nero_ai_primary_cta_link_attrs')) {
+    $hero_primary_attrs = nero_ai_primary_cta_link_attrs($hero_primary_url);
+} elseif (function_exists('nero_ai_external_link_attrs')) {
+    $hero_primary_attrs = nero_ai_external_link_attrs($hero_primary_url);
+} elseif (str_starts_with($hero_primary_url, 'http')) {
+    $hero_primary_attrs = ' target="_blank" rel="noopener noreferrer"';
+}
 $hero_secondary_label = $hero_secondary_label ?? (getenv('SECONDARY_CTA_LABEL') ?: 'Что можно автоматизировать');
 $hero_secondary_url = $hero_secondary_url ?? (getenv('SECONDARY_CTA_URL') ?: home_url('/#services'));
 $hero_secondary_external = $hero_secondary_external ?? null;
@@ -47,7 +55,7 @@ $hero_feed = $hero_feed ?? [];
             </div>
           <?php endif; ?>
           <div class="nero-ai-cta-row">
-            <a class="nero-ai-btn nero-ai-btn--primary" href="<?php echo esc_url($hero_primary_url); ?>"><?php echo esc_html($hero_primary_label); ?></a>
+            <a class="nero-ai-btn nero-ai-btn--primary" href="<?php echo esc_url($hero_primary_url); ?>"<?php echo $hero_primary_attrs; ?>><?php echo esc_html($hero_primary_label); ?></a>
             <a class="nero-ai-btn nero-ai-btn--ghost" href="<?php echo esc_url($hero_secondary_url); ?>"<?php echo $hero_secondary_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($hero_secondary_label); ?></a>
           </div>
         </div>

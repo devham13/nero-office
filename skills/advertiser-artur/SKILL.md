@@ -94,6 +94,16 @@ H1_для_hero: ...
 ПОДЗАГОЛОВОК_HERO: ...
 ```
 
+## CTA-кнопки (Telegram по умолчанию)
+
+- Основные синие CTA в HTML для Наташи: `${TELEGRAM_CHANNEL_URL}` / `nero_ai_primary_cta_url()` или `${PRIMARY_CTA_URL}` из env, если заданы.
+- Запрещено: `href="#"`, `href=""`, `href="/"`, кнопки без `href`.
+- Внешние ссылки: `target="_blank"` + `rel="noopener noreferrer"`.
+- Пример:
+```html
+<a href="${TELEGRAM_CHANNEL_URL}" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" target="_blank" rel="noopener noreferrer">${PRIMARY_CTA_LABEL}</a>
+```
+
 ## Запреты
 
 - Не превращай страницу в рекламную помойку.
