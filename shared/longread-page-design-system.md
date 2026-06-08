@@ -74,7 +74,7 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 - Превью ссылки: **1200×630**, не фавикон/логотип 640×640.
 - В `page-{slug}.php`: `nero_page_register_social_meta($page_seo_title, $page_seo_description, $page_og_image)`.
 - Опционально в hero: `<img class="nero-og-source" src="..." width="1200" height="630" alt="" aria-hidden="true" />` с URL скрина первого блока.
-- Без явного URL MU-plugin генерирует `/nero-og/{post_id}.jpg` в стиле hero.
+- После публикации: `python3 scripts/capture-page-og-screenshots.py --slug {slug} --apply` (скрин Playwright, не автогенерация).
 
 ## Юридический футер (обязательно)
 

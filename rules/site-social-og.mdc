@@ -19,7 +19,8 @@ alwaysApply: true
 
 | Слой | Файл |
 |------|------|
-| MU-plugin (все страницы) | `wordpress/mu-plugins/nero-social-og.php` — фильтр AIOSEO + `/nero-og/{id}.jpg` |
+| MU-plugin (все страницы) | `wordpress/mu-plugins/nero-social-og.php` — фильтр AIOSEO, URL скрина из meta/файла |
+| Скрин первого экрана | `scripts/capture-page-og-screenshots.py` → `uploads/nero-og-screenshots/{slug}.jpg` |
 | Шаблон лонгрида | `nero_page_register_social_meta($title, $desc, $og_image)` из `shared/theme-canonical/nero-page-social-meta.php` |
 | Канонический шаблон | `shared/templates/current-page-template.php` |
 
@@ -29,7 +30,10 @@ alwaysApply: true
 2. post meta `_nero_og_image`
 3. `<img class="nero-og-source">` или `data-nero-og-image` в HTML
 4. Featured image (large)
-5. Авто: `/nero-og/{post_id}.jpg` — тёмный hero-preview с H1
+5. Файл на сервере: `wp-content/uploads/nero-og-screenshots/{slug}.jpg` (скрин Playwright 1200×630)
+
+**Автогенерация GD запрещена.** После публикации Юра/QA запускает:
+`python3 scripts/capture-page-og-screenshots.py --slug {slug} --apply`
 
 ## Пайплайн
 
