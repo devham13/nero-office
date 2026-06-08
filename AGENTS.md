@@ -96,6 +96,14 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
 
+## Социальные превью OG (обязательно)
+
+Правило: `rules/site-social-og.mdc`. В Telegram/VK/Facebook в превью должен быть **hero 1200×630**, не фавикон.
+
+- MU-plugin `nero-social-og.php` переопределяет `og:image` у AIOSEO.
+- Шаблоны: `nero_page_register_social_meta($title, $desc, $og_image)`.
+- QA: `og:image` ≠ logo/favicon, размер 1200×630.
+
 ## Юридическое соответствие (обязательно)
 
 Правило репозитория: `rules/site-legal-compliance.mdc` (always apply).

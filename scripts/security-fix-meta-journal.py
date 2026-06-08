@@ -27,6 +27,7 @@ from credentials import get_credential, require_credential  # noqa: E402
 MU_PLUGINS_LOCAL = [
     ROOT / "wordpress" / "mu-plugins" / "nero-site-legal.php",
     ROOT / "wordpress" / "mu-plugins" / "nero-security-trust.php",
+    ROOT / "wordpress" / "mu-plugins" / "nero-social-og.php",
 ]
 TRUST_PAGES = {
     "politika-konfidentsialnosti": {

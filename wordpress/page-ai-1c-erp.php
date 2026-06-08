@@ -6,20 +6,7 @@
 
 $page_seo_title       = 'AI-агент для 1С и ERP: внедрение и настройка под ключ';
 $page_seo_description = 'Внедрение AI-агента для 1С и ERP: автоматизация счетов, заявок и первички без ручного ввода. Интеграция с CRM, OCR, ROI-калькулятор. Аудит документооборота.';
-
-add_filter( 'document_title_parts', static function ( array $parts ) use ( $page_seo_title ): array {
-	$parts['title'] = $page_seo_title;
-	return $parts;
-}, 20 );
-
-add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_description ): void {
-	echo '<meta name="description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
-	echo '<meta property="og:title" content="' . esc_attr( $page_seo_title ) . '" />' . "\n";
-	echo '<meta property="og:description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
-	echo '<meta property="og:url" content="' . esc_url( get_permalink() ) . '" />' . "\n";
-	echo '<meta property="og:type" content="article" />' . "\n";
-}, 1 );
-
+$page_og_image        = null;
 
 $brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 
@@ -38,6 +25,10 @@ if (!is_readable($nero_ai_bootstrap)) {
     $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+if (function_exists('nero_page_register_social_meta')) {
+    nero_page_register_social_meta($page_seo_title, $page_seo_description, $page_og_image);
+}
 
 $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Посчитать экономию';
 $primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
