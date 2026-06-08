@@ -69,6 +69,20 @@ JS из `shared/longread-page-reveal.js` должен быть вставлен 
 
 Новые страницы должны быть коммерческими: если новость про внедрение AI в бизнес, страница должна показывать, какую похожую услугу можно предложить клиенту: что автоматизировать, кому подходит, какую боль закрывает, как внедряется, какие интеграции нужны, какой CTA.
 
+## Open Graph / превью в соцсетях (обязательно)
+
+- Превью ссылки: **1200×630**, не фавикон/логотип 640×640.
+- В `page-{slug}.php`: `nero_page_register_social_meta($page_seo_title, $page_seo_description, $page_og_image)`.
+- Опционально в hero: `<img class="nero-og-source" src="..." width="1200" height="630" alt="" aria-hidden="true" />` с URL скрина первого блока.
+- После публикации: `python3 scripts/capture-page-og-screenshots.py --slug {slug} --apply` (скрин Playwright, не автогенерация).
+
+## Юридический футер (обязательно)
+
+- Оператор: **Горбачев Юрий Александрович**, ИНН **164807872488** (см. `shared/site-legal.php`, `rules/site-legal-compliance.mdc`).
+- Шаблон `page-{slug}.php` завершается **`get_footer()`** — MU-plugin `nero-security-trust.php` выводит ссылки на политику, контакты, условия.
+- Не удалять и не перекрывать `.nero-site-legal-block` / вывод `wp_footer`.
+- CTA и формы: текст согласия со ссылкой на `/politika-konfidentsialnosti/`.
+
 ## Запреты
 
 - Не делать светлый «метрика»-дизайн для новых AI-страниц.

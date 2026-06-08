@@ -1,0 +1,48 @@
+---
+description: Open Graph / Telegram / VK — превью hero 1200×630, не фавикон
+alwaysApply: true
+---
+
+# Социальные превью (Open Graph)
+
+## Проблема
+
+Без явного `og:image` AIOSEO подставляет **логотип/фавикон** (квадрат 640×640). В Telegram/VK/Facebook отображается иконка робота вместо hero-блока.
+
+## Обязательно на каждой странице
+
+1. **`og:image`** — горизонтальное превью **1200×630** (JPEG/PNG, HTTPS).
+2. **`twitter:card`** = `summary_large_image`.
+3. Не использовать site icon, custom logo, `cropped-photo_*`, `-150x150` как OG.
+
+## Реализация
+
+| Слой | Файл |
+|------|------|
+| MU-plugin (все страницы) | `wordpress/mu-plugins/nero-social-og.php` — фильтр AIOSEO, URL скрина из meta/файла |
+| Скрин первого экрана | `scripts/capture-page-og-screenshots.py` → `uploads/nero-og-screenshots/{slug}.jpg` |
+| Шаблон лонгрида | `nero_page_register_social_meta($title, $desc, $og_image)` из `shared/theme-canonical/nero-page-social-meta.php` |
+| Канонический шаблон | `shared/templates/current-page-template.php` |
+
+## Приоритет выбора og:image
+
+1. `$page_og_image` в `page-{slug}.php`
+2. post meta `_nero_og_image`
+3. `<img class="nero-og-source">` или `data-nero-og-image` в HTML
+4. Featured image (large)
+5. Файл на сервере: `wp-content/uploads/nero-og-screenshots/{slug}.jpg` (скрин Playwright 1200×630)
+
+**Автогенерация GD запрещена.** После публикации Юра/QA запускает:
+`python3 scripts/capture-page-og-screenshots.py --slug {slug} --apply`
+
+## Пайплайн
+
+- **Коля / Юра:** `$page_seo_title`, `$page_seo_description`; при наличии скрина hero — `$page_og_image`.
+- **Наташа:** в hero можно добавить скрытый `<img class="nero-og-source" src="..." alt="" width="1200" height="630" aria-hidden="true">` с URL загруженного превью.
+- **Юра:** после деплоя `wp rewrite flush`; проверить `og:image` в HTML ≠ фавикон.
+- **QA / Лёня:** curl страницы → `og:image` 1200×630, `twitter:card` = summary_large_image.
+
+## Запрещено
+
+- Публиковать лонгрид без `og:image` (полагаться на фавикон).
+- Квадратные 640×640 изображения в OG.

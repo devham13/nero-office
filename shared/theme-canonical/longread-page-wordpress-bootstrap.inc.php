@@ -9,6 +9,11 @@ if (is_readable($nero_ai_cta_helpers)) {
     require_once $nero_ai_cta_helpers;
 }
 
+$nero_page_social_meta = __DIR__ . '/nero-page-social-meta.php';
+if (is_readable($nero_page_social_meta)) {
+    require_once $nero_page_social_meta;
+}
+
 if (!function_exists('nero_ai_landing_body_class')) {
     add_filter('body_class', static function (array $classes): array {
         if (!in_array('nero-ai-landing', $classes, true)) {

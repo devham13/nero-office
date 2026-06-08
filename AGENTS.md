@@ -96,6 +96,29 @@ WordPress API / REST API / MCP blob flow для страниц с `<script>` и 
 
 Секреты брать только из Cloud Secrets / env vars. Не печатать секреты в ответах, PR body, handoff или логах.
 
+## Социальные превью OG (обязательно)
+
+Правило: `rules/site-social-og.mdc`. В Telegram/VK/Facebook в превью должен быть **hero 1200×630**, не фавикон.
+
+- MU-plugin `nero-social-og.php` — `og:image` только из **скрина первого экрана** (не фавикон, не автогенерация).
+- После публикации: `python3 scripts/capture-page-og-screenshots.py --slug {slug} --apply`.
+- Файл: `uploads/nero-og-screenshots/{slug}.jpg`, meta `_nero_og_image`.
+- QA: `og:image` — реальный скрин hero 1200×630.
+
+## Юридическое соответствие (обязательно)
+
+Правило репозитория: `rules/site-legal-compliance.mdc` (always apply).
+
+**Оператор сайта:** Горбачев Юрий Александрович, ИНН 164807872488, email `devham@mail.ru`.
+
+**Политика конфиденциальности:** `/politika-konfidentsialnosti/` — полный текст в `security/pages/politika-konfidentsialnosti.html`.
+
+На **каждой** странице (главная, лонгриды, служебные) должна быть видимая ссылка на политику. MU-plugin `nero-security-trust.php` + `nero-site-legal.php` добавляют юридический футер через `wp_footer`; шаблоны `page-{slug}.php` **обязаны** вызывать `get_footer()` в конце.
+
+- **Артур:** CTA/формы — текст согласия со ссылкой на политику.
+- **Наташа / Юра:** не дублировать юридический футер вручную; `get_footer()` в конце шаблона.
+- **QA / Лёня:** проверять HTTP 200 политики, ссылку в футере, ИНН на `/kontakty/`.
+
 ## Git hygiene
 
 `.cursor/nero-network-handoff.md` и `.cursor/nero-network-fragments/` — runtime-файлы пайплайна. Их можно создавать и читать во время автоматизации, но **нельзя коммитить** в Git/PR.
