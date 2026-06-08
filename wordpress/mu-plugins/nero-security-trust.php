@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Nero Security & Trust (MU)
  * Description: Anti-fraud trust signals: brand disclaimers, duplicate redirects, security headers, footer legal links, CTA safety notice.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Nero Network Security
  */
 
@@ -35,6 +35,21 @@ final class Nero_Security_Trust
         'alice-ai-llm-flash-yandex-dlya-biznesa'          => self::CANONICAL_ALICE_SLUG,
         'alice-ai-llm-flash-vnedrenie-biznes'             => self::CANONICAL_ALICE_SLUG,
         'yandex-alice-ai-llm-flash-avtomatizaciya-biznesa' => self::CANONICAL_ALICE_SLUG,
+    ];
+
+    private const CANONICAL_ZAYAVKI_SLUG = 'vnedrenie-ai-obrabotka-zayavok-s-sayta';
+
+    /** @var array<string, string> */
+    private const CONTENT_DUPLICATE_REDIRECTS = [
+        'ai-obrabotka-zayavok-s-sayta' => self::CANONICAL_ZAYAVKI_SLUG,
+    ];
+
+    /** Черновики/заглушки, случайно опубликованные с title «hero fix». */
+    private const PLACEHOLDER_SLUGS = [
+        'microsoft-otkaz-claude-code-stoimost-ai-avtomatizaciya',
+        'salesforce-claude-code-13-dnej-agentnaya-razrabotka',
+        'copilot-computer-use-mcp-agenty-bez-api',
+        'kontrol-rashodov-ai-tokeny-500-mln-claude',
     ];
 
     /** @var array<string, string> */
@@ -98,7 +113,10 @@ final class Nero_Security_Trust
         }
 
         $slug = $post->post_name;
-        $target = self::META_DUPLICATE_REDIRECTS[$slug] ?? self::ALICE_DUPLICATE_REDIRECTS[$slug] ?? null;
+        $target = self::META_DUPLICATE_REDIRECTS[$slug]
+            ?? self::ALICE_DUPLICATE_REDIRECTS[$slug]
+            ?? self::CONTENT_DUPLICATE_REDIRECTS[$slug]
+            ?? null;
         if ($target === null) {
             return;
         }
@@ -120,7 +138,13 @@ final class Nero_Security_Trust
         }
 
         $slug = $post->post_name;
-        if (isset(self::META_DUPLICATE_REDIRECTS[$slug]) || isset(self::ALICE_DUPLICATE_REDIRECTS[$slug])) {
+        $is_redirect_source = isset(self::META_DUPLICATE_REDIRECTS[$slug])
+            || isset(self::ALICE_DUPLICATE_REDIRECTS[$slug])
+            || isset(self::CONTENT_DUPLICATE_REDIRECTS[$slug]);
+        $is_placeholder = in_array($slug, self::PLACEHOLDER_SLUGS, true)
+            || mb_strtolower(trim($post->post_title), 'UTF-8') === 'hero fix';
+
+        if ($is_redirect_source || $is_placeholder) {
             echo '<meta name="robots" content="noindex, follow" />' . "\n";
         }
     }
