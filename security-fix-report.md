@@ -1,9 +1,10 @@
 # Отчёт об исправлениях безопасности и антифрод-факторов
 
-**Дата:** 8 июня 2026  
-**Сайт:** см. переменную WP_SITE_URL
+**Дата первичного аудита:** 8 июня 2026  
+**Дата деплоя исправлений:** 8 июня 2026, ~18:17 MSK  
+**Сайт:** см. переменную `WP_SITE_URL` в secrets  
 **IP:** 45.130.41.132 (Beget)  
-**Сервер:** nginx-reuseport/1.21.1, PHP 8.3.20, WordPress 7.0 (по meta generator)
+**Сервер:** nginx-reuseport/1.21.1, PHP 8.3.20, WordPress 7.0
 
 ---
 
@@ -11,12 +12,12 @@
 
 | Вопрос | Ответ |
 |--------|--------|
-| Реальный взлом обнаружен? | **Нет** (внешние проверки; серверный scan не выполнен — нет SSH) |
-| Вредоносные файлы найдены? | **Не обнаружены** снаружи; серверный `grep`/`find` не запускался |
-| Основная причина предупреждения | **Репутационно-контентная:** домен `meta-journal`, брендовые SEO-лонгриды без дисклеймеров, CTA в Telegram, молодой домен, нет страниц доверия |
-| Что исправлено на live-сайте | **Ничего** — доступ к серверу заблокирован (см. раздел 3) |
-| Что подготовлено к деплою | MU-plugin, скрипт деплоя, 4 страницы доверия, nginx-инструкции |
-| Можно ли подавать на перепроверку сейчас? | **Нет** — сначала задеплоить исправления с whitelisted IP, затем запросить review |
+| Реальный взлом обнаружен? | **Нет** — `wp core verify-checksums` успешен, малварь в теме/uploads не найдена |
+| Вредоносные файлы найдены? | **Нет** — PHP в uploads не обнаружен; карантин не требовался |
+| Основная причина предупреждения | **Репутационно-контентная:** домен с «meta», брендовые лонгриды, CTA в Telegram, молодой домен, отсутствие юр.страниц |
+| Что исправлено на live-сайте | **Да** — MU-plugin, страницы доверия, 301 дублей, security headers, `DISALLOW_FILE_EDIT` |
+| Backup на сервере | **Да** — `security-backups/2026-06-08-15-17/` (дамп БД, wp-config, .htaccess, списки плагинов/админов) |
+| Можно ли подавать на перепроверку? | **Да**, после заполнения email/ИНН на страницах доверия и проверки GSC/Яндекс |
 
 ---
 
@@ -24,157 +25,131 @@
 
 | Исправление | Где | Что сделано | Статус |
 |-------------|-----|-------------|--------|
-| Дисклеймеры на брендовых страницах | `wordpress/mu-plugins/nero-security-trust.php` | Автовставка по slug/title (Meta, KPMG, Яндекс, Microsoft, Сбер, OpenAI/Claude) + замена фишинговых формулировок | **Подготовлено**, не на сервере |
-| Дубли Meta Business Agent | MU-plugin `template_redirect` | 301 на `/meta-business-agent-whatsapp-ai-agent/` | **Подготовлено** |
-| Дубли Alice AI / Яндекс | MU-plugin | 301 на `/yandex-alice-ai-llm-flash-vnedrenie-biznes/` | **Подготовлено** |
-| Политика конфиденциальности | `security/pages/politika-konfidentsialnosti.html` | Контент готов | **Подготовлено** |
-| Контакты | `security/pages/kontakty.html` | Контент готов | **Подготовлено** |
-| О проекте | `security/pages/o-kompanii.html` | Контент готов | **Подготовлено** |
-| Условия использования | `security/pages/usloviya-ispolzovaniya.html` | Контент готов | **Подготовлено** |
-| CTA / Telegram-паттерн | MU-plugin footer | Текст безопасности + ссылки на юр.страницы | **Подготовлено** |
-| SEO-плагины (Yoast off) | `scripts/security-fix-meta-journal.py` | Деактивация Yoast, оставить AIOSEO | **Подготовлено** |
-| readme/license | `security/instructions-nginx-security.txt` | nginx deny rules | **Инструкция** |
-| Security headers | MU-plugin `send_headers` + nginx | HSTS, X-Frame-Options, nosniff, Referrer-Policy | **Подготовлено** |
-| wp-config hardening | Скрипт деплоя | `DISALLOW_FILE_EDIT` | **Подготовлено** |
-| uploads PHP block | nginx инструкция | deny `.php` в uploads | **Инструкция** |
-| robots/sitemap | Внешняя проверка | robots OK; sitemap AIOSEO `/sitemap.xml` | **Без изменений** |
-| Backup на сервере | — | Не создан | **Заблокировано** |
+| Дисклеймеры на брендовых страницах | `wp-content/mu-plugins/nero-security-trust.php` | Автовставка по slug/title + замена фишинговых формулировок | **Задеплоено** |
+| Дубли Meta Business Agent | MU-plugin `template_redirect` | 301 → `/meta-business-agent-whatsapp-ai-agent/` | **Задеплоено** |
+| Дубли Alice AI / Яндекс | MU-plugin | 301 → `/yandex-alice-ai-llm-flash-vnedrenie-biznes/` | **Задеплоено** |
+| Политика конфиденциальности | WP page ID 122 | `/politika-konfidentsialnosti/` | **HTTP 200** |
+| Контакты | WP page ID 123 | `/kontakty/` | **HTTP 200** |
+| О проекте | WP page ID 124 | `/o-kompanii/` | **HTTP 200** |
+| Условия использования | WP page ID 125 | `/usloviya-ispolzovaniya/` | **HTTP 200** |
+| CTA / Telegram-паттерн | MU-plugin footer | Текст безопасности + ссылки на юр.страницы | **Задеплоено** |
+| Yoast SEO | WP plugins | Yoast **неактивен** (был неактивен до деплоя) | **OK** |
+| Rank Math + AIOSEO | WP plugins | Оба **активны** — рекомендуется оставить один | **Требует решения** |
+| readme/license | nginx | Правила в `security/instructions-nginx-security.txt` | **Не применено** — readme.html и license.txt всё ещё HTTP 200 |
+| Security headers | MU-plugin `send_headers` | HSTS, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy | **Задеплоено** |
+| wp-config hardening | `wp-config.php` | `define('DISALLOW_FILE_EDIT', true);` | **Задеплоено** |
+| uploads PHP block | nginx (Beget) | PHP в uploads отдаёт 405 снаружи | **OK на уровне nginx** |
+| Backup | `security-backups/2026-06-08-15-17/` | DB export + критичные файлы | **Создан** (tar без robots.txt — файла не было) |
 
 ---
 
-## 3. Что не удалось исправить
+## 3. Что не удалось / осталось сделать
 
 | Что не удалось | Почему | Как исправить вручную |
 |----------------|--------|------------------------|
-| Backup файлов и БД на сервере | SSH: `Connection closed by 45.130.41.132`; FTP: `425 Security: Bad IP connecting` с IP Cloud Agent | Beget → SSH → добавить ваш IP в whitelist; выполнить `python3 scripts/security-fix-meta-journal.py --apply` |
-| Деплой MU-plugin на live | Нет записи файлов по FTP/SSH | Загрузить `wordpress/mu-plugins/nero-security-trust.php` в `wp-content/mu-plugins/` через файловый менеджер Beget |
-| Создание страниц доверия в WP | Нет WP-CLI/SSH | Запустить скрипт деплоя или создать 4 страницы вручную в админке из `security/pages/*.html` |
-| Деактивация Yoast SEO | Нет серверного доступа | WP Admin → Плагины → деактивировать «Yoast SEO» |
-| nginx readme/license block | Нет доступа к конфигу nginx | Применить `security/instructions-nginx-security.txt` в панели Beget |
-| Серверный malware scan | Нет SSH | Выполнить команды из раздела 5 отчёта на сервере |
-| Проверка логов | Нет доступа | Beget → Логи → access.log / error.log |
-| Юридические реквизиты | Неизвестны оператору агента | Владелец добавляет ИНН/ООО/email в Политику и Контакты |
-| Google Search Console review | Нет доступа к GSC аккаунту | Владелец подаёт после деплоя |
-| Яндекс.Вебмастер review | Нет доступа | Владелец подаёт после деплоя |
-| VK appeal | Нет доступа | Текст готов в разделе 9 |
+| Закрыть readme.html / license.txt | Нет доступа к nginx-конфигу | Применить `security/instructions-nginx-security.txt` в панели Beget |
+| Деактивировать Rank Math | Не входило в скрипт; Yoast уже был off | WP Admin → оставить AIOSEO **или** Rank Math, второй деактивировать |
+| Юридические реквизиты | Неизвестны агенту | Владелец: email, ИНН/ООО на `/kontakty/` и `/politika-konfidentsialnosti/` |
+| FTP с IP Cloud Agent | `425 Bad IP connecting` | Не критично — SSH работает после whitelist |
+| Google Search Console review | Нет доступа к аккаунту владельца | Владелец — раздел 10 |
+| Яндекс.Вебмастер review | Нет доступа | Владелец — раздел 11 |
+| VK appeal | Нет доступа | Владелец — раздел 9 |
+| Проверка access/error логов | Не выполнялась | Beget → Логи |
 
 ---
 
-## 4. Изменённые файлы (в репозитории)
+## 4. Изменённые файлы на сервере
 
 | Файл | Изменение | Backup |
 |------|-----------|--------|
-| `wordpress/mu-plugins/nero-security-trust.php` | Создан MU-plugin антифрод/доверия | — |
-| `scripts/security-fix-meta-journal.py` | Скрипт backup+деплоя | — |
-| `security/pages/*.html` | 4 страницы доверия | — |
-| `security/instructions-nginx-security.txt` | nginx правила | — |
-| `security/uploads-htaccess-snippet.conf` | Apache snippet (справочно) | — |
-| `security-backups/prep-2026-06-08/*` | Внешний снимок (curl, pages.json, home.html) | Локальный prep-backup |
+| `wp-content/mu-plugins/nero-security-trust.php` | Создан | `security-backups/2026-06-08-15-17/files-lite.tar.gz` |
+| `wp-config.php` | Добавлен `DISALLOW_FILE_EDIT` | тот же backup |
+| `.htaccess` | Скопирован в backup (не менялся скриптом) | тот же backup |
+| База данных | 4 новые страницы (ID 122–125) | `database.sql` в backup |
 
-**Live-сайт:** файлы не изменялись.
+**Репозиторий:** исходники в `wordpress/mu-plugins/`, `security/pages/`, `scripts/security-fix-meta-journal.py`.
 
 ---
 
-## 5. Изменённые страницы WordPress (план)
+## 5. Изменённые страницы WordPress
 
-### Канонические (остаются)
-
-| URL | Действие | Статус |
-|-----|----------|--------|
-| `/meta-business-agent-whatsapp-ai-agent/` | Каноническая Meta BA + дисклеймер | Требует деплоя MU-plugin |
-| `/yandex-alice-ai-llm-flash-vnedrenie-biznes/` | Каноническая Alice + дисклеймер | Требует деплоя |
-
-### 301 редирект (после деплоя MU-plugin)
+### Канонические
 
 | URL | Действие | Статус |
 |-----|----------|--------|
-| `/meta-business-agent-whatsapp-ii-agent-prodazhi/` | 301 → каноническая Meta | Подготовлено |
-| `/meta-business-agent-ai-whatsapp-instagram/` | 301 → каноническая Meta | Подготовлено |
-| `/yandex-alice-ai-llm-flash-biznes-avtomatizaciya/` | 301 → каноническая Alice | Подготовлено |
-| `/alice-ai-llm-flash-yandex-dlya-biznesa/` | 301 → каноническая Alice | Подготовлено |
-| `/alice-ai-llm-flash-vnedrenie-biznes/` | 301 → каноническая Alice | Подготовлено |
-| `/yandex-alice-ai-llm-flash-avtomatizaciya-biznesa/` | 301 → каноническая Alice | Подготовлено |
+| `/meta-business-agent-whatsapp-ai-agent/` | Каноническая Meta BA + дисклеймер | **Активна** |
+| `/yandex-alice-ai-llm-flash-vnedrenie-biznes/` | Каноническая Alice + дисклеймер | **Активна** |
 
-### Дисклеймер (25 брендовых страниц, автоматически через MU-plugin)
-
-Включая: `kpmg-claude-vnedrenie-ai-276-tysyach`, все `meta-business-agent-*`, `yandex-alice-*`, `alice-ai-llm-flash-*`, `microsoft-work-iq-*`, `sber-gigacowork-*`, `openai-codex-*`, `claude-*`, `vnedrenie-ai-amocrm`, и др. (полный список в `security-backups/prep-2026-06-08/pages.json`).
-
-### Новые страницы (после деплоя)
+### 301 редирект (проверено)
 
 | URL | Действие | Статус |
 |-----|----------|--------|
-| `/politika-konfidentsialnosti/` | Создать | Подготовлено |
-| `/kontakty/` | Создать | Подготовлено |
-| `/o-kompanii/` | Создать | Подготовлено |
-| `/usloviya-ispolzovaniya/` | Создать | Подготовлено |
+| `/meta-business-agent-whatsapp-ii-agent-prodazhi/` | 301 → каноническая Meta | **OK** |
+| `/meta-business-agent-ai-whatsapp-instagram/` | 301 → каноническая Meta | **OK** |
+| `/yandex-alice-ai-llm-flash-biznes-avtomatizaciya/` | 301 → каноническая Alice | **OK** |
+| `/alice-ai-llm-flash-yandex-dlya-biznesa/` | 301 → каноническая Alice | **OK** |
+| `/alice-ai-llm-flash-vnedrenie-biznes/` | 301 → каноническая Alice | **OK** |
+| `/yandex-alice-ai-llm-flash-avtomatizaciya-biznesa/` | 301 → каноническая Alice | **OK** |
+
+### Новые страницы доверия
+
+| URL | WP ID | Статус |
+|-----|-------|--------|
+| `/politika-konfidentsialnosti/` | 122 | **publish, HTTP 200** |
+| `/kontakty/` | 123 | **publish, HTTP 200** |
+| `/o-kompanii/` | 124 | **publish, HTTP 200** |
+| `/usloviya-ispolzovaniya/` | 125 | **publish, HTTP 200** |
+
+### Дисклеймеры
+
+Автоматически на ~25 брендовых страницах через MU-plugin (Meta, KPMG, Яндекс/Alice, Microsoft, Сбер, OpenAI/Claude и др.).
 
 ---
 
 ## 6. Карантин
 
-Подозрительных файлов для карантина **не обнаружено** (серверный scan не выполнялся).
+Подозрительных файлов **не обнаружено**. Карантин **не применялся**.
 
-Внешняя проверка: запрос к `/wp-content/uploads/2026/05/shell.php` возвращает nginx **405** — типичная блокировка PHP в uploads, не подтверждённый backdoor.
+Серверная проверка:
+- `find wp-content/uploads -name '*.php'` — пусто
+- `grep eval/base64_decode` в теме kadence — пусто
+- `wp core verify-checksums` — Success
 
 ---
 
-## 7. Проверки (этап 3 — выполнено снаружи)
+## 7. Проверки после деплоя
 
 | Проверка | Результат |
 |----------|-----------|
-| HTTPS `целевой сайт` | **200** |
-| HTTP → HTTPS | **301** → HTTPS **200** |
-| www → non-www | **301** → **200** |
-| Googlebot | **200**, без отличий |
-| YandexBot | **200**, без отличий |
-| Mobile UA | **200**, без отличий |
-| Cloaking | **Не обнаружен** |
+| HTTPS главная | **200** |
+| HTTP → HTTPS | **301 → 200** |
+| www → non-www | **301 → 200** |
+| Googlebot / YandexBot / Mobile | **200**, без cloaking |
 | Open redirect | **Не обнаружен** |
 | Mixed content | **Не обнаружен** |
-| Внешние домены в HTML | fonts.googleapis.com, mc.yandex.ru, t.me, vk.com, max.ru — легитимные |
-| robots.txt | **200**, стандартный WP |
-| sitemap.xml | **200**, AIOSEO index |
-| wp-sitemap.xml | Проверить после деплоя |
-| Security headers | **Отсутствуют** (до деплоя MU-plugin) |
-| readme.html / license.txt | **200** (нужно закрыть nginx) |
-| WP core checksum | Не проверялся (нет SSH) |
-| PHP в uploads | nginx 405 снаружи |
-| Плагины | AIOSEO + Yoast + MonsterInsights + OptinMonster + wp-yandex-metrika (по readme.txt) |
+| Security headers | **Есть** (HSTS, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy) |
+| Дисклеймер на Meta-странице | **Есть** (`nero-brand-disclaimer`) |
+| Дубль Meta → 301 | **OK** |
+| Дубль Alice → 301 | **OK** |
+| Trust footer | **Есть** (`nero-trust-footer`) |
+| readme.html / license.txt | **200** — закрыть через nginx |
+| WP core checksum | **Success** |
+| PHP в uploads | **Не найдено** |
+| Админы WP | **1** (`devham`, administrator) |
+| Активные плагины | AIOSEO, Rank Math, MonsterInsights, OptinMonster, wp-yandex-metrika, BLC SEO, WPCode |
 
 ---
 
 ## 8. Что владелец должен сделать вручную
 
-### Шаг 1. Открыть доступ к серверу
-1. Beget → Настройки SSH → **добавить IP** вашего компьютера/VPS.
-2. Beget → FTP → проверить ограничение по IP (сейчас Cloud Agent получает `425 Bad IP`).
-
-### Шаг 2. Backup и деплой (одна команда)
-```bash
-cd /path/to/your-repo-clone  # pragma: allowlist secret
-pip install paramiko
-python3 scripts/security-fix-meta-journal.py --apply
-```
-
-Скрипт создаст `security-backups/YYYY-MM-DD-HH-MM/` на сервере, загрузит MU-plugin, создаст страницы доверия, добавит `DISALLOW_FILE_EDIT`, деактивирует Yoast.
-
-### Шаг 3. nginx (Beget)
-Применить правила из `security/instructions-nginx-security.txt`.
-
-### Шаг 4. Заполнить реквизиты
-- Email в `/kontakty/` и `/politika-konfidentsialnosti/`
-- ИНН/ООО/ИП оператора
-
-### Шаг 5. Проверки в вебмастерах
-1. Google Search Console → Security Issues
-2. Яндекс.Вебмастер → Безопасность и нарушения
-3. https://transparencyreport.google.com/safe-browsing/search?url=
-4. https://www.virustotal.com/gui/domain/<PUBLIC_SITE_HOST>
-5. https://sitecheck.sucuri.net/results/<PUBLIC_SITE_HOST>
-6. https://opentip.kaspersky.com/
-7. https://vms.drweb.ru/scan/
-
-### Шаг 6. Не публиковать ссылки в VK/Telegram до снятия предупреждения
+1. **Заполнить реквизиты** на `/kontakty/` и `/politika-konfidentsialnosti/` (email, ИНН/ООО).
+2. **Применить nginx-правила** из `security/instructions-nginx-security.txt` (readme/license).
+3. **Решить дубль SEO-плагинов:** деактивировать Rank Math или AIOSEO (оставить один).
+4. **Google Search Console** → Проблемы безопасности → Запросить проверку (текст — раздел 10).
+5. **Яндекс.Вебмастер** → Безопасность → «Я всё исправил» (текст — раздел 11).
+6. **Проверить:** Transparency Report, VirusTotal, Sucuri, Kaspersky OpenTIP, Dr.Web.
+7. **VK** — если предупреждение в ленте (текст — раздел 9).
+8. До снятия предупреждения **не массово публиковать** ссылки в VK/Telegram.
 
 ---
 
@@ -183,19 +158,18 @@ python3 scripts/security-fix-meta-journal.py --apply
 ```
 Здравствуйте.
 
-Просим перепроверить домен . При переходе по ссылке появляется предупреждение о возможном вредоносном или фишинговом сайте.
+Просим перепроверить наш сайт (URL в WP_SITE_URL). При переходе по ссылке появлялось предупреждение о возможном вредоносном или фишинговом сайте.
 
-Мы провели аудит и исправили факторы, которые могли вызвать ложное срабатывание антифрод-систем:
-- добавлены дисклеймеры о неаффилированности с брендами Meta, WhatsApp, Instagram, KPMG, Яндекс, Microsoft, Сбер и другими правообладателями;
-- добавлены страницы "Политика конфиденциальности", "Контакты", "О проекте", "Условия использования";
-- убраны/закрыты дублирующие SEO-страницы (301 на канонические URL);
-- проверены редиректы и cloaking;
-- проверены внешние скрипты;
-- проверены WordPress, плагины, uploads;
+Мы провели аудит и исправили факторы ложного срабатывания антифрод-систем:
+- добавлены дисклеймеры о неаффилированности с брендами Meta, WhatsApp, Instagram, KPMG, Яндекс, Microsoft, Сбер и др.;
+- опубликованы страницы «Политика конфиденциальности», «Контакты», «О проекте», «Условия использования»;
+- дублирующие SEO-страницы закрыты 301-редиректами на канонические URL;
+- проверены редиректы и cloaking — расхождений нет;
+- WordPress core checksums валидны, PHP в uploads не найден;
 - сайт не запрашивает пароли, банковские карты, SMS-коды и доступы к аккаунтам;
-- сайт является независимым B2B-блогом об AI-автоматизации бизнеса.
+- сайт — независимый B2B-блог об AI-автоматизации бизнеса.
 
-Просим снять предупреждение или сообщить конкретный URL/причину блокировки, если проблема ещё сохраняется.
+Просим снять предупреждение или сообщить конкретный URL/причину блокировки.
 ```
 
 ---
@@ -205,16 +179,16 @@ python3 scripts/security-fix-meta-journal.py --apply
 ```
 Здравствуйте.
 
-На сайте  были исправлены факторы, которые могли быть восприняты как social engineering или phishing-by-brand.
+На нашем сайте исправлены факторы, которые могли восприниматься как social engineering / phishing-by-brand.
 
 Что сделано:
 - проверены редиректы и поведение для Googlebot/YandexBot/Mobile — cloaking не обнаружен;
 - добавлены видимые дисклеймеры на страницы с упоминанием брендов;
 - добавлены страницы политики конфиденциальности, контактов, условий использования и описания проекта;
-- дублирующиеся SEO-страницы закрыты 301-редиректами на канонические URL;
-- проверены WordPress core, плагины, темы, uploads;
-- сайт не содержит форм для ввода паролей, банковских карт, SMS-кодов или данных аккаунтов;
-- сайт не является официальным сайтом упоминаемых брендов и явно сообщает об этом пользователям.
+- дублирующиеся SEO-страницы закрыты 301 на канонические URL;
+- WordPress core verify-checksums — успешно; вредоносный код в теме/uploads не найден;
+- сайт не содержит форм для паролей, банковских карт, SMS-кодов;
+- сайт не является официальным сайтом упоминаемых брендов и явно сообщает об этом.
 
 Просим повторно проверить сайт.
 ```
@@ -226,15 +200,15 @@ python3 scripts/security-fix-meta-journal.py --apply
 ```
 Здравствуйте.
 
-Мы исправили факторы, которые могли вызвать предупреждение о небезопасном сайте:
-- добавили дисклеймеры о неаффилированности с брендами;
-- добавили политику конфиденциальности, контакты, условия использования и страницу о проекте;
-- проверили сайт на скрытые редиректы и cloaking;
-- проверили WordPress, файлы темы, плагины, uploads;
-- закрыли дублирующие SEO-страницы редиректами;
-- сайт не запрашивает пароли, банковские карты, SMS-коды и доступы к аккаунтам.
+Исправлены факторы, которые могли вызвать предупреждение о небезопасном сайте:
+- дисклеймеры о неаффилированности с брендами;
+- политика конфиденциальности, контакты, условия использования, о проекте;
+- проверка на скрытые редиректы и cloaking;
+- WordPress core, плагины, uploads — без признаков взлома;
+- дубли SEO-страниц закрыты редиректами;
+- сайт не запрашивает пароли, карты, SMS-коды и доступы к аккаунтам.
 
-Просим выполнить повторную проверку сайта.
+Просим выполнить повторную проверку.
 ```
 
 ---
@@ -242,58 +216,51 @@ python3 scripts/security-fix-meta-journal.py --apply
 ## 12. Финальный чек-лист
 
 - [x] Внешний аудит выполнен
-- [x] Локальный prep-backup (`security-backups/prep-2026-06-08/`)
-- [ ] **Backup на сервере создан** — заблокировано
-- [ ] Файлы на сервере проверены grep/find
-- [ ] База проверена WP-CLI/SQL
-- [ ] WordPress core checksum
-- [x] Плагины идентифицированы снаружи
-- [ ] Админы проверены
-- [x] PHP в uploads — nginx блокирует (405)
-- [ ] .htaccess / wp-config на сервере
-- [x] DISALLOW_FILE_EDIT — в скрипте деплоя
-- [x] Дисклеймеры — в MU-plugin (не на live)
-- [x] Дубли Meta — 301 в MU-plugin
-- [x] Дубли Alice — 301 в MU-plugin
-- [x] Страницы доверия — контент готов
-- [x] CTA/footer — в MU-plugin
-- [x] Yoast деактивация — в скрипте
-- [x] nginx readme — инструкция
-- [x] Security headers — MU-plugin + nginx инструкция
-- [x] GSC/Яндекс/VK тексты подготовлены
-- [ ] **Деплой на live** — требует whitelist IP
+- [x] Backup на сервере (`security-backups/2026-06-08-15-17/`)
+- [x] Серверный scan (grep/find, WP checksums)
+- [x] WordPress core checksum — Success
+- [x] Плагины проверены
+- [x] Админы проверены (1 administrator)
+- [x] PHP в uploads — не найдено
+- [x] `DISALLOW_FILE_EDIT` в wp-config.php
+- [x] Дисклеймеры на live
+- [x] Дубли Meta — 301
+- [x] Дубли Alice — 301
+- [x] Страницы доверия — HTTP 200
+- [x] CTA/footer безопасности
+- [x] Yoast неактивен
+- [ ] Rank Math vs AIOSEO — выбрать один
+- [ ] nginx readme/license — не применено
+- [x] Security headers на live
+- [ ] Email/ИНН на страницах доверия
+- [ ] GSC / Яндекс review поданы
+- [ ] VK appeal (если нужно)
 
 ---
 
 ## ФИНАЛЬНЫЙ ВЫВОД
 
-1. **Сайт заражён?** По внешним признакам — **нет**. Серверный scan не выполнен из‑за блокировки IP Beget.
-
-2. **Что больше всего влияло на предупреждение?** Домен `meta-journal` + лонгриды про Meta/WhatsApp/KPMG/Яндекс без дисклеймеров + CTA в Telegram + отсутствие политики конфиденциальности + дубли SEO-страниц.
-
-3. **Что исправлено?** В репозитории подготовлен полный пакет: MU-plugin, скрипт деплоя, страницы доверия, nginx-инструкции. **На live-сайте изменений нет.**
-
-4. **Что осталось владельцу?** Whitelist IP → `--apply` деплой → nginx rules → реквизиты → review в GSC/Яндекс/VK.
-
-5. **Можно ли подавать на перепроверку сейчас?** **Нет** — сначала задеплоить исправления и убедиться, что дисклеймеры и страницы доверия открываются.
-
-6. **Файл отчёта:** `security-fix-report.md` (корень репозитория).
+1. **Сайт заражён?** **Нет** — checksums OK, малварь не найдена.
+2. **Причина предупреждения?** Контент/репутация (бренды, дубли, Telegram-CTA, нет юр.прозрачности).
+3. **Исправлено на live?** **Да** — 8 июня 2026 через SSH после whitelist Beget.
+4. **Осталось владельцу?** Реквизиты, nginx для readme, один SEO-плагин, review в GSC/Яндекс/VK.
+5. **Перепроверка?** **Можно подавать** после заполнения контактов.
+6. **Отчёт:** `security-fix-report.md`
 
 ---
 
-## Команды диагностики на сервере (после получения SSH)
+## Команды для повторной проверки
 
 ```bash
-cd $REMOTE_SITE_ROOT   # уточнить REMOTE_SITE_ROOT
+# Снаружи
+curl -sI -L "$(wp option get siteurl 2>/dev/null || echo $WP_SITE_URL)"
+curl -sI "$(wp option get siteurl)/politika-konfidentsialnosti/"
+curl -sI "$(wp option get siteurl)/meta-business-agent-whatsapp-ii-agent-prodazhi/" | grep -i location
 
-wp core version
+# На сервере (SSH)
+cd "$REMOTE_SITE_ROOT"
 wp core verify-checksums
 wp plugin list
-wp theme list
-wp user list --role=administrator
-
-grep -rEl 'eval\(|base64_decode|gzinflate' wp-content/themes/kadence --include='*.php' | head -20
-find wp-content/uploads -type f \( -name '*.php' -o -name '*.phtml' \)
-
-wp db query "SELECT ID, post_title, post_name FROM wp_posts WHERE post_status='publish' AND post_type='page' AND (post_title LIKE '%Meta%' OR post_title LIKE '%KPMG%');"
+find wp-content/uploads -name '*.php'
+grep DISALLOW_FILE_EDIT wp-config.php
 ```
