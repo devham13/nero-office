@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Nero Security & Trust (MU)
  * Description: Anti-fraud trust signals: brand disclaimers, duplicate redirects, security headers, footer legal links, CTA safety notice.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Nero Network Security
  */
 
@@ -10,6 +10,11 @@ declare(strict_types=1);
 
 if (!defined('ABSPATH')) {
     exit;
+}
+
+$nero_site_legal = __DIR__ . '/nero-site-legal.php';
+if (is_readable($nero_site_legal)) {
+    require_once $nero_site_legal;
 }
 
 final class Nero_Security_Trust
@@ -206,29 +211,20 @@ final class Nero_Security_Trust
     public function render_cta_safety_styles(): void
     {
         echo '<style>.nero-brand-disclaimer{background:rgba(255,193,7,.12);border:1px solid rgba(255,193,7,.45);border-radius:12px;padding:14px 18px;margin:18px 0 24px;color:inherit}'
-            . '.nero-trust-footer{margin-top:24px;padding:16px 0;border-top:1px solid rgba(255,255,255,.12);font-size:.92rem;opacity:.9}'
-            . '.nero-cta-safety{font-size:.85rem;opacity:.85;margin-top:8px}</style>' . "\n";
+            . '.nero-trust-footer,.nero-site-legal-block{margin-top:24px;padding:16px 0;border-top:1px solid rgba(255,255,255,.12);font-size:.92rem;opacity:.9}'
+            . '.nero-cta-safety,.nero-site-legal-consent{font-size:.85rem;opacity:.85;margin-top:8px}'
+            . '.nero-site-legal-operator{opacity:.8;margin-bottom:8px}</style>' . "\n";
     }
 
     public function render_trust_footer(): void
     {
-        $links = [
-            home_url('/politika-konfidentsialnosti/') => 'Политика конфиденциальности',
-            home_url('/kontakty/')                    => 'Контакты',
-            home_url('/o-kompanii/')                  => 'О проекте',
-            home_url('/usloviya-ispolzovaniya/')      => 'Условия использования',
-        ];
+        if (function_exists('nero_site_render_legal_footer_block')) {
+            nero_site_render_legal_footer_block();
+            return;
+        }
 
         echo '<div class="nero-trust-footer" role="contentinfo">';
-        echo '<nav aria-label="Юридическая информация"><p>';
-        $parts = [];
-        foreach ($links as $url => $label) {
-            $parts[] = '<a href="' . esc_url($url) . '">' . esc_html($label) . '</a>';
-        }
-        echo implode(' · ', $parts);
-        echo '</p>';
-        echo '<p class="nero-cta-safety">Мы не запрашиваем пароли, коды из SMS, банковские карты или доступы к аккаунтам. '
-            . 'Для консультации достаточно описать задачу и оставить контакт для обратной связи.</p>';
+        echo '<p><a href="' . esc_url(home_url('/politika-konfidentsialnosti/')) . '">Политика конфиденциальности</a></p>';
         echo '</div>';
     }
 }

@@ -24,7 +24,10 @@ sys.path.insert(0, str(ROOT / "shared"))
 
 from credentials import get_credential, require_credential  # noqa: E402
 
-MU_PLUGIN_LOCAL = ROOT / "wordpress" / "mu-plugins" / "nero-security-trust.php"
+MU_PLUGINS_LOCAL = [
+    ROOT / "wordpress" / "mu-plugins" / "nero-site-legal.php",
+    ROOT / "wordpress" / "mu-plugins" / "nero-security-trust.php",
+]
 TRUST_PAGES = {
     "politika-konfidentsialnosti": {
         "title": "Политика конфиденциальности",
@@ -99,17 +102,20 @@ def backup(ssh: paramiko.SSHClient, remote_root: str, dry_run: bool) -> str:
     return backup_dir
 
 
-def upload_mu_plugin(ssh: paramiko.SSHClient, remote_root: str, dry_run: bool) -> None:
+def upload_mu_plugins(ssh: paramiko.SSHClient, remote_root: str, dry_run: bool) -> None:
     remote_mu = f"{remote_root}/wp-content/mu-plugins"
-    remote_file = f"{remote_mu}/nero-security-trust.php"
-    content = MU_PLUGIN_LOCAL.read_text(encoding="utf-8")
-    print(f"[deploy] MU plugin -> {remote_file}")
     if dry_run:
+        for local in MU_PLUGINS_LOCAL:
+            print(f"[deploy] MU plugin -> {remote_mu}/{local.name}")
         return
     run(ssh, f"mkdir -p {shlex.quote(remote_mu)}")
     sftp = ssh.open_sftp()
-    with sftp.file(remote_file, "w") as f:
-        f.write(content)
+    for local in MU_PLUGINS_LOCAL:
+        remote_file = f"{remote_mu}/{local.name}"
+        content = local.read_text(encoding="utf-8")
+        print(f"[deploy] MU plugin -> {remote_file}")
+        with sftp.file(remote_file, "w") as f:
+            f.write(content)
     sftp.close()
 
 
@@ -194,7 +200,7 @@ def main() -> int:
     backup_dir = backup(ssh, remote_root, dry_run)
     print(f"Backup dir: {backup_dir}")
 
-    upload_mu_plugin(ssh, remote_root, dry_run)
+    upload_mu_plugins(ssh, remote_root, dry_run)
     ensure_wp_config_hardening(ssh, remote_root, dry_run)
     deactivate_yoast(ssh, remote_root, dry_run)
     create_trust_pages(ssh, remote_root, dry_run)

@@ -27,6 +27,7 @@ is_background: false
    {HTML КАК ЕСТЬ}
    <?php get_footer(); ?>
   ```
+   **Обязательно** `get_footer()` в конце — MU-plugins `nero-site-legal.php` и `nero-security-trust.php` выводят ссылку на `/politika-konfidentsialnosti/` и данные оператора (Горбачев Ю.А., ИНН 164807872488). При деплое проверь наличие обоих файлов в `wp-content/mu-plugins/`.
 4. **Перед выгрузкой проверь активную тему и её реальный путь**: `stylesheet` и `template` должны быть `${WP_THEME_SLUG}`, а upload-путь бери из WordPress runtime: `get_stylesheet_directory()`. Если `SSH_THEME_PATH`/`REMOTE_WP_THEMES` отличаются от runtime-пути, не верь env — загружай в `get_stylesheet_directory()` и зафиксируй расхождение в отчёте.
 5. **Выгрузи через FTP/SFTP/SSH** в реальную папку активной темы. После upload проверь, что файл `page-{slug}.php` читается веб-сервером: файл `644`, каталоги темы/родители доступны на обход. Если живой HTML отдаёт `page.php`, сначала проверь не тот каталог и права.
 6. Если Наташа не завернула страницу в `<main id="primary" class="site-main ... " role="main" tabindex="-1">`, ты обязан добавить эту обёртку сам до публикации. Skip-link из шапки темы должен вести в реальную цель `#primary`.
