@@ -20,7 +20,7 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
     echo '<meta property="og:type" content="article" />' . "\n";
 }, 1);
 
-$brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: '');
+$brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 
 $nero_ai_header_links = [
     ['label' => 'Как работает', 'href' => '#kak-rabotaet'],
@@ -664,7 +664,8 @@ nav[aria-label="Хлебные крошки"],
       <h3>Human-in-the-loop для критичных тикетов</h3>
       <p>Практика НЛМК (кейс AI-ICS): при confidence ≥ порога (CT 0,8) — автомаршрутизация, при более низкой уверенности — ручная проверка оператором. AI не «промажет» по критичным обращениям (security, юридические, отмена enterprise-контракта), а скорость обработки типовых тикетов вырастет.</p>
       <p>DevRev (2026) описывает эволюцию: Era 1 — rule-based, Era 2 — ML/NLP (Zendesk, Freshdesk Freddy), Era 3 — agentic AI с knowledge graph.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p>Когда часть обращений приходит по email и попадает в CRM раньше helpdesk, тема ближе к <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" class="ym-link ym-link--accent">AI-обработке входящей почты в CRM</a>: классификация письма, извлечение сущностей и маршрутизация до очереди поддержки. AI-триаж тикетов фокусируется на support-очереди, SLA и назначении исполнителя.</p>
+      <p>На корпоративном масштабе те же принципы human-in-the-loop и managed-агентов уже проверены в enterprise: в разборе <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" class="ym-link ym-link--accent">KPMG и Claude — уроки AI для бизнеса</a> показаны цифровые шлюзы, которые можно адаптировать к helpdesk-маршрутизации.</p>
     </div>
   </section>
 
@@ -907,12 +908,12 @@ nav[aria-label="Хлебные крошки"],
       <p>Поддерживаемые платформы: Zendesk, Freshdesk, Jira Service Management, ServiceNow, Битрикс24, amoCRM, OTRS, Naumen — через REST API.</p>
 
       <h3>Связка с CRM, уведомлениями и отчётностью</h3>
-      <p>Система интегрируется с CRM (amoCRM, Битрикс24) для обогащения контекста: история клиента, тарифный план, LTV. Уведомления исполнителю — в Telegram, Slack или внутренний мессенджер. Аналитический дашборд (Metabase, Google Sheets, BI) отслеживает KPI в реальном времени.</p>
+      <p>Система интегрируется с CRM (<a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" class="ym-link ym-link--accent">amoCRM</a>, Битрикс24) для обогащения контекста: история клиента, тарифный план, LTV. Уведомления исполнителю — в Telegram, Slack или внутренний мессенджер. Аналитический дашборд (Metabase, Google Sheets, BI) отслеживает KPI в реальном времени.</p>
       <p>Дополнительные интеграции: телефония (Mango, UIS, Телфин → транскрипт → triage), мессенджеры (Telegram, WhatsApp Business, VK), база знаний (Confluence, Notion).</p>
 
       <h3>Безопасность и PII в обращениях поддержки</h3>
       <p>Тикеты часто содержат персональные данные. При отправке в облачный LLM требуется маскирование PII до классификации. Для российского enterprise доступны on-prem варианты: GigaChat, YandexGPT, локальный Qwen — обработка в закрытом контуре без передачи данных за периметр. Соответствие 152-ФЗ обеспечивается архитектурно.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p>Если тикет связан с заявкой, счётом или документом в учётной системе, цепочку дополняет <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" class="ym-link ym-link--accent">AI-агент для 1С и ERP</a>: от триажа обращения до создания «Заказа клиента» или «Заявки на расход ДС» без двойного ввода.</p>
     </div>
   </section>
 
@@ -1040,7 +1041,66 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aitt_page_url = trailingslashit(get_permalink());
+$aitt_site_url = trailingslashit(home_url('/'));
+$aitt_brand    = get_bloginfo('name') ?: 'Nero Network';
+$aitt_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $aitt_site_url . '#organization',
+            'name'  => $aitt_brand,
+            'url'   => $aitt_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $aitt_site_url . '#website',
+            'url'       => $aitt_site_url,
+            'name'      => $aitt_brand,
+            'publisher' => ['@id' => $aitt_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $aitt_page_url . '#webpage',
+            'url'         => $aitt_page_url,
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $aitt_site_url . '#website'],
+            'about'       => ['@id' => $aitt_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id'   => $aitt_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aitt_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aitt_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $aitt_page_url . '#service',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'url'         => $aitt_page_url,
+            'provider'    => ['@id' => $aitt_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id'   => $aitt_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить ai triage tickets в существующий helpdesk?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Интеграция происходит через API/webhook без замены текущей платформы. Webhook нового тикета → LLM-классификатор → обновление полей через API helpdesk. Поддерживаются Zendesk, Freshdesk, JSM, Битрикс24, amoCRM и другие системы с REST API. Начинать рекомендуется с режима Assist.']],
+                ['@type' => 'Question', 'name' => 'Подходит ли для малого бизнеса?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'При потоке менее 50 тикетов в день полноценный ML-триаж может быть избыточен. Однако LLM-решение на базе few-shot промптов работает даже при небольшой истории. Для малого бизнеса оптимален режим Assist + rule-assisted: минимальные затраты, ощутимый эффект при росте потока.']],
+                ['@type' => 'Question', 'name' => 'Нужна ли замена текущей системы тикетов?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Нет. AI-триаж — надстройка, а не замена helpdesk. Система интегрируется через API. Даже legacy-системы без нативной AI-функциональности подключаются через webhook-прослойку (n8n, Make, custom).']],
+                ['@type' => 'Question', 'name' => 'Как измерить точность классификации?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Основная метрика — routing accuracy: процент тикетов, назначенных верно с первого раза. Измеряется по feedback операторов. Ориентир для production: ≥ 85%. Дополнительно — reassign rate (цель < 10%) и confidence distribution.']],
+                ['@type' => 'Question', 'name' => 'Чем отличается от AI-обработки email в CRM?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'AI-триаж тикетов helpdesk работает с support-обращениями: техническая поддержка, сервисные запросы, инциденты. AI-обработка email в CRM ориентирована на sales-воронку. Разные таксономии, разные SLA-политики, разные очереди.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($aitt_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
 </main>
 <!-- /wp:html -->
 
