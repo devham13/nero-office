@@ -1,3 +1,8 @@
+## 2026-06-09 — ai-triage-tickets-helpdesk
+
+- Юра: опубликовано `/ai-triage-tickets-helpdesk/` (HTTP 200, custom template page-ai-triage-tickets-helpdesk.php, WP post ID 130).
+- Следующий шаг: google-table-manager (publish, строка 24), indexator, QA (Макс), SEO-аудит (Лёня).
+
 # Session Handoff
 
 ## 2026-06-07 — ai-1c-erp
