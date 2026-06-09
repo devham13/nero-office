@@ -1,5 +1,11 @@
 # Session Handoff
 
+## 2026-06-09 — ai-seo-kontent
+
+- Юра: опубликовано `[REDACTED]ai-seo-kontent/` (HTTP 200, custom template page-ai-seo-kontent.php, WP post ID 136).
+- Warnings: placeholders `SCHEMA-MARKUP:INSERT` и `INTERNAL-LINKS:INSERT` остались в live HTML (этапы schema-markup / internal-linker не выполнены до публикации).
+- Следующий шаг: google-table-manager (publish, строка 27), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
