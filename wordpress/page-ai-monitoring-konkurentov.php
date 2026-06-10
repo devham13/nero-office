@@ -1105,7 +1105,12 @@ nav[aria-label="Хлебные крошки"],
   </section>
 
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="amk-cnt">
+    <div class="amk-prose nero-ai-reveal amk-related-note">
+      <p>Мониторинг конкурентов часто становится первой «быстрой победой» в программе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/>масштабного внедрения AI в бизнес</a> — когда разведка превращается в регулярные действия, а не разовые отчёты.</p>
+      <p>Если после гипотез нужно автоматизировать учёт и документооборот, логичное продолжение — <a href="/ai-1c-erp/>AI-агент для 1С и ERP: внедрение и настройка под ключ</a>.</p>
+    </div>
+  </div>
 
 <section id="ai-monitoring-konkurentov-boris-block" class="amk-root" aria-label="Анимация: пайплайн AI-разведки от сигналов конкурентов до безопасных гипотез">
 <style>
@@ -1632,7 +1637,12 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
-    <!-- INTERNAL-LINKS:INSERT -->
+  <div class="amk-cnt">
+    <div class="amk-prose nero-ai-reveal amk-related-note">
+      <p>Чтобы гипотезы из разведки сразу становились задачами SMM, подключите <a href="/vnedrenie-ai-amocrm/>AI-агента для amoCRM: внедрение и настройка под ключ</a> — контент-план и CRM работают в одном контуре.</p>
+      <p>Когда лиды приходят через почту, полезно связать мониторинг с <a href="/vnedrenie-ai-obrabotka-email-crm/>AI-обработкой входящей почты в CRM</a>: сигнал конкурента не теряется между маркетингом и продажами.</p>
+    </div>
+  </div>
 
 <section class="amk-section amk-section-alt" id="integraciya">
     <div class="amk-cnt">
