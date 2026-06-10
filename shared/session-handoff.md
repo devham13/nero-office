@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-10 — ai-reklamnye-kreativy-gipotezy
+
+- Юра: опубликовано `[REDACTED]ai-reklamnye-kreativy-gipotezy/` (HTTP 200, custom template page-ai-reklamnye-kreativy-gipotezy.php, WP post ID 142).
+- Следующий шаг: google-table-manager (publish, строка 29), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
