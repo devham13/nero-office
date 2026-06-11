@@ -991,7 +991,11 @@ document.addEventListener("DOMContentLoaded", function () {
       </nav>
     </div>
   </div>
-  <!-- INTERNAL-LINKS:INSERT -->
+  <section class="asz-intro-bridge" style="padding:0 0 28px" aria-label="Смежные материалы">
+    <div class="asz-cnt">
+      <p class="nero-ai-reveal" style="font-size:15px;text-align:center;max-width:780px;margin:0 auto">Статусные уведомления — частый первый шаг в программе <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" class="ym-link ym-link--accent">масштабного внедрения AI в бизнес</a>: измеримый эффект по WISMO виден уже в пилоте, без годового IT-проекта.</p>
+    </div>
+  </section>
 
   <!-- WISMO -->
   <section class="asz-section" id="wismo">
@@ -1351,7 +1355,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <h3 class="nero-ai-reveal">Требования и ограничения для РФ</h3>
       <p class="nero-ai-reveal">С 1 июня 2025 расширены ограничения на иностранные мессенджеры для ряда категорий. Для частного e-commerce Telegram и WhatsApp возможны при соблюдении <strong>152-ФЗ</strong> и уведомления РКН. С января 2026 РКН продолжает ограничения WhatsApp — планируйте статусные уведомления в первую очередь через <strong>Telegram/SMS</strong>. Рекомендация Nero: каскад <strong>Telegram → SMS → email → VK/MAX</strong>.</p>
       <h3 class="nero-ai-reveal">Единый тон и персонализация через AI</h3>
-      <p class="nero-ai-reveal">Разрозненные SMS от перевозчика и email от магазина создают шум. AI унифицирует tone of voice, адаптирует длину под канал и эскалирует негатив к оператору с summary диалога. Голосовой сценарий: ASH Russia (SaluteSpeech) подтверждает окно визита курьера — меньше холостых рейсов.</p>
+      <p class="nero-ai-reveal">Разрозненные SMS от перевозчика и email от магазина создают шум. AI унифицирует tone of voice, адаптирует длину под канал и эскалирует негатив к оператору с summary диалога. Для исходящих статусов по email это соседний, но отдельный контур от <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" class="ym-link ym-link--accent">AI-обработки входящей почты в CRM</a> — там фокус на triage заявок, здесь на проактивных уведомлениях покупателю. Голосовой сценарий: ASH Russia (SaluteSpeech) подтверждает окно визита курьера — меньше холостых рейсов.</p>
     </div>
   </section>
 
@@ -1364,13 +1368,13 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
 
       <h3 class="nero-ai-reveal">CRM: amoCRM, Битрикс24</h3>
-      <p class="nero-ai-reveal"><strong>Интеграция ai статус заказа с crm</strong> — RetailCRM (триггеры + webhook в Telegram), amoCRM (стадии сделок, поля «трек»), Битрикс24 (сервисный бот 5 УГЛОВ). Фокус — <strong>клиентские статусы заказа</strong>, не внутренняя автоматизация CRM. <strong>AI статус заказа с crm</strong>: CRM → middleware → перевозчик → notification router → AI-агент.</p>
+      <p class="nero-ai-reveal"><strong>Интеграция ai статус заказа с crm</strong> — RetailCRM (триггеры + webhook в Telegram), amoCRM (стадии сделок, поля «трек»), Битрикс24 (сервисный бот 5 УГЛОВ). Фокус — <strong>клиентские статусы заказа</strong>, не внутренняя автоматизация воронки: если нужен AI для сделок и задач в amoCRM, смотрите <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM</a>, а на этой странице — уведомления покупателю по этапам доставки. <strong>AI статус заказа с crm</strong>: CRM → middleware → перевозчик → notification router → AI-агент.</p>
       <div class="asz-chips nero-ai-reveal">
         <span class="asz-chip">RetailCRM</span><span class="asz-chip">amoCRM</span><span class="asz-chip">Битрикс24</span><span class="asz-chip">1С / ERP</span><span class="asz-chip">СДЭК API 2.0</span><span class="asz-chip">Boxberry</span><span class="asz-chip">Яндекс Доставка</span><span class="asz-chip">Ozon / WB API</span>
       </div>
 
       <h3 class="nero-ai-reveal">1С / ERP / WMS — статусы из backend</h3>
-      <p class="nero-ai-reveal">Модули информирования из 1С шлют SMS/Telegram без AI на свободный текст. Nero добавляет обмен 1С ↔ CRM ↔ перевозчик, единую карту статусов и AI-ответы на B2B-запросы «где отгрузка по счёту №…».</p>
+      <p class="nero-ai-reveal">Модули информирования из 1С шлют SMS/Telegram без AI на свободный текст. Nero добавляет обмен 1С ↔ CRM ↔ перевозчик, единую карту статусов и AI-ответы на B2B-запросы «где отгрузка по счёту №…». Когда ERP — источник истины по отгрузкам, полезно сопоставить с <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" class="ym-link ym-link--accent">внедрением AI для 1С и ERP</a> — там акцент на учётных операциях, здесь на клиентском трекинге и WISMO.</p>
 
       <h3 class="nero-ai-reveal">СДЭК, Boxberry, Почта России, маркетплейсы</h3>
       <div class="asz-table-wrap nero-ai-reveal">
