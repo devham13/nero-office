@@ -1102,7 +1102,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p>AI убирает ручной перенос там, где он дороже всего: в первичке, закупках и входящем потоке. Человек подключается при низком confidence или нестандартном бланке.</p>
         </div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:28px;font-size:15px;max-width:740px;margin-left:auto;margin-right:auto;text-align:center;">По McKinsey, ощутимый эффект от AI даёт перестройка workflow, а не «ещё один OCR». Масштаб корпоративных внедрений иллюстрирует <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" style="color:var(--vdoc-accent);text-decoration:underline;text-underline-offset:3px">опыт KPMG и Claude для 276&nbsp;000 сотрудников</a> — полезный ориентир при автоматизации первички в среднем бизнесе.</p>
     </div>
   </section>
 
@@ -1633,7 +1633,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="vdoc-card nero-ai-reveal">
         <div class="vdoc-timeline">
-          <div class="vdoc-tl-item"><div class="vdoc-tl-dot"></div><h3>Аудит потока (2–3 дня)</h3><p>20–50 образцов, карта полей, приоритетные сценарии. Сверка со смежными решениями: <a href="/ai-1c-erp/">ai-1c-erp</a> и <a href="/vnedrenie-ai-obrabotka-email-crm/">обработка почты в CRM</a>.</p></div>
+          <div class="vdoc-tl-item"><div class="vdoc-tl-dot"></div><h3>Аудит потока (2–3 дня)</h3><p>20–50 образцов, карта полей, приоритетные сценарии. Сверка со смежными решениями: <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" style="color:var(--vdoc-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> и <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" style="color:var(--vdoc-accent);text-decoration:underline;text-underline-offset:3px">обработку входящей почты в CRM</a>.</p></div>
           <div class="vdoc-tl-item"><div class="vdoc-tl-dot"></div><h3>Пилот на 20 документах</h3><p>Field accuracy, STP rate, время на документ. Лид-магнит страницы — снижаем порог для МСБ.</p></div>
           <div class="vdoc-tl-item"><div class="vdoc-tl-dot"></div><h3>Запуск и обучение</h3><p>Валидация, интеграция webhook/API, промышленная очередь, роль верификатора. Срок пилота: <strong>2–4 недели</strong>.</p></div>
         </div>
@@ -1680,7 +1680,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p>Черновики, сопоставление контрагентов и номенклатуры. Nero дополняет 1С:РПД: кастомная валидация, заявки, нестандартные формы.</p>
         </div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:20px;font-size:15px;">Для amoCRM типичный сценарий — счёт или акт из вложения сразу создаёт сделку и задачу верификатору. Подробнее о настройке под ключ: <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" style="color:var(--vdoc-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для amoCRM</a> — соседняя посадочная про автоматизацию сделок без ручного переноса полей.</p>
       <div class="vdoc-card nero-ai-reveal" style="margin-top:20px;">
         <h3>Почта, сканеры, единый поток</h3>
         <p>Файлы с диска, вложения из почты, фото со сканера. «Автомир»: до <strong>100 000 стр./мес.</strong>, оптимизация бухгалтерии <strong>&gt;20%</strong>. Связка с ЭДО (Диадок) — как в кейсе «Подружка».</p>
@@ -1770,7 +1770,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vdoc_page_url = trailingslashit( get_permalink() );
+$vdoc_site_url = trailingslashit( home_url( '/' ) );
+$vdoc_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vdoc_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vdoc_site_url . '#organization',
+      'name'  => $vdoc_brand,
+      'url'   => $vdoc_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vdoc_site_url . '#website',
+      'url'       => $vdoc_site_url,
+      'name'      => $vdoc_brand,
+      'publisher' => [ '@id' => $vdoc_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vdoc_page_url . '#webpage',
+      'url'         => $vdoc_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vdoc_site_url . '#website' ],
+      'about'       => [ '@id' => $vdoc_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vdoc_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vdoc_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vdoc_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vdoc_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vdoc_page_url,
+      'provider'    => [ '@id' => $vdoc_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vdoc_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужна ли доработка под наши бланки?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, на этапе пилота. Система обучается на 20+ образцах каждого типа. Нестандартные счета — норма: дообучение повышает точность с 80% и выше.' ] ],
+        [ '@type' => 'Question', 'name' => 'Безопасность и хранение коммерческих данных', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Облако в РФ по 152-ФЗ или on-premise при жёстких требованиях ИБ. Контур проектируется на аудите.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что нужно для теста на 20 документах?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '20 файлов PDF/JPG, опционально справочник контрагентов, регламент обязательных полей. Загрузить документы для теста — без обязательств.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI-обработка документов для малого бизнеса — реально ли?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, при потоке от 50–100 док./мес. и боли ручного ввода. Пилот на 20 документах и чек от 250 тыс. ₽ доступнее корпоративного СЭД.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI-обработку документов пошагово?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '1) Аудит. 2) Пилот 20 док. 3) Валидация и интеграция. 4) Очередь и верификаторы. 5) Мониторинг STP и дообучение.' ] ],
+        [ '@type' => 'Question', 'name' => 'Автоматизация через AI — что получим на выходе?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Структурированные данные в учётной системе, меньше ручного труда, прозрачные метрики, маршруты согласования. Цифровой конвейер первички — от скана до проводки.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vdoc_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 <script>
 (function(){
