@@ -41,7 +41,7 @@ $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Собрать AI-наст�
 $primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
-$secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '#';
+$secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '#kak-rabotaet';
 
 get_header();
 
@@ -1626,7 +1626,7 @@ nav[aria-label="Хлебные крошки"],
       <aside class="ym-cta-block ym-cta-block--secondary" id="cta-obuchenie">
         <div class="ym-cta-block__body">
           <p class="ym-cta-block__headline">Хотите понимать AI до старта проекта?</p>
-          <p class="ym-cta-block__sub">Если HR или руководитель хочет разобраться в RAG, промптах и human-in-the-loop до пилота — посмотрите <a href="<?php echo esc_url($secondary_cta_url); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html($secondary_cta_label); ?></a>. Это ускоряет согласование внедрения с командой.</p>
+          <p class="ym-cta-block__sub">Если HR или руководитель хочет разобраться в RAG, промптах и human-in-the-loop до пилота — посмотрите <a href="<?php echo esc_url($secondary_cta_url); ?>" class="ym-link ym-link--accent"><?php echo esc_html($secondary_cta_label); ?></a>. Это ускоряет согласование внедрения с командой.</p>
         </div>
       </aside>
     </div>
