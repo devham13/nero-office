@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-13 — vnedrenie-ai-dlya-kliniki
+
+- Юра: опубликовано `[REDACTED]vnedrenie-ai-dlya-kliniki/` (HTTP 200, custom template page-vnedrenie-ai-dlya-kliniki.php, WP post ID 162).
+- Следующий шаг: google-table-manager (publish, строка 41), indexator, QA (Макс), SEO-аудит (Лёня).
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
