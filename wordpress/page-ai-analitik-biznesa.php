@@ -732,7 +732,7 @@ nav[aria-label="Хлебные крошки"],
 
       <div class="aab-card nero-ai-reveal" style="margin-top:24px;">
         <p>По обзору «Яков и Партнёры» + Яндекс (2025): <strong>71%</strong> крупных компаний используют gen AI; <strong>78%</strong> отмечают финансовую отдачу. Но лишь <strong>~4%</strong> довели кейс до полного внедрения — главная причина: отсутствие data layer и ROI-модели.</p>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Первый шаг к ежедневному брифингу — собрать проверяемый data layer из учётных и коммерческих систем: без этого AI останется экспериментом с ChatGPT. На практике начинают с контура <a href="https://meta-journal.ru/ai-1c-erp/">AI-агент для 1С и ERP</a> — read-only OData/API и нормализованные KPI для витрины аналитики.</p>
       </div>
     </div>
   </section>
@@ -1420,7 +1420,8 @@ nav[aria-label="Хлебные крошки"],
       <div class="aab-card nero-ai-reveal" style="margin-top:28px;">
         <h3>Ориентиры по ROI без выдуманных цифр</h3>
         <p><strong>78%</strong> компаний отмечают финансовую отдачу от ИИ (Яков и Партнёры, 2025). Окупаемость кастомного контура — ориентир <strong>3–9 месяцев</strong> при активном использовании, не гарантия. Пилот на «выручка + маржа + воронка CRM» — 2–4 недели.</p>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Для витрины «воронка CRM» нужны чистые сделки и этапы в amoCRM — если автоматизации ещё нет, логично сначала закрыть <a href="https://meta-journal.ru/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a>, а уже затем подключать ежедневный брифинг собственнику.</p>
+        <p>Дополнительный поток лидов в дашборд даёт входящая почта: <a href="https://meta-journal.ru/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> убирает ручную разборку заявок и ускоряет попадание обращений в воронку для AI-аналитики.</p>
       </div>
     </div>
   </section>
@@ -1538,7 +1539,123 @@ nav[aria-label="Хлебные крошки"],
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://meta-journal.ru//#organization",
+      "name": "Neurinix",
+      "url": "https://meta-journal.ru/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://meta-journal.ru//#website",
+      "url": "https://meta-journal.ru/",
+      "name": "Neurinix",
+      "publisher": {
+        "@id": "https://meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://meta-journal.ru/ai-analitik-biznesa/#webpage",
+      "url": "https://meta-journal.ru/ai-analitik-biznesa/",
+      "name": "AI-аналитик бизнеса: управленческие отчёты и дашборд для собственника под ключ",
+      "description": "Внедряем AI-аналитик бизнеса: CRM, 1С и реклама в одном дашборде. Каждый день — выводы, риски и действия для собственника. Получите пример отчёта.",
+      "isPartOf": {
+        "@id": "https://meta-journal.ru//#website"
+      },
+      "about": {
+        "@id": "https://meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://meta-journal.ru/ai-analitik-biznesa/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://meta-journal.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI-аналитик бизнеса: управленческие отчёты и дашборд для собственника под ключ",
+          "item": "https://meta-journal.ru/ai-analitik-biznesa/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://meta-journal.ru/ai-analitik-biznesa/#service",
+      "name": "AI-аналитик бизнеса: управленческие отчёты и дашборд для собственника под ключ",
+      "description": "Внедряем AI-аналитик бизнеса: CRM, 1С и реклама в одном дашборде. Каждый день — выводы, риски и действия для собственника. Получите пример отчёта.",
+      "url": "https://meta-journal.ru/ai-analitik-biznesa/",
+      "provider": {
+        "@id": "https://meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meta-journal.ru/ai-analitik-biznesa/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как внедрить ai аналитик бизнеса в действующие процессы?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Без «ломки» учёта: read-only API/OData к 1С и CRM. Первый пилот — один контур («выручка + воронка»). Полный цикл: Discovery 3–5 дней → data layer 5–10 дней → AI layer 5–7 дней → пилот 2–4 недели."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли начать с одного направления?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Типовой старт — ai анализ продаж: CRM + оплаты из 1С. Второй этап — рекламные кабинеты и ai прогноз выручки."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли штатный аналитик после внедрения?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI снижает зависимость от ручной сводки, но не отменяет стратегические решения. Для МСБ часто достаточно финдиректора на валидации пилота."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как связано с трендом AI-внедрений 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "McKinsey State of AI: выигрывают компании, перестраивающие end-to-end процессы. Услуга «под ключ» — мост от эксперимента с ChatGPT к операционному AI-контуру с KPI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что если данные «грязные»?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Discovery включает аудит качества. На пилоте — минимальный согласованный набор KPI. Data layer выявляет расхождения до запуска брифинга."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько до первого отчёта?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "По рынку: 1–2 недели при готовых доступах. Проект Nero Network: ориентир 2–4 недели до стабильного пилота с валидацией."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 </main>
 
