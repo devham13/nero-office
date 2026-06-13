@@ -40,8 +40,8 @@ require $nero_ai_bootstrap;
 $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Проверить заявки из соцсетей';
 $primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
-$secondary_cta_url = '#kak-rabotaet';
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
+$secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '#kak-rabotaet';
 
 get_header();
 
@@ -641,7 +641,10 @@ body.nero-ai-landing{padding-top:0!important}
   </section>
 
   <!-- §2 Что такое -->
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vnz-cnt" style="padding:0 0 clamp(20px,3vw,36px)">
+    <p class="vnz-related nero-ai-reveal" style="font-size:15px;max-width:820px;margin:0 auto 14px;text-align:center">После квалификации лид из VK или Telegram обычно уходит в CRM — тот же принцип, что и в сценарии <a href="/vnedrenie-ai-amocrm/" style="color:var(--vnz-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>: карточка сделки, теги источника и handoff менеджеру без ручного копипаста.</p>
+    <p class="vnz-related nero-ai-reveal" style="font-size:15px;max-width:820px;margin:0 auto;text-align:center">Если часть заявок приходит ещё и на почту, имеет смысл собрать единую картину входящих: <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vnz-accent);text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM</a> — соседний разбор автоматизации email→CRM, дополняющий мессенджеры и комментарии.</p>
+  </div>
   <section class="vnz-section vnz-section-alt" id="chto-takoe">
     <div class="vnz-cnt">
       <div class="vnz-sh nero-ai-reveal">
@@ -1047,7 +1050,7 @@ body.nero-ai-landing{padding-top:0!important}
       <div class="ym-cta-block ym-cta-block--dual" id="cta-ceny">
         <div class="ym-cta-block__body">
           <p class="ym-cta-block__headline">Узнайте бюджет под ваш поток из VK и Telegram</p>
-          <p class="ym-cta-block__sub">Ориентир <strong>120–350 тыс. ₽</strong> за внедрение под ключ. На аудите дадим оценку каналов и ROI. Если команда хочет понимать n8n и human-in-the-loop до старта — <a href="<?php echo esc_url(getenv('SECONDARY_CTA_URL') ?: ''); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html(getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы'); ?></a>.</p>
+          <p class="ym-cta-block__sub">Ориентир <strong>120–350 тыс. ₽</strong> за внедрение под ключ. На аудите дадим оценку каналов и ROI. Если команда хочет понимать n8n и human-in-the-loop до старта — <a href="<?php echo esc_url($secondary_cta_url); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html($secondary_cta_label); ?></a>.</p>
           <div class="ym-cta-block__actions">
             <a href="<?php echo esc_url($primary_cta_url); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent"<?php echo $primary_cta_attrs; ?>>Проверить заявки из соцсетей</a>
             <a href="#faq" class="nero-ai-btn nero-ai-btn-secondary ym-btn ym-btn--ghost">Вопросы по внедрению</a>
@@ -1058,7 +1061,10 @@ body.nero-ai-landing{padding-top:0!important}
   </section>
 
   <!-- §7 Кейсы -->
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vnz-cnt" style="padding:0 0 clamp(20px,3vw,36px)">
+    <p class="vnz-related nero-ai-reveal" style="font-size:15px;max-width:820px;margin:0 auto 14px;text-align:center">На корпоративном масштабе те же идеи managed-агентов и цифровых шлюзов уже разбирали в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vnz-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a> — полезно для сравнения enterprise-подхода Meta и практики внедрения в РФ.</p>
+    <p class="vnz-related nero-ai-reveal" style="font-size:15px;max-width:820px;margin:0 auto;text-align:center">Когда заявки из соцсетей должны стыковаться с учётом и складом, а не только с CRM, смотрите смежный кейс <a href="/ai-1c-erp/" style="color:var(--vnz-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> — автоматизация заявок поверх 1С и ERP без разрыва между каналами и операционкой.</p>
+  </div>
   <section class="vnz-section" id="keisy">
     <div class="vnz-cnt">
       <div class="vnz-sh nero-ai-reveal">
@@ -1626,7 +1632,101 @@ document.querySelectorAll('[data-vnz-faq] .vnz-faq-q').forEach(function(q){
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vnz_page_url = trailingslashit( get_permalink() );
+$vnz_site_url = trailingslashit( home_url( '/' ) );
+$vnz_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vnz_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vnz_site_url . '#organization',
+      'name'  => $vnz_brand,
+      'url'   => $vnz_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vnz_site_url . '#website',
+      'url'       => $vnz_site_url,
+      'name'      => $vnz_brand,
+      'publisher' => [ '@id' => $vnz_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vnz_page_url . '#webpage',
+      'url'         => $vnz_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vnz_site_url . '#website' ],
+      'about'       => [ '@id' => $vnz_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vnz_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vnz_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vnz_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vnz_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vnz_page_url,
+      'provider'    => [ '@id' => $vnz_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vnz_page_url . '#faq',
+      'mainEntity' => [
+        [
+          '@type' => 'Question',
+          'name'  => 'Как внедрить без потери качества диалога?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'RAG по базе знаний, тон бренда, handoff человеку. AI — первая линия; человек закрывает сделку.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Нужна ли CRM?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Да, если считаете лиды. Поддерживаются amoCRM и Битрикс24; омниканалы — по согласованию.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Юридические ограничения VK и Telegram?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => '152-ФЗ: согласие на ПДн до сбора телефона. Без спама; автоответы в комментариях — уместно, не флуд.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Чем отличается от Senler / Salebot?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Senler/Salebot — рассылки и воронки. AI-агент Nero — квалификация входящих в свободной форме и передача в CRM.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Сколько занимает внедрение?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Аудит — 7 дней. Разработка — обычно 2–4 недели для VK + Telegram + amoCRM/Битрикс24.',
+          ],
+        ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vnz_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
