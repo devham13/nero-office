@@ -41,8 +41,8 @@ require $nero_ai_bootstrap;
 $primary_cta_label   = getenv( 'PRIMARY_CTA_LABEL' ) ?: 'Собрать AI-воронку';
 $primary_cta_url     = nero_ai_primary_cta_url( getenv( 'PRIMARY_CTA_URL' ) ?: '' );
 $primary_cta_attrs   = nero_ai_primary_cta_link_attrs( $primary_cta_url );
-$secondary_cta_label   = getenv( 'SECONDARY_CTA_LABEL' ) ?: 'Курс по AI-автоматизации';
-$secondary_cta_url     = getenv( 'SECONDARY_CTA_URL' ) ?: '#';
+$secondary_cta_label   = getenv( 'SECONDARY_CTA_LABEL' ) ?: '';
+$secondary_cta_url     = getenv( 'SECONDARY_CTA_URL' ) ?: '';
 $secondary_cta_has_url = $secondary_cta_url && $secondary_cta_url !== '#';
 
 get_header();
