@@ -926,7 +926,11 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+<aside class="ava-card ava-internal-links nero-ai-reveal" aria-label="Смежные внедрения AI в CRM">
+  <p class="ava-eyebrow" style="margin-bottom:12px;">Смежные внедрения</p>
+  <p>Если CRM — amoCRM или Битрикс24, логичный следующий шаг после голосового администратора — <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM под ключ</a>: сделки, задачи мастерам и входящие из мессенджеров без ручного переноса.</p>
+  <p style="margin-top:14px;">Для учётки в 1С смотрите отдельный сценарий — <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агент для 1С и ERP</a>: заявки, счета и документы в связке с CRM, без двойного ввода в заказ-наряды.</p>
+</aside>
 
   <div class="ava-toc-outer">
     <div class="ava-cnt">
@@ -1294,7 +1298,11 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+<aside class="ava-card ava-internal-links nero-ai-reveal" aria-label="Дополнительные сценарии автоматизации">
+  <p class="ava-eyebrow" style="margin-bottom:12px;">Дополнительные сценарии</p>
+  <p>Помимо телефона клиенты пишут на почту — <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a> классифицирует письма и создаёт сделки до этапа записи на пост.</p>
+  <p style="margin-top:14px;">На фоне тренда contact-center automation 2026 полезно сравнить enterprise-подход: в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link ym-link--accent">KPMG и Claude — уроки AI для бизнеса</a> — managed-агенты и цифровые шлюзы, которые масштабируются и до сервисных ниш.</p>
+</aside>
 
   <!-- H2: Кейсы -->
   <section class="ava-section ava-section-alt" id="kejsy-scenarii" aria-labelledby="kejs-h2">
@@ -1509,7 +1517,107 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })();
 </script>
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "[REDACTED]//#organization",
+      "name": "[REDACTED]",
+      "url": "[REDACTED]/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "[REDACTED]//#website",
+      "url": "[REDACTED]/",
+      "name": "[REDACTED]",
+      "publisher": {
+        "@id": "[REDACTED]//#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "[REDACTED]/ai-dlya-avtoservisa/#webpage",
+      "url": "[REDACTED]/ai-dlya-avtoservisa/",
+      "name": "AI-администратор для автосервиса: внедрение и настройка под ключ",
+      "description": "AI-администратор для автосервиса принимает звонки, уточняет услугу и записывает клиентов в CRM. Внедрение под ключ: сценарии, интеграции, кейсы. Калькулятор потерь и ориентир 120–350 тыс. ₽.",
+      "isPartOf": {
+        "@id": "[REDACTED]//#website"
+      },
+      "about": {
+        "@id": "[REDACTED]//#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "[REDACTED]/ai-dlya-avtoservisa/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "[REDACTED]/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI-администратор для автосервиса: внедрение и настройка под ключ",
+          "item": "[REDACTED]/ai-dlya-avtoservisa/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "[REDACTED]/ai-dlya-avtoservisa/#service",
+      "name": "AI-администратор для автосервиса: внедрение и настройка под ключ",
+      "description": "AI-администратор для автосервиса принимает звонки, уточняет услугу и записывает клиентов в CRM. Внедрение под ключ: сценарии, интеграции, кейсы. Калькулятор потерь и ориентир 120–350 тыс. ₽.",
+      "url": "[REDACTED]/ai-dlya-avtoservisa/",
+      "provider": {
+        "@id": "[REDACTED]//#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "[REDACTED]/ai-dlya-avtoservisa/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужен ли второй администратор после внедрения?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Не обязательно. AI закрывает рутину и нерабочее время; один администратор + AI часто заменяют схему «два приёмщика в сезон»."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какие CRM и телефонию подключаете?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "amoCRM, Битрикс24, 1С:Автосервис, Альфа-Авто, AutoCRM, Trinion, Google Таблица. Телефония: Манго, UIS, Sipuni, МТТ, Ростелеком ВАТС, Asterisk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как считается окупаемость?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Через калькулятор: (звонки × % пропущенных × конверсия × чек) − стоимость внедрения. Плюс разгрузка админа, меньше no-show, записи вне рабочих часов."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Законно ли записывать разговоры с AI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, при соблюдении 152-ФЗ. AI предупреждает о записи в начале; продолжение = фактическое согласие. Хранение — на серверах в РФ при требовании клиента."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <!-- AD_BANNER: not configured -->
 
