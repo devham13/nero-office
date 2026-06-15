@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-15 — ai-dlya-restorana
+
+- Юра: опубликовано `[REDACTED]ai-dlya-restorana/` (HTTP 200, custom template page-ai-dlya-restorana.php, WP post ID 173).
+- Следующий шаг: google-table-manager (publish, строка 48), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
