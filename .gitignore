@@ -26,6 +26,7 @@ downloaded.html
 node_modules/
 skills/indexlift-seo-auditor/node_modules/
 skills/indexlift-seo-auditor/deliverables/
+skills/indexlift-seo-auditor/deliverables-no-slash/
 skills/indexlift-seo-auditor/package-lock.json
 
 # Python / OS noise
