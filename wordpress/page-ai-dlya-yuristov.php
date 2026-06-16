@@ -1161,8 +1161,6 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
-
   <!-- §1 Зачем -->
   <section class="adl-section" id="zachem-ai">
     <div class="adl-cnt">
@@ -1214,7 +1212,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <li><strong>Форма «Получить пример брифа»</strong> — точка входа для тёплых лидов.</li>
           <li><strong>Email-parser и телефония</strong> (опционально) — speech-to-text при хранении в РФ.</li>
         </ul>
-        <p>Агент определяет <strong>направление права</strong> и <strong>срочность</strong>, задаёт уточняющие вопросы по ветке сценария — принцип conversational intake 2026.</p>
+        <p>Агент определяет <strong>направление права</strong> и <strong>срочность</strong>, задаёт уточняющие вопросы по ветке сценария — принцип conversational intake 2026. Если заметная доля обращений приходит на корпоративную почту, имеет смысл сначала настроить <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработку входящей почты в CRM</a> — письма классифицируются и попадают в карточку ещё до этапа брифа.</p>
       </div>
 
       <div class="adl-card nero-ai-reveal" id="ai-brif">
@@ -1543,7 +1541,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="adl-card nero-ai-reveal">
         <h3>Связка заявки с сайта и мессенджеров в одну воронку</h3>
-        <p>AI intake объединяет каналы: один бриф, одна карточка, один ответственный. Референс Clio: данные intake стандартизируются без ручного копирования.</p>
+        <p>AI intake объединяет каналы: один бриф, одна карточка, один ответственный. В amoCRM тот же принцип «без ручного копирования» раскрыт в материале про <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a>; для юрбюро мы адаптируем поля под legal-бриф. Референс Clio: данные intake стандартизируются без ручного копирования.</p>
       </div>
     </div>
   </section>
@@ -1578,7 +1576,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="adl-sh nero-ai-reveal">
         <span class="adl-eyebrow">Доверие</span>
         <h2>Примеры внедрения AI для юристов</h2>
-        <p>Публичных прямых кейсов «внешний клиент → AI-бриф → amoCRM» мало; ниже — релевантные примеры и проектная модель Nero Network.</p>
+        <p>Публичных прямых кейсов «внешний клиент → AI-бриф → amoCRM» мало; ниже — релевантные примеры и проектная модель Nero Network. Смежный опыт автоматизации заявок и документов в учётном контуре — в разборе <a href="/ai-1c-erp/">AI-агента для 1С и ERP под ключ</a>.</p>
       </div>
       <div class="adl-case-grid nero-ai-reveal">
         <div class="adl-case-card">
@@ -1718,7 +1716,78 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$adl_page_url = trailingslashit( get_permalink() );
+$adl_site_url = trailingslashit( home_url( '/' ) );
+$adl_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$adl_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $adl_site_url . '#organization',
+      'name'  => $adl_brand,
+      'url'   => $adl_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $adl_site_url . '#website',
+      'url'       => $adl_site_url,
+      'name'      => $adl_brand,
+      'publisher' => [ '@id' => $adl_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $adl_page_url . '#webpage',
+      'url'         => $adl_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $adl_site_url . '#website' ],
+      'about'       => [ '@id' => $adl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $adl_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $adl_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $adl_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $adl_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $adl_page_url,
+      'provider'    => [ '@id' => $adl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $adl_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI для юристов без риска для клиентов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Контур данных в РФ, отдельные согласия на ПДн, AI только в режиме сбора фактов, human-in-the-loop на каждом брифе. Эскалация сложных случаев — сразу юристу.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли начать с одного сценария (только бриф)?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Пилот: один канал (Telegram или форма) + одна практика + CRM. Масштабирование — на 4–8 неделе.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужна ли доработка сайта и CRM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Минимально: виджет или ссылка на бот, API-ключи CRM, пользовательские поля под бриф. WordPress, Tilda, кастомный лендинг — поддерживаются.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько длится проект внедрения?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит 1–3 дня, проектирование 3–5 дней, пилот 2–3 недели. Первый рабочий бриф в CRM — от 2–4 недель.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли решение для малого юридического бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Один юрист + менеджер, одна CRM, один канал — достаточный старт.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI юриста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. 3% допускают полную автоматизацию; 45% — только помощник (Авито × Право.ru).' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли on-prem?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Зависит от политики ПДн; Yandex Cloud / GigaChat / self-hosted — опции Nero Network.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем отличается от ChatGPT?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Корпоративный контур, сценарии, CRM, журнал, запрет утечки в публичные сервисы.' ] ],
+      ],
+    ],
+    [
+      '@type'       => 'Article',
+      '@id'         => $adl_page_url . '#article',
+      'headline'    => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $adl_page_url,
+      'mainEntityOfPage' => [ '@id' => $adl_page_url . '#webpage' ],
+      'publisher'   => [ '@id' => $adl_site_url . '#organization' ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $adl_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
