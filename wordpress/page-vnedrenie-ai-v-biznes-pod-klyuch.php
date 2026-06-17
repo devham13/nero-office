@@ -22,6 +22,12 @@ add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_descr
 
 $brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 
+$nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
+if (!is_readable($nero_ai_bootstrap)) {
+    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
+}
+require $nero_ai_bootstrap;
+
 $nero_ai_header_links = [
     ['label' => 'Услуга под ключ', 'href' => '#pod-klyuch'],
     ['label' => 'AI-аудит', 'href' => '#audit'],
@@ -55,12 +61,6 @@ $primary_cta_url = $hero_primary_url;
 $primary_cta_attrs = $hero_primary_attrs;
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
 $secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '';
-
-$nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
-if (!is_readable($nero_ai_bootstrap)) {
-    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
-}
-require $nero_ai_bootstrap;
 
 get_header();
 
@@ -1044,7 +1044,7 @@ section.vaibk-hero-ai-biznes {
         <span class="bpk-eyebrow">Roadmap</span>
         <h2>Этапы внедрения AI в бизнес-процессы</h2>
         <p>Пять этапов Nero Network — ответ на запрос «как внедрить AI в бизнес» без бесконечных стратегических сессий.</p>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Опыт крупных игроков показывает: масштаб без процесса не работает — разбор <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">уроков внедрения AI в KPMG для 276&nbsp;000 сотрудников</a> помогает заранее заложить governance и change management в roadmap 30/60/90.</p>
       </div>
 
       <div class="bpk-card nero-ai-reveal">
@@ -1097,7 +1097,7 @@ section.vaibk-hero-ai-biznes {
         <span class="bpk-eyebrow">Доказательства</span>
         <h2>Кейсы внедрения AI в бизнес</h2>
         <p>Зонтичная услуга ведёт в воронку вертикалей Nero — без конкуренции slug.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+        <p>В сетевом ритейле и франшизах типовой пилот — <a href="/ai-kontrol-standartov-franshizy/">AI-контроль стандартов и чек-листов точек</a>: измеримый KPI за 4–8 недель, дополняет CRM- и ERP-сценарии в карточках ниже.</p>
       </div>
 
       <div class="bpk-table-wrap nero-ai-reveal">
@@ -1634,7 +1634,69 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vaibk_page_url = trailingslashit( get_permalink() );
+$vaibk_site_url = trailingslashit( home_url( '/' ) );
+$vaibk_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vaibk_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vaibk_site_url . '#organization',
+      'name'  => $vaibk_brand,
+      'url'   => $vaibk_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vaibk_site_url . '#website',
+      'url'       => $vaibk_site_url,
+      'name'      => $vaibk_brand,
+      'publisher' => [ '@id' => $vaibk_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vaibk_page_url . '#webpage',
+      'url'         => $vaibk_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vaibk_site_url . '#website' ],
+      'about'       => [ '@id' => $vaibk_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vaibk_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vaibk_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vaibk_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vaibk_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vaibk_page_url,
+      'provider'    => [ '@id' => $vaibk_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vaibk_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI в бизнес без бесконечных экспериментов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Начните с AI-аудита: зафиксируйте 1–2 процесса с высоким объёмом и baseline-метриками. Запустите PoC на 50–100 реальных примерах, затем пилот с go/no-go по KPI.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит внедрение и когда окупается?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Вилка 250 тыс.–3 млн ₽ зависит от числа интеграций. Окупаемость — от стоимости операции и FTE: кейс металлургии ~4 месяца при экономии 45 млн ₽/год.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужна ли интеграция с CRM и ERP?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, если цель — AI автоматизация бизнеса, а не генерация текстов. Nero интегрирует amoCRM, Bitrix24, 1С, email, Telegram, телефонию через Make/n8n и MCP.' ] ],
+        [ '@type' => 'Question', 'name' => 'Под ключ или своими силами — что выбрать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Своими силами — при ML/data-команде и 6–12 месяцах. Под ключ — если нужен результат за 4–8 недель, нет IT-отдела, важны интеграции и KPI.' ] ],
+        [ '@type' => 'Question', 'name' => 'С чего начать малому бизнесу?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Один процесс с быстрым ROI: входящие заявки, email→CRM или поддержка L1. Методология «30–60 дней на первую болевую точку».' ] ],
+        [ '@type' => 'Question', 'name' => 'Безопасны ли корпоративные данные?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Разграничение доступа, логи действий агента, российские LLM и on-premise при 152-ФЗ. Юридически значимые решения — только с подтверждением человека.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем AI-агент отличается от чат-бота?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Чат-бот отвечает в окне чата. AI агенты выполняют действия: пишут в CRM, ставят задачи, маршрутизируют, готовят документы — в связке с Make/n8n и MCP.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли начать с одного процесса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, это рекомендуемый путь: пилот → метрики → расширение. Именно так устроена услуга внедрение AI в бизнес под ключ в Nero Network.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vaibk_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
