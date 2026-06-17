@@ -6,3 +6,5 @@
 | 2026-06-06 | vnedrenie-ai-amocrm | [REDACTED]vnedrenie-ai-amocrm/ | AI-агент для amoCRM: внедрение и настройка под ключ | page-vnedrenie-ai-amocrm.php |
 | 2026-06-07 | vnedrenie-ai-obrabotka-email-crm | [REDACTED]vnedrenie-ai-obrabotka-email-crm/ | AI-обработка входящей почты в CRM: внедрение под ключ | page-vnedrenie-ai-obrabotka-email-crm.php |
 | 2026-06-07 | ai-1c-erp | [REDACTED]ai-1c-erp/ | AI-агент для 1С и ERP: внедрение и настройка под ключ | page-ai-1c-erp.php |
+| 2026-06-16 | ai-kontrol-standartov-franshizy | [REDACTED]ai-kontrol-standartov-franshizy/ | AI для франшизы: контроль стандартов и чек-листов точек | page-ai-kontrol-standartov-franshizy.php |
+| 2026-06-17 | vnedrenie-ai-v-biznes-pod-klyuch | [REDACTED]vnedrenie-ai-v-biznes-pod-klyuch/ | Внедрение AI в бизнес под ключ: аудит, KPI и agentic-решения | page-vnedrenie-ai-v-biznes-pod-klyuch.php |
