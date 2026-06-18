@@ -1215,6 +1215,35 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
+  <!-- internal-links: смежные посадочные Nero Network -->
+  <section class="akdb-section akdb-section-alt nero-ai-section" id="smeshnye-materialy">
+    <div class="akdb-cnt">
+      <div class="akdb-sh">
+        <span class="akdb-eyebrow">Смежные услуги</span>
+        <h2>От AI-стратегии к точечному внедрению</h2>
+        <p>Дорожная карта консалтинга часто приводит к конкретным интеграциям — отдельные посадочные Nero Network по самым частым сценариям после приоритизации.</p>
+      </div>
+      <div class="akdb-grid-2 nero-ai-reveal">
+        <div class="akdb-card">
+          <span class="akdb-eyebrow">Продажи и CRM</span>
+          <p>Когда приоритет №1 в roadmap — воронка и квалификация лидов, следующий шаг: <a class="akdb-link" href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a>.</p>
+        </div>
+        <div class="akdb-card nero-ai-delay-1">
+          <span class="akdb-eyebrow">Документооборот и ERP</span>
+          <p>Для учётного контура после приоритизации сценариев смотрите <a class="akdb-link" href="/ai-1c-erp/">AI-агента для 1С и ERP: внедрение и настройка под ключ</a>.</p>
+        </div>
+        <div class="akdb-card nero-ai-delay-2">
+          <span class="akdb-eyebrow">Входящие заявки</span>
+          <p>Если первый quick win — triage писем и маршрутизация заявок в CRM: <a class="akdb-link" href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM: внедрение под ключ</a>.</p>
+        </div>
+        <div class="akdb-card nero-ai-delay-3">
+          <span class="akdb-eyebrow">Enterprise-ориентир</span>
+          <p>Для финмодели на масштабе сотрудников полезен разбор <a class="akdb-link" href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude: 276 000 сотрудников — уроки AI для бизнеса</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- #cta final -->
   <section class="akdb-section nero-ai-section" id="cta">
     <div class="akdb-cnt">
@@ -1657,7 +1686,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<!-- INTERNAL-LINKS:INSERT -->
+<!-- INTERNAL-LINKS: inserted in #smeshnye-materialy -->
 <?php
 $akdb_page_url   = trailingslashit(get_permalink());
 $akdb_site_url   = trailingslashit(home_url('/'));
