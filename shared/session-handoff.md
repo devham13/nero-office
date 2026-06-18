@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-18 — ai-konsalting-dlya-biznesa
+
+- Юра: опубликовано `[REDACTED]ai-konsalting-dlya-biznesa/` (HTTP 200, custom template page-ai-konsalting-dlya-biznesa.php, WP post ID 195).
+- Следующий шаг: google-table-manager (publish, строка 55), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
