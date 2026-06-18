@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-12 — ai-nastavnik-adaptaciya-sotrudnikov
+
+- Юра: опубликовано `/ai-nastavnik-adaptaciya-sotrudnikov/` (HTTP 200, custom template page-ai-nastavnik-adaptaciya-sotrudnikov.php, WP post ID 151).
+- Следующий шаг: google-table-manager (publish, строка 36), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
