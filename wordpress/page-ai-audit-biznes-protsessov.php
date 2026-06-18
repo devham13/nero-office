@@ -5,15 +5,13 @@
  * Slug: ai-audit-biznes-protsessov
  */
 
-declare(strict_types=1);
-
 // ── SEO ──────────────────────────────────────────────────────────────────────
 $page_seo_title       = 'AI-аудит бизнес-процессов — заказать для компании под ключ';
 $page_seo_description = 'Проведём AI-аудит бизнес-процессов для вашей компании. Покажем, какие процессы автоматизировать первыми и какой ROI ожидать. Бесплатная карта AI-возможностей.';
 
 add_filter(
     'document_title_parts',
-    static function (array $parts) use ($page_seo_title): array {
+    static function ( array $parts ) use ( $page_seo_title ): array {
         $parts['title'] = $page_seo_title;
         return $parts;
     },
@@ -22,32 +20,15 @@ add_filter(
 
 add_action(
     'wp_head',
-    static function () use ($page_seo_title, $page_seo_description): void {
-        echo '<meta name="description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
-        echo '<meta property="og:title" content="' . esc_attr($page_seo_title) . '" />' . "\n";
-        echo '<meta property="og:description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
-        echo '<meta property="og:url" content="' . esc_url(get_permalink()) . '" />' . "\n";
+    static function () use ( $page_seo_title, $page_seo_description ): void {
+        echo '<meta name="description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
+        echo '<meta property="og:title" content="' . esc_attr( $page_seo_title ) . '" />' . "\n";
+        echo '<meta property="og:description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
+        echo '<meta property="og:url" content="' . esc_url( get_permalink() ) . '" />' . "\n";
         echo '<meta property="og:type" content="article" />' . "\n";
     },
     1
 );
-
-// ── CTA helpers ──────────────────────────────────────────────────────────────
-$brand             = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
-$primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Получить карту AI-возможностей';
-$primary_cta_url   = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
-$primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
-
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Курс по AI-автоматизации';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#metodologiya';
-
-// Alias function so hero/Boris fragments can call nero_ai_primary_cta_label()
-if (!function_exists('nero_ai_primary_cta_label')) {
-    function nero_ai_primary_cta_label(): string
-    {
-        return getenv('PRIMARY_CTA_LABEL') ?: 'Получить карту AI-возможностей';
-    }
-}
 
 // ── Header nav — якоря к секциям страницы ────────────────────────────────────
 $nero_ai_header_links = [
@@ -60,10 +41,25 @@ $nero_ai_header_links = [
 
 // ── Bootstrap (тема → fallback shared/) ──────────────────────────────────────
 $nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
-if (!is_readable($nero_ai_bootstrap)) {
-    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
+if ( ! is_readable( $nero_ai_bootstrap ) ) {
+    $nero_ai_bootstrap = dirname( __DIR__ ) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+// ── CTA helpers (requires bootstrap) ─────────────────────────────────────────
+$brand             = get_bloginfo( 'name' ) ?: ( getenv( 'SITE_BRAND' ) ?: '' ); // pragma: allowlist secret
+$primary_cta_label = getenv( 'PRIMARY_CTA_LABEL' ) ?: 'Получить карту AI-возможностей';
+$primary_cta_url   = nero_ai_primary_cta_url( getenv( 'PRIMARY_CTA_URL' ) ?: '' );
+$primary_cta_attrs = nero_ai_primary_cta_link_attrs( $primary_cta_url );
+
+$secondary_cta_label = getenv( 'SECONDARY_CTA_LABEL' ) ?: 'Курс по AI-автоматизации';
+$secondary_cta_url   = getenv( 'SECONDARY_CTA_URL' ) ?: '#metodologiya';
+
+if ( ! function_exists( 'nero_ai_primary_cta_label' ) ) {
+    function nero_ai_primary_cta_label() {
+        return getenv( 'PRIMARY_CTA_LABEL' ) ?: 'Получить карту AI-возможностей';
+    }
+}
 
 get_header();
 
@@ -1161,64 +1157,64 @@ nav[aria-label="Хлебные крошки"],
 </div>
 
 <?php
-$naad_page_url = trailingslashit( get_permalink() );
-$naad_site_url = trailingslashit( home_url( '/' ) );
-$naad_brand    = get_bloginfo( 'name' ) ?: 'Organization';
-$naad_schema   = [
-    '@context' => 'https://schema.org',
-    '@graph'   => [
-        [
-            '@type' => 'Organization',
-            '@id'   => $naad_site_url . '#organization',
-            'name'  => $naad_brand,
-            'url'   => $naad_site_url,
-        ],
-        [
-            '@type'     => 'WebSite',
-            '@id'       => $naad_site_url . '#website',
-            'url'       => $naad_site_url,
-            'name'      => $naad_brand,
-            'publisher' => [ '@id' => $naad_site_url . '#organization' ],
-        ],
-        [
-            '@type'       => 'WebPage',
-            '@id'         => $naad_page_url . '#webpage',
-            'url'         => $naad_page_url,
-            'name'        => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги',
-            'description' => $page_seo_description,
-            'isPartOf'    => [ '@id' => $naad_site_url . '#website' ],
-            'about'       => [ '@id' => $naad_site_url . '#organization' ],
-        ],
-        [
-            '@type'           => 'BreadcrumbList',
-            '@id'             => $naad_page_url . '#breadcrumb',
-            'itemListElement' => [
-                [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $naad_site_url ],
-                [ '@type' => 'ListItem', 'position' => 2, 'name' => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги', 'item' => $naad_page_url ],
-            ],
-        ],
-        [
-            '@type'       => 'Service',
-            '@id'         => $naad_page_url . '#service',
-            'name'        => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги',
-            'description' => $page_seo_description,
-            'url'         => $naad_page_url,
-            'provider'    => [ '@id' => $naad_site_url . '#organization' ],
-        ],
-        [
-            '@type'      => 'FAQPage',
-            '@id'        => $naad_page_url . '#faq',
-            'mainEntity' => [
-                [ '@type' => 'Question', 'name' => 'Как провести AI-аудит бизнес-процессов без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит — это управленческий, а не технический инструмент. Для его проведения программист на стороне клиента не нужен. Вам понадобится: доступ к данным (CRM-выгрузка, записи звонков, основные регламенты); 2–3 часа времени ключевых сотрудников на структурированные интервью; готовность открыто рассказать, как работают процессы на самом деле. Технической экспертизы на стороне клиента на этапе диагностики не требуется. Программисты понадобятся на следующем шаге — при реализации рекомендаций аудита. Но не раньше.' ] ],
-                [ '@type' => 'Question', 'name' => 'Подходит ли AI-аудит для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да — и для малого бизнеса AI-аудит особенно ценен. Именно небольшие компании (5–50 человек) чаще всего несут скрытые потери на ручных операциях, которые при малом масштабе кажутся нормальными. Юридическая компания из 6 человек (кейс GodKod AI) сэкономила 3 млн рублей в год, отказавшись от найма в пользу автоматизации. Для малого бизнеса особенно подходит формат экспресс-аудита: 1–5 дней, фокус на 3–5 ключевых процессах.' ] ],
-                [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-аудит бизнес-процессов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит решает четыре управленческие задачи: определяет, нужен ли AI вашей компании прямо сейчас; показывает конкретные процессы с наибольшим потенциалом автоматизации; считает ROI по каждому сценарию консервативно; даёт дорожную карту с конкретными инструментами, сроками и этапами внедрения.' ] ],
-                [ '@type' => 'Question', 'name' => 'Как быстро окупается AI после правильного аудита?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Quick Wins, выявленные в ходе аудита, окупаются за 1–3 месяца после внедрения. Среднесрочные результаты (3–6 месяцев) — более сложные интеграции: снижение ФОТ на рутинных задачах, ускорение цикла сделки. По консервативным международным оценкам (AI Hub Landau) правильно выбранные AI-инвестиции возвращают в 10–50 раз больше стоимости самого аудита за первый год.' ] ],
-                [ '@type' => 'Question', 'name' => 'Что входит в бесплатную карту AI-возможностей?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Бесплатная карта AI-возможностей включает: 3–5 процессов с наибольшим потенциалом автоматизации именно в вашей компании; ориентировочный эффект для каждого процесса (в часах или рублях в месяц); рекомендацию по первому шагу — какой инструмент, какая интеграция, с чего начать; честную оценку, стоит ли вообще начинать AI-проект прямо сейчас. Карта формируется на основе короткой диагностической сессии (60–90 минут).' ] ],
-            ],
-        ],
+$audit_page_url = trailingslashit( get_permalink() );
+$audit_site_url = trailingslashit( home_url( '/' ) );
+$audit_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$audit_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $audit_site_url . '#organization',
+      'name'  => $audit_brand,
+      'url'   => $audit_site_url,
     ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $audit_site_url . '#website',
+      'url'       => $audit_site_url,
+      'name'      => $audit_brand,
+      'publisher' => [ '@id' => $audit_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $audit_page_url . '#webpage',
+      'url'         => $audit_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $audit_site_url . '#website' ],
+      'about'       => [ '@id' => $audit_site_url . '#organization' ],
+    ],
+    [
+      '@type'           => 'BreadcrumbList',
+      '@id'             => $audit_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $audit_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $audit_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $audit_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $audit_page_url,
+      'provider'    => [ '@id' => $audit_site_url . '#organization' ],
+    ],
+    [
+      '@type'      => 'FAQPage',
+      '@id'        => $audit_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как провести AI-аудит бизнес-процессов без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит — это управленческий, а не технический инструмент. Для его проведения программист на стороне клиента не нужен. Вам понадобится: доступ к данным (CRM-выгрузка, записи звонков, основные регламенты); 2–3 часа времени ключевых сотрудников на структурированные интервью; готовность открыто рассказать, как работают процессы на самом деле. Технической экспертизы на стороне клиента на этапе диагностики не требуется. Программисты понадобятся на следующем шаге — при реализации рекомендаций аудита. Но не раньше.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли AI-аудит для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да — и для малого бизнеса AI-аудит особенно ценен. Именно небольшие компании (5–50 человек) чаще всего несут скрытые потери на ручных операциях, которые при малом масштабе кажутся нормальными. Юридическая компания из 6 человек (кейс GodKod AI) сэкономила 3 млн рублей в год, отказавшись от найма в пользу автоматизации. Для малого бизнеса особенно подходит формат экспресс-аудита: 1–5 дней, фокус на 3–5 ключевых процессах.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-аудит бизнес-процессов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит решает четыре управленческие задачи: определяет, нужен ли AI вашей компании прямо сейчас; показывает конкретные процессы с наибольшим потенциалом автоматизации; считает ROI по каждому сценарию консервативно; даёт дорожную карту с конкретными инструментами, сроками и этапами внедрения.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как быстро окупается AI после правильного аудита?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Quick Wins, выявленные в ходе аудита, окупаются за 1–3 месяца после внедрения. Среднесрочные результаты (3–6 месяцев) — более сложные интеграции: снижение ФОТ на рутинных задачах, ускорение цикла сделки. По консервативным международным оценкам (AI Hub Landau) правильно выбранные AI-инвестиции возвращают в 10–50 раз больше стоимости самого аудита за первый год.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что входит в бесплатную карту AI-возможностей?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Бесплатная карта AI-возможностей включает: 3–5 процессов с наибольшим потенциалом автоматизации именно в вашей компании; ориентировочный эффект для каждого процесса (в часах или рублях в месяц); рекомендацию по первому шагу — какой инструмент, какая интеграция, с чего начать; честную оценку, стоит ли вообще начинать AI-проект прямо сейчас. Карта формируется на основе короткой диагностической сессии (60–90 минут).' ] ],
+      ],
+    ],
+  ],
 ];
-echo '<script type="application/ld+json">' . wp_json_encode( $naad_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+echo '<script type="application/ld+json">' . wp_json_encode( $audit_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 ?>
 
 </main>
