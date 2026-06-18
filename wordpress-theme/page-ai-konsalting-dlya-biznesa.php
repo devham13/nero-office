@@ -1658,7 +1658,68 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <!-- INTERNAL-LINKS:INSERT -->
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$akdb_page_url   = trailingslashit(get_permalink());
+$akdb_site_url   = trailingslashit(home_url('/'));
+$akdb_schema_h1  = 'AI-консалтинг для бизнеса: стратегия внедрения и дорожная карта под ключ';
+$akdb_schema     = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $akdb_site_url . '#organization',
+            'name'  => $brand,
+            'url'   => $akdb_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $akdb_site_url . '#website',
+            'url'       => $akdb_site_url,
+            'name'      => $brand,
+            'publisher' => ['@id' => $akdb_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $akdb_page_url . '#webpage',
+            'url'         => $akdb_page_url,
+            'name'        => $akdb_schema_h1,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $akdb_site_url . '#website'],
+            'about'       => ['@id' => $akdb_site_url . '#organization'],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $akdb_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $akdb_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $akdb_schema_h1, 'item' => $akdb_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $akdb_page_url . '#service',
+            'name'        => $akdb_schema_h1,
+            'description' => $page_seo_description,
+            'url'         => $akdb_page_url,
+            'provider'    => ['@id' => $akdb_site_url . '#organization'],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $akdb_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить AI-консалтинг в компании с нуля?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Зафиксируйте 3–5 ключевых процессов с объёмами → экспресс-диагностика (3–5 дней) → воркшопы → утвердите roadmap и KPI первого пилота → запуск только по сценарию с готовыми данными.']],
+                ['@type' => 'Question', 'name' => 'Сколько длится AI-консалтинг и когда ждать первый эффект?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Стратегия — 2–4 недели. Первый эффект пилота — от 1–3 месяцев. Масштабный ROI — типично 9–18 месяцев (OTUS / Habr).']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит AI-консалтинг?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Вилка Nero Network — 100–700 тыс. ₽. Рынок: экспресс от 150 тыс., стандарт 300–450 тыс., enterprise от 1 млн ₽.']],
+                ['@type' => 'Question', 'name' => 'Нужна ли своя команда разработки после консалтинга?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Не обязательно сразу. Консалтинг даёт спецификацию и backlog — можно передать Nero или интегратору.']],
+                ['@type' => 'Question', 'name' => 'Чем AI-консалтинг отличается от заказа одной нейросети «под задачу»?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Разовый бот решает одну точку. Консалтинг отвечает, какую точку брать первой и как считать ROI. 97% экспериментируют, 26% имеют формализованный план.']],
+                ['@type' => 'Question', 'name' => 'AI-консалтинг для малого бизнеса — имеет ли смысл?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да, в формате top-3 сценариев и одного пилота. Для микробизнеса иногда достаточно точечной интеграции.']],
+                ['@type' => 'Question', 'name' => 'AI-консалтинг с CRM — это отдельная услуга?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'На этапе консалтинга определяем роль CRM в AI-архитектуре. Точечное внедрение в amoCRM / Bitrix24 — следующий шаг после приоритизации.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($akdb_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
 
 </main>
 
