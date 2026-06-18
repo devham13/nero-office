@@ -812,7 +812,9 @@ nav[aria-label="Хлебные крошки"],
 
     <p>Профессиональная методология оценки — двухосная матрица: <strong>Impact</strong> (влияние на деньги или время) × <strong>Feasibility</strong> (насколько просто внедрить). Каждому процессу присваивается оценка по обеим осям.</p>
 
-    <!-- INTERNAL-LINKS:INSERT -->
+    <p>Практика показывает: наибольший ROI при минимальных затратах даёт автоматизация там, где высок объём однотипных операций. <a href="/ai-1c-erp/">Интеграция AI с 1С и ERP</a> — один из самых предсказуемых Quick Wins: обработка документов ускоряется в 20–30 раз, ручной ввод практически уходит. Параллельно аудит оценивает <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-маршрутизацию входящей почты и заявок в CRM</a>: время реакции на обращение снижается с часов до секунд.</p>
+
+    <p>Для компаний с активными продажами отдельно анализируется <a href="/vnedrenie-ai-amocrm/">автоматизация воронки в amoCRM с помощью AI-агента</a> — квалификация лидов, заполнение карточек, сопровождение сделок без участия менеджера. Крупный бизнес подтверждает тренд: <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">опыт KPMG по внедрению AI для 276 000 сотрудников</a> показывает, как системный подход к выбору процессов кардинально меняет итоговый результат.</p>
 
     <div style="overflow-x:auto;margin:24px 0;">
       <table style="width:100%;border-collapse:collapse;font-size:15px;">
@@ -1158,7 +1160,66 @@ nav[aria-label="Хлебные крошки"],
   <a href="<?php echo esc_url( nero_ai_primary_cta_url() ); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:16px 40px;background:var(--ym-accent,#4fa3e0);color:#fff;font-weight:800;font-size:17px;border-radius:10px;text-decoration:none;"><?php echo esc_html( nero_ai_primary_cta_label() ); ?></a>
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$naad_page_url = trailingslashit( get_permalink() );
+$naad_site_url = trailingslashit( home_url( '/' ) );
+$naad_brand    = get_bloginfo( 'name' ) ?: 'Organization';
+$naad_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $naad_site_url . '#organization',
+            'name'  => $naad_brand,
+            'url'   => $naad_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $naad_site_url . '#website',
+            'url'       => $naad_site_url,
+            'name'      => $naad_brand,
+            'publisher' => [ '@id' => $naad_site_url . '#organization' ],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $naad_page_url . '#webpage',
+            'url'         => $naad_page_url,
+            'name'        => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги',
+            'description' => $page_seo_description,
+            'isPartOf'    => [ '@id' => $naad_site_url . '#website' ],
+            'about'       => [ '@id' => $naad_site_url . '#organization' ],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $naad_page_url . '#breadcrumb',
+            'itemListElement' => [
+                [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $naad_site_url ],
+                [ '@type' => 'ListItem', 'position' => 2, 'name' => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги', 'item' => $naad_page_url ],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $naad_page_url . '#service',
+            'name'        => 'AI-аудит бизнес-процессов: найдём, где автоматизация принесёт деньги',
+            'description' => $page_seo_description,
+            'url'         => $naad_page_url,
+            'provider'    => [ '@id' => $naad_site_url . '#organization' ],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $naad_page_url . '#faq',
+            'mainEntity' => [
+                [ '@type' => 'Question', 'name' => 'Как провести AI-аудит бизнес-процессов без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит — это управленческий, а не технический инструмент. Для его проведения программист на стороне клиента не нужен. Вам понадобится: доступ к данным (CRM-выгрузка, записи звонков, основные регламенты); 2–3 часа времени ключевых сотрудников на структурированные интервью; готовность открыто рассказать, как работают процессы на самом деле. Технической экспертизы на стороне клиента на этапе диагностики не требуется. Программисты понадобятся на следующем шаге — при реализации рекомендаций аудита. Но не раньше.' ] ],
+                [ '@type' => 'Question', 'name' => 'Подходит ли AI-аудит для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да — и для малого бизнеса AI-аудит особенно ценен. Именно небольшие компании (5–50 человек) чаще всего несут скрытые потери на ручных операциях, которые при малом масштабе кажутся нормальными. Юридическая компания из 6 человек (кейс GodKod AI) сэкономила 3 млн рублей в год, отказавшись от найма в пользу автоматизации. Для малого бизнеса особенно подходит формат экспресс-аудита: 1–5 дней, фокус на 3–5 ключевых процессах.' ] ],
+                [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-аудит бизнес-процессов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-аудит решает четыре управленческие задачи: определяет, нужен ли AI вашей компании прямо сейчас; показывает конкретные процессы с наибольшим потенциалом автоматизации; считает ROI по каждому сценарию консервативно; даёт дорожную карту с конкретными инструментами, сроками и этапами внедрения.' ] ],
+                [ '@type' => 'Question', 'name' => 'Как быстро окупается AI после правильного аудита?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Quick Wins, выявленные в ходе аудита, окупаются за 1–3 месяца после внедрения. Среднесрочные результаты (3–6 месяцев) — более сложные интеграции: снижение ФОТ на рутинных задачах, ускорение цикла сделки. По консервативным международным оценкам (AI Hub Landau) правильно выбранные AI-инвестиции возвращают в 10–50 раз больше стоимости самого аудита за первый год.' ] ],
+                [ '@type' => 'Question', 'name' => 'Что входит в бесплатную карту AI-возможностей?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Бесплатная карта AI-возможностей включает: 3–5 процессов с наибольшим потенциалом автоматизации именно в вашей компании; ориентировочный эффект для каждого процесса (в часах или рублях в месяц); рекомендацию по первому шагу — какой инструмент, какая интеграция, с чего начать; честную оценку, стоит ли вообще начинать AI-проект прямо сейчас. Карта формируется на основе короткой диагностической сессии (60–90 минут).' ] ],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $naad_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
