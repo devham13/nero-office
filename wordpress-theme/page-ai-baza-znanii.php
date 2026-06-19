@@ -1739,7 +1739,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </table>
       </div>
       <p class="nero-ai-reveal" style="margin-top:24px;"><strong>Уникальный подход Nero Network:</strong> сначала <strong>аудит базы знаний</strong> (лид-магнит), потом PoC, потом production — контраст с «скормить ChatGPT все PDF».</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:16px;">Для учётных систем и справочников часто нужен отдельный контур: <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> дополняет базу знаний, когда ответ завязан на остатки, счета или документооборот.</p>
+      <p class="nero-ai-reveal" style="margin-top:16px;">Даже крупные компании идут поэтапно — см. <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">уроки массового внедрения AI в корпорации</a> (кейс KPMG и Claude для 276&nbsp;000 сотрудников).</p>
     </div>
   </section>
 
@@ -2254,7 +2255,101 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$akb_page_url = trailingslashit(get_permalink());
+$akb_site_url = trailingslashit(home_url('/'));
+$akb_brand    = get_bloginfo('name') ?: 'Nero Network';
+$akb_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $akb_site_url . '#organization',
+            'name'  => $akb_brand,
+            'url'   => $akb_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $akb_site_url . '#website',
+            'url'       => $akb_site_url,
+            'name'      => $akb_brand,
+            'publisher' => ['@id' => $akb_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $akb_page_url . '#webpage',
+            'url'         => $akb_page_url,
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $akb_site_url . '#website'],
+            'about'       => ['@id' => $akb_site_url . '#organization'],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $akb_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $akb_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $akb_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $akb_page_url . '#service',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'url'         => $akb_page_url,
+            'provider'    => ['@id' => $akb_site_url . '#organization'],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $akb_page_url . '#faq',
+            'mainEntity' => [
+                [
+                    '@type'          => 'Question',
+                    'name'           => 'Как внедрить AI-базу знаний без программиста?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => 'Реалистичный сценарий при внедрении под ключ: Nero Network берёт на себя разработку, интеграцию и настройку. С вашей стороны — владелец контента, список источников, эталонные вопросы и участие в приёмке PoC. Low-code слой (Make/n8n) снижает зависимость от постоянного DevOps.',
+                    ],
+                ],
+                [
+                    '@type'          => 'Question',
+                    'name'           => 'Можно ли подключить Confluence / SharePoint / Notion?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => 'Да. Стандартные коннекторы через API: Confluence, SharePoint, Google Drive, Notion, Яндекс Вики, Bitrix24, локальные папки, 1С-выгрузки. Кейс Reg.ru/Runity — RAG по Confluence + GitLab с учётом прав доступа.',
+                    ],
+                ],
+                [
+                    '@type'          => 'Question',
+                    'name'           => 'Как обеспечивается безопасность и доступ к документам?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => 'RBAC — фильтрация документов по роли до поиска. Данные не идут в обучение публичных моделей. Российские LLM (YandexGPT, GigaChat) и облако в РФ для 152-ФЗ. Audit log запросов. On-premise для регулируемых отраслей.',
+                    ],
+                ],
+                [
+                    '@type'          => 'Question',
+                    'name'           => 'Чем AI-база знаний отличается от ChatGPT для компании?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => 'ChatGPT не знает ваших регламентов, создаёт риск утечки при загрузке документов и может галлюцинировать. RAG отвечает только по проиндексированным фрагментам, показывает источник, при неуверенности — отказывает.',
+                    ],
+                ],
+                [
+                    '@type'          => 'Question',
+                    'name'           => 'Сколько времени занимает запуск?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text'  => 'PoC: 2–3 недели. Production: 4–8 недель. Первые ответы по пилотному набору документов — уже на этапе PoC.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($akb_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
 
 </main>
 
