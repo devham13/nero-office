@@ -177,6 +177,11 @@ nav[aria-label="Хлебные крошки"],
 .rag-faq-item.open .rag-faq-q::after{transform:rotate(180deg);}
 .rag-faq-a{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .38s ease,padding .25s;font-size:14.5px;color:var(--rag-muted);line-height:1.72;}
 .rag-faq-item.open .rag-faq-a{max-height:600px;padding:0 24px 20px;}
+.rag-related{background:rgba(255,255,255,.04);border:1px solid rgba(121,242,255,.18);border-radius:var(--rag-r-lg);padding:24px 28px;margin:28px 0 8px;}
+.rag-related p{font-size:15px;line-height:1.72;margin:0 0 12px;}
+.rag-related p:last-child{margin-bottom:0;}
+.rag-related a{color:var(--rag-accent)!important;text-decoration:underline!important;text-underline-offset:3px;}
+.rag-related a:hover{color:#fff!important;}
 .ym-cta-block{border-radius:20px;padding:36px 40px;margin:32px 0;background:linear-gradient(135deg,rgba(121,242,255,.12),rgba(139,92,246,.1));border:1px solid rgba(121,242,255,.3);text-align:center;}
 .ym-cta-block--secondary{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);text-align:left;}
 .ym-cta-block--dual{background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(121,242,255,.1));border-color:rgba(34,197,94,.3);}
@@ -340,7 +345,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="rag-pain-card"><h3>Утечка при копировании</h3><p>Конфиденциальные фрагменты уходят в публичные чат-боты вместо закрытого контура.</p></div>
     </div>
     <div class="rag-card nero-ai-reveal" style="margin-top:28px;">
-      <p>По опросу S&P Global (1000+ IT/business лидеров, март 2025) <strong>42%</strong> компаний отказались от большинства AI-инициатив; в среднем <strong>46% PoC</strong> не доходят до production. Среди причин — стоимость, privacy, security — факторы, усиливающие спрос на <strong>on-prem RAG</strong>.</p>
+      <p>По опросу S&P Global (1000+ IT/business лидеров, март 2025) <strong>42%</strong> компаний отказались от большинства AI-инициатив; в среднем <strong>46% PoC</strong> не доходят до production. Среди причин — стоимость, privacy, security — факторы, усиливающие спрос на <strong>on-prem RAG</strong>. На корпоративном масштабе те же риски разобраны в материале про <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--rag-accent);text-decoration:underline;text-underline-offset:3px">масштабное внедрение AI в KPMG</a> — цифровые шлюзы и managed-агенты, которые можно сопоставить с корпоративным RAG.</p>
     </div>
     <div class="rag-card nero-ai-reveal" style="margin-top:20px;">
       <h3 style="font-size:17px;margin-bottom:10px;">Что теряют IT, юристы и продуктовые команды</h3>
@@ -636,7 +641,7 @@ nav[aria-label="Хлебные крошки"],
     <div class="rag-card nero-ai-reveal" style="margin-top:20px;">
       <h3>LLM + retrieval: логика Nero Network</h3>
       <ol style="padding-left:20px;color:var(--rag-muted);line-height:1.8;font-size:14.5px;">
-        <li>Пользователь задаёт вопрос в чате (портал / Telegram / Bitrix24 / amoCRM)</li>
+        <li>Пользователь задаёт вопрос в чате (портал / Telegram / Bitrix24 / <a href="/vnedrenie-ai-amocrm/" style="color:var(--rag-accent);text-decoration:underline;text-underline-offset:3px">amoCRM</a>)</li>
         <li>Оркестратор проверяет права доступа (ACL)</li>
         <li>Hybrid retrieval → top-K чанков → rerank</li>
         <li>LLM генерирует ответ только на основе context + «иначе — не знаю»</li>
@@ -663,7 +668,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="rag-source-card"><h3>PDF / Word</h3><p>OCR-пайплайн, версионирование, dedup для legacy-контента</p></div>
     </div>
     <div class="rag-card nero-ai-reveal" style="margin-top:28px;">
-      <p>Кейс <strong>ARAG Альфа-Банка</strong>: RAG поверх Confluence и Jira; Qdrant с шардированием по доменам; ACL из Confluence перед выдачей. Для legacy-контента настраиваем автообновление индекса при изменении статьи — обязательный элемент production.</p>
+      <p>Кейс <strong>ARAG Альфа-Банка</strong>: RAG поверх Confluence и Jira; Qdrant с шардированием по доменам; ACL из Confluence перед выдачей. Для учётного контура — инструкции и договоры из <a href="/ai-1c-erp/" style="color:var(--rag-accent);text-decoration:underline;text-underline-offset:3px">AI-агента для 1С и ERP</a>; для legacy-контента настраиваем автообновление индекса при изменении статьи — обязательный элемент production.</p>
     </div>
   </div>
 </section>
@@ -730,7 +735,10 @@ nav[aria-label="Хлебные крошки"],
       <div class="rag-tl-item"><div class="rag-tl-dot"></div><h3>Фаза 2 — production (4–8 недель)</h3><p>ACL по ролям; автообновление индекса; audit log, reranker; SLA-мониторинг; обучение команд. Альфа-Банк: пилот 100 операторов → production за <strong>4 месяца</strong>; <strong>85 000+</strong> запросов/сутки.</p></div>
     </div>
 
-    <!-- INTERNAL-LINKS:INSERT -->
+    <aside class="rag-related nero-ai-reveal" aria-label="Смежные материалы по AI для бизнеса">
+      <p>База знаний RAG дополняет, но не заменяет другие AI-сценарии в CRM. Если часть контекста приходит из входящей почты до попадания в CRM, полезно связать проект с <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработкой входящей почты в CRM</a> — triage писем, извлечение полей и маршрутизация заявок на этапе до индексации регламентов в vector DB.</p>
+    </aside>
+
     <div class="ym-cta-block ym-cta-block--primary" id="cta-etapy">
       <div class="ym-cta-block__icon" aria-hidden="true">📚</div>
       <div class="ym-cta-block__body">
@@ -892,7 +900,72 @@ nav[aria-label="Хлебные крошки"],
 
 </div><!-- .rag-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$rag_page_url  = trailingslashit( get_permalink() );
+$rag_site_url  = trailingslashit( home_url( '/' ) );
+$rag_brand     = get_bloginfo( 'name' ) ?: 'Nero Network';
+$rag_faq_schema = [];
+foreach ( $faq_items as $item ) {
+	$rag_faq_schema[] = [
+		'@type'          => 'Question',
+		'name'           => $item['q'],
+		'acceptedAnswer' => [
+			'@type' => 'Answer',
+			'text'  => $item['a'],
+		],
+	];
+}
+$rag_schema = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $rag_site_url . '#organization',
+			'name'  => $rag_brand,
+			'url'   => $rag_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $rag_site_url . '#website',
+			'url'       => $rag_site_url,
+			'name'      => $rag_brand,
+			'publisher' => [ '@id' => $rag_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $rag_page_url . '#webpage',
+			'url'         => $rag_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $rag_site_url . '#website' ],
+			'about'       => [ '@id' => $rag_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $rag_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $rag_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $rag_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $rag_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $rag_page_url,
+			'provider'    => [ '@id' => $rag_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $rag_page_url . '#faq',
+			'mainEntity' => $rag_faq_schema,
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $rag_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 </main>
 
