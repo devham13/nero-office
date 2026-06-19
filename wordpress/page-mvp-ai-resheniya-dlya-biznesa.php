@@ -1662,8 +1662,91 @@ document.addEventListener("DOMContentLoaded", function () {
 </div><!-- /.mvpai-content -->
 
 
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
+  <section class="mvpai-section mvpai-section-alt" id="smegnye-materialy" aria-label="Смежные материалы по внедрению AI">
+    <div class="mvpai-cnt">
+      <div class="mvpai-sh mvpai-left">
+        <span class="mvpai-eyebrow">Смежные сценарии</span>
+        <h2>От MVP к production: узкие интеграции</h2>
+        <p>После пилота MVP AI часто нужен отдельный контур под CRM, почту или учёт — без подмены главной темы страницы.</p>
+      </div>
+      <div class="mvpai-grid-2 nero-ai-reveal">
+        <div class="mvpai-card">
+          <p>Квалификация лидов и задачи менеджерам в amoCRM — отдельный сценарий: <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM под ключ</a>.</p>
+        </div>
+        <div class="mvpai-card nero-ai-delay-1">
+          <p>Маршрутизация входящей почты в CRM закрывается узкой посадочной: <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a>.</p>
+        </div>
+        <div class="mvpai-card nero-ai-delay-2">
+          <p>Когда MVP затрагивает заказы и складской учёт, смотрите <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агент для 1С и ERP: внедрение под ключ</a>.</p>
+        </div>
+        <div class="mvpai-card">
+          <p>На корпоративном масштабе те же принципы agentic AI уже проверены в enterprise: в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link ym-link--accent">KPMG и Claude — уроки AI для бизнеса</a> показаны managed-агенты и цифровые шлюзы.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php
+$mvpai_page_url = trailingslashit( get_permalink() );
+$mvpai_site_url = trailingslashit( home_url( '/' ) );
+$mvpai_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$mvpai_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $mvpai_site_url . '#organization',
+			'name'  => $mvpai_brand,
+			'url'   => $mvpai_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $mvpai_site_url . '#website',
+			'url'       => $mvpai_site_url,
+			'name'      => $mvpai_brand,
+			'publisher' => [ '@id' => $mvpai_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $mvpai_page_url . '#webpage',
+			'url'         => $mvpai_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $mvpai_site_url . '#website' ],
+			'about'       => [ '@id' => $mvpai_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $mvpai_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $mvpai_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $mvpai_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $mvpai_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $mvpai_page_url,
+			'provider'    => [ '@id' => $mvpai_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'FAQPage',
+			'@id'   => $mvpai_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить mvp ai решения в компании?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Бриф и Карта MVP-функций → подготовка данных → разработка 2–4 недели → пилот 1–2 недели → разбор метрик: масштабирование, доработка или остановка. Пилот идёт параллельно текущим процессам с эскалацией на сотрудников.' ] ],
+				[ '@type' => 'Question', 'name' => 'Можно ли обойтись без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'На стороне клиента — да: нужен владелец процесса и данные. Разработку под ключ выполняет Nero Network. No-code возможен для простых FAQ; для RAG, CRM и метрик пилота обычно нужен кастомный MVP.' ] ],
+				[ '@type' => 'Question', 'name' => 'Под ключ или самостоятельно — что выбрать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Самостоятельно — быстрый тест в чате без гарантии RAG и масштабирования. Под ключ — пилот на ваших данных, eval-набор, архитектура для следующего этапа, 152-ФЗ и российские LLM.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько длится разработка и когда виден результат?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Разработка — 2–4 недели. Первые измеримые результаты пилота — на 3–5-й неделе. Production под нагрузку — от 10–20 недель, отдельный этап после успешного MVP.' ] ],
+				[ '@type' => 'Question', 'name' => 'Нужна ли своя нейросеть?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет в 80% случаев (Prime IT). Достаточно API + архитектура + RAG. Fine-tune — редкий следующий шаг после подтверждённой гипотезы.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие задачи решает mvp ai решения — краткий список?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Проверка спроса на AI-продукт, снижение нагрузки на поддержку, ускорение обработки заявок, внутренний поиск по знаниям, классификация документов, черновики КП с контролем человека.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $mvpai_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 </main>
 
 <script>
