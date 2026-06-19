@@ -1132,7 +1132,7 @@ body.nero-ai-landing{padding-top:0!important}
         </table>
       </div>
 
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:24px;font-size:15px;line-height:1.65;color:var(--iace-muted)">Зонтичная <strong>интеграция AI с корпоративными системами</strong> объединяет CRM, ERP, 1С, телефонию и базы знаний; ниже — разбор по каждому контуру со ссылками на узкие посадочные. На enterprise-масштабе те же принципы единого data context уже проверены: в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="iace-link">KPMG и Claude — 276 000 сотрудников: уроки AI для бизнеса</a> описаны managed-агенты и цифровые шлюзы, применимые к связке CRM↔ERP.</p>
 
       <div class="iace-scenario nero-ai-reveal">
         <h3>CRM (amoCRM, Битрикс24): лиды, сделки, переписка</h3>
@@ -1273,7 +1273,7 @@ body.nero-ai-landing{padding-top:0!important}
         <div class="iace-case-card">
           <div class="iace-case-tag">Телефония</div>
           <h3>Транскрипт → CRM</h3>
-          <p>STT звонка, summary, задача менеджеру. См. <a href="/vnedrenie-ai-obrabotka-email-crm/" class="iace-link">почта в CRM</a>.</p>
+          <p>STT звонка, summary, задача менеджеру — см. сценарий «Телефония и почта в CRM» выше.</p>
         </div>
       </div>
 
@@ -1359,7 +1359,68 @@ body.nero-ai-landing{padding-top:0!important}
 
 <!-- AD_BANNER:INSERT -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$iace_page_url = trailingslashit( get_permalink() );
+$iace_site_url = trailingslashit( home_url( '/' ) );
+$iace_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$iace_h1       = 'Интеграция AI в CRM, ERP и корпоративные системы: внедрение под ключ';
+$iace_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $iace_site_url . '#organization',
+			'name'  => $iace_brand,
+			'url'   => $iace_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $iace_site_url . '#website',
+			'url'       => $iace_site_url,
+			'name'      => $iace_brand,
+			'publisher' => [ '@id' => $iace_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $iace_page_url . '#webpage',
+			'url'         => $iace_page_url,
+			'name'        => $iace_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $iace_site_url . '#website' ],
+			'about'       => [ '@id' => $iace_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $iace_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $iace_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $iace_h1, 'item' => $iace_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $iace_page_url . '#service',
+			'name'        => $iace_h1,
+			'description' => $page_seo_description,
+			'url'         => $iace_page_url,
+			'provider'    => [ '@id' => $iace_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $iace_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить интеграцию AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит систем и данных → выбор одного пилотного сценария → проектирование коннекторов и RAG → read-only тест → одна write-операция с подтверждением → масштабирование. Старт: Проверить интеграции и Схема интеграции AI.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько стоит интеграция AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Зависит от числа систем и глубины интеграции. Ориентир ' . $iace_brand . ': 300 000–3 000 000 ₽; пилот одного сценария — ближе к нижней границе. Точная смета — после аудита.' ] ],
+				[ '@type' => 'Question', 'name' => 'Можно ли без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Для узких задач в Битрикс24 MCP Hub и штатных сценариях 1С — частично да. Смешанный ландшафт CRM + ERP + телефония требует настройки интеграции инженерами или подрядчиком под ключ.' ] ],
+				[ '@type' => 'Question', 'name' => 'Подходит ли для малого и среднего бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Интеграция AI для малого бизнеса — обычно один контур (CRM + почта или телефония). Для среднего бизнеса — CRM + 1С + телефония с поэтапным пилотом. Главное условие: дисциплина данных в CRM.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие задачи решает интеграция AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Квалификация и скоринг лидов, summary звонков и переписок, RAG по регламентам, черновики документов, маршрутизация обращений, подсказки по учётным операциям с подтверждением. Это ai автоматизация бизнеса на реальных процессах.' ] ],
+				[ '@type' => 'Question', 'name' => 'Чем отличается от «просто нейросети для бизнеса»?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI для бизнеса в виде браузерного чата не видит ваши сделки и остатки. Интеграция с корпоративными системами даёт агентам инструменты, контекст и измеримый KPI.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $iace_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 <script>
 /**
