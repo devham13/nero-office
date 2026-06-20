@@ -423,7 +423,7 @@ nav[aria-label="Хлебные крошки"],
           <li class="sales-hero-badge">Контроль CRM</li>
         </ul>
         <div class="sales-hero-cta-row">
-          <a class="sales-hero-btn sales-hero-btn--primary nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url(nero_ai_primary_cta_url()); ?>"><?php echo esc_html(getenv('PRIMARY_CTA_LABEL') ?: 'Ускорить продажи'); ?></a>
+          <a class="sales-hero-btn sales-hero-btn--primary nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
           <a class="sales-hero-btn sales-hero-btn--ghost nero-ai-btn nero-ai-btn-secondary" href="#scenarii">Сценарии AI</a>
         </div>
       </div>
