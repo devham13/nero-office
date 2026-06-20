@@ -9,6 +9,7 @@
 7. Укажите рекламные и CTA-ссылки, если они нужны.
 8. Проверьте настройку: `python scripts/check-config.py --local`.
 9. Для сетевой проверки: `python scripts/check-config.py --local --network`.
-10. Запустите задачу в Cursor: создать WordPress-страницу через Nero Network Office Page.
+10. Целевой домен задаётся в Secrets — см. `docs/SITE-TARGET.md`.
+11. Запустите задачу в Cursor: создать WordPress-страницу через Nero Network Office Page.
 
 Если критичных переменных нет, агент публикации должен остановиться с блокером и не просить пароли в чате.
