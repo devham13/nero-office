@@ -21,11 +21,6 @@ add_action('wp_head', static function () use ($page_seo_title, $page_seo_descrip
 }, 1);
 
 $brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
-$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Настроить контроль AI';
-$primary_cta_url     = nero_ai_primary_cta_url();
-$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#urovni';
 
 $nero_ai_header_links = [
     ['label' => 'Прогноз Gartner', 'href' => '#gartner'],
@@ -41,6 +36,12 @@ if (!is_readable($nero_ai_bootstrap)) {
     $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Настроить контроль AI';
+$primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
+$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Как это работает';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#urovni';
 
 get_header();
 
@@ -673,7 +674,8 @@ body.nero-ai-landing{padding-top:0!important}
         <p class="nero-ai-eyebrow">AI governance · Gartner 2026</p>
         <p>Компании масштабируют <strong>внедрение AI в бизнес</strong> быстрее, чем выстраивают контроль: чат-боты в поддержке, сценарии в Make и n8n, MCP-агенты с доступом к CRM и 1С, корпоративные Copilot-плагины. Каждый такой контур — это уже не «просто нейросеть», а <strong>AI-агент</strong> с правами на данные и действия.</p>
         <p><strong>Nero Network</strong> внедряет <strong>AI governance под ключ</strong>: пропорциональный контроль по уровням автономности, роли, аудит, approval workflows и circuit breakers — без блокировки простых агентов и без «полного доверия» автономным ботам.</p>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>На корпоративном масштабе массовое развёртывание агентов без пропорционального контроля уже обсуждают лидеры рынка: в материале о <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude — уроки AI для бизнеса</a> показаны цифровые шлюзы и managed-агенты для сотен тысяч сотрудников — тот же класс рисков, что и у MCP-ботов с доступом к CRM и 1С.</p>
+        <p>MCP-агенты с правами на CRM — типовой объект governance: перед выдачей уровней L3–L4 имеет смысл сравнить сценарии <a href="/vnedrenie-ai-amocrm/">внедрения AI-агента в amoCRM под ключ</a> — какие действия агент выполняет в сделках, задачах и исходящих письмах.</p>
       </div>
       <div class="vg-terminal" aria-label="Схема пайплайна governance">
         <div class="vg-t-line"><span class="vg-t-tag">agent</span><span class="vg-t-val">→ Policy Gateway</span></div>
@@ -1287,7 +1289,8 @@ body.nero-ai-landing{padding-top:0!important}
     <div class="vg-card nero-ai-reveal nero-ai-delay-1" style="margin-top:32px">
       <h3>Интеграции без замены стека</h3>
       <p>Governance-слой поверх Make/n8n, MCP, amoCRM, Bitrix24, 1С, Telegram, YandexGPT/GigaChat — с обезличиванием под 152-ФЗ. Фокус — контроль агентов в любых интеграциях.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p>Контур 1С и ERP требует отдельной матрицы прав: от чтения остатков до черновиков «Заказа клиента». Смежный разбор — <a href="/ai-1c-erp/">AI-агент для 1С и ERP: внедрение под ключ</a>; governance-слой ставится поверх уже работающего агента, не заменяя учётную систему.</p>
+      <p>Почтовые агенты в CRM — частый сценарий L2–L3: <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> показывает, где нужен approve перед записью письма в базу и созданием сделки.</p>
     </div>
   </div>
 </section>
@@ -1406,7 +1409,66 @@ body.nero-ai-landing{padding-top:0!important}
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vgov_page_url = trailingslashit(get_permalink());
+$vgov_site_url = trailingslashit(home_url('/'));
+$vgov_brand    = get_bloginfo('name') ?: 'Nero Network';
+$vgov_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $vgov_site_url . '#organization',
+            'name'  => $vgov_brand,
+            'url'   => $vgov_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $vgov_site_url . '#website',
+            'url'       => $vgov_site_url,
+            'name'      => $vgov_brand,
+            'publisher' => ['@id' => $vgov_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $vgov_page_url . '#webpage',
+            'url'         => $vgov_page_url,
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $vgov_site_url . '#website'],
+            'about'       => ['@id' => $vgov_site_url . '#organization'],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $vgov_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vgov_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vgov_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $vgov_page_url . '#service',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'url'         => $vgov_page_url,
+            'provider'    => ['@id' => $vgov_site_url . '#organization'],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $vgov_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить AI governance пошагово?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Аудит → классификация L1–L4 → матрица ролей → gateway и audit log → пилот на 2–3 агентах → документация и чек-лист → масштабирование.']],
+                ['@type' => 'Question', 'name' => 'Нужен ли программист для настройки контроля агентов?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'При интеграции под ключ — Nero Network настраивает Make/n8n, proxy и очереди approve. Внутреннему IT нужно согласовать доступы и владельцев процессов.']],
+                ['@type' => 'Question', 'name' => 'Как связать AI governance с CRM и ERP?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Единый реестр: агент amoCRM L2 и агент 1С L1 в одной политике. Gateway маршрутизирует tool-calls без замены CRM.']],
+                ['@type' => 'Question', 'name' => 'Подходит ли AI governance малому и среднему бизнесу?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Средний бизнес — основной сегмент (от 400 тыс. ₽). Малый — при 2–3 агентах, начинают с L1–L2 и реестра.']],
+                ['@type' => 'Question', 'name' => 'Чем AI governance отличается от «ещё одного бота»?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Бот без классификации — неизвестный риск. Governance — рамка для всех ботов: кто что может, как остановить, как расследовать.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($vgov_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
 
 </main>
 
