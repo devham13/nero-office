@@ -124,10 +124,31 @@ def _owner_id() -> int:
     raise RuntimeError("Missing VK_GROUP_ID or VK_OWNER_ID")
 
 
-def upload_wall_photo(group_id: int, image_url: str) -> str:
-    server = _vk("photos.getWallUploadServer", {"group_id": abs(group_id)})
-    upload_url = server["upload_url"]
+def _upload_photo_bytes(upload_url: str, image_bytes: bytes, filename: str, mime: str) -> dict:
+    try:
+        import requests  # type: ignore[import-untyped]
 
+        response = requests.post(
+            upload_url,
+            files={"photo": (filename, image_bytes, mime)},
+            timeout=60,
+        )
+        response.raise_for_status()
+        upload_data = response.json()
+    except ImportError:
+        upload_raw = _http_post(
+            upload_url,
+            {},
+            files={"photo": (filename, image_bytes, mime)},
+        )
+        upload_data = json.loads(upload_raw.decode("utf-8"))
+
+    if not upload_data.get("photo"):
+        raise RuntimeError("VK photo upload returned empty photo payload")
+    return upload_data
+
+
+def upload_wall_photo(group_id: int, image_url: str) -> str:
     image_bytes = _http_get(image_url)
     suffix = ".jpg"
     if ".png" in image_url.lower():
@@ -135,23 +156,35 @@ def upload_wall_photo(group_id: int, image_url: str) -> str:
     elif ".webp" in image_url.lower():
         suffix = ".webp"
     mime = "image/jpeg" if suffix == ".jpg" else f"image/{suffix.lstrip('.')}"
+    filename = f"post{suffix}"
 
-    upload_raw = _http_post(
-        upload_url,
-        {},
-        files={"photo": (f"post{suffix}", image_bytes, mime)},
-    )
-    upload_data = json.loads(upload_raw.decode("utf-8"))
+    try:
+        server = _vk("photos.getWallUploadServer", {"group_id": abs(group_id)})
+        upload_data = _upload_photo_bytes(server["upload_url"], image_bytes, filename, mime)
+        saved = _vk(
+            "photos.saveWallPhoto",
+            {
+                "group_id": abs(group_id),
+                "photo": upload_data["photo"],
+                "server": upload_data["server"],
+                "hash": upload_data["hash"],
+            },
+        )
+    except RuntimeError as exc:
+        error = str(exc)
+        if "error_code': 27" not in error and "error_code\": 27" not in error:
+            raise
+        server = _vk("photos.getMessagesUploadServer", {"group_id": abs(group_id)})
+        upload_data = _upload_photo_bytes(server["upload_url"], image_bytes, filename, mime)
+        saved = _vk(
+            "photos.saveMessagesPhoto",
+            {
+                "photo": upload_data["photo"],
+                "server": upload_data["server"],
+                "hash": upload_data["hash"],
+            },
+        )
 
-    saved = _vk(
-        "photos.saveWallPhoto",
-        {
-            "group_id": abs(group_id),
-            "photo": upload_data["photo"],
-            "server": upload_data["server"],
-            "hash": upload_data["hash"],
-        },
-    )
     photo = saved[0]
     owner = photo["owner_id"]
     photo_id = photo["id"]
