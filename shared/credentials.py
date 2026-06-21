@@ -45,5 +45,27 @@ def require_credential(name: str) -> str:
     return value
 
 
+CANONICAL_PUBLIC_SITE_DEFAULT = ""
+
+
 def public_site_url() -> str:
-    return get_credential("PUBLIC_SITE_URL") or require_credential("WP_SITE_URL")
+    """Deploy/live-check base URL (WP_SITE_URL or PUBLIC_SITE_URL)."""
+    return (
+        get_credential("PUBLIC_SITE_URL")
+        or get_credential("WP_SITE_URL")
+        or require_credential("PUBLIC_SITE_URL")
+    ).rstrip("/")
+
+
+def canonical_public_site_url() -> str:
+    """Canonical domain for published links, journals, schema and social posts."""
+    return (
+        get_credential("PUBLIC_SITE_CANONICAL_URL")
+        or get_credential("PUBLIC_SITE_URL")
+        or require_credential("PUBLIC_SITE_URL")
+    ).rstrip("/")
+
+
+def published_page_url(slug: str) -> str:
+    slug = slug.strip("/")
+    return f"{canonical_public_site_url()}/{slug}/"

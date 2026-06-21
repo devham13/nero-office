@@ -15,7 +15,7 @@ from urllib.parse import urljoin, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from credentials import get_credential  # noqa: E402
+from credentials import canonical_public_site_url, get_credential  # noqa: E402
 
 SCHEMA_CONTEXT = "https://schema.org"
 
@@ -44,7 +44,11 @@ def _org_name(explicit: str | None = None) -> str:
 
 def _site_url(page_url: str, explicit: str | None = None) -> str:
     return _normalize_url(
-        explicit or get_credential("PUBLIC_SITE_URL") or get_credential("WP_SITE_URL") or _site_origin(page_url)
+        explicit
+        or canonical_public_site_url()
+        or get_credential("PUBLIC_SITE_URL")
+        or get_credential("WP_SITE_URL")
+        or _site_origin(page_url)
     )
 
 
