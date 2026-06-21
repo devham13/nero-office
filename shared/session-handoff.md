@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-06-21 — vnedrenie-ai-obrabotka-zayavok
+
+- Юра: опубликовано `[REDACTED]vnedrenie-ai-obrabotka-zayavok/` (HTTP 200, custom template page-vnedrenie-ai-obrabotka-zayavok.php, WP post ID 310).
+- Следующий шаг: google-table-manager (publish, строка 66), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
