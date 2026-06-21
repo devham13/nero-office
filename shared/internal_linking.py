@@ -15,7 +15,7 @@ from urllib.parse import urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from credentials import get_credential  # noqa: E402
+from credentials import canonical_public_site_url, get_credential  # noqa: E402
 
 LEDGER = Path(__file__).resolve().parent / "kirill-news-ledger.md"
 PUBLISHED = Path(__file__).resolve().parent / "published-pages.md"
@@ -55,7 +55,7 @@ class LinkSuggestion:
 
 
 def _site_origin() -> str:
-    raw = get_credential("PUBLIC_SITE_URL") or get_credential("WP_SITE_URL") or ""
+    raw = canonical_public_site_url() or get_credential("PUBLIC_SITE_URL") or get_credential("WP_SITE_URL") or ""
     parsed = urlparse(raw.strip())
     if parsed.scheme and parsed.netloc:
         return f"{parsed.scheme}://{parsed.netloc}"

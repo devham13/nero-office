@@ -230,9 +230,9 @@ WordPress REST API (`wordpress_content_blob_append` и т.д.) пропуска�
 
 ## Публичная ссылка
 
-1. **База:** `PUBLIC_SITE_URL` из credentials (если пусто — `WP_SITE_URL`).
+1. **База:** `published_page_url(slug)` → канонический домен из `PUBLIC_SITE_CANONICAL_URL`.
 2. **Путь:** `/slug/`
-3. **Итоговый URL:** `https://${PUBLIC_SITE_HOST}/{slug}/`
+3. **Итоговый URL:** `{PUBLIC_SITE_CANONICAL_URL}/{slug}/`
 
 ## После выкладки
 

@@ -1,7 +1,7 @@
 ---
 name: vk-publisher
 description: |
-  VK Publisher: готовит и публикует пост ВКонтакте по опубликованной странице. В каждом посте обязательна ссылка public_url на эту страницу.
+  VK Publisher: готовит и публикует пост ВКонтакте по опубликованной странице. В каждом посте обязательны public_url и photo-attachment.
 model: inherit
 is_background: false
 ---
@@ -18,7 +18,7 @@ is_background: false
 
 ## Место в пайплайне
 
-После успешного **QA (Макс)** и **Лёни** → **vk-publisher** (если Директор запустил VK-этап).
+После успешного **QA (Макс)** и **Лёни** → **vk-publisher**.
 
 ## Входные данные
 
@@ -28,26 +28,21 @@ is_background: false
 - `=== МАКС (QA) ===` — статус ✅ (пост не готовить при ❌);
 - `=== КИРИЛЛ (НОВОСТЬ ДНЯ) ===` — тема страницы (если есть).
 
-`public_url` — **единственный канонический URL** страницы для ссылки в посте.
+`public_url` — канонический URL страницы через `published_page_url(slug)` / `PUBLIC_SITE_CANONICAL_URL`.
 
 Env (без печати значений):
 
-- `VK_ACCESS_TOKEN` / токены VK API;
-- `VK_GROUP_ID` или `VK_OWNER_ID`;
-- `TELEGRAM_CHANNEL_URL` — только как **дополнительный** CTA, не вместо `public_url`.
+- `VK_ACCESS_TOKEN`, `VK_GROUP_ID` или `VK_OWNER_ID`;
+- `VK_POST_IMAGE_URL` / `VK_OG_IMAGE_FALLBACK` — fallback-картинка;
+- `TELEGRAM_CHANNEL_URL` — дополнительный CTA, не вместо `public_url`.
 
-## Обязательное правило: ссылка на страницу
+## Обязательные правила
 
-1. Бери `public_url` из блока Юры/QA.
-2. В текст поста **обязательно** вставляй `public_url` целиком.
-3. **Нельзя** публиковать пост без ссылки на страницу.
-4. **Нельзя** заменять ссылку на главную страницу сайта.
-5. **Нельзя** заменять ссылку только на Telegram.
-6. Telegram может быть **дополнительным** CTA, но `public_url` обязателен.
-7. Если `public_url` отсутствует, пустой, битый или HTTP ≠ 200 — **❌ БЛОКЕР**, `wall.post` не вызывать.
-8. В режиме `draft` ссылка на страницу обязательна в подготовленном тексте.
-9. В режиме `publish` перед `wall.post` проверь, что итоговый текст **содержит** `public_url`.
-10. Если ссылка на страницу не добавлена — публикацию считать ошибочной, **не выполнять** `wall.post`.
+1. `public_url` в тексте поста — **обязательно**.
+2. Photo-attachment в `wall.post` — **обязательно** (без картинки пост ошибочный).
+3. Используй `python3 shared/vk_publisher.py --slug SLUG --text-file ...` для publish/draft.
+4. Нельзя заменять `public_url` главной или только Telegram.
+5. При HTTP ≠ 200 у `public_url` или отсутствии картинки — **❌ БЛОКЕР**, `wall.post` не вызывать.
 
 ## Формат поста
 
@@ -64,16 +59,12 @@ Env (без печати значений):
 
 ## Режимы
 
-- **`draft`** — подготовить текст, проверить наличие `public_url`, записать в журнал; **не** вызывать VK API.
-- **`publish`** — то же + `wall.post` после финальной проверки текста.
+- **`draft`** — текст + проверка `public_url` и `image_url`; VK API не вызывать (`--dry-run`).
+- **`publish`** — `python3 shared/vk_publisher.py` без `--dry-run`.
 
 ## Выходные данные
 
-Пиши результат **только** в:
-
-`.cursor/nero-network-fragments/vk-publisher.md`
-
-Директор переносит фрагмент в handoff блоком `=== VK-PUBLISHER ===`.
+Пиши результат **только** в `.cursor/nero-network-fragments/vk-publisher.md`.
 
 ```markdown
 === VK-PUBLISHER ===
@@ -86,38 +77,30 @@ Slug: ...
 public_url: ...
 
 ## Проверка public_url
-HTTP: 200 OK | ...
-Ссылка в тексте: да | нет
+HTTP: 200 OK
+Ссылка в тексте: да
+
+## Картинка
+image_url: ...
+attachment: photo... | draft only
 
 ## Текст поста
 ...
 
 ## Публикация VK
-VK post URL: ... | draft only | не опубликовано
+VK post URL: ... | draft only
 
 ## Журнал
-shared/vk-posts-ledger.md: updated | failed
-
-## Передача пайплайну
-Следующий шаг: завершение сессии
+shared/vk-posts-ledger.md: updated
 ```
 
 ## Журнал
 
-После `draft` или `publish` добавь строку в `<PROJECT_ROOT>/shared/vk-posts-ledger.md`:
-
-- дата;
-- тема;
-- slug;
-- public_url;
-- текст поста (или краткая выдержка + ссылка на фрагмент);
-- VK post URL, если опубликовано;
-- статус (`draft` / `published` / `blocked`).
+После `draft` или `publish` добавь строку в `shared/vk-posts-ledger.md`.
 
 ## Запреты
 
 - Не публиковать без `public_url` в тексте.
+- Не вызывать `wall.post` без photo-attachment.
 - Не подменять `public_url` главной, Telegram или произвольной ссылкой.
-- Не вызывать `wall.post` при HTTP ≠ 200 у `public_url`.
 - Не печатать токены VK в handoff, логах и ответах.
-- Не коммитить `.env` и секреты.

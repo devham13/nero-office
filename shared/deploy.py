@@ -13,7 +13,13 @@ from pathlib import Path
 
 import paramiko
 
-from credentials import get_credential, public_site_url, require_credential
+from credentials import (
+    canonical_public_site_url,
+    get_credential,
+    public_site_url,
+    published_page_url,
+    require_credential,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -185,7 +191,7 @@ def verify_live(url: str, slug: str) -> None:
     markers = (
         'id="primary"',
         f"{slug}-page",
-        "kpmg-gateway-hero-canvas",
+        "<canvas",
     )
     request = urllib.request.Request(url, headers={"User-Agent": "NeroNetworkDeploy/1.0"})
     with urllib.request.urlopen(request, timeout=20) as response:
@@ -223,12 +229,23 @@ def main() -> int:
     finally:
         ssh.close()
 
-    public_url = f"{public_site_url().rstrip('/')}/{slug}/"
+    public_url = published_page_url(slug)
+    live_urls = [public_url]
+    deploy_base = public_site_url().rstrip("/")
+    if deploy_base != canonical_public_site_url():
+        live_urls.append(f"{deploy_base}/{slug}/")
+
     if not args.skip_live_check:
-        try:
-            verify_live(public_url, slug)
-        except (urllib.error.URLError, RuntimeError) as exc:
-            print(f"Live check warning: {exc}")
+        last_exc: Exception | None = None
+        for check_url in live_urls:
+            try:
+                verify_live(check_url, slug)
+                last_exc = None
+                break
+            except (urllib.error.URLError, RuntimeError) as exc:
+                last_exc = exc
+        if last_exc is not None:
+            print(f"Live check warning: {last_exc}")
 
     print(f"Published: {public_url}")
     return 0
