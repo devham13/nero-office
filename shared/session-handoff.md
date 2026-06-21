@@ -1,3 +1,9 @@
+## 2026-06-18 — ai-audit-biznes-protsessov
+
+- Юра: опубликовано `https://neurinix.com/ai-audit-biznes-protsessov/` (HTTP 200, custom template page-ai-audit-biznes-protsessov.php, WP post ID 222).
+- Исправлен баг: убран `declare(strict_types=1)`, CTA-хелперы перенесены после `require $nero_ai_bootstrap`.
+- Следующий шаг: google-table-manager (publish, строка 57), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 # Session Handoff
 
 ## 2026-06-07 — ai-1c-erp
