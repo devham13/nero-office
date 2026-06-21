@@ -43,6 +43,12 @@ $primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Какие задачи решает AI';
 $secondary_cta_url = '#zadachi';
+$secondary_training_url = nero_ai_resolve_env('SECONDARY_CTA_URL');
+if ($secondary_training_url === '' || nero_ai_is_placeholder_cta_url($secondary_training_url)) {
+    $secondary_training_url = nero_ai_primary_cta_url();
+}
+$secondary_training_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI';
+$secondary_training_attrs = nero_ai_external_link_attrs($secondary_training_url);
 
 get_header();
 
@@ -1995,7 +2001,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <aside class="ym-cta-block ym-cta-block--secondary" id="cta-obuchenie">
   <div class="ym-cta-block__body">
     <p class="ym-cta-block__headline">Команда хочет понимать AI до пилота?</p>
-    <p class="ym-cta-block__sub">Если супервизоры и IT хотят разобраться в n8n, промптах и human-in-the-loop до интеграции с телефонией — посмотрите <a href="<?php echo esc_url(getenv('SECONDARY_CTA_URL') ?: ''); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html(getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI'); ?></a>. Это ускоряет согласование пилота с руководством контакт-центра.</p>
+    <p class="ym-cta-block__sub">Если супервизоры и IT хотят разобраться в n8n, промптах и human-in-the-loop до интеграции с телефонией — посмотрите <a href="<?php echo esc_url($secondary_training_url); ?>" class="ym-link ym-link--accent"<?php echo $secondary_training_attrs; ?>><?php echo esc_html($secondary_training_label); ?></a>. Это ускоряет согласование пилота с руководством контакт-центра.</p>
   </div>
 </aside>
 <p class="vna-card nero-ai-reveal" style="padding:18px 22px;margin-top:20px;"><em><strong>Итог:</strong> <strong>ai контакт центр под ключ</strong> — это измеримый проект с KPI на каждом этапе, а не «включили бота и забыли».</em></p>
