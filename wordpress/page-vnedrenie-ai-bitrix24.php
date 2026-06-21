@@ -1013,8 +1013,8 @@ nav[aria-label="Хлебные крошки"],
         <div class="vnb-card"><h3>Малый и средний бизнес</h3><p>Пилот от <strong>180 тыс. ₽</strong>, 4–6 недель. Средний бизнес: несколько воронок, QA, 1С — проект <strong>500 тыс.–1 млн ₽</strong>.</p></div>
       </div>
       <div class="vnb-card nero-ai-reveal" style="margin-top:24px;">
-        <!-- INTERNAL-LINKS:INSERT -->
-        <p><strong>Сравнение с amoCRM:</strong> если вы читали наш материал про <a href="/vnedrenie-ai-amocrm/">AI-агент для amoCRM</a>, логика та же. Отличия Битрикс24: глубже <strong>задачи и проекты</strong>, сильнее <strong>корпоративный мессенджер и открытые линии</strong>.</p>
+        <p><strong>Сравнение с amoCRM:</strong> если вы читали наш материал про <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a>, логика та же. Отличия Битрикс24: глубже <strong>задачи и проекты</strong>, сильнее <strong>корпоративный мессенджер и открытые линии</strong>.</p>
+        <p>Если часть заявок приходит по email, смежный сценарий — <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a>: письма не теряются, карточки создаются автоматически, менеджер подключается к горячим лидам.</p>
       </div>
     </div>
   </section>
@@ -1049,9 +1049,8 @@ nav[aria-label="Хлебные крошки"],
         </table>
       </div>
       <div class="vnb-card nero-ai-reveal" style="margin-top:24px;">
-        <!-- INTERNAL-LINKS:INSERT-2 -->
         <h3 style="font-size:19px;margin-bottom:10px;">RAG по базе знаний и регламентам</h3>
-        <p>Документы, скрипты, FAQ индексируются в векторное хранилище; агент отвечает <strong>со ссылкой на источник</strong> — как «Призма» у Пеленга. <strong>AI:</strong> первичный ответ, квалификация, автозаполнение, QA. <strong>Человек:</strong> крупные сделки, скидки, юридика, финальное КП.</p>
+        <p>Документы, скрипты, FAQ индексируются в векторное хранилище; агент отвечает <strong>со ссылкой на источник</strong> — как «Призма» у Пеленга. При связке CRM с учётом — <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> закрывает документооборот и статусы заказов. <strong>AI:</strong> первичный ответ, квалификация, автозаполнение, QA. <strong>Человек:</strong> крупные сделки, скидки, юридика, финальное КП.</p>
       </div>
     </div>
   </section>
@@ -1236,7 +1235,65 @@ nav[aria-label="Хлебные крошки"],
 </script>
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vnb_page_url = trailingslashit( get_permalink() );
+$vnb_site_url = trailingslashit( home_url( '/' ) );
+$vnb_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vnb_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $vnb_site_url . '#organization',
+			'name'  => $vnb_brand,
+			'url'   => $vnb_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $vnb_site_url . '#website',
+			'url'       => $vnb_site_url,
+			'name'      => $vnb_brand,
+			'publisher' => [ '@id' => $vnb_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $vnb_page_url . '#webpage',
+			'url'         => $vnb_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $vnb_site_url . '#website' ],
+			'about'       => [ '@id' => $vnb_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $vnb_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vnb_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vnb_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $vnb_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $vnb_page_url,
+			'provider'    => [ '@id' => $vnb_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'FAQPage',
+			'@id'   => $vnb_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Можно ли внедрить без программиста', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Битрикс24 Вайбкод и бот-платформа v2 — простые боты без кода. Но очереди, 3-сек лимит webhook, structured output, RAG, QA звонков, 1С — зона интегратора.' ] ],
+				[ '@type' => 'Question', 'name' => 'CoPilot или кастомный агент — что выбрать', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Тексты и расшифровки — BitrixGPT достаточно. Воронка без ручного ввода и ответ за секунды — кастомный агент. Можно комбинировать.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сроки, риски и поддержка после запуска', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит 3–5 дней; пилот 4–6 нед.; проект 2–3 мес. Без KPI-пилота проект могут закрыть. Поддержка: 3 мес. включено; далее — абонент или пакет часов.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как внедрить ai битрикс24 самостоятельно', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Зарегистрировать приложение, webhook, middleware, LLM, промпты, staging-портал. Для бизнеса без DevOps быстрее — заказать внедрение у команды с кейсами на FastAPI/n8n и CRM.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vnb_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
