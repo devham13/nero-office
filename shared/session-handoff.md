@@ -1,3 +1,9 @@
+## 2026-06-21 — vnedrenie-ai-bitrix24
+
+- Юра: опубликовано `[REDACTED]vnedrenie-ai-bitrix24/` (HTTP 200, custom template page-vnedrenie-ai-bitrix24.php, WP post ID 350).
+- ⚠ schema-markup и internal-linker не выполнены (плейсхолдеры на странице).
+- Следующий шаг: google-table-manager (publish, строка 69), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 # Session Handoff
 
 ## 2026-06-07 — ai-1c-erp
