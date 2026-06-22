@@ -30,12 +30,7 @@ add_action(
     1
 );
 
-$brand               = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
-$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Собрать заявки в одну воронку';
-$primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
-$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Обучение по AI-автоматизации';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
+$brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 
 $nero_ai_header_links = [
     ['label' => 'Как работает', 'href' => '#kak-rabotaet'],
@@ -50,6 +45,12 @@ if (!is_readable($nero_ai_bootstrap)) {
     $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Собрать заявки в одну воронку';
+$primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
+$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Обучение по AI-автоматизации';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
 
 get_header();
 
