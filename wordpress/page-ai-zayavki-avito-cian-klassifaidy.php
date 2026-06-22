@@ -50,7 +50,7 @@ $primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Собрать заявк
 $primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Обучение по AI-автоматизации';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: home_url('/#services');
 
 get_header();
 
@@ -1788,9 +1788,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 
 </div>
-
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
 
 </main>
 
