@@ -1789,6 +1789,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div>
 
+<?php
+$azak_page_url = trailingslashit( get_permalink() );
+$azak_site_url = trailingslashit( home_url( '/' ) );
+$azak_brand    = $brand ?: get_bloginfo( 'name' );
+?>
+<div class="azak-content">
+<section class="azak-section azak-section-alt" id="smeshnye-materialy" aria-label="Смежные материалы Nero Network">
+  <div class="azak-cnt">
+    <div class="azak-sh azak-left nero-ai-reveal">
+      <span class="azak-eyebrow">Смежные материалы</span>
+      <h2>AI-агенты для других каналов и систем</h2>
+      <p>Классифайды — один из источников лидов. Когда заявки идут из CRM, почты или учётной системы, помогают соседние посадочные Nero Network.</p>
+    </div>
+    <ul class="nero-ai-reveal" style="max-width:820px;margin:0 auto;">
+      <li>Если CRM — amoCRM, а лиды приходят не только с площадок, но и из сделок и задач внутри CRM, смотрите <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-amocrm/' ) ); ?>" style="color:var(--azak-primary);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a> — автоматизация воронки без ручного переноса данных.</li>
+      <li>Когда входящий поток идёт из почты, а не из мессенджеров Avito и Циан, полезна <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-obrabotka-email-crm/' ) ); ?>" style="color:var(--azak-primary);text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM</a> — тот же принцип triage и маршрутизации заявок.</li>
+      <li>После сделки в CRM часто нужен учётный контур: счета, заказы, документы. Для этого — <a href="<?php echo esc_url( home_url( '/ai-1c-erp/' ) ); ?>" style="color:var(--azak-primary);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> на этапе после квалификации лида.</li>
+      <li>На корпоративном масштабе task-specific AI agents уже проверены в enterprise: в разборе <a href="<?php echo esc_url( home_url( '/kpmg-claude-vnedrenie-ai-276-tysyach/' ) ); ?>" style="color:var(--azak-primary);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a> — цифровые шлюзы и managed-агенты, применимые к источникам трафика вроде классифайдов.</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<?php
+$azak_schema = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [ '@type' => 'Organization', '@id' => $azak_site_url . '#organization', 'name' => $azak_brand, 'url' => $azak_site_url ],
+    [ '@type' => 'WebSite', '@id' => $azak_site_url . '#website', 'url' => $azak_site_url, 'name' => $azak_brand, 'publisher' => [ '@id' => $azak_site_url . '#organization' ] ],
+    [ '@type' => 'WebPage', '@id' => $azak_page_url . '#webpage', 'url' => $azak_page_url, 'name' => $page_seo_title, 'description' => $page_seo_description, 'isPartOf' => [ '@id' => $azak_site_url . '#website' ], 'about' => [ '@id' => $azak_site_url . '#organization' ] ],
+    [ '@type' => 'BreadcrumbList', '@id' => $azak_page_url . '#breadcrumb', 'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $azak_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $azak_page_url ],
+      ] ],
+    [ '@type' => 'Service', '@id' => $azak_page_url . '#service', 'name' => $page_seo_title, 'description' => $page_seo_description, 'url' => $azak_page_url, 'provider' => [ '@id' => $azak_site_url . '#organization' ] ],
+    [ '@type' => 'FAQPage', '@id' => $azak_page_url . '#faq', 'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Что будет, если на Avito нет платной подписки с API мессенджера?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Без подписки read/write возвращает 402. Полноценный AI-агент требует платного тарифа — отдельная строка бюджета до старта.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли обойтись без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Для одного канала и зеркалирования — да (Albato, Make). Для AI под ключ с несколькими площадками — нужна проектная интеграция.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI заявки Авито под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Самостоятельно — если тестируете один канал. Под ключ — если нужна единая воронка Avito + Циан + Юла с CRM и картой потерь.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI менеджера?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI — speed-to-lead и квалификация. Человек — торг, показы, юридические нюансы.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как подключить Циан?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'ACCESS KEY в ЛК или запрос на import@cian.ru. API бесплатен для агентств и застройщиков.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли бизнес-аккаунт на Юле?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. API только для бизнес-аккаунта; токен выдаёт персональный менеджер Юлы.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заблокируют ли аккаунт за бота?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При официальном API — нет. Эмуляция браузера — нарушение правил Avito.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как соблюдается 152-ФЗ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'YandexGPT или GigaChat для хранения данных в РФ. OpenAI/Claude — через прокси с согласованной политикой ПДн.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько времени занимает внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Типовой проект: 4–6 недель — аудит, разработка, пилот и QA.' ] ],
+        [ '@type' => 'Question', 'name' => 'У нас только Avito / только Циан — имеет смысл?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Архитектура модульная: старт с одного канала, подключение остальных без переписывания.' ] ],
+      ] ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $azak_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 </main>
 
 <script>
