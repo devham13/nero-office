@@ -1,3 +1,10 @@
+## 2026-06-22 — ai-zayavki-avito-cian-klassifaidy
+
+- Юра: опубликовано `[REDACTED]ai-zayavki-avito-cian-klassifaidy/` (HTTP 200, custom template page-ai-zayavki-avito-cian-klassifaidy.php, WP post ID 415).
+- Исправление: CTA-хелперы перенесены после bootstrap (устранён HTTP 500).
+- Предупреждения: schema-markup и internal-linker не вставлены (плейсхолдеры сохранены).
+- Следующий шаг: google-table-manager (publish, строка 104), indexator, QA (Макс), SEO-аудит (Лёня).
+
 # Session Handoff
 
 ## 2026-06-07 — ai-1c-erp
