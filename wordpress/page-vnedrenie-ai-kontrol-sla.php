@@ -921,14 +921,12 @@ body.nero-ai-landing{padding-top:0!important}
 
 <div class="vsla-content">
 
-<!-- INTERNAL-LINKS:INSERT -->
-
 <section class="vsla-intro nero-ai-section" id="intro" aria-label="Введение">
   <div class="vsla-cnt">
     <div class="vsla-intro-grid nero-ai-reveal">
       <div class="vsla-intro-text">
         <p class="vsla-eyebrow">Лонгрид · AI контроль SLA</p>
-        <p>Когда заявки просрочены, ответственные теряются, а клиент злится — проблема редко в отсутствии SLA в CRM. Чаще срыв происходит между дедлайном и реакцией команды. Nero Network внедряет <strong>AI-контроль SLA</strong> как надстройку над helpdesk и CRM: агент отслеживает таймеры, приоритеты и до нарушения норматива запускает эскалацию.</p>
+        <p>Когда заявки просрочены, ответственные теряются, а клиент злится — проблема редко в отсутствии SLA в CRM. Чаще срыв происходит между дедлайном и реакцией команды: письмо уже в очереди, а тикет в helpdesk ещё не создан — типичный разрыв, который закрывает <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-obrabotka-email-crm/' ) ); ?>" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a>. Nero Network внедряет <strong>AI-контроль SLA</strong> как надстройку над helpdesk и CRM: агент отслеживает таймеры, приоритеты и до нарушения норматива запускает эскалацию.</p>
         <p>Ниже — как устроено решение, что даёт бизнесу и как заказать внедрение под ключ. Ориентир бюджета: <strong>180–550 тыс. ₽</strong>. Первый шаг — <strong>«Найти просроченные обращения»</strong> и чек-лист потерь SLA за 15 минут.</p>
       </div>
       <div class="vsla-intro-kpi" aria-label="Ключевые метрики SLA">
@@ -1476,7 +1474,7 @@ body.nero-ai-landing{padding-top:0!important}
 <tr><td>Post-breach</td><td>+60 мин без реакции</td><td>повторная эскалация, переназначение</td></tr>
 </tbody></table></div>
 <p>Freshdesk SLA Policies поддерживают многоуровневую эскалацию: за 30 мин до breach, на breach, после breach. Zendesk рекомендует матрицу 50% SLA → агент, 80% → тимлид, breach → руководитель. AI-агент Nero выполняет эту логику <strong>вне часового цикла</strong> нативных automations — через Make, n8n или собственный FastAPI-контур.</p>
-<p><strong>Автоматическая эскалация обращений</strong> включает: смену assignee, создание задачи в amoCRM/Битрикс24, запись в Google Sheets для еженедельного отчёта compliance.</p>
+<p><strong>Автоматическая эскалация обращений</strong> включает: смену assignee, <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-amocrm/' ) ); ?>" class="ym-link ym-link--accent">создание задач в amoCRM через AI-агента</a>, синхронизацию с Битрикс24, запись в Google Sheets для еженедельного отчёта compliance.</p>
     </div>
   </div>
 </section>
@@ -1515,7 +1513,7 @@ body.nero-ai-landing{padding-top:0!important}
 <ul><li><strong>amoCRM</strong> — сделки/лиды + входящие обращения;</li><li><strong>Битрикс24</strong> — CRM, задачи, Открытые линии (Telegram, WhatsApp, VK); нативная bot-платформа для AI-агентов внутри портала;</li><li><strong>HelpDeskEddy, Okdesk, Usedesk</strong> — зрелый SLA из коробки, отчёты по compliance;</li><li><strong>Telegram</strong> — канал эскалаций для ответственных и руководителей.</li></ul>
 <p><strong>Международный стек</strong> (для филиалов и SaaS с Zendesk/Freshdesk):</p>
 <ul><li>Zendesk — SLA-политики + hourly automations (ограничение по частоте);</li><li>Freshdesk — Freddy AI Insights и многоуровневая эскалация в SLA Policies.</li></ul>
-<p><strong>Ingest-модуль</strong> принимает webhook/API из всех перечисленных систем. Опционально: Mango Office, UIS для голосовых SLA; база знаний Confluence/Notion для summary-агента.</p>
+<p><strong>Ingest-модуль</strong> принимает webhook/API из всех перечисленных систем. Опционально: Mango Office, UIS для голосовых SLA; для учётных контуров — <a href="<?php echo esc_url( home_url( '/ai-1c-erp/' ) ); ?>" class="ym-link ym-link--accent">интеграция AI с 1С и ERP</a>; база знаний Confluence/Notion для summary-агента.</p>
 <h3>Синхронизация заявок, ответственных и уведомлений</h3>
 <p>Типовая цепочка:</p>
 <ol><li>Заявка создаётся (почта, виджет, Telegram, WhatsApp, Битрикс24 Открытые линии).</li><li>Webhook → очередь (Redis/n8n) → AI классифицирует тип, приоритет, привязывает SLA-политику.</li><li>Фоновый агент пересчитывает таймеры.</li><li>При приближении к breach — контекст (summary треда) и эскалация.</li><li>После закрытия — аналитика; AI помечает паттерны («категория X срывает SLA по пятницам»).</li></ol>
@@ -1605,7 +1603,7 @@ body.nero-ai-landing{padding-top:0!important}
   <div class="vsla-cnt">
     <div class="vsla-body nero-ai-reveal">
 <h2>Внедрение AI в бизнес-процессы поддержки</h2>
-<p><strong>Внедрение ai в бизнес</strong> поддержки в 2026 году — не выбор между «ботом» и «людьми», а слоистая архитектура. <strong>Внедрение ai агентов</strong> и <strong>внедрение ai решений</strong> в контур SLA даёт измеримый эффект на дисциплину процессов, даже когда узкое место — не скорость ответа, а контроль дедлайнов.</p>
+<p><strong>Внедрение ai в бизнес</strong> поддержки в 2026 году — не выбор между «ботом» и «людьми», а слоистая архитектура; об этом же говорят <a href="<?php echo esc_url( home_url( '/kpmg-claude-vnedrenie-ai-276-tysyach/' ) ); ?>" class="ym-link ym-link--accent">масштабные корпоративные внедрения AI</a>. <strong>Внедрение ai агентов</strong> и <strong>внедрение ai решений</strong> в контур SLA даёт измеримый эффект на дисциплину процессов, даже когда узкое место — не скорость ответа, а контроль дедлайнов.</p>
 <p><strong>Внедрение ai в бизнес процессы</strong> поддержки по модели Nero Network:</p>
 <ol><li><strong>Ingest</strong> — единая очередь из всех каналов.</li><li><strong>SLA Engine</strong> — дедлайны, business hours, паузы.</li><li><strong>Risk AI</strong> — классификация, предсказание breach, аномалии.</li><li><strong>Escalation Router</strong> — Telegram, email, CRM-задачи.</li><li><strong>Analytics</strong> — compliance, FRT, ART, escalation rate, repeat breach по агенту.</li></ol>
 <p>По отчёту Zendesk 2025 (<strong>10 000+</strong> респондентов), <strong>75%</strong> CX-лидеров ожидают, что <strong>80%</strong> обращений будут решаться без человека в ближайшие годы; <strong>73%</strong> агентов считают, что AI-copilot поможет в работе. Rob Thomas (IBM): «клиенты всё больше готовы к высокоавтоматизированным каналам; NPS цифровых агентов может быть выше, чем у классического call-центра».</p>
@@ -1644,7 +1642,65 @@ body.nero-ai-landing{padding-top:0!important}
 
 </div><!-- /.vsla-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vsla_page_url = trailingslashit( get_permalink() );
+$vsla_site_url = trailingslashit( home_url( '/' ) );
+$vsla_brand    = get_bloginfo( 'name' ) ?: 'Nero Network'; // pragma: allowlist secret
+$vsla_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vsla_site_url . '#organization',
+      'name'  => $vsla_brand,
+      'url'   => $vsla_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vsla_site_url . '#website',
+      'url'       => $vsla_site_url,
+      'name'      => $vsla_brand,
+      'publisher' => [ '@id' => $vsla_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vsla_page_url . '#webpage',
+      'url'         => $vsla_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vsla_site_url . '#website' ],
+      'about'       => [ '@id' => $vsla_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vsla_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vsla_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vsla_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vsla_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vsla_page_url,
+      'provider'    => [ '@id' => $vsla_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vsla_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты для внедрения?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ai контроль sla без программиста — да, при модели «под ключ». Nero Network настраивает интеграции на Make/n8n, webhook-агенты и Telegram-эскалации.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как быстро окупается контроль SLA?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентиры из смежных кейсов: ускорение первого ответа до 10× (Ростелеком-ЦОД) и консультаций в 3 раза (ТЕХНОНИКОЛЬ). Пилот 2–4 недели даёт baseline для масштабирования.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли подключить к уже работающему helpdesk?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. AI-надстройка работает поверх Okdesk, HelpDeskEddy, Битрикс24, amoCRM, Zendesk, Freshdesk.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vsla_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 </main>
 
