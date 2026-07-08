@@ -1028,7 +1028,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <p>Кейс PrivateSEO: стоимость контента <strong>−40%</strong>, конверсия с блога <strong>×2,1</strong>.</p>
         </div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
     </div>
   </section>
 
@@ -1545,7 +1544,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="akcs-card"><h3>CRM и email</h3><p>amoCRM, Bitrix24: письма под стадию воронки, реактивация и промо с сегментацией.</p></div>
         <div class="akcs-card"><h3>SEO и GEO</h3><p>Мета, H2/H3, FAQ под кластер. Структурированные блоки для AI-цитирования в выдаче.</p></div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
     </div>
   </section>
 
@@ -1675,7 +1673,29 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Как внедрить AI-контент для бизнеса пошагово?","acceptedAnswer":{"@type":"Answer","text":"Аудит каналов, база знаний и ToV, пайплайн и QA, пилот 20–50 единиц, обучение и масштабирование. Первый шаг — контент-план на AI."}},
+{"@type":"Question","name":"Какие задачи решает AI-контент-система?","acceptedAnswer":{"@type":"Answer","text":"Регулярный выпуск без расширения штата, единый стиль across каналов, сокращение цикла идея-публикация, прозрачная стоимость единицы, SEO/GEO, интеграция с CRM."}},
+{"@type":"Question","name":"Можно ли внедрить без программиста?","acceptedAnswer":{"@type":"Answer","text":"Да. Nero Network настраивает n8n/Make.com, GigaChat/YandexGPT API, WordPress и CRM. Команда работает через интерфейс и регламент — без кода."}},
+{"@type":"Question","name":"Сколько стоит AI-контент для бизнеса?","acceptedAnswer":{"@type":"Answer","text":"Ориентир: 100–600 тыс. ₽ за внедрение под ключ. Подписки на LLM API — отдельно."}},
+{"@type":"Question","name":"Как заказать консультацию?","acceptedAnswer":{"@type":"Answer","text":"Через CTA «Настроить AI-контент» — экспресс-аудит каналов и контент-план на AI с темами и приоритетами."}},
+{"@type":"Question","name":"Не забанит ли Google и Яндекс за AI-тексты?","acceptedAnswer":{"@type":"Answer","text":"Penalize низкое качество, не AI как таковой. Human-in-the-loop, RAG, QA — стандарт системного подхода."}},
+{"@type":"Question","name":"Как обеспечивается качество?","acceptedAnswer":{"@type":"Answer","text":"Три уровня: RAG на данных бренда, QA-агент с чеклистом, финальная редактура человеком."}},
+{"@type":"Question","name":"Что с персональными данными и 152-ФЗ?","acceptedAnswer":{"@type":"Answer","text":"GigaChat, YandexGPT, отечественные облака. RAG на ваших данных без утечки в публичные модели."}},
+{"@type":"Question","name":"Чем это отличается от Jasper или Copilot?","acceptedAnswer":{"@type":"Answer","text":"Nero Network строит вашу систему на российском стеке с WordPress, amoCRM, VK, Telegram — под ключ."}},
+{"@type":"Question","name":"Когда ждать первые результаты?","acceptedAnswer":{"@type":"Answer","text":"Первые материалы — на первой неделе после настройки базы знаний. Пилот — 2–4 недели."}}
+]}
+</script>
+<script>
+(function(){
+  var sl=document.querySelector('a.skip-link[href="#main"]');
+  if(sl){sl.setAttribute('href','#primary');}
+  var iw=document.getElementById('inner-wrap');
+  var primary=document.getElementById('primary');
+  if(iw&&primary&&iw!==primary){iw.removeAttribute('role');}
+})();
+</script>
 
 </main>
 
