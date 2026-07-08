@@ -1844,8 +1844,10 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </aside>
 
-  <!-- INTERNAL-LINKS:INSERT -->
-
+  <aside class="vnaa-card nero-ai-reveal" style="margin:0 0 32px;border-color:rgba(121,242,255,.22);" aria-label="Смежные материалы по AI-внедрению">
+    <h3>Данные для аналитики: от входящих заявок к отчётам</h3>
+    <p>Часть управленческих метрик начинается не в BI, а во входящем потоке: письма, заявки, лиды. Если отчёты «сыпятся» из почты, имеет смысл сначала настроить <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработку входящей почты в CRM</a> — классификация и маршрутизация до того, как данные попадут в витрину для NLQ.</p>
+  </aside>
 
   <section class="vnaa-section" id="kak-rabotaet">
     <div class="vnaa-cnt">
@@ -1877,11 +1879,11 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="vnaa-card nero-ai-reveal" style="margin-top:24px;"><h3>amoCRM, Битрикс24 и воронки продаж</h3>
 <ul><li>конверсия по этапам и менеджерам;</li><li>средний цикл сделки по сегментам;</li><li>прогноз закрытия месяца на основе текущего pipeline.</li></ul>
-<p>Интеграция <strong>AI-аналитики с CRM</strong> даёт ответы по воронке в реальном времени:</p>
+<p>Интеграция <strong>AI-аналитики с CRM</strong> даёт ответы по воронке в реальном времени — смежный сценарий: <a href="/vnedrenie-ai-amocrm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a> для автоматизации сделок и задач до слоя аналитики:</p>
 <p>Данные синхронизируются в витрину; AI не ходит напрямую в API CRM при каждом запросе — это снижает нагрузку и повышает предсказуемость ответов.</p>
 </div>
       <div class="vnaa-card nero-ai-reveal" style="margin-top:24px;"><h3>1С и учётные данные</h3>
-<p>1С — основной источник финансовой правды для российского SMB и среднего бизнеса. Подключаем через OData, REST или регламентную выгрузку. AI-аналитика отвечает на вопросы по выручке, марже, себестоимости, дебиторке — с привязкой к справочникам номенклатуры и контрагентов.</p>
+<p>1С — основной источник финансовой правды для российского SMB и среднего бизнеса. Подключаем через OData, REST или регламентную выгрузку; для учётного контура отдельно разбираем <a href="/ai-1c-erp/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-агента для 1С и ERP под ключ</a>. AI-аналитика отвечает на вопросы по выручке, марже, себестоимости, дебиторке — с привязкой к справочникам номенклатуры и контрагентов.</p>
 <p>Важно: определения метрик в 1С и в Excel часто расходятся. Semantic layer на этапе внедрения <strong>синхронизирует</strong> «как считаем выручку» для всей компании.</p>
 </div>
       <div class="vnaa-card nero-ai-reveal" style="margin-top:24px;"><h3>Power BI, Yandex DataLens, Metabase, ClickHouse + LLM</h3>
@@ -1950,7 +1952,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
       <div class="vnaa-card nero-ai-reveal" style="margin-top:24px;"><h3>Сценарии для ритейла, услуг, B2B и внутренней аналитики</h3>
 <ul><li><strong>Ритейл:</strong> анализ продаж по SKU, оборачиваемость, прогноз закупок;</li><li><strong>Услуги:</strong> загрузка специалистов, конверсия заявок, LTV по сегментам;</li><li><strong>B2B:</strong> воронка длинного цикла, дебиторка, план/факт по менеджерам;</li><li><strong>Внутренняя аналитика:</strong> HR-запросы, тикеты поддержки, операционные KPI.</li></ul>
-<p>ОТП Банк автоматизировал анализ <strong>400 000+</strong> текстовых обращений в месяц по 260 тематикам. McKinsey Lilli обрабатывает <strong>500 000+</strong> промптов в месяц; <strong>72%</strong> сотрудников активны, экономия до <strong>30%</strong> времени на поиске и синтезе знаний.</p>
+<p>ОТП Банк автоматизировал анализ <strong>400 000+</strong> текстовых обращений в месяц по 260 тематикам. McKinsey Lilli обрабатывает <strong>500 000+</strong> промптов в месяц; <strong>72%</strong> сотрудников активны, экономия до <strong>30%</strong> времени на поиске и синтезе знаний. На корпоративном масштабе смотрите разбор <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> — цифровые шлюзы и managed-агенты как ориентир для governance аналитики.</p>
 </div>
       <div class="vnaa-card nero-ai-reveal" style="margin-top:24px;"><h3>Что можно внедрить без enterprise-бюджета</h3>
 <ul><li>пилот на amoCRM + 1С за <strong>250–600 тыс. ₽</strong>;</li><li>Telegram-дайджест для руководителя;</li><li>NLQ на 3–5 ключевых метриках;</li><li>trust-layer с SQL и ревью.</li></ul>
@@ -2079,7 +2081,70 @@ if ($ad_banner_url && $ad_banner_image) : ?>
 
 </div><!-- /.vnaa-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vnaa_page_url = trailingslashit( get_permalink() );
+$vnaa_site_url = trailingslashit( home_url( '/' ) );
+$vnaa_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vnaa_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vnaa_site_url . '#organization',
+      'name'  => $vnaa_brand,
+      'url'   => $vnaa_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vnaa_site_url . '#website',
+      'url'       => $vnaa_site_url,
+      'name'      => $vnaa_brand,
+      'publisher' => [ '@id' => $vnaa_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vnaa_page_url . '#webpage',
+      'url'         => $vnaa_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vnaa_site_url . '#website' ],
+      'about'       => [ '@id' => $vnaa_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vnaa_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vnaa_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vnaa_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vnaa_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vnaa_page_url,
+      'provider'    => [ '@id' => $vnaa_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vnaa_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Сколько стоит AI-аналитика под ключ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пилот — от 250 тыс. ₽, полное внедрение — до 2 млн ₽. Точная стоимость AI-аналитики зависит от числа интеграций и требований к безопасности. Начните с бесплатного аудита отчётности — получите смету под ваши данные.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли внедрить AI-аналитику без своего BI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. На пилоте мы разворачиваем Metabase или подключаем DataLens. Если BI уже есть — AI-слой ставится поверх. Excel и Google Sheets — допустимый старт для быстрого пилота.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI-аналитика под ключ или самостоятельно — что выбрать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Если нет штатного data engineer и аналитика с опытом LLM — под ключ быстрее и безопаснее. Самостоятельный путь оправдан при наличии внутренней команды и готовности потратить 3–6 месяцев на эксперименты.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие данные нужны для старта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Минимум: 6–12 месяцев истории по 1–2 процессам, справочники (продукты, клиенты, каналы), описание метрик «как считаем сейчас». Аудит покажет пробелы, если данных недостаточно.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем AI-аналитика отличается от ChatGPT?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'ChatGPT не знает ваших данных и может «придумать» цифры. AI-аналитика Nero Network работает только с вашими витринами, показывает SQL и не отвечает без данных.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли программист после внедрения?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Для ежедневного использования — нет. Для доработки витрин и новых интеграций — желателен сопровождающий партнёр или внутренний специалист. Nero Network предлагает сопровождение после запуска.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что если AI ошибётся в цифрах?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Trust-by-design: SQL виден, критичные ответы проходят ревью, аномалии логируются. Один неверный ответ не должен доходить до совета директоров без проверки.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-аналитика?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ускорение управленческих отчётов, ответы на вопросы к данным без аналитика, прогнозы, выявление аномалий, Telegram-дайджесты, снижение ошибок ручного копирования между системами.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vnaa_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 
 <script>
 (function(){
