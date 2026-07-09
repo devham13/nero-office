@@ -659,7 +659,7 @@ nav[aria-label="Хлебные крошки"],
       </div>
       <div class="nero-ai-reveal">
         
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Рекомендательная выдача слабеет, когда данные о клиенте размазаны по CRM, почте и учётной системе без единого профиля. Соседний сценарий — <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a>: автоматизация сделок и задач даёт сигналы для персонализации витрины.</p>
         <p>По данным McKinsey, <strong>71%</strong> потребителей ожидают персонализацию, а <strong>76%</strong> разочарованы, когда её нет. Персонализация в топ-квартиле компаний даёт прирост выручки <strong>5–15%</strong>, в отдельных кейсах — до <strong>25%</strong>. В 2025–2026 крупные маркетплейсы России живут в режиме персонализированных витрин: <strong>69%</strong> онлайн-покупок приходится на e-commerce (Sostav), к 2026 прогноз — <strong>73%</strong>. При этом <strong>99%</strong> маркетплейсов внедрили AI-рекомендации, тогда как у малых селлеров продвинутая аналитика есть лишь у <strong>~20%</strong> (Sber Developers).</p>
 
         <div class="art-card" id="mertvyj-katalog">
@@ -723,6 +723,7 @@ nav[aria-label="Хлебные крошки"],
           </table>
         </div>
         <p>По Online Store News (2026), лучшее размещение рекомендаций смещается в <strong>корзину и drawer</strong>: CTR на <strong>22–34%</strong> выше, чем у карусели только на карточке.</p>
+        <p>Омниканальные триггерные подборки в email и мессенджерах опираются на тот же профиль покупателя. Параллельно можно настроить <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработку входящей почты в CRM</a>, чтобы входящие обращения не терялись до попадания в рекомендательный контур.</p>
       </div>
 
       <div class="art-card nero-ai-reveal nero-ai-delay-1" id="algoritmy">
@@ -955,6 +956,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="art-card nero-ai-reveal" id="cms-i-fidy">
         <h3>Bitrix, WooCommerce, Tilda и фиды товаров</h3>
         <p>Поддерживаем <strong>1С-Битрикс</strong>, <strong>WooCommerce</strong>, InSales, Tilda (zero-block/GTM), Shopify, кастом REST API. Модули: каталог-коннектор, event collector, recommendation engine, widget layer.</p>
+        <p>Для синхронизации каталога, остатков и заказов с рекомендательным движком полезен и <a href="/ai-1c-erp/">AI-агент для 1С и ERP под ключ</a> — единый контур данных снижает риск рекомендовать позиции «не в наличии».</p>
         <p>Кейс REES46 / TechnoDom: <strong>725 блоков</strong>, учёт складов по городам, визуальный редактор без IT — <strong>6%</strong> выручки онлайн-канала.</p>
       </div>
       <div class="art-card nero-ai-reveal nero-ai-delay-1" id="metriki">
@@ -1075,6 +1077,7 @@ nav[aria-label="Хлебные крошки"],
           <li><strong>Ozon:</strong> LLM-ассистент для поиска, потенциал <strong>+3–5% GMV</strong> (Forbes/Совкомбанк).</li>
           <li>Для среднего магазина: чат-виджет RAG, Telegram/VK с единым user_id, динамические заголовки блоков.</li>
         </ul>
+        <p>На enterprise-масштабе похожую логику цифровых агентов разбираем в материале про <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude: уроки AI для бизнеса</a> — managed-агенты и корпоративные шлюзы задают планку зрелости персонализации.</p>
       </div>
     </div>
   </section>
@@ -1102,9 +1105,12 @@ nav[aria-label="Хлебные крошки"],
         <details><summary>Как внедрить AI-рекомендации товаров на сайт?</summary><div class="art-faq-body"><p>Аудит → архитектура (SaaS/гибрид/кастом) → фид и события → блоки на ключевых страницах → A/B 3–4 недели → масштаб и compliance. Nero Network выполняет цикл под ключ.</p></div></details>
         <details><summary>Какие задачи решает AI-рекомендации товаров?</summary><div class="art-faq-body"><p>Рост CR и AOV, снижение отказов, персонализация поиска, омниканал (email, Telegram, VK), прозрачная доля выручки от блоков.</p></div></details>
         <details><summary>Сколько стоит AI-рекомендации товаров?</summary><div class="art-faq-body"><p>Ориентир <strong>500 тыс.–3 млн ₽</strong>: SaaS от 500 тыс. ₽, гибрид 800 тыс.–1,5 млн ₽, кастом до 3 млн ₽. Точная стоимость — после аудита.</p></div></details>
+        <details><summary>Как заказать внедрение AI-рекомендации товаров?</summary><div class="art-faq-body"><p>Оставьте заявку на аудит товарной выдачи или консультацию. Nero Network оценит фид, метрики, CMS и предложит план: SaaS, гибрид или кастом с фиксированными сроками и чеком.</p></div></details>
+        <details><summary>AI-рекомендации товаров под ключ или самостоятельно — что выбрать?</summary><div class="art-faq-body"><p>Самостоятельно — если есть аналитик и разработчик, готовы к A/B и аудиту фида. Под ключ — если нужен результат с фиксированными сроками, интеграцией CRM, compliance и сопровождением A/B.</p></div></details>
         <details><summary>Что делать при холодном старте — мало заказов?</summary><div class="art-faq-body"><p>Content-based и LLM-эмбеддинги. Collaborative filtering — от ~500–1000 заказов.</p></div></details>
         <details><summary>У нас уже есть «Похожие товары» — зачем AI?</summary><div class="art-faq-body"><p>Статика ≠ персонализация. AI учитывает сессию, co-purchase, ранжирует по вероятности покупки. Lamoda: <strong>+1,5%</strong> после переработки similar-блока.</p></div></details>
         <details><summary>Нарушает ли персонализация закон о данных?</summary><div class="art-faq-body"><p>Нет при корректной настройке: 152-ФЗ, правила по 10.2-2, opt-out. Compliance входит в проект Nero Network.</p></div></details>
+        <details><summary>AI-рекомендации товаров с CRM — как это работает?</summary><div class="art-faq-body"><p>События с сайта (просмотр, корзина) → сегмент в amoCRM/Bitrix24 → триггер: email, web-push, задача менеджеру. Единый профиль для сайта и мессенджера по user_id.</p></div></details>
       </div>
     </div>
   </section>
@@ -1139,7 +1145,73 @@ nav[aria-label="Хлебные крошки"],
 
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$reco_page_url = trailingslashit( get_permalink() );
+$reco_site_url = trailingslashit( home_url( '/' ) );
+$reco_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$reco_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $reco_site_url . '#organization',
+      'name'  => $reco_brand,
+      'url'   => $reco_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $reco_site_url . '#website',
+      'url'       => $reco_site_url,
+      'name'      => $reco_brand,
+      'publisher' => [ '@id' => $reco_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $reco_page_url . '#webpage',
+      'url'         => $reco_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $reco_site_url . '#website' ],
+      'about'       => [ '@id' => $reco_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $reco_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $reco_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $reco_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $reco_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $reco_page_url,
+      'provider'    => [ '@id' => $reco_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $reco_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI-рекомендации товаров на сайт?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пошагово: (1) аудит товарной выдачи и фида; (2) выбор архитектуры — SaaS, гибрид или кастом; (3) настройка фида и событий в Метрике/GA4; (4) размещение блоков на главной, карточке, корзине, поиске; (5) A/B-тест 3–4 недели; (6) масштабирование и compliance. Nero Network выполняет весь цикл под ключ.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-рекомендации товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Рост конверсии карточки и корзины; рост среднего чека через cross-sell и up-sell; снижение отказов на каталоге и пустой корзине; персонализация поиска и главной; омниканальные рекомендации (email, Telegram, VK); прозрачная доля выручки от рекомендательных блоков.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит AI-рекомендации товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир: 500 тыс.–3 млн ₽ в зависимости от архитектуры. Быстрый старт на SaaS — от 500 тыс. ₽; гибрид с LLM — 800 тыс.–1,5 млн ₽; полный кастом — до 3 млн ₽. Точная стоимость — после аудита каталога и ТЗ.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как заказать внедрение AI-рекомендации товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Оставьте заявку на аудит товарной выдачи или консультацию. Nero Network оценит фид, метрики, CMS и предложит план: SaaS, гибрид или кастом с фиксированными сроками и чеком.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI-рекомендации товаров под ключ или самостоятельно — что выбрать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Самостоятельно — если есть аналитик и разработчик, готовы к A/B и аудиту фида. Под ключ — если нужен результат с фиксированными сроками, интеграцией CRM, compliance и сопровождением A/B. Для большинства среднего e-commerce выгоднее под ключ: меньше риска «виджет без эффекта».' ] ],
+        [ '@type' => 'Question', 'name' => 'Что делать при холодном старте — мало заказов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Используйте content-based рекомендации и LLM-эмбеддинги описаний. Collaborative filtering подключают от ~500–1000 заказов. До этого работают правила, атрибуты, «похожие по смыслу» через эмбеддинги.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нарушает ли персонализация закон о данных?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет, при корректной настройке: согласия 152-ФЗ, правила рекомендательных технологий по 149-ФЗ ст. 10.2-2, возможность отказа. Nero Network оформляет compliance в рамках проекта.' ] ],
+        [ '@type' => 'Question', 'name' => 'У нас уже есть блок «Похожие товары» — зачем AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Статичный блок «похожие по категории» ≠ персонализация. AI учитывает поведение в сессии, co-purchase, атрибуты, ранжирует по вероятности покупки. A/B обычно показывает разницу в CTR и CR. Lamoda получила +1,5% покупок именно после переработки similar-блока с реранкером.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI-рекомендации товаров с CRM — как это работает?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'События с сайта (просмотр, корзина) → сегмент в amoCRM/Bitrix24 → триггер: email, web-push, задача менеджеру. Единый профиль для сайта и мессенджера по user_id.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $reco_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
+
+
 
 </main>
 
