@@ -936,6 +936,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page aim-ecom-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1"></span>
 
 <!-- HERO -->
 <section class="nero-ai-hero aim-ecom-hero" id="hero" aria-labelledby="hero-ecom-title">
@@ -1149,7 +1150,10 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vna-cnt">
+    <p class="vna-related nero-ai-reveal" style="padding:0 0 24px;font-size:15px;line-height:1.72;color:var(--vna-muted);">Часть обращений в магазин приходит по email — «где заказ», «есть ли размер M». Связка с CRM снимает ручную сортировку: см. <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработку входящей почты в CRM</a> — triage писем, извлечение полей и маршрутизация в сделку без копипаста.</p>
+    <p class="vna-related nero-ai-reveal" style="padding:0 0 48px;font-size:15px;line-height:1.72;color:var(--vna-muted);">На уровне крупного ритейла и холдингов те же принципы AI-агентов уже проверены в enterprise: в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a> показаны digital gateway и managed-агенты, которые можно адаптировать к e-commerce-контуру.</p>
+  </div>
 
   <section id="ai-dlya-internet-magazina-boris-block" class="becm-root" aria-label="Анимация: путь покупателя от поиска к рекомендациям и AI-поддержке в интернет-магазине">
 <style>
@@ -1632,7 +1636,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="vna-grid-2">
         <div class="vna-card nero-ai-reveal">
           <h3>Ответы 24/7 по наличию, доставке и возвратам</h3>
-          <p>Агент обращается к каталогу и CRM/OMS: проверяет остатки, статус заказа (с согласием), отвечает по FAQ. RAG по вашим документам — без «общих знаний» о политике возврата, которой у вас нет.</p>
+          <p>Агент обращается к каталогу и CRM/OMS: проверяет остатки, статус заказа (с согласием), отвечает по FAQ. Для сценариев с amoCRM — отдельная посадочная про <a href="/vnedrenie-ai-amocrm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>. RAG по вашим документам — без «общих знаний» о политике возврата, которой у вас нет.</p>
         </div>
         <div class="vna-card nero-ai-reveal nero-ai-delay-1">
           <h3>Эскалация сложных кейсов менеджеру без потери контекста</h3>
@@ -1669,7 +1673,7 @@ nav[aria-label="Хлебные крошки"],
 
       <div class="vna-card nero-ai-reveal" style="margin-top:20px;">
         <h3>Интеграция, обучение на данных магазина, запуск и сопровождение</h3>
-        <p>Каталог (YML/API/1С) → AI-слой (YandexGPT, GigaChat, RAG) → CRM + мессенджеры + аналитика. Модерация промптов, compliance 152-ФЗ, логи и маскирование ПДн.</p>
+        <p>Каталог (YML/API/<a href="/ai-1c-erp/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">1С и ERP с AI-агентом</a>) → AI-слой (YandexGPT, GigaChat, RAG) → CRM + мессенджеры + аналитика. Модерация промптов, compliance 152-ФЗ, логи и маскирование ПДн.</p>
       </div>
 
       <div class="vna-card nero-ai-reveal nero-ai-delay-1" style="margin-top:20px;">
@@ -1852,7 +1856,69 @@ nav[aria-label="Хлебные крошки"],
 
 </div><!-- /.aim-ecom-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aim_page_url = trailingslashit( get_permalink() );
+$aim_site_url = trailingslashit( home_url( '/' ) );
+$aim_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aim_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $aim_site_url . '#organization',
+			'name'  => $aim_brand,
+			'url'   => $aim_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $aim_site_url . '#website',
+			'url'       => $aim_site_url,
+			'name'      => $aim_brand,
+			'publisher' => [ '@id' => $aim_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $aim_page_url . '#webpage',
+			'url'         => $aim_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $aim_site_url . '#website' ],
+			'about'       => [ '@id' => $aim_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $aim_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aim_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aim_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $aim_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $aim_page_url,
+			'provider'    => [ '@id' => $aim_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'FAQPage',
+			'@id'   => $aim_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить ai для интернет магазина?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Начните с аудита: каталог, поиск, CRM, каналы. Выберите один модуль для пилота (поиск или поддержка), зафиксируйте KPI на 2–4 недели, затем масштабируйте. Nero Network ведёт проект под ключ.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько стоит ai для интернет магазина?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир: 200 000 – 2 000 000 ₽ в зависимости от каталога, модулей и интеграций. Точная смета — после аудита. Пилот одного модуля снижает входной порог.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие задачи решает ai для интернет магазина?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Семантический поиск, рекомендации, генерация карточек, поддержка 24/7, персонализация, аналитика zero-result и диалогов. Связка с CRM и маркетплейсами.' ] ],
+				[ '@type' => 'Question', 'name' => 'ai для интернет магазина без программиста — возможно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При внедрении под ключ — да: интеграцию и настройку берёт на себя команда Nero Network. Вам нужны доступы к каталогу, CRM и согласование сценариев.' ] ],
+				[ '@type' => 'Question', 'name' => 'ai для интернет магазина под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Под ключ выгодно при нескольких каналах, 1С/CRM, маркетплейсах и требованиях 152-ФЗ. Самостоятельно — при узком сценарии и сильной IT-команде.' ] ],
+				[ '@type' => 'Question', 'name' => 'ai для интернет магазина с CRM — что даёт связка?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Актуальные остатки и цены, статус заказа в чате, сегменты для рекомендаций, единая история клиента при эскалации на оператора.' ] ],
+				[ '@type' => 'Question', 'name' => 'ai для интернет магазина кейсы — есть ли в России?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да: поддержка (CaseUp + YandexGPT + RetailCRM), большой каталог + 1С (Botseller), платформенный AI Ozon/WB. Полных публичных enterprise-кейсов «всё в одном» мало — типична проектная модель интегратора.' ] ],
+				[ '@type' => 'Question', 'name' => 'ai для интернет магазина для малого бизнеса — с чего начать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'С AI-поддержки или умного поиска — быстрый измеримый эффект при умеренном бюджете. Аудит покажет приоритет.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aim_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 <script>
 (function(){
