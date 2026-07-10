@@ -724,7 +724,9 @@ body.nero-ai-landing{padding-top:0!important}
       </nav>
     </div>
   </section>
-<!-- INTERNAL-LINKS:INSERT -->
+  <div class="nero-ai-container aavr-internal-link-note nero-ai-reveal">
+    <p class="aavr-prose" style="font-size:15px;margin:0;padding:8px 0 0">Когда CRM уже принимает лиды и переписки, но не объясняет причины отказов, полезно разделить роли: <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a> закрывает операционный контур сделок и диалогов — а AI-анализ возражений строится поверх этих данных как аналитический слой, без каннибализации запроса «автоматизация amoCRM».</p>
+  </div>
 
   <section class="nero-ai-section aavr-section" id="bole">
     <div class="nero-ai-container">
@@ -844,7 +846,11 @@ body.nero-ai-landing{padding-top:0!important}
     </div>
   </section>
 
-<!-- INTERNAL-LINKS:INSERT -->
+  <div class="nero-ai-container aavr-internal-link-note nero-ai-reveal">
+    <p class="aavr-prose" style="font-size:15px;margin:0;padding:8px 0">Перед подключением каналов ниже учтите смежные внедрения Nero Network: для B2B с учётным контуром <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> даёт контекст заказов и остатков к ценовым возражениям в CRM.</p>
+    <p class="aavr-prose" style="font-size:15px;margin:0;padding:0 0 8px">Если часть диалогов приходит из почты до попадания в воронку, смотрите отдельный сценарий — <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a>: письма разбираются и маршрутизируются в CRM, а затем попадают в общую карту возражений вместе со звонками и мессенджерами.</p>
+  </div>
+
   <section class="nero-ai-section aavr-section nero-ai-section-alt" id="integracii">
     <div class="nero-ai-container">
       <div class="nero-ai-section-head nero-ai-left nero-ai-reveal">
@@ -1075,7 +1081,66 @@ body.nero-ai-landing{padding-top:0!important}
     </div>
   </section>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aavr_page_url = trailingslashit( get_permalink() );
+$aavr_site_url = trailingslashit( home_url( '/' ) );
+$aavr_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aavr_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aavr_site_url . '#organization',
+      'name'  => $aavr_brand,
+      'url'   => $aavr_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aavr_site_url . '#website',
+      'url'       => $aavr_site_url,
+      'name'      => $aavr_brand,
+      'publisher' => [ '@id' => $aavr_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aavr_page_url . '#webpage',
+      'url'         => $aavr_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aavr_site_url . '#website' ],
+      'about'       => [ '@id' => $aavr_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aavr_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aavr_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aavr_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aavr_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $aavr_page_url,
+      'provider'    => [ '@id' => $aavr_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aavr_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai анализ возражений в действующий отдел продаж?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Без остановки продаж. Этап 0 — аудит (1–2 дня): какие каналы, сколько диалогов, что в CRM. Этап 1 — пилот на исторических данных (50–200 диалогов) и одном live-канале. РОП валидирует таксономию. Этап 2 — автоматический разбор новых диалогов и отчёт для собственника. Менеджеры продолжают работать как обычно; меняются скрипты и оффер на основе данных.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты и IT-отдел?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. Nero Network реализует ai анализ возражений без программиста на стороне клиента: коннекторы телефонии, STT, LLM, автоматизация (Make/n8n/Itgrix), интеграция CRM. От клиента — доступ к записям, обратная связь РОПа, согласия по 152-ФЗ.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как устроена интеграция с CRM и телефонией?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Схема: завершение звонка → webhook → запись → STT → LLM → теги и поля в amoCRM/Битрикс24 → дашборд. Для мессенджеров — API или интегратор (Wazzup, Chat2Desk). Полный цикл «конец звонка → данные в CRM» — 30–90 секунд при облачном STT (Itgrix, 2026). Поддерживаются Mango, UIS, Sipuni, amoCRM, Битрикс24, RetailCRM.' ] ],
+        [ '@type' => 'Question', 'name' => '152-ФЗ и хранение записей звонков при AI-обработке', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Чек-лист compliance в каждом проекте Nero Network: 1) Запись = персональные данные (голос, содержание разговора). 2) Автоинформатор о записи в начале звонка. 3) Согласие на обработку для AI-аналитики, обучения, маркетинга — отдельно от исполнения договора. 4) Локализация: хранение ПДн граждан РФ на серверах в РФ (ред. с 1 июля 2025). 5) Договор поручения на обработку ПДн с облачным провайдером; при зарубежном LLM — уведомление РКН о трансграничной передаче. 6) Практика Nero Network: российский контур (Yandex Cloud, VK Cloud, on-prem Whisper + локальная LLM), минимизация ПДн в промптах, сроки хранения, журнал доступа.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли заказать ai анализ возражений для одного филиала или отдела?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Модульная архитектура: старт с одного канала (только звонки или только WhatsApp), одного отдела или филиала. Пилот на 2–3 недели покажет ценность до масштабирования на всю компанию. Минимум данных — 30–50 диалогов для первой карты.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aavr_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 </main>
 
 <script>
