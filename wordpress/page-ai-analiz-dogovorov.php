@@ -499,7 +499,7 @@ body.nero-ai-landing{padding-top:0!important}
         <li class="nero-ai-badge">Отчёт юристу</li>
       </ul>
       <div class="nero-ai-btn-row">
-        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?><?php echo $primary_cta_attrs; ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($primary_cta_label); ?></a>
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
         <a class="nero-ai-btn nero-ai-btn-secondary" href="#chto-delaet-ai">Как это работает</a>
       </div>
     </div>
@@ -1216,7 +1216,9 @@ body.nero-ai-landing{padding-top:0!important}
         <div class="aad-card nero-ai-delay-1">
           <h3>Связка с CRM и ERP</h3>
           <p>Bitrix24, amoCRM: карточка сделки, статус review, SLA. Точечная связка с 1С — реквизиты и сумма в карточку договора.</p>
-          <!-- INTERNAL-LINKS:INSERT -->
+          <p style="margin-top:12px;font-size:14px;">Для CRM-контура смотрите <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM под ключ</a> — карточка сделки, задачи и статус согласования без ручного переноса данных.</p>
+          <p style="margin-top:10px;font-size:14px;">Точечная связка с учётом и ERP-контуром — в материале про <a href="/ai-1c-erp/" class="ym-link ym-link--accent">внедрение AI в 1С и ERP</a>: выгрузка реквизитов контрагента и суммы в карточку договора.</p>
+          <p style="margin-top:10px;font-size:14px;">Когда договоры приходят из email, на входе помогает <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a> — классификация письма, вложения и маршрутизация до юридического review.</p>
         </div>
       </div>
       <div class="aad-table-wrap nero-ai-reveal" style="margin-top:28px;">
@@ -1405,8 +1407,66 @@ body.nero-ai-landing{padding-top:0!important}
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
-
+<?php
+$aad_page_url = trailingslashit( get_permalink() );
+$aad_site_url = trailingslashit( home_url( '/' ) );
+$aad_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aad_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aad_site_url . '#organization',
+      'name'  => $aad_brand,
+      'url'   => $aad_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aad_site_url . '#website',
+      'url'       => $aad_site_url,
+      'name'      => $aad_brand,
+      'publisher' => [ '@id' => $aad_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aad_page_url . '#webpage',
+      'url'         => $aad_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aad_site_url . '#website' ],
+      'about'       => [ '@id' => $aad_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aad_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aad_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aad_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aad_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $aad_page_url,
+      'provider'    => [ '@id' => $aad_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aad_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-анализ договоров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Первичный review, извлечение условий, сравнение с шаблоном, подсветка рисков, черновик протокола разногласий, сводка для не-юристов. Не заменяет переговоры и финальное решение.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир: 200 тыс.–1,5 млн ₽ в зависимости от числа типов договоров, интеграций и контура размещения. Бесплатная проверка 3 договоров — без обязательств.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как обеспечивается точность и ответственность за ошибки AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Гибрид LLM + детерминированных правил. Human-in-the-loop на каждом договоре. Ответственность за подпись — за юристом.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли решение для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При потоке от 20 договоров в месяц — да. При меньшем объёме — начните с бесплатной проверки 3 договоров или готового SaaS.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужна ли интеграция с CRM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Не обязательна для старта, но критична для масштабирования. Nero Network интегрирует с Bitrix24, amoCRM, 1С, Directum.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aad_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 </main>
 <script>
 /**
