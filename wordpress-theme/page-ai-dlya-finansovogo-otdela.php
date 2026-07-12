@@ -1574,8 +1574,8 @@ Nero Network проектирует такие контуры для малог�
 </div>
 </div></section>
 <section class="fin-section fin-section-alt" id="integracii">
-<!-- INTERNAL-LINKS:INSERT -->
 <div class="fin-cnt">
+<div class="fin-scenario nero-ai-reveal"><p>Практический разбор <a href="/ai-1c-erp/">внедрения AI-агента для 1С и ERP</a> — от OCR и первички до черновиков в учётной системе; на этой странице акцент смещён на cash flow, CFO-отчётность и сквозной процесс до управленческого отчёта.</p></div>
 <div class="fin-sh"><span class="fin-eyebrow">Интеграции</span><h2>Интеграция AI с 1С, ERP, CRM и банками</h2></div>
 <p>36% CFO в отчёте KPMG 2026 называют главным барьером <strong>интеграцию систем</strong>. Без связки с учётом AI остаётся островом в Excel.</p>
 <div class="fin-scenario nero-ai-reveal"><h3>Подключение к учётным и ERP-системам</h3>
@@ -1659,7 +1659,8 @@ Nero Network проектирует такие контуры для малог�
 <div class="fin-scenario nero-ai-reveal"><h3>Малый бизнес: быстрый старт без штатного разработчика</h3>
 <p><strong>AI для финансов для малого бизнеса</strong> — один юрлицо, 1С:Бухгалтерия, один банк, Google Sheets для управленки. Пилот «входящие счета → сверка → черновик» или «выписка → сверка с 1С» укладывается в нижнюю вилку бюджета. <strong>AI для финансов без программиста</strong> на стороне клиента возможен: интеграцию и настройку делает подрядчик, команда финансов — регламенты и приёмку.</p>
 </div>
-<!-- INTERNAL-LINKS:INSERT -->
+<div class="fin-scenario nero-ai-reveal"><p>На фоне <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">масштабного внедрения AI в крупной компании</a> — 276 тысяч сотрудников KPMG — SMB и mid-market берут те же принципы governance и human-in-the-loop, но с меньшим горизонтом пилота.</p></div>
+<div class="fin-scenario nero-ai-reveal"><p>Если дебиторка и воронка в CRM, а деньги в 1С, смотрите <a href="/vnedrenie-ai-amocrm/">интеграцию AI с amoCRM под ключ</a> как соседний сценарий до финансовой сверки.</p></div>
 <div class="fin-scenario nero-ai-reveal"><h3>Средний бизнес и финансовый блок</h3>
 <p><strong>AI для финансов для среднего бизнеса</strong> — несколько юрлиц, УТ/ERP, ЭДО, CRM, казначейство. Здесь критичны стыки: кейс NeoGraph показал, что 19 млн ₽/год терялись между продажами и складом — финИИ внутри отдела их не увидел. Nero Network закладывает в проект <strong>карту стыков</strong> с операциями, не только автоматизацию внутри бухгалтерии.</p>
 </div>
@@ -1752,7 +1753,68 @@ Nero Network проектирует такие контуры для малог�
 </div>
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$fin_page_url = trailingslashit( get_permalink() );
+$fin_site_url = trailingslashit( home_url( '/' ) );
+$fin_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$fin_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $fin_site_url . '#organization',
+      'name'  => $fin_brand,
+      'url'   => $fin_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $fin_site_url . '#website',
+      'url'       => $fin_site_url,
+      'name'      => $fin_brand,
+      'publisher' => [ '@id' => $fin_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $fin_page_url . '#webpage',
+      'url'         => $fin_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $fin_site_url . '#website' ],
+      'about'       => [ '@id' => $fin_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $fin_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $fin_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $fin_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $fin_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $fin_page_url,
+      'provider'    => [ '@id' => $fin_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $fin_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai для финансов пошагово', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '1. Зафиксировать baseline: часы на отчёты, сверки, закрытие месяца. 2. Выбрать один сценарий с максимальной болью. 3. Собрать 50–200 эталонных документов и регламенты. 4. Подключить источники (1С, банк, ЭДО) через API/MCP. 5. Запустить пилот на 30% потока с KPI точности. 6. Обучить финкоманду human-in-the-loop. 7. Вынести в продакшен с журналом и SLA. 8. Масштабировать второй сценарий по карте стыков.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит ai для финансов', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Вилка 300 тыс.–2 млн ₽ за внедрение под ключ: аудит, пилот, продакшен. Точная смета — после аудита рутины и перечня интеграций. Сопровождение — отдельной строкой.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли программист для внедрения', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'На стороне клиента — не обязателен при работе с интегратором. Nero Network настраивает Make/n8n, MCP, RAG; от финансов нужны доступы, регламенты и приёмка результатов.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает ai для финансов в первую очередь', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Приоритет 1 в типовых проектах: сверка банка с 1С, входящие счета и первичка, черновик управленческого отчёта, прогноз cash flow на 30–90 дней. Второй волной — стыки с CRM и операционными разрывами.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI бухгалтера', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI снимает рутину ввода и черновиков; утверждение, комплаенс, нестандарт и подпись — за главбухом и CFO. KPMG формулирует: AI в finance — decision-engine, не просто cost lever.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли оставить 1С на поддержке', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Интеграция через OData/REST и MCP без модификации ядра конфигурации — стандартный подход рынка РФ.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $fin_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 
 </main>
 
