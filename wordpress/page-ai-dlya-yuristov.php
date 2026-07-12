@@ -1595,7 +1595,33 @@ nav[aria-label="Хлебные крошки"],
   </div>
 </section>
 
-<!-- INTERNAL-LINKS:INSERT -->
+<section class="yl-section yl-internal-links" id="smozhnye-materialy">
+  <div class="yl-cnt">
+    <div class="yl-sh nero-ai-reveal">
+      <span class="yl-eyebrow">Смежные материалы</span>
+      <h2>Внедрение AI в <span class="yl-gt">соседних процессах</span></h2>
+      <p>Юротдел редко живёт изолированно: CRM, ERP и enterprise-контур — соседние точки автоматизации с тем же подходом human-in-the-loop.</p>
+    </div>
+    <div class="yl-grid-2 nero-ai-reveal nero-ai-delay-1">
+      <div class="yl-card">
+        <h3>ERP и договорный контур</h3>
+        <p>Для корпоративных юрслужб с интеграцией в СЭД и ERP: <a href="<?php echo esc_url( home_url( '/ai-1c-erp/' ) ); ?>">AI-агент для 1С и ERP под ключ</a> — сквозная автоматизация документооборота рядом с юридическими процессами.</p>
+      </div>
+      <div class="yl-card">
+        <h3>CRM для юрфирм</h3>
+        <p>Входящий запрос → квалификация → карточка клиента: <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-amocrm/' ) ); ?>">внедрение AI-агента в amoCRM</a> дополняет сценарий первичного приёма у юристов.</p>
+      </div>
+      <div class="yl-card">
+        <h3>Почта и CRM</h3>
+        <p>Автоматизация входящих обращений клиентов: <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-obrabotka-email-crm/' ) ); ?>">AI-обработка почты в CRM</a> снижает ручную сортировку до эскалации юристу.</p>
+      </div>
+      <div class="yl-card">
+        <h3>Enterprise-масштаб</h3>
+        <p>Уроки rollout на десятки тысяч сотрудников и agentic AI в регулируемых функциях: <a href="<?php echo esc_url( home_url( '/kpmg-claude-vnedrenie-ai-276-tysyach/' ) ); ?>">кейс KPMG и Claude для 276&nbsp;000 сотрудников</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="yl-section" id="keisy">
   <div class="yl-cnt">
@@ -1714,7 +1740,69 @@ nav[aria-label="Хлебные крошки"],
 
 </div><!-- .yl-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$yl_page_url = trailingslashit( get_permalink() );
+$yl_site_url = trailingslashit( home_url( '/' ) );
+$yl_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$yl_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $yl_site_url . '#organization',
+      'name'  => $yl_brand,
+      'url'   => $yl_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $yl_site_url . '#website',
+      'url'       => $yl_site_url,
+      'name'      => $yl_brand,
+      'publisher' => [ '@id' => $yl_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $yl_page_url . '#webpage',
+      'url'         => $yl_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $yl_site_url . '#website' ],
+      'about'       => [ '@id' => $yl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $yl_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $yl_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $yl_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $yl_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $yl_page_url,
+      'provider'    => [ '@id' => $yl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $yl_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai для юристов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Поэтапно: аудит рутины → пилот на одном сценарии → настройка RAG и интеграций → human-in-the-loop и пороги риска → масштабирование. Срок первого результата — от 2 недель. Под ключ это делает Nero Network.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит ai для юристов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир Nero Network: 300 тыс.–2 млн ₽ в зависимости от сценариев, интеграций и контура. Пилот с одного сценария — нижняя граница диапазона.' ] ],
+        [ '@type' => 'Question', 'name' => 'Ai для юристов под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Под ключ: on-prem / облако РФ, интеграция с СЭД, пороги риска, журнал, срок 2–8 недель. Самостоятельно — риск утечек в публичные чаты и месяцы проб.' ] ],
+        [ '@type' => 'Question', 'name' => 'Ai для юристов без программиста — реально?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, при модели под ключ: Nero настраивает техническую часть, юристы работают в готовых интерфейсах. IT подключается только для доступов и on-prem.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает ai для юристов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Проверка договоров, поиск практики, FAQ по регламентам, compliance-чеклисты, черновики документов, мониторинг НПА. Финальная позиция — за юристом.' ] ],
+        [ '@type' => 'Question', 'name' => 'ИИ галлюцинирует — как с этим жить?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Только черновики, citations, чек-листы, обязательная перепроверка. Точность 60–80% на отдельных задачах — достаточно для рутины, недостаточно для автономных решений.' ] ],
+        [ '@type' => 'Question', 'name' => 'Кто отвечает за ошибку AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Юрист, утвердивший документ. ИИ — инструмент в цепочке, не замена профессиональной ответственности.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли 152-ФЗ при внедрении?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Если в документах есть ПДн — да: on-prem или облако РФ с договором обработки, реестр ПО, политики хранения. Nero проектирует контур под требования ИБ клиента.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $yl_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
