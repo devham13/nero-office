@@ -1957,7 +1957,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <h2>Как AI помогает в закупках: сравнение, анализ и решения</h2>
         <div class="vna-callout"><p><strong>Коротко:</strong> AI автоматизирует <strong>анализ поставщиков</strong>, <strong>сравнение предложений поставщиков</strong> и подготовку закупочных решений — с обязательной проверкой человеком.</p></div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin:0 0 24px;font-size:15px;line-height:1.72;color:var(--vna-soft);">Переписка с поставщиками — отдельное узкое место: классификация intent, извлечение полей КП и маршрутизация в SRM. Если входящий поток идёт через почту и CRM, полезно сравнить сценарий <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработки входящей почты в CRM</a> — тот же принцип human-in-the-loop до финального закупочного решения.</p>
       <div class="vna-subsection nero-ai-reveal">
         <h3 class="vna-h3">Автоматическое сравнение коммерческих предложений</h3>
         <p>Модуль «КП-парсер» извлекает из документов позиции, единицы измерения, цены, сроки поставки и условия оплаты. LLM сопоставляет каждую строку КП с позициями ТЗ и строит сравнительную матрицу.</p>
@@ -2034,7 +2034,8 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="vna-subsection nero-ai-reveal">
         <h3 class="vna-h3">Интеграция с ERP, CRM и документооборотом</h3>
-        <p><strong>Внедрение ai в бизнес процессы</strong> требует связки с учётом: <strong>1С</strong> (OData), <strong>Битрикс24</strong>, SRM (ELMA365, AGORA, Bidzaar), документооборот (Контур.Диадок, СБИС), почта (IMAP → n8n/Make), Telegram Bot API.</p>
+        <p><strong>Внедрение ai в бизнес процессы</strong> требует связки с учётом: <a href="/ai-1c-erp/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> (OData), <strong>Битрикс24</strong>, SRM (ELMA365, AGORA, Bidzaar), документооборот (Контур.Диадок, СБИС), почта (IMAP → n8n/Make), Telegram Bot API.</p>
+        <p>Когда заявка или RFQ приходит из CRM до учётного контура, полезен соседний сценарий — <a href="/vnedrenie-ai-amocrm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>: автоматизация сделок и задач без двойного ввода данных.</p>
         <p>Кейс Группы «Эталон» + Синтека: &gt;97% заявок в цифре; сроки обработки −25–30% (<a href="https://cynteka.ru/keisy/tsifrovizatsiya-zakupok-gruppy-etalon/" target="_blank" rel="noopener noreferrer">Cynteka</a>).</p>
       </div>
       <div class="vna-subsection nero-ai-reveal">
@@ -2098,7 +2099,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <h3 class="vna-h3">Как считать экономию: время, ошибки, скидки</h3>
         <p>Формула ROI: время закупщика × ставка; стоимость ошибок; экономия 3–7% при росте конкуренции; сокращение согласований на 30–60%. Кейс «Акрон»: экономия времени &gt;2 млн ₽ за 4 месяца. MIT: 95% enterprise GenAI pilots не дают ROI без масштабирования.</p>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:20px;font-size:15px;line-height:1.72;color:var(--vna-soft);">На корпоративном масштабе те же закономерности видны в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a>: цифровые шлюзы и managed-агенты, которые можно адаптировать к закупочным потокам и расчёту ROI.</p>
     </div>
   </section>
 
@@ -2223,7 +2224,70 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vazak_page_url = trailingslashit(get_permalink());
+$vazak_site_url = trailingslashit(home_url('/'));
+$vazak_brand    = $brand ?: 'Nero Network';
+$vazak_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $vazak_site_url . '#organization',
+            'name'  => $vazak_brand,
+            'url'   => $vazak_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $vazak_site_url . '#website',
+            'url'       => $vazak_site_url,
+            'name'      => $vazak_brand,
+            'publisher' => ['@id' => $vazak_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $vazak_page_url . '#webpage',
+            'url'         => $vazak_page_url,
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $vazak_site_url . '#website'],
+            'about'       => ['@id' => $vazak_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id'   => $vazak_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vazak_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vazak_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $vazak_page_url . '#service',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'url'         => $vazak_page_url,
+            'provider'    => ['@id' => $vazak_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id'   => $vazak_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить ai закупки пошагово?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => '1) Аудит процесса. 2) Один сценарий пилота. 3) Данные: номенклатура, шаблоны ТЗ, история 12 мес. 4) Пилот 4–8 недель с KPI. 5) Интеграция с 1С/CRM. 6) Обучение и масштабирование.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит ai закупки?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Ориентир: 300 тыс.–2 млн ₽. Аудит + пилот — от 300 тыс. ₽. Полный контур — до 2 млн ₽. Точная стоимость — после аудита.']],
+                ['@type' => 'Question', 'name' => 'Нужны ли программисты?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Для MVP — частично (Make, n8n + LLM API). Для 1С, закрытого контура и журнала решений AI нужна разработка или внедрение под ключ. Nero Network закрывает техническую часть.']],
+                ['@type' => 'Question', 'name' => 'Как интегрировать с CRM и ERP?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Типовой стек: 1С (OData) ↔ Make/n8n ↔ LLM ↔ почта/Telegram ↔ Битрикс24. AI — слой между каналами и учётом, не замена ERP.']],
+                ['@type' => 'Question', 'name' => 'Под ключ или своими силами — что выбрать?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Под ключ оправдан при >100 заявок/мес. и требовании быстрого ROI. Своими силами — если есть разработчик 1С и горизонт 3–6 мес. на MVP.']],
+                ['@type' => 'Question', 'name' => 'Заменит ли AI закупщика?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Нет. AI готовит материалы, сравнивает, классифицирует. Выбор поставщика, переговоры и ответственность за 44-ФЗ/223-ФЗ — за человеком. «Цифровые агенты усиливают компетенции» — Эдуард Галеев, ТГК-16.']],
+                ['@type' => 'Question', 'name' => 'Какие риски у AI в закупках?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Галлюцинации LLM → human review. Утечка данных → on-prem LLM. Регуляторика → AI не принимает финальное решение. Пилот без scale → 1 сценарий, измеримый KPI.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($vazak_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
+
+</script>
 
 <?php nero_ai_echo_theme_scripts(); ?>
 <?php get_footer(); ?>
