@@ -1469,7 +1469,70 @@ nav[aria-label="Хлебные крошки"],
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aip_page_url = trailingslashit( get_permalink() );
+$aip_site_url = trailingslashit( home_url( '/' ) );
+$aip_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aip_h1       = 'AI для производства: внедрение и настройка под ключ';
+$aip_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aip_site_url . '#organization',
+      'name'  => $aip_brand,
+      'url'   => $aip_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aip_site_url . '#website',
+      'url'       => $aip_site_url,
+      'name'      => $aip_brand,
+      'publisher' => [ '@id' => $aip_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aip_page_url . '#webpage',
+      'url'         => $aip_page_url,
+      'name'        => $aip_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aip_site_url . '#website' ],
+      'about'       => [ '@id' => $aip_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aip_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aip_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $aip_h1, 'item' => $aip_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aip_page_url . '#service',
+      'name'        => $aip_h1,
+      'description' => $page_seo_description,
+      'url'         => $aip_page_url,
+      'provider'    => [ '@id' => $aip_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aip_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI для производства пошагово?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит → подготовка данных (SCADA/MES) → пилот 4–8 недель в параллельном режиме → промэксплуатация с интеграцией в ТОиР → тираж на соседние линии.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты и IT-отдел?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При модели «под ключ» интегратор настраивает OPC UA и модель, обучает мастера. Внутренний IT нужен для доступов к SCADA/MES — не для разработки моделей.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли начать без остановки производства?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Inline QC работает на скорости конвейера. PdM подключается к телеметрии. Пилот идёт параллельно — линия не останавливается.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит AI для производства?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'От 700 тыс. до 5 млн ₽ в зависимости от масштаба; пилот — нижняя граница вилки.' ] ],
+        [ '@type' => 'Question', 'name' => 'Под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Без ML-команды под ключ быстрее и дешевле по совокупной стоимости владения.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI для производства?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'QC, PdM, OEE-аналитика, оптимизация режимов, ИИ-ассистент мастера.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aip_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
+</script>
 
 </main>
 
