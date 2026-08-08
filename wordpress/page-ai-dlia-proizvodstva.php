@@ -626,7 +626,7 @@ nav[aria-label="Хлебные крошки"],
         <div class="aip-intro-text">
           <p class="aip-eyebrow">Производство · AI под ключ</p>
           <p><strong>Коротко:</strong> AI для производства — это не чат-бот в офисе, а прикладные модели поверх данных цеха: датчиков SCADA, MES, ERP, камер на линии и журналов ТОиР. Они снижают простои, брак и ручную отчётность — без остановки конвейера. Nero Network внедряет такие решения под ключ: от аудита до пилота на одном участке и тиража на завод.</p>
-          <p>Простой часа линии, бракованная партия, сводка OEE в Excel к концу смены — знакомые боли техдиректора и операционного директора. По данным ЦИПР 2026, более 50% российских предприятий уже вовлечены во внедрение ИИ, но лишь часть дошла до промышленной эксплуатации. В обрабатывающей промышленности 32% уже используют ИИ, ещё 18% планируют внедрение в течение трёх лет. Окно для измеримого эффекта на болезненном участке открыто прямо сейчас.</p>
+          <p>Простой часа линии, бракованная партия, сводка OEE в Excel к концу смены — знакомые боли техдиректора и операционного директора. По данным ЦИПР 2026, более 50% российских предприятий уже вовлечены во внедрение ИИ, но лишь часть дошла до промышленной эксплуатации. В обрабатывающей промышленности 32% уже используют ИИ, ещё 18% планируют внедрение в течение трёх лет. На корпоративном масштабе похожие программы уже разбирали в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--aip-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a>. Окно для измеримого эффекта на болезненном участке открыто прямо сейчас.</p>
         </div>
         <div class="aip-intro-kpi" aria-label="Ключевые метрики производства">
           <div class="aip-kpi-card"><div class="kv">2,4 ч</div><div class="kl">простои смены</div><div class="ks">типичная боль</div></div>
@@ -1217,7 +1217,7 @@ nav[aria-label="Хлебные крошки"],
         <pre class="aip-code" aria-label="Архитектура интеграции">Датчики / камеры / SCADA → Edge-сервер (on-prem) → AI-модуль → Rule-engine → Алерт мастеру
                                                                     ↓
                                               MES / 1С / SAP / CMMS ← заявка на ТО</pre>
-        <p>AI работает поверх ISA-95: читает телеметрию, пишет алерты и отчёты. Стек: OPC UA, Modbus, MQTT; MES (Galaktika, Opcenter); ERP (1С, SAP); уведомления в Telegram и панель мастера.</p>
+        <p>AI работает поверх ISA-95: читает телеметрию, пишет алерты и отчёты. Стек: OPC UA, Modbus, MQTT; MES (Galaktika, Opcenter); ERP (1С, SAP); уведомления в Telegram и панель мастера. Для учётного контура и документооборота между цехом и бэк-офисом см. <a href="/ai-1c-erp/" style="color:var(--aip-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP: внедрение под ключ</a>.</p>
         <p>Кейс Köber + Siemens Opcenter: nonconformity reports −70% в первый год. Подключение к SCADA без замены парка — стандартная практика.</p>
       </div>
 
@@ -1354,7 +1354,7 @@ nav[aria-label="Хлебные крошки"],
       </div>
       <div class="aip-card nero-ai-reveal nero-ai-delay-1">
         <h3>AI-агенты и автоматизация рутины</h3>
-        <p>Агенты — не замена мастера, а помощник: RAG по регламентам, разбор аварий, автогенерация сменных отчётов, маршрутизация заявок в CMMS/1С. Критические решения остаются за человеком.</p>
+        <p>Агенты — не замена мастера, а помощник: RAG по регламентам, разбор аварий, автогенерация сменных отчётов, маршрутизация заявок в CMMS/1С. Для коммерческого блока завода схожий подход описан в разделе про <a href="/vnedrenie-ai-amocrm/" style="color:var(--aip-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM</a>. Критические решения остаются за человеком.</p>
         <div class="aip-table-wrap">
           <table class="aip-table">
             <thead><tr><th>AI</th><th>Человек</th></tr></thead>
@@ -1465,7 +1465,16 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <section class="aip-section" id="related">
+    <div class="aip-cnt">
+      <div class="aip-sh aip-left nero-ai-reveal">
+        <span class="aip-eyebrow">Смежные темы</span>
+        <h2>AI для бизнеса: смежные материалы</h2>
+        <p>Цеховые сценарии — на этой странице; офисные потоки и CRM — на соседних посадочных.</p>
+      </div>
+      <p class="nero-ai-reveal" style="font-size:15px;line-height:1.65;color:var(--aip-muted,#94a3b8)">Если узкое место не только на линии, но и во входящих заказах и письмах поставщиков, сравните сценарий <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--aip-accent);text-decoration:underline;text-underline-offset:3px">AI-обработки входящей почты в CRM</a> — triage и маршрутизация до попадания данных в MES и ERP.</p>
+    </div>
+  </section>
 
 </div>
 
