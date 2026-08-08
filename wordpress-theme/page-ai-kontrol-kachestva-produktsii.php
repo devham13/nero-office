@@ -51,6 +51,8 @@ $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Оценить контро
 $primary_cta_url   = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
 
+$nero_internal_base = rtrim((string) (getenv('PUBLIC_SITE_URL') ?: getenv('WP_SITE_URL') ?: ''), '/');
+
 get_header();
 
 $nero_ai_floating = get_stylesheet_directory() . '/nero-ai-floating-header.inc.php';
@@ -176,6 +178,8 @@ nav[aria-label="Хлебные крошки"],
 .ym-btn--accent,.nero-ai-home-page .ym-btn--accent{background:linear-gradient(135deg,var(--aqc-btn-from),var(--aqc-btn-to));color:#fff!important;box-shadow:0 8px 32px rgba(59,130,246,.35);}
 .ym-btn--ghost{background:rgba(255,255,255,.08);color:var(--aqc-text)!important;border:1.5px solid rgba(255,255,255,.18);}
 .ym-link--accent{color:var(--aqc-accent)!important;text-decoration:underline!important;}
+.aqc-related .aqc-related-item{font-size:15px;line-height:1.75;margin:0 0 1.1em;color:var(--aqc-muted);}
+.aqc-related .aqc-related-item:last-child{margin-bottom:0;}
 .nero-ai-reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}
 .nero-ai-reveal.nero-ai-active{opacity:1;transform:none;}
 .nero-ai-delay-1{transition-delay:.12s;}
@@ -1619,8 +1623,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div><!-- /.aqc-content -->
 
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
+  <!-- internal-linker: outgoing links -->
+  <section class="aqc-section aqc-section-alt aqc-related" id="related" aria-label="Смежные материалы">
+    <div class="aqc-cnt">
+      <div class="aqc-sh">
+        <span class="aqc-eyebrow">Смежные материалы</span>
+        <h2>Внедрение AI в смежных бизнес-процессах</h2>
+        <p>Контроль качества на линии часто идёт в паре с учётным контуром и автоматизацией заявок — ниже посадочные Nero Network по соседним сценариям.</p>
+      </div>
+      <div class="aqc-related-links nero-ai-reveal" style="max-width:820px;margin:0 auto;">
+        <p class="aqc-related-item">Браковочные акты и traceability в 1С/MES закрываются не только CV, но и <a href="<?php echo esc_url($nero_internal_base . '/ai-1c-erp/'); ?>" class="ym-link ym-link--accent">AI-агентом для 1С и ERP под ключ</a> — когда QC-события должны попадать в учётный контур без ручного переноса.</p>
+        <p class="aqc-related-item">На корпоративном масштабе те же принципы agentic AI и managed-агентов разбираются в материале <a href="<?php echo esc_url($nero_internal_base . '/kpmg-claude-vnedrenie-ai-276-tysyach/'); ?>" class="ym-link ym-link--accent">KPMG и Claude — уроки AI для бизнеса</a>: полезно перед согласованием пилота CV с IT и руководством.</p>
+        <p class="aqc-related-item">Если параллельно автоматизируете продажи и лиды, посмотрите <a href="<?php echo esc_url($nero_internal_base . '/vnedrenie-ai-amocrm/'); ?>" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM</a> — сценарий «заявка без двойного ввода» рядом с производственными контурами среднего бизнеса.</p>
+        <p class="aqc-related-item">Для потоков входящих обращений до этапа производства уместна <a href="<?php echo esc_url($nero_internal_base . '/vnedrenie-ai-obrabotka-email-crm/'); ?>" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a> — triage заявок до того, как заказ попадёт на линию.</p>
+      </div>
+    </div>
+  </section>
+  <?php
+  $aqc_page_url  = trailingslashit( get_permalink() );
+  $aqc_site_url  = trailingslashit( home_url( '/' ) );
+  $aqc_brand     = get_bloginfo( 'name' ) ?: 'Nero Network';
+  $aqc_h1        = 'AI-контроль качества продукции: внедрение компьютерного зрения под ключ';
+  $aqc_schema    = [
+      '@context' => 'https://schema.org',
+      '@graph'   => [
+          [
+              '@type' => 'Organization',
+              '@id'   => $aqc_site_url . '#organization',
+              'name'  => $aqc_brand,
+              'url'   => $aqc_site_url,
+          ],
+          [
+              '@type'     => 'WebSite',
+              '@id'       => $aqc_site_url . '#website',
+              'url'       => $aqc_site_url,
+              'name'      => $aqc_brand,
+              'publisher' => [ '@id' => $aqc_site_url . '#organization' ],
+          ],
+          [
+              '@type'       => 'WebPage',
+              '@id'         => $aqc_page_url . '#webpage',
+              'url'         => $aqc_page_url,
+              'name'        => $aqc_h1,
+              'description' => $page_seo_description,
+              'isPartOf'    => [ '@id' => $aqc_site_url . '#website' ],
+              'about'       => [ '@id' => $aqc_site_url . '#organization' ],
+          ],
+          [
+              '@type'           => 'BreadcrumbList',
+              '@id'             => $aqc_page_url . '#breadcrumb',
+              'itemListElement' => [
+                  [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aqc_site_url ],
+                  [ '@type' => 'ListItem', 'position' => 2, 'name' => $aqc_h1, 'item' => $aqc_page_url ],
+              ],
+          ],
+          [
+              '@type'       => 'Service',
+              '@id'         => $aqc_page_url . '#service',
+              'name'        => $aqc_h1,
+              'description' => $page_seo_description,
+              'url'         => $aqc_page_url,
+              'provider'    => [ '@id' => $aqc_site_url . '#organization' ],
+          ],
+          [
+              '@type'      => 'FAQPage',
+              '@id'        => $aqc_page_url . '#faq',
+              'mainEntity' => [
+                  [ '@type' => 'Question', 'name' => 'Как внедрить AI-контроль качества на существующей линии?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит → камеры на одном участке → пилот с параллельным ручным ОТК 2–4 недели → калибровка → PLC и учётные системы → тираж. Минимум: 200–500 кадров на класс дефекта.' ] ],
+                  [ '@type' => 'Question', 'name' => 'Сколько стоит AI-контроль качества для малого и среднего бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI контроль качества для малого бизнеса (1 линия, 1–2 камеры) — от 800 тыс. ₽. Для среднего бизнеса — обычно 1,5–3 млн ₽; сложные контуры — до 6 млн ₽.' ] ],
+                  [ '@type' => 'Question', 'name' => 'Нужны ли программисты в штате?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI контроль качества без программиста — нормальная модель: операторы с дашбордом, технолог настраивает пороги, Nero Network ведёт дообучение по SLA.' ] ],
+                  [ '@type' => 'Question', 'name' => 'Какие задачи решает AI-контроль качества кроме поиска дефектов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '100% контроль потока, цифровой след, аналитика defect rate, ранний дрейф качества, автоматические акты в 1С/MES, опционально — черновик root cause.' ] ],
+                  [ '@type' => 'Question', 'name' => 'AI контроль качества под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Самостоятельная сборка даёт демо, но редко доходит до промышленного контура. Под ключ закрывает verification gap — от пилота до акта в ERP.' ] ],
+                  [ '@type' => 'Question', 'name' => 'Как проходит демо проверки качества?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Лид-магнит: вы отправляете фото/видео изделия → инженер показывает детекцию на демо-стенде → обсуждаем применимость и вилку бюджета. Демо не заменяет пилот на площадке.' ] ],
+              ],
+          ],
+      ],
+  ];
+  echo '<script type="application/ld+json">' . wp_json_encode( $aqc_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+  ?>
+  
 
 </main>
 
