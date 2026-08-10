@@ -87,8 +87,12 @@ body.nero-ai-landing{padding-top:0!important}
 .vrtl-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.22);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0891b2;margin-bottom:12px}
 .vrtl-callout{border-left:4px solid var(--vrtl-accent);padding:16px 20px;background:#fff;border-radius:0 var(--vrtl-r) var(--vrtl-r) 0;box-shadow:0 4px 24px rgba(15,23,42,.06);margin:20px 0}
 .vrtl-intro{padding:clamp(36px,5vw,64px) 0;border-bottom:1px solid var(--vrtl-border);background:#fff}
+
+.vrtl-intro-text{position:relative;padding-left:20px;text-align:left!important}
+.vrtl-intro-text::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;border-radius:2px;background:linear-gradient(180deg,var(--vrtl-accent),var(--vrtl-violet))}
+.vrtl-intro-text p{text-align:left!important}
 .vrtl-intro-grid{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
-.vrtl-intro-text p{font-size:15px}
+.vrtl-intro-text p{font-size:15px;text-align:left!important}
 .vrtl-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .vrtl-kpi{background:var(--vrtl-bg);border:1px solid var(--vrtl-border);border-radius:14px;padding:14px;text-align:center}
 .vrtl-kpi .kv{font-size:22px;font-weight:900;color:var(--vrtl-ink)}
@@ -142,8 +146,6 @@ body.nero-ai-landing{padding-top:0!important}
 .nero-ai-reveal.nero-ai-active{opacity:1;transform:none}
 .nero-ai-delay-1{transition-delay:.12s}.nero-ai-delay-2{transition-delay:.24s}
 .vrtl-disclaimer{font-size:13px;color:var(--vrtl-muted);font-style:italic;margin-top:12px}
-.vrtl-dash-canvas-wrap{position:relative;height:200px;border-radius:12px;overflow:hidden;margin:12px 0;background:linear-gradient(135deg,#0a0e1c,#12182b)}
-#alina-retail-hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 /* Boris block */
 #vnedrenie-ai-dlya-riteyla-boris-block.brt-root{padding:48px 0 56px;background:#f1f5f9}
 #vnedrenie-ai-dlya-riteyla-boris-block .brt-cnt{max-width:1160px;margin:0 auto;padding:0 24px}
@@ -171,11 +173,144 @@ body.nero-ai-landing{padding-top:0!important}
 
 <main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-dlya-riteyla-page" role="main" tabindex="-1">
 
-<section class="nero-ai-hero" id="hero" aria-labelledby="hero-riteyl-title">
+<section class="nero-ai-hero vrai-hero-retail" id="vrai-hero-retail" aria-labelledby="vrai-hero-title">
+<style>
+.vrai-hero-retail {
+  --vrai-cyan: #79f2ff;
+  --vrai-violet: #8b5cf6;
+  --vrai-green: #22c55e;
+  --vrai-bg: #050711;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  align-items: center;
+  padding: clamp(72px, 9vw, 132px) 0 clamp(44px, 7vw, 86px);
+  isolation: isolate;
+  color: #e6edf7;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.vrai-hero-retail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 45% 30%, #000 0%, transparent 72%);
+  opacity: .55;
+  pointer-events: none;
+  z-index: 0;
+}
+.vrai-hero-retail .nero-ai-container { width: min(1220px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
+.vrai-hero-retail .nero-ai-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, .98fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.vrai-hero-retail .nero-ai-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; margin: 0 0 16px; padding: 8px 12px;
+  border: 1px solid rgba(121, 242, 255, 0.2); border-radius: 999px;
+  background: rgba(121, 242, 255, 0.08); color: var(--vrai-cyan) !important;
+  font-size: 13px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.11em;
+}
+.vrai-hero-retail h1 {
+  margin: 0; max-width: 780px;
+  font-size: clamp(40px, 6.8vw, 88px); line-height: .92; letter-spacing: -0.07em; color: #fff;
+}
+.vrai-hero-retail .nero-ai-gradient-text {
+  background: linear-gradient(92deg, #fff 0%, var(--vrai-cyan) 44%, #c4b5fd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+.vrai-hero-retail .nero-ai-hero-lead {
+  margin: 24px 0 0; max-width: 720px; color: #c7d2e5 !important;
+  font-size: clamp(17px, 2vw, 22px); line-height: 1.58;
+}
+.vrai-hero-retail .nero-ai-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+.vrai-hero-retail .nero-ai-badge {
+  display: inline-flex; padding: 8px 11px; border: 1px solid rgba(255,255,255,.11);
+  border-radius: 999px; background: rgba(255,255,255,.055); color: #dce8f7;
+  font-size: 13px; font-weight: 700; white-space: nowrap;
+}
+.vrai-hero-retail .nero-ai-btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.vrai-hero-retail .nero-ai-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+  padding: 14px 20px; border-radius: 999px; font-size: 15px; font-weight: 800;
+  text-decoration: none !important; transition: transform .22s ease;
+}
+.vrai-hero-retail .nero-ai-btn:hover { transform: translateY(-2px); }
+.vrai-hero-retail .nero-ai-btn-primary {
+  color: #031018 !important;
+  background: linear-gradient(135deg, var(--vrai-cyan), #a7f3d0);
+  box-shadow: 0 18px 42px rgba(121, 242, 255, 0.22);
+}
+.vrai-hero-retail .nero-ai-btn-secondary {
+  color: #e6edf7 !important; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+}
+.vrai-hero-retail .nero-ai-dashboard {
+  position: relative; padding: 18px; border-radius: 34px;
+  background: rgba(2, 6, 23, 0.42); box-shadow: 0 28px 90px rgba(0,0,0,.42);
+  transform: perspective(1100px) rotateY(-3deg) rotateX(2deg);
+}
+.vrai-hero-retail .nero-ai-dashboard-shell {
+  overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 26px;
+  background: linear-gradient(180deg, rgba(15,23,42,.95), rgba(6,10,24,.96));
+}
+.vrai-hero-retail .nero-ai-window-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.045);
+}
+.vrai-hero-retail .nero-ai-dots { display: flex; gap: 7px; }
+.vrai-hero-retail .nero-ai-dot { width: 10px; height: 10px; border-radius: 50%; }
+.vrai-hero-retail .nero-ai-dot:nth-child(1) { background: #fb7185; }
+.vrai-hero-retail .nero-ai-dot:nth-child(2) { background: #fbbf24; }
+.vrai-hero-retail .nero-ai-dot:nth-child(3) { background: #34d399; }
+.vrai-hero-retail .nero-ai-window-title { color: #cfe3f9; font-size: 12px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.vrai-hero-retail .nero-ai-window-body { padding: 18px; }
+.vrai-hero-retail .nero-ai-dashboard-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.vrai-hero-retail .nero-ai-dashboard-title h3 { margin: 0; font-size: 20px; color: #fff; letter-spacing: -0.03em; }
+.vrai-hero-retail .nero-ai-live-pill {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; border-radius: 999px;
+  background: rgba(34,197,94,.10); color: #bbf7d0; font-size: 12px; font-weight: 800;
+}
+.vrai-hero-retail .nero-ai-live-pill::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+  box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+}
+.vrai-hero-retail .nero-ai-metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.vrai-hero-retail .nero-ai-metric {
+  padding: 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 18px; background: rgba(255,255,255,.055);
+}
+.vrai-hero-retail .nero-ai-metric span { display: block; color: #9aa8bd; font-size: 12px; font-weight: 700; }
+.vrai-hero-retail .nero-ai-metric strong { display: block; margin-top: 7px; color: #fff; font-size: 22px; line-height: 1; }
+.vrai-hero-retail .vrai-dash-canvas-wrap {
+  margin-top: 14px; height: 200px; border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(121,242,255,.14); background: rgba(5,7,17,.6);
+}
+.vrai-hero-retail #retail-ai-hero-canvas { display: block; width: 100%; height: 100%; }
+.vrai-hero-retail .nero-ai-task-stream { margin-top: 14px; display: grid; gap: 10px; }
+.vrai-hero-retail .nero-ai-task {
+  display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px;
+  padding: 11px; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.04);
+}
+.vrai-hero-retail .nero-ai-task-icon {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 12px;
+  background: rgba(121,242,255,.12); color: var(--vrai-cyan); font-size: 13px;
+}
+.vrai-hero-retail .nero-ai-task strong { display: block; color: #f8fafc; font-size: 13px; }
+.vrai-hero-retail .nero-ai-task span { color: #9aa8bd; font-size: 12px; }
+.vrai-hero-retail .nero-ai-status { color: #86efac; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+.vrai-hero-retail .nero-ai-status--amber { color: #fcd34d; }
+@media (max-width: 960px) {
+  .vrai-hero-retail .nero-ai-hero-grid { grid-template-columns: 1fr; }
+  .vrai-hero-retail .nero-ai-dashboard { transform: none; }
+}
+</style>
+
   <div class="nero-ai-container nero-ai-hero-grid">
     <div class="nero-ai-hero-copy nero-ai-reveal">
       <p class="nero-ai-eyebrow">Ритейл · внедрение под ключ</p>
-      <h1 id="hero-riteyl-title">AI для ритейла: внедрение и настройка <span class="nero-ai-gradient-text">под ключ</span></h1>
+      <h1 id="vrai-hero-title">AI для ритейла: внедрение и настройка <span class="nero-ai-gradient-text">под ключ</span></h1>
       <p class="nero-ai-hero-lead">Прогноз спроса, AI-поддержка покупателей и аналитика продаж для магазинов, сетей и D2C-брендов — без лишнего штата и ручной рутины</p>
       <ul class="nero-ai-badges" aria-label="Ключевые модули">
         <li class="nero-ai-badge">Прогноз спроса</li>
@@ -190,34 +325,242 @@ body.nero-ai-landing{padding-top:0!important}
         <a class="nero-ai-btn nero-ai-btn-secondary" href="#vnedrenie-pod-klyuch">Как внедряем</a>
       </div>
     </div>
-    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демо: AI-контур ритейла">
+
+    <div class="nero-ai-dashboard nero-ai-reveal nero-ai-delay-2" aria-label="Демонстрация AI-контура ритейла">
       <div class="nero-ai-dashboard-shell">
         <div class="nero-ai-window-top">
           <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
-          <span class="nero-ai-window-title">AI-контур ритейла · демонстрационные данные</span>
+          <span class="nero-ai-window-title">пример логики AI-системы · демонстрационные данные</span>
         </div>
         <div class="nero-ai-window-body">
-          <div class="nero-ai-dashboard-title"><h3>AI-контур ритейла</h3><span class="nero-ai-live-pill">онлайн</span></div>
-          <div class="nero-ai-metrics-grid">
-            <div class="nero-ai-metric"><span>OOS-алерты</span><strong>3</strong><small>ходовые SKU</small></div>
-            <div class="nero-ai-metric"><span>Время ответа</span><strong>9 сек</strong><small>1-я линия</small></div>
-            <div class="nero-ai-metric"><span>Автозакрытие</span><strong>62%</strong><small>тикетов</small></div>
-            <div class="nero-ai-metric"><span>Прогноз</span><strong>91%</strong><small>точность 7 дн.</small></div>
+          <div class="nero-ai-dashboard-title">
+            <h3>AI-контур ритейла</h3>
+            <span class="nero-ai-live-pill">онлайн</span>
           </div>
-          <div class="vrtl-dash-canvas-wrap" aria-hidden="false">
-            <canvas id="alina-retail-hero-canvas" role="img" aria-label="Анимация hero: операционный контур AI для ритейла — зона Алины"></canvas>
+          <div class="nero-ai-metrics-grid">
+            <div class="nero-ai-metric"><span>OOS-алерты</span><strong>−34%</strong></div>
+            <div class="nero-ai-metric"><span>Время ответа</span><strong>9 сек</strong></div>
+            <div class="nero-ai-metric"><span>Автозакрытие тикетов</span><strong>62%</strong></div>
+            <div class="nero-ai-metric"><span>Точность прогноза</span><strong>91%</strong></div>
+          </div>
+          <div class="vrai-dash-canvas-wrap" aria-hidden="false">
+            <canvas id="retail-ai-hero-canvas" role="img" aria-label="Анимация: потоки SKU сходятся в AI-хаб ритейла, агенты обрабатывают заказ и прогноз"></canvas>
           </div>
           <div class="nero-ai-task-stream" aria-label="Лента событий ритейла">
-            <div class="nero-ai-task"><span class="nero-ai-task-icon">TG</span><div><strong>Заказ в Telegram</strong><span>новый запрос покупателя</span></div><span class="nero-ai-status">в работе</span></div>
-            <div class="nero-ai-task"><span class="nero-ai-task-icon">CRM</span><div><strong>Статус из CRM</strong><span>заказ #4821 — в пути</span></div><span class="nero-ai-status">готово</span></div>
-            <div class="nero-ai-task"><span class="nero-ai-task-icon">★</span><div><strong>Рекомендация SKU</strong><span>upsell +2 позиции</span></div><span class="nero-ai-status">готово</span></div>
-            <div class="nero-ai-task"><span class="nero-ai-task-icon">!</span><div><strong>Алерт OOS</strong><span>SKU-1847 · 2 ТЗ</span></div><span class="nero-ai-status nero-ai-status--amber">алерт</span></div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">TG</span>
+              <div><strong>Заказ в Telegram</strong><span>«где мой заказ #4821?»</span></div>
+              <span class="nero-ai-status">ответ</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">CRM</span>
+              <div><strong>Статус из RetailCRM</strong><span>в пути · доставка завтра</span></div>
+              <span class="nero-ai-status">готово</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">AI</span>
+              <div><strong>Рекомендация SKU</strong><span>размер M · cross-sell +12%</span></div>
+              <span class="nero-ai-status">upsell</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">!</span>
+              <div><strong>Алерт OOS</strong><span>SKU-8842 · пополнение через 2 дня</span></div>
+              <span class="nero-ai-status nero-ai-status--amber">alert</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var canvas = document.getElementById("retail-ai-hero-canvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var cw = 0, ch = 0, cx = 0, cy = 0, frame = 0, scale = 1;
+
+  function resize() {
+    var wrap = canvas.parentElement;
+    if (!wrap) return;
+    canvas.width = wrap.clientWidth || 400;
+    canvas.height = wrap.clientHeight || 200;
+    cw = canvas.width; ch = canvas.height;
+    cx = cw * 0.52; cy = ch * 0.48;
+    scale = Math.min(cw / 420, ch / 200) * 0.95;
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  var C = {
+    outline: "#94a3b8", hub: "#1e293b", shelf: "#334155",
+    cyan: "#79f2ff", violet: "#8b5cf6", green: "#22c55e", amber: "#f59e0b",
+    agentYellow: "#eab308", agentGreen: "#10b981", agentBlue: "#3b82f6",
+    agentPink: "#ec4899", agentPurple: "#8b5cf6", bubble: "#0f172a"
+  };
+
+  function rr(ctx, x, y, w, h, r, fill, stroke) {
+    ctx.fillStyle = fill;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+    ctx.fill();
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke(); }
+  }
+
+  function SkuDataArc(x1, y1, x2, y2, color) {
+    this.x1 = x1; this.y1 = y1; this.x2 = x2; this.y2 = y2; this.color = color;
+    this.offset = Math.random() * 100;
+  }
+  SkuDataArc.prototype.draw = function (ctx) {
+    var t = (frame * 0.4 + this.offset) % 120;
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = 0.35;
+    ctx.beginPath();
+    ctx.moveTo(this.x1, this.y1);
+    ctx.quadraticCurveTo((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2 - 40 * scale, this.x2, this.y2);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+    var p = t / 120;
+    var mx = this.x1 + (this.x2 - this.x1) * p;
+    var my = this.y1 + (this.y2 - this.y1) * p - Math.sin(p * Math.PI) * 40 * scale;
+    rr(ctx, mx - 8, my - 5, 16, 10, 3, this.color, C.outline);
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 6px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("SKU", mx, my + 2);
+  };
+
+  function RetailCommandHub(x, y) {
+    this.x = x; this.y = y;
+    this.phase = 0;
+    this.roiPulse = 0;
+  }
+  RetailCommandHub.prototype.draw = function (ctx) {
+    this.phase = (frame * 0.06) % 220;
+    rr(ctx, this.x - 70 * scale, this.y - 55 * scale, 140 * scale, 110 * scale, 10, C.hub, C.outline);
+    for (var i = 0; i < 3; i++) {
+      rr(ctx, this.x - 55 * scale + i * 38 * scale, this.y - 35 * scale, 28 * scale, 40 * scale, 4, C.shelf, C.outline);
+      ctx.fillStyle = C.cyan;
+      ctx.globalAlpha = this.phase > 30 + i * 25 ? 0.9 : 0.2;
+      ctx.fillRect(this.x - 50 * scale + i * 38 * scale, this.y - 28 * scale + (i % 2) * 8, 18 * scale, 6);
+      ctx.globalAlpha = 1;
+    }
+    if (this.phase > 80) {
+      ctx.strokeStyle = C.violet;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var j = 0; j < 5; j++) {
+        var gx = this.x - 50 * scale + j * 22 * scale;
+        var gy = this.y + 18 * scale - Math.sin((frame + j * 12) * 0.08) * 10 * scale;
+        if (j === 0) ctx.moveTo(gx, gy); else ctx.lineTo(gx, gy);
+      }
+      ctx.stroke();
+    }
+    if (this.phase > 170) {
+      this.roiPulse = Math.min(1, this.roiPulse + 0.04);
+      ctx.save();
+      ctx.globalAlpha = this.roiPulse * (1 - this.roiPulse * 0.3);
+      ctx.strokeStyle = C.green;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 55 * scale * this.roiPulse, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = C.green;
+      ctx.font = "bold " + (10 * scale) + "px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("ROI +", this.x, this.y - 62 * scale);
+      ctx.restore();
+    } else {
+      this.roiPulse = 0;
+    }
+  };
+
+  function Agent(x, y, color, role, dialogs) {
+    this.x = x; this.y = y; this.color = color; this.role = role;
+    this.dialogs = dialogs; this.dir = 1; this.stepTrig = Math.random() * 200;
+    this.bubble = 0;
+  }
+  Agent.prototype.draw = function (ctx) {
+    this.stepTrig = (this.stepTrig + 0.35) % 200;
+    var tx = cx + (this.role === "1_architect" ? -90 : this.role === "5_deployer" ? 90 : 0) * scale;
+    var ty = cy + (this.role === "3_coder" ? 55 : this.role === "4_designer" ? -50 : 70) * scale;
+    if (this.stepTrig > 40 && this.stepTrig < 160) {
+      this.x += (tx - this.x) * 0.04;
+      this.y += (ty - this.y) * 0.04;
+    }
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y - 12, 7, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = C.outline;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillRect(this.x - 5, this.y - 5, 10, 14);
+    if (this.stepTrig > 90 && this.stepTrig < 110 && Math.random() < 0.02) {
+      this.bubble = 80;
+      this.bubbleText = this.dialogs[Math.floor(Math.random() * this.dialogs.length)];
+    }
+    if (this.bubble > 0) {
+      this.bubble--;
+      ctx.fillStyle = "rgba(255,255,255,0.95)";
+      var bw = ctx.measureText(this.bubbleText).width + 14;
+      rr(ctx, this.x - bw / 2, this.y - 38, bw, 16, 6, "rgba(255,255,255,0.95)", C.outline);
+      ctx.fillStyle = C.bubble;
+      ctx.font = "9px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(this.bubbleText, this.x, this.y - 26);
+    }
+  };
+
+  var arcs = [
+    new SkuDataArc(20, 20, cx, cy, C.cyan),
+    new SkuDataArc(cw - 20, 30, cx, cy, C.violet),
+    new SkuDataArc(40, ch - 20, cx, cy, C.amber)
+  ];
+  var hub = new RetailCommandHub(cx, cy - 10 * scale);
+  var agents = [
+    new Agent(40, ch - 40, C.agentYellow, "1_architect", ["Связал 1С с data layer", "ETL продаж запущен", "Остатки синхронизированы"]),
+    new Agent(60, 50, C.agentGreen, "2_seo", ["Каталог для agentic commerce", "Карточки обогащены LLM", "Фиды Ozon актуальны"]),
+    new Agent(cw - 50, ch - 35, C.agentBlue, "3_coder", ["RAG на регламентах", "API CRM подключён", "Handoff настроен"]),
+    new Agent(cw - 45, 45, C.agentPink, "4_designer", ["Сценарий чата готов", "Рекомендации в корзине", "Визуальный поиск включён"]),
+    new Agent(cx, ch - 25, C.agentPurple, "5_deployer", ["Пилот на Telegram", "KPI зафиксированы", "Масштаб на 12 ТЗ"])
+  ];
+  var bubbles = [];
+
+  function createBubble(text, x, y) {
+    bubbles.push({ text: text, x: x, y: y, life: 100 });
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.fillStyle = "rgba(5,7,17,0.3)";
+    ctx.fillRect(0, 0, cw, ch);
+    arcs.forEach(function (a) { a.draw(ctx); });
+    hub.draw(ctx);
+    agents.forEach(function (a) { a.draw(ctx); });
+    if (frame % 140 === 60) createBubble("Заказ из Telegram", 30, 30);
+    if (frame % 140 === 85) createBubble("Прогноз спроса +8%", cx, 20);
+    if (frame % 140 === 110) createBubble("OOS: SKU-8842", cw - 60, 40);
+    if (frame % 140 === 130) createBubble("Тикет закрыт AI", cx, ch - 30);
+    bubbles = bubbles.filter(function (b) {
+      b.life--;
+      b.y -= 0.3;
+      ctx.globalAlpha = b.life / 100;
+      ctx.fillStyle = C.cyan;
+      ctx.font = "9px sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(b.text, b.x, b.y);
+      ctx.globalAlpha = 1;
+      return b.life > 0;
+    });
+    frame++;
+    requestAnimationFrame(loop);
+  }
+  loop();
+});
+</script>
 
 <div class="vrtl-content">
 
@@ -704,11 +1047,76 @@ body.nero-ai-landing{padding-top:0!important}
     },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
     items.forEach(function(item){observer.observe(item);});
   }else{items.forEach(function(item){item.classList.add('nero-ai-active');});}
-  var heroItems=document.querySelectorAll('.nero-ai-hero .nero-ai-reveal');
+  var heroItems=document.querySelectorAll('.nero-ai-hero .nero-ai-reveal, .vrai-hero-retail .nero-ai-reveal');
   heroItems.forEach(function(item){item.classList.add('nero-ai-active');});
 })();
 </script>
 
+
+
+<?php
+$vrtl_page_url = trailingslashit( get_permalink() );
+$vrtl_site_url = trailingslashit( home_url( '/' ) );
+$vrtl_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vrtl_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vrtl_site_url . '#organization',
+      'name'  => $vrtl_brand,
+      'url'   => $vrtl_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vrtl_site_url . '#website',
+      'url'       => $vrtl_site_url,
+      'name'      => $vrtl_brand,
+      'publisher' => [ '@id' => $vrtl_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vrtl_page_url . '#webpage',
+      'url'         => $vrtl_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vrtl_site_url . '#website' ],
+      'about'       => [ '@id' => $vrtl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vrtl_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vrtl_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vrtl_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vrtl_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vrtl_page_url,
+      'provider'    => [ '@id' => $vrtl_site_url . '#organization' ],
+      'serviceType' => 'Внедрение AI для ритейла',
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vrtl_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужны ли свои разработчики?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет, если вы заказываете внедрение AI для ритейла под ключ. Нужен владелец процесса со стороны бизнеса (коммерция, e-com, поддержка) и доступ к 1С/CRM. Техническую часть закрывает интегратор.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько длится внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит: 5–7 дней. Пилот одного модуля: 4–6 недель. Масштабирование на сеть: 2–4 месяца. Полная платформа (прогноз + поддержка + рекомендации + BI) — 4–6 месяцев поэтапно, не «всё сразу».' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие данные нужны для старта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'История продаж (желательно 12+ месяцев), остатки, номенклатура, цены, FAQ и регламенты доставки/возврата, API-доступ к CRM/1С (read + ограниченный write для статусов), каналы связи (виджет, мессенджеры).' ] ],
+        [ '@type' => 'Question', 'name' => 'Как считать ROI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Формула пилота: (экономия ФОТ 1-й линии + прирост маржи от снижения списаний/OOS + прирост выручки от рекомендаций) − стоимость проекта и поддержки. Фиксируем базовые метрики до запуска и сравниваем через 4–8 недель. Международные ×3 конверсии — ориентир, не гарантия.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI для ритейла под ключ или самостоятельно?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Самостоятельно имеет смысл при сильном in-house IT и ML-компетенции (как X5 Tech). Для магазина, сети или D2C без ML-отдела под ключ быстрее выводит на метрики: готовые коннекторы, отработанные регламенты RAG и handoff.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи решает AI для ритейла в первую очередь?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Чаще всего стартуют с AI-поддержки (быстрый эффект, понятный ROI) или прогноза спроса (если боль — OOS и списания). Рекомендации и аналитика — второй этап после единого слоя данных.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI для ритейла без остановки продаж?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пилот на одном канале или категории, параллельная работа старого процесса, постепенное переключение трафика после проверки качества ответов агента.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vrtl_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 </main>
 
 <?php nero_ai_echo_theme_scripts(); ?>
