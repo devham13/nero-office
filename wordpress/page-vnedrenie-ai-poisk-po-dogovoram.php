@@ -40,6 +40,12 @@ require $nero_ai_bootstrap;
 $primary_cta_label = getenv('PRIMARY_CTA_LABEL') ?: 'Проверить документы';
 $primary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs($primary_cta_url);
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
+$secondary_cta_url = getenv('SECONDARY_CTA_URL') ?: '';
+if (empty($secondary_cta_url) || $secondary_cta_url === '#') {
+    $secondary_cta_url = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
+}
+$secondary_cta_attrs = nero_ai_primary_cta_link_attrs($secondary_cta_url);
 
 get_header();
 
@@ -169,6 +175,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-poisk-po-dogovoram-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1" aria-hidden="true"></span>
 
 <section class="nero-ai-hero ragdog-hero" id="ragdog-hero" aria-labelledby="ragdog-hero-title">
 <style>
@@ -1839,7 +1846,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <aside class="ym-cta-block ym-cta-block--secondary" id="cta-obuchenie">
         <div class="ym-cta-block__body">
           <p class="ym-cta-block__headline">Команда хочет понимать RAG до старта пилота?</p>
-          <p class="ym-cta-block__sub">Перед внедрением AI-поиска по договорам полезно разобраться в chunking, grounding, OCR и human-in-the-loop — это ускоряет согласование с ИБ и юротделом. Посмотрите <a href="<?php echo esc_url(getenv('SECONDARY_CTA_URL') ?: ''); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html(getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы'); ?></a>.</p>
+          <p class="ym-cta-block__sub">Перед внедрением AI-поиска по договорам полезно разобраться в chunking, grounding, OCR и human-in-the-loop — это ускоряет согласование с ИБ и юротделом. Посмотрите <a href="<?php echo esc_url($secondary_cta_url); ?>" class="ym-link ym-link--accent"<?php echo $secondary_cta_attrs; ?>><?php echo esc_html($secondary_cta_label); ?></a>.</p>
         </div>
       </aside>
 
