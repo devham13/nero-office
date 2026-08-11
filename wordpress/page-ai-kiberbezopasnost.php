@@ -948,7 +948,8 @@ nav[aria-label="Хлебные крошки"],
         </table>
       </div>
       <p class="nero-ai-reveal" style="text-align:center;margin-top:16px;font-size:14px;color:var(--aib-muted);">На старте рекомендуем L1–L2. Критичные решения — всегда за человеком.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="aib-related nero-ai-reveal" style="margin-top:20px;font-size:15px">Фишинг и BEC часто приходят через почтовый шлюз — до попадания в SIEM полезно сравнить сценарий <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--aib-accent);text-decoration:underline;text-underline-offset:3px">AI-обработки входящей почты в CRM</a>: triage писем, извлечение IOC и маршрутизация подозрительных обращений в SOC без ручного копирования в тикет.</p>
+      <p class="aib-related nero-ai-reveal" style="margin-top:14px;font-size:15px">Для enrichment алертов контекстом активов и заказов из учётной системы закрывает <a href="/ai-1c-erp/" style="color:var(--aib-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> — тот же принцип RAG поверх CMDB и ERP, что применяется при корреляции инцидентов с критичными бизнес-процессами.</p>
     </div>
   </section>
 
@@ -1069,7 +1070,8 @@ nav[aria-label="Хлебные крошки"],
         <li>Политика LLM</li>
         <li>2–4 недели истории инцидентов</li>
       </ul>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="aib-related nero-ai-reveal" style="margin-top:20px;font-size:15px">На enterprise-масштабе guardrails и managed-агенты уже разбирались в кейсе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--aib-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a>: цифровые шлюзы, политики LLM и поэтапная автономия агентов — те же принципы, что нужны CISO перед запуском AI в SOC.</p>
+      <p class="aib-related nero-ai-reveal" style="margin-top:14px;font-size:15px">Для среднего бизнеса, где SOC ещё формируется, а AI-агенты уже работают в продажах, логичный соседний сценарий — <a href="/vnedrenie-ai-amocrm/" style="color:var(--aib-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>: единые регламенты данных и human-in-the-loop снижают риск shadow AI при расширении автоматизации.</p>
     </div>
   </section>
 
@@ -1536,7 +1538,67 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aib_page_url = trailingslashit( get_permalink() );
+$aib_site_url = trailingslashit( home_url( '/' ) );
+$aib_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aib_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aib_site_url . '#organization',
+      'name'  => $aib_brand,
+      'url'   => $aib_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aib_site_url . '#website',
+      'url'       => $aib_site_url,
+      'name'      => $aib_brand,
+      'publisher' => [ '@id' => $aib_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aib_page_url . '#webpage',
+      'url'         => $aib_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aib_site_url . '#website' ],
+      'about'       => [ '@id' => $aib_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aib_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aib_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aib_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aib_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $aib_page_url,
+      'provider'    => [ '@id' => $aib_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aib_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai кибербезопасность?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Закажите аудит сценариев AI для ИБ → выберите пилотный сценарий → интегрируйте SIEM → замерьте baseline MTTR → масштабируйте на agentic triage и отчёты.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит и что входит в проект?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 700 тыс.–5 млн ₽: аудит, интеграция, настройка сценариев, обучение, KPI-дашборд. Точная смета — после аудита.' ] ],
+        [ '@type' => 'Question', 'name' => 'Под ключ или своими силами?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Под ключ быстрее (MVP за 2–4 недели), безопаснее по 152-ФЗ и с измеримым ROI.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие задачи закрывает решение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Triage, enrichment, расследование, гипотезы kill chain, отчёты для CISO, черновики Sigma/YARA/KQL. Финальные решения по критичным инцидентам — зона человека.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI аналитиков?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI снимает 30–50% рутины; аналитик становится супервизором агентов.' ] ],
+        [ '@type' => 'Question', 'name' => 'AI выдумает ложную угрозу — что делать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Human-in-the-loop, audit log рассуждений агента, уровни автономии L1–L2 на старте.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aib_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
