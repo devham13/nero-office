@@ -300,7 +300,7 @@ body.nero-ai-landing{padding-top:0!important}
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <p class="apt-inline-related nero-ai-reveal" style="max-width:820px;margin:0 auto 32px;font-size:15px;color:var(--apt-muted);line-height:1.7">Смежные сценарии внедрения: <a href="/vnedrenie-ai-amocrm/">AI-агент для amoCRM</a> для передачи лидов после рекомендации тарифа и <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> для документооборота после выбора пакета.</p>
 
   <!-- #pochemu -->
   <section class="apt-section" id="pochemu" aria-labelledby="apt-h-pochemu">
@@ -849,7 +849,7 @@ body.nero-ai-landing{padding-top:0!important}
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <p class="apt-inline-related nero-ai-reveal" style="max-width:820px;margin:0 auto 32px;font-size:15px;color:var(--apt-muted);line-height:1.7">Для автоматизации входящих заявок после pricing page смотрите также <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработку входящей почты в CRM</a>.</p>
 
   <!-- #ceny -->
   <section class="apt-section" id="ceny" aria-labelledby="apt-h-ceny">
@@ -938,7 +938,56 @@ body.nero-ai-landing{padding-top:0!important}
 
 </div><!-- /.apt-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apt_page_url = trailingslashit( get_permalink() );
+$apt_site_url = trailingslashit( home_url( '/' ) );
+$apt_brand    = get_bloginfo( 'name' ) ?: $brand;
+$apt_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $apt_site_url . '#organization',
+			'name'  => $apt_brand,
+			'url'   => $apt_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $apt_site_url . '#website',
+			'url'       => $apt_site_url,
+			'name'      => $apt_brand,
+			'publisher' => [ '@id' => $apt_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $apt_page_url . '#webpage',
+			'url'         => $apt_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $apt_site_url . '#website' ],
+			'about'       => [ '@id' => $apt_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $apt_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apt_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $apt_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $apt_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $apt_page_url,
+			'provider'    => [ '@id' => $apt_site_url . '#organization' ],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $apt_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 </main>
 
