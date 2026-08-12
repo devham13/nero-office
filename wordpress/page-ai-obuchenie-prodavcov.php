@@ -1239,7 +1239,33 @@ nav[aria-label="Хлебные крошки"],
   </div>
 
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <section class="aop-section aop-section-alt aop-internal-links" id="poleznoe" aria-label="Смежные материалы по внедрению AI">
+    <div class="aop-cnt">
+      <div class="aop-sh nero-ai-reveal">
+        <span class="aop-eyebrow">Экосистема AI</span>
+        <h2>Смежные материалы: CRM, автоматизация и корпоративное обучение</h2>
+        <p>AI-тренажёр знаний продукта — часть стека внедрения нейросетей в продажи. Ниже — соседние решения, которые часто заказывают вместе с онбордингом менеджеров.</p>
+      </div>
+      <div class="aop-grid-2 nero-ai-reveal">
+        <div class="aop-card">
+          <h3>CRM и допуск к лидам</h3>
+          <p>После сертификации статус уходит в amoCRM — логично смотреть и <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM под ключ</a>: автоматизация воронки рядом с обучением продавцов.</p>
+        </div>
+        <div class="aop-card nero-ai-delay-1">
+          <h3>Почта и CRM</h3>
+          <p>Если лиды приходят на общий ящик, полезно связать тренажёр с <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" class="ym-link ym-link--accent">AI-обработкой входящей почты в CRM</a> — единый контур от письма до допуска менеджера.</p>
+        </div>
+        <div class="aop-card nero-ai-delay-2">
+          <h3>Каталог и ERP</h3>
+          <p>Актуальный прайс и комплектации часто живут в 1С — см. <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" class="ym-link ym-link--accent">AI-агент для 1С и ERP</a> как смежный проект синхронизации базы знаний тренажёра.</p>
+        </div>
+        <div class="aop-card">
+          <h3>Масштаб обучения</h3>
+          <p>Для ориентира по корпоративному размаху — <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" class="ym-link ym-link--accent">кейс KPMG: AI-обучение 276&nbsp;000 сотрудников</a> и уроки для крупных sales-команд.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- SCHEMA-MARKUP:INSERT -->
 
