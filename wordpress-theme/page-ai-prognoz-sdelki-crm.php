@@ -1604,7 +1604,7 @@ nav[aria-label="Хлебные крошки"],
           <h3>Сигналы модели: стадия, давность контакта, источник, сумма, история коммуникаций</h3>
           <p><strong>Структурные:</strong> стадия и время на стадии; сумма, маржа; источник; сдвиги close date; заполненность BANT/MEDDIC.</p>
           <p><strong>Поведенческие:</strong> давность контакта; касания за 14 дней; вовлечённость ЛПР; следующий шаг с датой.</p>
-          <p><strong>Коммуникационные:</strong> конкурент, бюджет, тональность, возражения по цене (NLP).</p>
+          <p><strong>Коммуникационные:</strong> конкурент, бюджет, тональность, возражения по цене (NLP). Письма и заявки из входящего потока можно нормализовать через <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработку входящей почты в CRM</a> — так модель прогноза получает чистые сигналы без ручного переноса в карточку сделки.</p>
         </div>
         <div class="vna-card nero-ai-reveal nero-ai-delay-1" id="pereсchet">
           <h3>Как AI пересчитывает вероятность при изменении воронки</h3>
@@ -1635,10 +1635,10 @@ nav[aria-label="Хлебные крошки"],
             <tr><th>CRM</th><th>Что из коробки</th><th>Кастомный AI-модуль Nero Network</th></tr>
           </thead>
           <tbody>
-            <tr><td>amoCRM</td><td>Rule-based скоринг по формуле</td><td>ML на won/lost + NLP по коммуникациям</td></tr>
+            <tr><td>amoCRM</td><td>Rule-based скоринг по формуле</td><td>ML на won/lost + NLP по коммуникациям; см. также <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a></td></tr>
             <tr><td>Битрикс24</td><td>CoPilot, формулы, детерминированный скоринг</td><td>Поля AI_Probability, Risk_Flags, Next_Step</td></tr>
             <tr><td>Salesforce</td><td>Einstein Opportunity Scoring (при лицензии)</td><td>Кастом для среднего B2B без enterprise-ценника</td></tr>
-            <tr><td>BPMSoft, 1С:CRM</td><td>Базовая аналитика</td><td>REST API + score в карточку</td></tr>
+            <tr><td>BPMSoft, 1С:CRM</td><td>Базовая аналитика</td><td>REST API + score в карточку; при учётном контуре ERP — <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -1902,7 +1902,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="vna-card nero-ai-reveal">
         <p>State of Sales 2026: <strong>4 050</strong> sales professionals, <strong>22</strong> страны. <strong>54%</strong> уже используют AI-агентов; <strong>51%</strong> leaders: silos тормозят AI; <strong>84%</strong> планируют консолидацию стека.</p>
         <p><em>«The secret sauce for sales AI agents is unified data… Otherwise, you get garbage outputs.»</em> — Adam Alfano, Salesforce.</p>
-        <p>Тренд: data readiness → agentic actions → единый прогноз в CRM. Рынок CRM в СНГ ~44,1 млрд ₽ (+25% г/г); AI в продажах — драйвер №1.</p>
+        <p>Тренд: data readiness → agentic actions → единый прогноз в CRM. Рынок CRM в СНГ ~44,1 млрд ₽ (+25% г/г); AI в продажах — драйвер №1. На корпоративном масштабе тот же принцип виден в <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">разборе KPMG и Claude для 276 000 сотрудников</a> — сначала единые данные, затем агенты и прогнозные сценарии.</p>
       </div>
     </div>
   </section>
@@ -2003,8 +2003,71 @@ nav[aria-label="Хлебные крошки"],
 </div><!-- /.vna-content -->
 
 
-<!-- INTERNAL-LINKS:INSERT — внутренние ссылки из === INTERNAL-LINKER === (Юра) -->
-<!-- SCHEMA-MARKUP:INSERT — JSON-LD вставит schema-markup → Юра -->
+<!-- internal links: vnedrenie-ai-obrabotka-email-crm (#kak-rabotaet), vnedrenie-ai-amocrm + ai-1c-erp (#integraciya), kpmg-claude (#trend-2026) — === INTERNAL-LINKER === -->
+<?php
+$aps_crm_page_url = trailingslashit(get_permalink());
+$aps_crm_site_url = trailingslashit(home_url('/'));
+$aps_crm_h1       = 'AI-прогноз вероятности сделки в CRM: внедрение под ключ';
+$aps_crm_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $aps_crm_site_url . '#organization',
+            'name'  => $brand,
+            'url'   => $aps_crm_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $aps_crm_site_url . '#website',
+            'url'       => $aps_crm_site_url,
+            'name'      => $brand,
+            'publisher' => ['@id' => $aps_crm_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $aps_crm_page_url . '#webpage',
+            'url'         => $aps_crm_page_url,
+            'name'        => $aps_crm_h1,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $aps_crm_site_url . '#website'],
+            'about'       => ['@id' => $aps_crm_site_url . '#organization'],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $aps_crm_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aps_crm_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $aps_crm_h1, 'item' => $aps_crm_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $aps_crm_page_url . '#service',
+            'name'        => $aps_crm_h1,
+            'description' => $page_seo_description,
+            'url'         => $aps_crm_page_url,
+            'provider'    => ['@id' => $aps_crm_site_url . '#organization'],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $aps_crm_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Что такое AI-прогноз вероятности сделки в CRM?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Модуль deal scoring: ML рассчитывает вероятность won на основе паттернов и сигналов (стадия, активность, коммуникации). Результат — score в карточке и weighted forecast для собственника.']],
+                ['@type' => 'Question', 'name' => 'Чем AI scoring лидов отличается от прогноза сделки?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Scoring лидов — конверсия лида в сделку. Deal scoring — вероятность закрытия открытой opportunity. Для длинного цикла критичен второй уровень.']],
+                ['@type' => 'Question', 'name' => 'Как внедрить AI-прогноз сделки в существующую CRM?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Аудит → API → обучение на won/lost → поля score + дашборд → пилот read-only → workflow → governance. MVP — 4–6 недель.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит внедрение AI-прогноза сделки?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Ориентир 250–900 тыс. ₽ в зависимости от интеграций и NLP. Точная смета после аудита воронки.']],
+                ['@type' => 'Question', 'name' => 'Можно ли внедрить без программистов в штате?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да. Интеграция, модель и дашборд — на стороне Nero Network. Клиент: доступ к CRM, валидация стадий, обучение менеджеров.']],
+                ['@type' => 'Question', 'name' => 'Какие CRM поддерживают deal scoring?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'amoCRM, Битрикс24, Salesforce, HubSpot, BPMSoft, 1С:CRM — через REST API и кастомные поля.']],
+                ['@type' => 'Question', 'name' => 'Как AI помогает собственнику видеть реальную выручку?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Weighted pipeline: Σ(сумма × AI_Probability) вместо roll-up по стадиям. Дашборд committed / best case / AI-weighted.']],
+                ['@type' => 'Question', 'name' => 'Что входит в аудит прогноза продаж?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Выгрузка 6–24 мес.; прогноз vs факт; индекс качества данных; рекомендация ML / rule-based / гигиена. Отчёт за 3–5 дней.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($aps_crm_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
+
 
 <!-- ====================================================
      FAQ ACCORDION
