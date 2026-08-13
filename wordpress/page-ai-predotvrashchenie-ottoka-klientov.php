@@ -44,6 +44,15 @@ $secondary_cta_label = getenv( 'SECONDARY_CTA_LABEL' ) ?: 'Обучение по
 $secondary_cta_url   = getenv( 'SECONDARY_CTA_URL' ) ?: '';
 $secondary_cta_attrs = $secondary_cta_url ? ' target="_blank" rel="noopener noreferrer"' : '';
 
+$apok_page_url  = get_permalink();
+$apok_home_url  = home_url( '/' );
+$apok_org_id    = $apok_home_url . '#organization';
+$apok_site_id   = $apok_home_url . '#website';
+$apok_page_id   = $apok_page_url . '#webpage';
+$apok_crumb_id  = $apok_page_url . '#breadcrumb';
+$apok_service_id = $apok_page_url . '#service';
+$apok_faq_id    = $apok_page_url . '#faq';
+
 get_header();
 
 $nero_ai_floating = get_stylesheet_directory() . '/nero-ai-floating-header.inc.php';
@@ -418,7 +427,8 @@ nav[aria-label="Хлебные крошки"],
 			<span class="apok-tier low">Low</span><span class="apok-tier med">Medium</span>
 			<span class="apok-tier high">High</span><span class="apok-tier crit">Critical</span>
 		</div>
-		<!-- INTERNAL-LINKS:INSERT -->
+		<p class="apok-related-inline nero-ai-reveal" style="margin-top:20px;max-width:760px;">Сценарии удержания запускаются там, где уже живут клиентские данные: <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a> добавляет скоринг риска, автозадачи и timeline в воронке — без ручного копирования сигналов между системами.</p>
+		<p class="apok-related-inline nero-ai-reveal" style="max-width:760px;">Если биллинг и договоры в 1С, тот же agentic-подход к операционным данным описан в материале про <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a>.</p>
 		<div class="apok-grid-2 nero-ai-reveal" style="margin-top:24px;">
 			<div class="apok-card">
 				<h3>Как AI-агент выявляет риск раньше отмены</h3>
@@ -884,9 +894,76 @@ nav[aria-label="Хлебные крошки"],
 
 </div><!-- .apok-content -->
 
-<!-- INTERNAL-LINKS:INSERT -->
+<aside class="apok-related nero-ai-reveal" aria-label="Смежные материалы" style="max-width:1160px;margin:48px auto 0;padding:0 24px;">
+	<h2 class="apok-related__title" style="font-size:1.125rem;font-weight:700;margin:0 0 12px;">Смежные материалы Nero Network</h2>
+	<ul class="apok-related__list" style="margin:0;padding-left:1.25rem;line-height:1.75;">
+		<li><a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> — ускоряет реакцию на негатив в тикетах, один из ранних сигналов «тихого» оттока.</li>
+		<li><a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude: уроки масштабного внедрения AI</a> — как крупные компании выстраивают governance и human-in-the-loop для agentic-систем.</li>
+	</ul>
+</aside>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apok_schema = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $apok_org_id,
+			'name'  => $brand,
+			'url'   => $apok_home_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $apok_site_id,
+			'url'       => $apok_home_url,
+			'name'      => $brand,
+			'publisher' => [ '@id' => $apok_org_id ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $apok_page_id,
+			'url'         => $apok_page_url,
+			'name'        => 'AI-агент для предотвращения оттока клиентов: внедрение под ключ',
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $apok_site_id ],
+			'about'       => [ '@id' => $apok_org_id ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $apok_crumb_id,
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apok_home_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'AI-агент для предотвращения оттока клиентов: внедрение под ключ', 'item' => $apok_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $apok_service_id,
+			'name'        => 'AI-агент для предотвращения оттока клиентов: внедрение под ключ',
+			'description' => $page_seo_description,
+			'url'         => $apok_page_url,
+			'provider'    => [ '@id' => $apok_org_id ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $apok_faq_id,
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Чем AI-агент отличается от аналитики churn?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аналитика показывает метрики. Агент выполняет действие: задача, письмо, эскалация — с audit log.' ] ],
+				[ '@type' => 'Question', 'name' => 'Можно без своей разработки?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Nero Network — data layer, модель, агент, Make/n8n. Клиент даёт доступы и правила скидок.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие метрики после запуска?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Churn gross/net, save rate, time-to-intervention, удержанный MRR, involuntary vs voluntary, ROI пилота.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как быстро окупается?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентиры: 3–12 месяцев в зависимости от базы. Калькулятор — первичная оценка.' ] ],
+				[ '@type' => 'Question', 'name' => 'Мало данных — можно начать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'От нескольких сотен клиентов и 6+ мес. истории. Иначе — этап сбора данных 3–6 мес.' ] ],
+				[ '@type' => 'Question', 'name' => 'Mindbox уже есть — зачем агент?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'CDP даёт сегмент. Агент — приоритет, канал, текст, эскалация и лимиты автономии.' ] ],
+				[ '@type' => 'Question', 'name' => 'AI отошлёт скидку всем?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. Human-in-the-loop, uplift-логика, лимиты для VIP и Enterprise.' ] ],
+				[ '@type' => 'Question', 'name' => 'amoCRM / Bitrix24?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Типовые интеграции: виджет риска, автозадачи, timeline.' ] ],
+				[ '@type' => 'Question', 'name' => '152-ФЗ и безопасность?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'РФ-контур, YandexGPT при необходимости, audit log, лимиты автономии агента.' ] ],
+				[ '@type' => 'Question', 'name' => 'Для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'От нескольких сотен подписчиков с CRM и биллингом. Узкий пилот от 200 тыс. ₽.' ] ],
+			],
+		],
+	],
+];
+?>
+<script type="application/ld+json"><?php echo wp_json_encode( $apok_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ); ?></script>
 
 <script>
 (function(){
