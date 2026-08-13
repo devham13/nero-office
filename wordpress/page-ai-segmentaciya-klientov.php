@@ -54,6 +54,7 @@ if ( ! is_readable( $nero_ai_floating ) ) {
 	require $nero_ai_floating;
 }
 
+?>
 
 <?php nero_ai_echo_theme_styles( [ 'nero-ai-longread-ui-compat.css' ] ); ?>
 
@@ -1374,8 +1375,6 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
-
   <section class="aseg-section" id="problem">
     <div class="aseg-cnt">
       <div class="aseg-sh nero-ai-reveal">
@@ -1396,6 +1395,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <li><strong>LTV по сегментам</strong> — VIP и «засыпающие» получают одинаковое давление.</li>
         </ul>
         <p>Salesforce в отчёте 2026 называет AI и AI-агенты <strong>тактикой №1</strong> для роста продаж (опрос <strong>4 050</strong> sales professionals). Но <strong>51%</strong> лидеров продаж указывают: разрозненные системы тормозят AI и персонализацию.</p>
+        <p style="margin-top:16px;">Параллельно с сегментацией исходящих касаний часто настраивают <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработку входящей почты в CRM</a> — чтобы входящие заявки не терялись до попадания в нужный сегмент.</p>
       </div>
     </div>
   </section>
@@ -1942,7 +1942,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="aseg-card nero-ai-reveal nero-ai-delay-2" style="margin-top:24px;" id="crm-nocode">
         <h3>AI-сегментация клиентов без программиста (no-code + AI)</h3>
-        <p>Путь для SMB: <strong>Make / n8n</strong> + кастомное поле сегмента в amoCRM или Битрикс24.</p>
+        <p>Путь для SMB: <strong>Make / n8n</strong> + кастомное поле сегмента в amoCRM или Битрикс24. Если параллельно нужны Salesbot, триггеры сделок и AI-слой поверх amoCRM без замены CRM, см. отдельную услугу — <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрение AI-агента в amoCRM под ключ</a>.</p>
         <ol style="padding-left:20px;color:var(--aseg-muted);line-height:1.7;">
           <li>Выгрузка транзакций (или webhook заказа).</li>
           <li>Расчёт R/F/M в сценарии no-code.</li>
@@ -1981,7 +1981,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="aseg-tl-item">
           <div class="aseg-tl-dot"></div>
           <h3>Настройка сегментов и запуск персональных касаний</h3>
-          <p>1–2 пилотных сценария, динамические сегменты, AI-слой для текстов, оркестрация касаний, human-in-the-loop. Срок пилота: <strong>2–6 недель</strong> после аудита.</p>
+          <p>1–2 пилотных сценария, динамические сегменты, AI-слой для текстов, оркестрация касаний, human-in-the-loop. Срок пилота: <strong>2–6 недель</strong> после аудита. Когда сегментация опирается на заказы и документы из учётной системы, полезно смотреть смежный контур — <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агент для 1С и ERP</a> (заявки, счета, синхронизация с CRM).</p>
         </div>
         <div class="aseg-tl-item">
           <div class="aseg-tl-dot"></div>
@@ -2141,7 +2141,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div><!-- /.aseg-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aseg_page_url = trailingslashit( get_permalink() );
+$aseg_site_url = trailingslashit( home_url( '/' ) );
+$aseg_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aseg_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $aseg_site_url . '#organization',
+			'name'  => $aseg_brand,
+			'url'   => $aseg_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $aseg_site_url . '#website',
+			'url'       => $aseg_site_url,
+			'name'      => $aseg_brand,
+			'publisher' => [ '@id' => $aseg_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $aseg_page_url . '#webpage',
+			'url'         => $aseg_page_url,
+			'name'        => 'AI-сегментация клиентской базы для повторных продаж',
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $aseg_site_url . '#website' ],
+			'about'       => [ '@id' => $aseg_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $aseg_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aseg_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => 'AI-сегментация клиентской базы для повторных продаж', 'item' => $aseg_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $aseg_page_url . '#service',
+			'name'        => 'AI-сегментация клиентской базы для повторных продаж',
+			'description' => $page_seo_description,
+			'url'         => $aseg_page_url,
+			'provider'    => [ '@id' => $aseg_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $aseg_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить AI-сегментацию клиентов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит CRM → карта сегментов → 1–2 пилотных сценария → настройка триггеров → AI-слой → запуск и A/B.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько времени занимает внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Карта сегментов — 2–5 рабочих дней. Пилот — 2–6 недель после аудита.' ] ],
+				[ '@type' => 'Question', 'name' => 'Нужны ли программисты?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Для пилота — не обязательно: динамические сегменты amoCRM, Bitrix24, RetailCRM, Make/n8n.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие CRM поддерживаются?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'amoCRM, Битрикс24, RetailCRM, Mindbox, Sendsay, Unisender CDP — типовой стек.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как измерить эффект?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Open/click по сегментам, repeat purchase rate, доля выручки CRM-канала, LTV VIP vs засыпающие.' ] ],
+				[ '@type' => 'Question', 'name' => 'У нас мало данных — можно начать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'RFM от 50–100 заказов. ML-прогнозы — при 500+ заказов.' ] ],
+				[ '@type' => 'Question', 'name' => 'AI придумает неуместные офферы?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Human-in-the-loop: шаблоны, модерация текстов, лимиты скидок, запрет демпинга для VIP.' ] ],
+				[ '@type' => 'Question', 'name' => 'Это же общее внедрение AI в бизнес?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Фокус страницы — сегментация базы и повторные продажи, не общая автоматизация процессов.' ] ],
+				[ '@type' => 'Question', 'name' => 'Юридически: можно слать всем из базы?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нужны согласия (152-ФЗ). AI помогает не слать нерелевантно, а не без разрешения.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aseg_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
