@@ -702,7 +702,7 @@ nav[aria-label="Хлебные крошки"],
           <p class="ard-eyebrow">Лонгрид · ai рекомендации товаров</p>
           <p><strong>Коротко:</strong> AI-рекомендательная система для допродаж — программный слой между каталогом, поведением покупателя и точками показа, который автоматически предлагает cross-sell, upsell и комплекты вместо статичных правил.</p>
           <p>Трафик есть, конверсия стабильна, а <strong>средний чек не растёт</strong> — покупатель уходит с одним товаром.</p>
-          <!-- INTERNAL-LINKS:INSERT -->
+          <p>Связка рекомендаций с CRM — отдельный сценарий: <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a> и автоматизация коммуникаций после покупки дополняют допродажи на сайте.</p>
           <p>Nero Network внедряет <strong>AI-рекомендации товаров под ключ</strong>: от аудита каталога и интеграции с WooCommerce, 1С-Битрикс, retailCRM до A/B-тестов и прозрачного расчёта роста AOV.</p>
         </div>
         <div class="ard-intro-kpi" aria-label="Ключевые метрики e-commerce">
@@ -1048,7 +1048,7 @@ nav[aria-label="Хлебные крошки"],
         <p><strong>Внедрение AI в бизнес</strong> в 2026 — task-specific agents в рабочих приложениях. E-commerce — первый сценарий: измеримый KPI, готовые интеграции, быстрый пилот.</p>
       </div>
       <div class="ard-scenario nero-ai-reveal">
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Узкие сценарии не конкурируют с «общим» AI: <a href="/vnedrenie-ai-amocrm/">AI для amoCRM</a> закрывает воронку в CRM, <a href="/ai-1c-erp/">AI в 1С и ERP</a> — документооборот и остатки, а рекомендательная система растит AOV на витрине.</p>
         <h3>Агент допродаж vs универсальный чат-бот</h3>
         <p>Агент решает конкретную задачу — увеличить ценность заказа. LLM становится реранкером и семантическим слоем, а не единственным «мозгом». Узкий сценарий с прямой связью на выручку, параллельно с другими AI-инициативами.</p>
       </div>
@@ -1405,7 +1405,64 @@ nav[aria-label="Хлебные крошки"],
 </script>
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$ard_page_url = trailingslashit( get_permalink() );
+$ard_site_url = trailingslashit( home_url( '/' ) );
+$ard_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$ard_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $ard_site_url . '#organization',
+      'name'  => $ard_brand,
+      'url'   => $ard_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $ard_site_url . '#website',
+      'url'       => $ard_site_url,
+      'name'      => $ard_brand,
+      'publisher' => [ '@id' => $ard_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $ard_page_url . '#webpage',
+      'url'         => $ard_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $ard_site_url . '#website' ],
+      'about'       => [ '@id' => $ard_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $ard_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $ard_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $ard_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $ard_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $ard_page_url,
+      'provider'    => [ '@id' => $ard_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $ard_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты и ML-команда?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нужна интеграция с каталогом и аналитикой. Nero Network берёт разработку на себя.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько времени до первых результатов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пилот на корзине и карточке — 2–4 недели после аудита.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит AI рекомендации товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 300 000–1 500 000 ₽ за проект под ключ.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $ard_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
