@@ -523,7 +523,7 @@ nav[aria-label="Хлебные крошки"],
 
 <section class="nero-ai-hero apt-hero-poisk" id="hero" aria-labelledby="hero-poisk-title">
 <style>
-/* apt-hero-poisk — самодостаточный hero (канон meta-journal.ru / .nero-ai-home-page) */
+/* apt-hero-poisk — самодостаточный hero (канон .nero-ai-home-page) */
 .apt-hero-poisk {
   --apt-cyan: #79f2ff;
   --apt-violet: #8b5cf6;
@@ -1391,7 +1391,10 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vna-cnt nero-ai-reveal" style="margin-bottom:24px;">
+    <p style="font-size:15px;color:var(--vna-muted);margin:0 0 12px;">AI-поиск по каталогу — один из сценариев <strong>внедрения AI в бизнес</strong> для e-commerce. Когда нужна связка выдачи с CRM и сделками, смотрите посадочную про <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>.</p>
+    <p style="font-size:15px;color:var(--vna-muted);margin:0;">Для B2B-каталогов с учётом в 1С, PIM и сложными ценами релевантен <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP: внедрение и настройка под ключ</a>.</p>
+  </div>
 
   <!-- СЕКЦИЯ 1: Почему не находят -->
   <section class="vna-section" id="pochemu-ne-nahodyat">
@@ -2096,7 +2099,10 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vna-cnt nero-ai-reveal" style="margin:28px 0;">
+    <p style="font-size:15px;color:var(--vna-muted);margin:0 0 12px;">В e-commerce поисковый контекст часто уходит в CRM: zero-result → «помогите найти» → лид менеджеру. По тому же принципу работает <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM: внедрение под ключ</a>.</p>
+    <p style="font-size:15px;color:var(--vna-muted);margin:0;">На фоне тренда task-specific AI-агентов в enterprise полезен разбор <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> — цифровые шлюзы и managed-агенты, которые можно адаптировать к поиску и поддержке каталога.</p>
+  </div>
 
   <!-- СЕКЦИЯ 7: Кейсы -->
   <section class="vna-section" id="keisy">
@@ -2337,7 +2343,83 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+<?php
+$schema_base = trailingslashit(home_url());
+$schema_page = trailingslashit(get_permalink());
+$schema_brand = get_bloginfo('name');
+$schema_ld = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'Organization',
+            '@id' => $schema_base . '#organization',
+            'name' => $schema_brand,
+            'url' => $schema_base,
+        ],
+        [
+            '@type' => 'WebSite',
+            '@id' => $schema_base . '#website',
+            'url' => $schema_base,
+            'name' => $schema_brand,
+            'publisher' => ['@id' => $schema_base . '#organization'],
+        ],
+        [
+            '@type' => 'WebPage',
+            '@id' => $schema_page . '#webpage',
+            'url' => $schema_page,
+            'name' => 'AI-поиск товаров для интернет-магазина: внедрение под ключ',
+            'description' => 'Внедрение AI-поиска товаров для интернет-магазина и B2B-каталога: нейросеть понимает запрос на естественном языке и находит товары без точного названия. Демо на 20 запросах. От 300 тыс. ₽.',
+            'isPartOf' => ['@id' => $schema_base . '#website'],
+            'about' => ['@id' => $schema_base . '#organization'],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $schema_page . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Главная',
+                    'item' => $schema_base,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'AI-поиск товаров для интернет-магазина: внедрение под ключ',
+                    'item' => $schema_page,
+                ],
+            ],
+        ],
+        [
+            '@type' => 'Service',
+            '@id' => $schema_page . '#service',
+            'name' => 'AI-поиск товаров для интернет-магазина: внедрение под ключ',
+            'description' => 'Внедрение AI-поиска товаров для интернет-магазина и B2B-каталога: нейросеть понимает запрос на естественном языке и находит товары без точного названия. Демо на 20 запросах. От 300 тыс. ₽.',
+            'url' => $schema_page,
+            'provider' => ['@id' => $schema_base . '#organization'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id' => $schema_page . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить AI-поиск товаров?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Аудит (20 тестовых запросов) → выбор архитектуры (SaaS / модуль / кастом) → MVP на части каталога → A/B-тест → полный rollout. Срок MVP — от 3–4 недель. Nero Network ведёт проект под ключ.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит AI-поиск товаров?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Ориентир: 300 000–1 200 000 ₽ за проект. Аудит — от 50–80 тыс. ₽, MVP — 250–450 тыс. ₽. Точная смета — после проверки каталога и 20 запросов.']],
+                ['@type' => 'Question', 'name' => 'Можно ли внедрить без программиста?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да, при SaaS-виджете (SearchBooster, AnyQuery) или модуле Bitrix — подключение через фид и JS. Кастом с 1С/CRM: код пишет подрядчик, с вашей стороны — доступы и фид.']],
+                ['@type' => 'Question', 'name' => 'Нужно ли переиндексировать весь каталог?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да. AI-поиск строит индекс по фиду: названия, описания, атрибуты, артикулы. При изменении товара индекс обновляется автоматически (webhook/cron). Первичная индексация — 1–3 дня.']],
+                ['@type' => 'Question', 'name' => 'Как проверить качество до запуска?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Лид-магнит: проверка по 20 запросам, таблица «до/после». Офлайн-метрика nDCG на Golden Set из 100–200 запросов — для технического QA.']],
+                ['@type' => 'Question', 'name' => 'Работает ли с нашей CMS?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да: 1С-Битрикс, WooCommerce, OpenCart, кастомные решения. Формат — API + виджет или модуль.']],
+                ['@type' => 'Question', 'name' => 'Чем отличается от «умного поиска»?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => '«Умный поиск» — маркетинговый зонтик. AI-поиск — гибрид keyword + embeddings + ранжирование. Семантический поиск — ключевой компонент.']],
+                ['@type' => 'Question', 'name' => 'Безопасны ли данные каталога?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'При self-hosted (Qdrant, Meilisearch) и российских embeddings (Yandex Cloud) данные не уходят к зарубежным вендорам. SaaS — данные у провайдера; читайте DPA.']],
+                ['@type' => 'Question', 'name' => 'Когда ожидать первые результаты?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'SaaS — от 1 дня. Кастомный MVP — 3–4 недели. Измеримый эффект в A/B — от 2–4 недель после запуска.']],
+                ['@type' => 'Question', 'name' => 'Подходит ли для каталога <1 000 товаров?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'При <500 SKU боль слабее; при 500–1 000 уже заметна. Для малых каталогов — модуль Bitrix или SaaS с минимальным бюджетом.']],
+            ],
+        ],
+    ],
+];
+echo wp_json_encode($schema_ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+?>
+</script>
 
 </main>
 
