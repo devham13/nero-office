@@ -1577,7 +1577,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
   <!-- INTERNAL-LINKS:INSERT -->
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$avz_page_url = trailingslashit( get_permalink() );
+$avz_site_url = trailingslashit( home_url( '/' ) );
+$avz_schema_h1 = 'AI-анализ возвратов и негативных отзывов: внедрение под ключ';
+$avz_schema = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $avz_site_url . '#organization',
+      'name'  => $brand,
+      'url'   => $avz_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $avz_site_url . '#website',
+      'url'       => $avz_site_url,
+      'name'      => $brand,
+      'publisher' => [ '@id' => $avz_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $avz_page_url . '#webpage',
+      'url'         => $avz_page_url,
+      'name'        => $avz_schema_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $avz_site_url . '#website' ],
+      'about'       => [ '@id' => $avz_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $avz_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $avz_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $avz_schema_h1, 'item' => $avz_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $avz_page_url . '#service',
+      'name'        => $avz_schema_h1,
+      'description' => $page_seo_description,
+      'url'         => $avz_page_url,
+      'provider'    => [ '@id' => $avz_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $avz_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты с нашей стороны?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет, если выбираете формат ai анализ возвратов без программиста / под ключ. Nero Network настраивает коннекторы, ETL, дашборд и алерты. От клиента — доступы к API, продуктовый owner, согласование таксономии.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько времени занимает пилот?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '3–5 рабочих дней на лид-магнит «100 отзывов + 100 возвратов». Полный MVP — 2–3 недели, полное внедрение — 4–6 недель.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие данные нужны для старта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '• Выгрузки или API к отзывам, вопросам, чатам (минимум 3 месяца истории). • Данные о возвратах: SKU, дата, формальная причина, статус, канал. • Справочник товаров: артикул, категория, поставщик, размерная сетка. • Желательно: фото из отзывов, логистические SLA.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как избежать галлюцинаций LLM при разборе отзывов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '• Порог confidence и маршрутизация в human-in-the-loop при значениях ниже 0,6. • Цитата-доказательство в каждой разметке. • Выборочный аудит 5–10% разметки. • Запрет на «выдуманные» причины без привязки к тексту. • Для критичных категорий (брак, безопасность) — только подтверждённые кластеры.' ] ],
+        [ '@type' => 'Question', 'name' => 'Юридические ограничения на обработку отзывов и ПДн', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Отзывы с именем, email и телефоном — персональные данные (152-ФЗ). Нужны: правовое основание, политика конфиденциальности, при поручении обработки — договор с Nero Network. При трансграничной передаче в зарубежные LLM — отдельная оценка рисков; альтернатива — YandexGPT, GigaChat, on-prem.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем отличается от ручного разбора и BI-дашбордов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Кабинет маркетплейса и BI показывают что произошло (% возврата, reason code). AI анализ возвратов показывает почему в свободном тексте, кластеризует синонимы, ставит задачи и алертирует до того, как проблема станет массовой. Это не замена BI, а смысловой слой поверх него.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai анализ возвратов, если отзывов мало?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Старт с категорийных аналогов, подключение чатов и тикетов (там сигнал появляется раньше), пилот на 100 единиц. Для новых SKU — мониторинг первых 10–20 отзывов с пониженным порогом алерта.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие маркетплейсы поддерживаются?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ozon, Wildberries, Яндекс Маркет — через API; плюс собственный интернет-магазин, маркетплейсы как источник через выгрузки при ограничениях API.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $avz_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 <script>
 (function () {
