@@ -672,7 +672,16 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <aside class="akp-related akp-intro" aria-label="Смежные материалы Nero Network">
+    <div class="akp-cnt">
+      <div class="nero-ai-reveal" style="max-width:820px;margin:0 auto;">
+        <p class="akp-eyebrow" style="margin-bottom:10px;">Смежные материалы</p>
+        <p>Вопросы клиентов из CRM — главный источник тем для календаря: если нужна не только контент-рубрика, но и <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">автоматизация amoCRM с AI-агентом под ключ</a>, это отдельная посадочная про сделки, задачи и типовые вопросы в воронке.</p>
+        <p>Часть интентов приходит из почты до попадания в CRM — сценарий <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработки входящей почты в CRM</a> показывает, как классифицировать письма и превращать их в лиды, а не в «сырой» текст для SMM.</p>
+        <p>Когда контент-план связан с заказами и остатками, полезен смежный контур учёта: <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агент для 1С и ERP под ключ</a> — документооборот и статусы заказов, которые тоже могут стать рубриками в календаре.</p>
+      </div>
+    </div>
+  </aside>
 
   <section class="akp-section" id="bolezny">
     <div class="akp-cnt">
