@@ -21,7 +21,7 @@ add_filter(
 add_action(
     'wp_head',
     static function () use ($page_seo_title, $page_seo_description): void {
-        echo '<meta name="description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
+        // Meta description — AIOSEO; excerpt из post_excerpt для сниппета.
         echo '<meta property="og:title" content="' . esc_attr($page_seo_title) . '" />' . "\n";
         echo '<meta property="og:description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
         echo '<meta property="og:url" content="' . esc_url(get_permalink()) . '" />' . "\n";
@@ -196,6 +196,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page akp-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1"></span>
 
 <section class="nero-ai-hero akp-hero" id="akp-hero" aria-labelledby="akp-hero-title">
 <style>
