@@ -1463,7 +1463,110 @@ nav[aria-label="Хлебные крошки"],
 
 </div><!-- .akp-content -->
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$akp_page_url = trailingslashit( get_permalink() );
+$akp_site_url = trailingslashit( home_url( '/' ) );
+$akp_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$akp_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $akp_site_url . '#organization',
+      'name'  => $akp_brand,
+      'url'   => $akp_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $akp_site_url . '#website',
+      'url'       => $akp_site_url,
+      'name'      => $akp_brand,
+      'publisher' => [ '@id' => $akp_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $akp_page_url . '#webpage',
+      'url'         => $akp_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $akp_site_url . '#website' ],
+      'about'       => [ '@id' => $akp_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $akp_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $akp_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $akp_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $akp_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $akp_page_url,
+      'provider'    => [ '@id' => $akp_site_url . '#organization' ],
+    ],
+    [
+      '@type'      => 'FAQPage',
+      '@id'        => $akp_page_url . '#faq',
+      'mainEntity' => [
+        [
+          '@type'          => 'Question',
+          'name'           => 'Как внедрить ai контент план без программиста?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Настройку делает интегратор Nero (Make/n8n, API, RSS). Ежедневно редактор работает в Google Sheets и Telegram-боте approve — без кода.',
+          ],
+        ],
+        [
+          '@type'          => 'Question',
+          'name'           => 'Сколько стоит ai контент план?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Ориентир 60–200 тыс. ₽ под ключ; точная смета после брифа (каналы, CRM, Дzen RSS).',
+          ],
+        ],
+        [
+          '@type'          => 'Question',
+          'name'           => 'Можно ли только VK или только Telegram?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Да. Пакет масштабируется; ai посты вк или TG-only — минус адаптации под другие площадки.',
+          ],
+        ],
+        [
+          '@type'          => 'Question',
+          'name'           => 'Как связать план с CRM?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'amoCRM «Типовые вопросы» → интенты в scoring → строки календаря; webhooks для срочных тем.',
+          ],
+        ],
+        [
+          '@type'          => 'Question',
+          'name'           => 'Что если идеи снова закончатся?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Агент перезаполняет пустые слоты, а не переписывает весь месяц. Wordstat + новые CRM-вопросы — бесконечный вход.',
+          ],
+        ],
+        [
+          '@type'          => 'Question',
+          'name'           => 'Нужен ли программист на поддержке?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Нет для контент-команды. Технические правки сценариев — по SLA Nero или вашему integrator.',
+          ],
+        ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $akp_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 
 </main>
 
