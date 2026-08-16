@@ -679,7 +679,7 @@ nav[aria-label="Хлебные крошки"],
 <h3>Ручная модерация не масштабируется на сотни SKU</h3>
 </div>
 <div class="vpkt-card nero-ai-reveal">
-<p>Контент-менеджер вычитывает 5–10 карточек в день. Агентство с 15 клиентами и 200+ SKU на каждого — сотни черновиков в месяц. Рынок переполнен <strong>генераторами</strong> (MPStats, SellerDen, ESEO, Fabula), но они редко встраиваются в ваш CRM/PIM и не считают <strong>% проходимости с первой попытки</strong>.</p>
+<p>Контент-менеджер вычитывает 5–10 карточек в день. Агентство с 15 клиентами и 200+ SKU на каждого — сотни черновиков в месяц. Рынок переполнен <strong>генераторами</strong> (MPStats, SellerDen, ESEO, Fabula), но они редко встраиваются в ваш CRM/PIM и не считают <strong>% проходимости с первой попытки</strong>. Если черновики карточек приходят из почты менеджеров, на предыдущем этапе воронки помогает <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> — классификация писем и постановка задач контент-команде до выгрузки на маркетплейс.</p>
 <p>По прогнозу <strong>Gartner</strong>, более <strong>40% agentic AI-проектов будут отменены к концу 2027</strong> — из-за неясного ROI и слабого risk control (<a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener noreferrer">пресс-релиз</a>). Выигрывает <strong>измеримый workflow</strong>: черновик → AI-скоринг → человек → API — как Amazon Enhance My Listing.</p>
 </div>
 </div>
@@ -887,6 +887,7 @@ loop();
 </tbody>
 </table>
 </div>
+<p class="vpkt-related nero-ai-reveal" style="margin-top:20px;font-size:15px">Для синхронизации статусов карточек с <strong>amoCRM</strong> сопоставьте сценарий с <a href="/vnedrenie-ai-amocrm/" style="color:var(--vpkt-accent,#79f2ff);text-decoration:underline;text-underline-offset:3px">внедрением AI-агента в amoCRM под ключ</a> — автоматизация сделок и задач контент-команды без ручного переноса данных между системами.</p>
 </div>
 </div>
 </section>
@@ -965,7 +966,7 @@ loop();
 <div class="vpkt-grid-3 nero-ai-reveal">
 <div class="vpkt-card"><h3>Малый бизнес</h3><p>Google Sheets + AI-отчёт, фокус на топ-20 SKU с наибольшей маржой, чек-лист как ритуал перед выгрузкой.</p></div>
 <div class="vpkt-card"><h3>Агентство</h3><p>Мультиаккаунт, отдельные чек-листы под категории, дашборд ошибок копирайтеров, white-label отчёт.</p></div>
-<div class="vpkt-card"><h3>Производитель</h3><p>Интеграция с 1С, пакетная проверка новинок, адаптация под WB/Ozon.</p></div>
+<div class="vpkt-card"><h3>Производитель</h3><p>На стороне учёта — <a href="/ai-1c-erp/">AI-агент для 1С и ERP: внедрение под ключ</a>: выгрузка номенклатуры и остатков, пакетная проверка новинок, адаптация карточек под WB/Ozon.</p></div>
 </div>
 </div>
 </div>
@@ -1108,8 +1109,74 @@ btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.pr
 })();
 </script>
 
-<!-- INTERNAL-LINKS:INSERT -->
-<!-- SCHEMA-MARKUP:INSERT -->
+<!-- INTERNAL-LINKS:INSERT
+  1. /vnedrenie-ai-obrabotka-email-crm/ — «AI-обработка входящей почты в CRM» (#ruchnaya-ne-masshtabiruetsya)
+  2. /vnedrenie-ai-amocrm/ — «внедрение AI-агента в amoCRM под ключ» (#integracii)
+  3. /ai-1c-erp/ — «AI-агент для 1С и ERP: внедрение под ключ» (#scenarii-biznes)
+-->
+<?php
+$vpkt_page_url = trailingslashit( get_permalink() );
+$vpkt_site_url = trailingslashit( home_url( '/' ) );
+$vpkt_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$vpkt_h1       = 'AI проверка карточек товаров: внедрение под ключ';
+$vpkt_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vpkt_site_url . '#organization',
+      'name'  => $vpkt_brand,
+      'url'   => $vpkt_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vpkt_site_url . '#website',
+      'url'       => $vpkt_site_url,
+      'name'      => $vpkt_brand,
+      'publisher' => [ '@id' => $vpkt_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vpkt_page_url . '#webpage',
+      'url'         => $vpkt_page_url,
+      'name'        => $vpkt_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vpkt_site_url . '#website' ],
+      'about'       => [ '@id' => $vpkt_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vpkt_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vpkt_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $vpkt_h1, 'item' => $vpkt_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vpkt_page_url . '#service',
+      'name'        => $vpkt_h1,
+      'description' => $page_seo_description,
+      'url'         => $vpkt_page_url,
+      'provider'    => [ '@id' => $vpkt_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vpkt_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Можно ли без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, если внедрение под ключ. Интегратор Nero настраивает Make/n8n, API и CRM. Программист нужен только при нестандартной ERP — оценивается на аудите.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как интегрировать с CRM и PIM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Статусы «черновик → на проверке → одобрено → опубликовано» синхронизируются с amoCRM или Bitrix24. AI-отчёт прикрепляется к сделке. Публикация — по кнопке «Утвердить» через API WB/Ozon.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем отличается от встроенных ассистентов и SaaS?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Момент проверки: SaaS / встроенные — после публикации или в SaaS; Nero Network — до публикации, в вашем контуре. Кастомные правила: SaaS — ограничены; Nero — полный лексикон и чек-лист. CRM/API: SaaS — нет; Nero — Make, n8n, WB/Ozon API. Метрика проходимости: SaaS — не в фокусе; Nero — дашборд % с 1-й попытки. Gartner: 40% agentic AI-проектов отменят — нужен измеримый процесс, а не автономный агент.' ] ],
+        [ '@type' => 'Question', 'name' => 'Это заменит контент-менеджера?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI снимает рутину по 25 пунктам; человек утверждает, задаёт стратегию, работает с документами. Как у Amazon: AI предлагает — продавец решает.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит ai проверка карточек товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 80–250 тыс. ₽ в зависимости от пакета. Точная смета — после аудита и экспресс-скоринга 1–3 SKU.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai проверка карточек товаров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит → чек-лист → настройка AI → интеграция → пилот 50–100 SKU → масштабирование. Срок 6–10 недель. Nero ведёт проект под ключ.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vpkt_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 <script>
 (function(){
