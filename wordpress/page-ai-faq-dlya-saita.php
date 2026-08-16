@@ -40,6 +40,12 @@ require $nero_ai_bootstrap;
 $primary_cta_label = getenv( 'PRIMARY_CTA_LABEL' ) ?: 'Собрать AI-FAQ';
 $primary_cta_url   = nero_ai_primary_cta_url( getenv( 'PRIMARY_CTA_URL' ) ?: '' );
 $primary_cta_attrs = nero_ai_primary_cta_link_attrs( $primary_cta_url );
+$secondary_cta_label = getenv( 'SECONDARY_CTA_LABEL' ) ?: 'обучение по внедрению AI в бизнес-процессы';
+$secondary_cta_url   = getenv( 'SECONDARY_CTA_URL' ) ?: '';
+if ( function_exists( 'nero_ai_is_placeholder_cta_url' ) && nero_ai_is_placeholder_cta_url( $secondary_cta_url ) ) {
+	$secondary_cta_url = function_exists( 'nero_ai_telegram_channel_url' ) ? nero_ai_telegram_channel_url() : $primary_cta_url;
+}
+$secondary_cta_attrs = function_exists( 'nero_ai_external_link_attrs' ) ? nero_ai_external_link_attrs( $secondary_cta_url ) : '';
 
 get_header();
 
@@ -177,6 +183,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page ai-faq-dlya-saita-page" role="main" tabindex="-1">
+<span id="main" tabindex="-1" class="screen-reader-text" aria-hidden="true"></span>
 
 <section class="nero-ai-hero faq-hero-rag" id="faq-hero-rag" aria-labelledby="faq-hero-title">
 <style>
@@ -1136,7 +1143,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </table>
       </div>
 
-      <p class="nero-ai-reveal" style="margin-top:24px;text-align:left;max-width:900px;"><!-- INTERNAL-LINKS:INSERT -->Кейс КНАУФ (Just AI): RAG-ветка вместо ручных Q&A-пар на ~1 000 страниц документов — <strong>89% точности</strong>, экономия до <strong>50% времени</strong> поддержки. Для клиник: V-AI Labs — ответ за 3 сек, <strong>72%</strong> обращений без админов. Для SaaS: СофтВейв — <strong>92% точность</strong>, <strong>−45%</strong> тикетов только с людьми.</p>
+      <p class="nero-ai-reveal" style="margin-top:24px;text-align:left;max-width:900px;">Кейс КНАУФ (Just AI): RAG-ветка вместо ручных Q&A-пар на ~1 000 страниц документов — <strong>89% точности</strong>, экономия до <strong>50% времени</strong> поддержки. Для клиник: V-AI Labs — ответ за 3 сек, <strong>72%</strong> обращений без админов. Для SaaS: СофтВейв — <strong>92% точность</strong>, <strong>−45%</strong> тикетов только с людьми. AI-FAQ часто дополняют <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-amocrm/' ) ); ?>">внедрением AI в amoCRM</a> и <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-obrabotka-email-crm/' ) ); ?>">автоматизацией входящей почты в CRM</a> — единый контур поддержки и лидов.</p>
     </div>
   </section>
 
@@ -1861,7 +1868,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <aside class="ym-cta-block ym-cta-block--secondary afq-cnt" id="cta-obuchenie" style="max-width:1180px;margin-left:auto;margin-right:auto;">
     <div class="ym-cta-block__body">
       <p class="ym-cta-block__headline">Хотите разобраться в RAG и AI-FAQ до старта проекта?</p>
-      <p class="ym-cta-block__sub">Если команде важно понимать chunking, промпты, human-in-the-loop и eval до заказа внедрения — посмотрите <a href="<?php echo esc_url(getenv('SECONDARY_CTA_URL') ?: ''); ?>" class="ym-link ym-link--accent" target="_blank" rel="noopener noreferrer"><?php echo esc_html(getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы'); ?></a>. Это ускоряет согласование пилота с IT и поддержкой.</p>
+      <p class="ym-cta-block__sub">Если команде важно понимать chunking, промпты, human-in-the-loop и eval до заказа внедрения — посмотрите <a href="<?php echo esc_url( $secondary_cta_url ); ?>" class="ym-link ym-link--accent"<?php echo $secondary_cta_attrs; ?>><?php echo esc_html( $secondary_cta_label ); ?></a>. Это ускоряет согласование пилота с IT и поддержкой.</p>
     </div>
   </aside>
 
@@ -1917,7 +1924,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$afq_site_url  = home_url( '/' );
+$afq_page_url  = get_permalink();
+$afq_brand     = get_bloginfo( 'name' ) ?: ( getenv( 'SITE_BRAND' ) ?: '' ); // pragma: allowlist secret
+$afq_faq_entities = [
+	[ '@type' => 'Question', 'name' => 'Можно ли подключить AI-FAQ к WordPress?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Виджет вставляется скриптом в тему; FAQ-блок синхронизируется с утверждёнными Q&A. Nero Network работает с WordPress-native шаблонами без REST API для страниц с script/canvas.' ] ],
+	[ '@type' => 'Question', 'name' => 'Сколько времени занимает запуск?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'MVP RAG-виджета — 1–2 недели; полный цикл с пилотом — 2–4 недели. КНАУФ — 2 недели до прод; при готовой платформе — вывод за 1 день.' ] ],
+	[ '@type' => 'Question', 'name' => 'Нужна ли готовая база знаний до старта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Не обязательно. Достаточно FAQ, типовых писем поддержки, регламентов, прайса. Аудит выявит «белые пятна».' ] ],
+	[ '@type' => 'Question', 'name' => 'Подходит ли AI-FAQ для клиник и образовательных проектов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Клиники: организационные FAQ, записи, расписание — не медсоветы. EdTech: программы, оплата, дедлайны.' ] ],
+	[ '@type' => 'Question', 'name' => 'Как виджет обновляет FAQ без ручного редактирования страниц?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Лог вопросов → кластеризация → черновик Q&A → модерация редактора → публикация в блок FAQ (WP) + Schema FAQPage.' ] ],
+	[ '@type' => 'Question', 'name' => 'Чем AI-FAQ отличается от обычного чат-бота?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Чат-бот — сценарные ветки; AI-FAQ — семантический поиск по KB + опциональное обновление SEO-блока FAQ.' ] ],
+	[ '@type' => 'Question', 'name' => 'Сколько стоит AI-FAQ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '80–220 тыс. ₽ разово (пакеты Старт/Бизнес/Pro) + ~3 000–15 000 ₽/мес на LLM и хостинг.' ] ],
+	[ '@type' => 'Question', 'name' => 'Бот соврёт?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'RAG только по вашим документам, citations, порог уверенности, эскалация. Качество KB — главный фактор.' ] ],
+	[ '@type' => 'Question', 'name' => 'Как соблюсти 152-ФЗ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'LLM и БД в РФ, согласие в виджете, без трансграничной передачи ПДн без оснований.' ] ],
+	[ '@type' => 'Question', 'name' => 'Можно ли интегрировать с amoCRM и Bitrix24?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да — лид при эскалации с транскриптом и тегом «AI-FAQ».' ] ],
+];
+$afq_schema = [
+	'@context' => 'https://schema.org',
+	'@graph'     => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $afq_site_url . '#organization',
+			'name'  => $afq_brand,
+			'url'   => $afq_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $afq_site_url . '#website',
+			'url'       => $afq_site_url,
+			'name'      => $afq_brand,
+			'publisher' => [ '@id' => $afq_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $afq_page_url . '#webpage',
+			'url'         => $afq_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $afq_site_url . '#website' ],
+			'about'       => [ '@id' => $afq_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $afq_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $afq_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $afq_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $afq_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $afq_page_url,
+			'provider'    => [ '@id' => $afq_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $afq_page_url . '#faq',
+			'mainEntity' => $afq_faq_entities,
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $afq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 </main>
 
 <script>
