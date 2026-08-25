@@ -1832,4 +1832,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
+<?php
+$nero_ai_header_js = function_exists('nero_ai_read_theme_asset')
+    ? nero_ai_read_theme_asset('assets/js/nero-ai-site-header.js')
+    : '';
+if ($nero_ai_header_js === '' && function_exists('nero_ai_read_theme_asset')) {
+    $nero_ai_header_js = nero_ai_read_theme_asset('nero-ai-site-header.js');
+}
+if ($nero_ai_header_js === '') {
+    $nero_ai_header_js_fallback = dirname(__DIR__) . '/shared/theme-canonical/nero-ai-site-header.js';
+    if (is_readable($nero_ai_header_js_fallback)) {
+        $nero_ai_header_js = (string) file_get_contents($nero_ai_header_js_fallback);
+    }
+}
+if ($nero_ai_header_js !== '') {
+    echo "<script>\n", $nero_ai_header_js, "\n</script>\n";
+}
+?>
+
 <?php get_footer(); ?>
