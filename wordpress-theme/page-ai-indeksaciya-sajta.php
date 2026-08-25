@@ -664,7 +664,10 @@ nav[aria-label="Хлебные крошки"],
           <p class="idx-eyebrow">Коротко</p>
           <p><strong>AI-агент контроля индексации</strong> — task-specific автоматизация, которая ежедневно сверяет опубликованные URL с sitemap, robots, Google Search Console и Яндекс.Вебмастером и присылает алерт, если страница не попала в индекс. Nero Network внедряет такой агент под ключ за 2–4 недели; стартовый шаг — бесплатный аудит 20 страниц.</p>
           <p>Прежде чем говорить об <strong>ai индексации сайта</strong>, важно развести два разных смысла слова «индексация». На рынке их часто путают — и именно здесь Nero Network предлагает понятный, технически точный оффер.</p>
-          <!-- INTERNAL-LINKS:INSERT -->
+          <p>Мониторинг индексации — один из task-specific AI-агентов: узкая функция вместо «универсального чат-бота». На фоне тренда <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link ym-link--accent">масштабного внедрения AI в enterprise</a> такие агенты проще обосновать в бюджете и быстрее запустить в проде.</p>
+          <p>Когда алерт об исключённом URL нужно сразу отдать в работу менеджеру, агент создаёт тикет в CRM — тот же подход, что при <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрении AI-агента для amoCRM</a>: автоматизация рутины и SLA на реакцию.</p>
+          <p>Для компаний с учётным контуром 1С/ERP мониторинг индексации часто идёт в одном портфеле с <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агентом для 1С и ERP</a> — разные task-specific агенты, общая оркестрация на n8n.</p>
+          <p>Смежный сценарий — <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a>: и там, и здесь цель одна — не терять сигналы из-за ручного контроля.</p>
         </div>
         <div class="idx-intro-deco" aria-label="Пайплайн мониторинга">
           <div class="row"><span>daily_job</span><strong>running</strong></div>
