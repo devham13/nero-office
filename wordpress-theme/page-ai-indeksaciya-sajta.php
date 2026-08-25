@@ -261,7 +261,8 @@ nav[aria-label="Хлебные крошки"],
 .nero-ai-reveal.nero-ai-active { opacity: 1; transform: none; }
 </style>
 
-<main id="primary" class="site-main nero-ai-home-page ai-indeksaciya-sajta-page" role="main" tabindex="-1">
+<main id="primary" class="site-main nero-ai-home-page ai-indeksaciya-sajta-page" role="main" tabindex="-1" aria-label="Содержимое страницы">
+<a id="main" class="screen-reader-text" tabindex="-1">Содержимое</a>
 
 <section class="nero-ai-hero idx-indeksaciya-hero" id="hero" aria-labelledby="idx-hero-title">
 <style>
