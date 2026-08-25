@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-08-25 — ai-scenarii-reels
+
+- Юра: опубликовано `[REDACTED]ai-scenarii-reels/` (HTTP 200, custom template page-ai-scenarii-reels.php, WP post ID 892).
+- Следующий шаг: google-table-manager (publish, строка 126), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
