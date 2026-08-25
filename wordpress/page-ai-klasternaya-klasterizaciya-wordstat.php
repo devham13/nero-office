@@ -24,11 +24,18 @@ add_action(
         echo '<meta name="description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
         echo '<meta property="og:title" content="' . esc_attr($page_seo_title) . '" />' . "\n";
         echo '<meta property="og:description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
-        echo '<meta property="og:url" content="' . esc_url(get_permalink()) . '" />' . "\n";
+        echo '<meta property="og:url" content="https://www.meta-journal.ru/ai-klasternaya-klasterizaciya-wordstat/" />' . "\n";
+        echo '<link rel="canonical" href="https://www.meta-journal.ru/ai-klasternaya-klasterizaciya-wordstat/" />' . "\n";
         echo '<meta property="og:type" content="article" />' . "\n";
     },
     1
 );
+
+$nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
+if (!is_readable($nero_ai_bootstrap)) {
+    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
+}
+require $nero_ai_bootstrap;
 
 $brand               = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 $primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Собрать карту тем';
@@ -44,12 +51,6 @@ $nero_ai_header_links = [
     ['label' => 'Кейсы',        'href' => '#keisy'],
     ['label' => 'FAQ',          'href' => '#faq'],
 ];
-
-$nero_ai_bootstrap = get_stylesheet_directory() . '/longread-page-wordpress-bootstrap.inc.php';
-if (!is_readable($nero_ai_bootstrap)) {
-    $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
-}
-require $nero_ai_bootstrap;
 
 get_header();
 
@@ -116,7 +117,7 @@ nav[aria-label="Хлебные крошки"],
 @media(max-width:600px){.ym-cta-block{padding:28px 20px;}}
 </style>
 
-<main id="primary" class="site-main nero-ai-home-page ai-klasternaya-klasterizaciya-wordstat-page" role="main" tabindex="-1">
+<main id="main" class="site-main nero-ai-home-page ai-klasternaya-klasterizaciya-wordstat-page" role="main" tabindex="-1">
 
 <section class="nero-ai-hero wstat-hero-cluster" id="hero" aria-labelledby="hero-wstat-title">
 <style>
@@ -1286,7 +1287,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
     <div class="wsk-card nero-ai-reveal">
-      <p>В 2026 году Wordstat стал доступен программно через Yandex Cloud Search API и MCP-коннекторы (<a href="https://habr.com/ru/articles/1030276/" target="_blank" rel="noopener noreferrer">Habr</a>; <a href="https://github.com/marketscore/marketscore-wordstat-mcp" target="_blank" rel="noopener noreferrer">marketscore-wordstat-mcp</a>). Gartner фиксирует переход к autonomous marketing: CMO ищут управляемые AI-воркфлоу с контролем затрат.</p>
+      <p>В 2026 году Wordstat стал доступен программно через Yandex Cloud Search API и MCP-коннекторы (<a href="https://habr.com/ru/articles/1030276/" target="_blank" rel="noopener noreferrer">Habr</a>; <a href="https://github.com/marketscore/marketscore-wordstat-mcp" target="_blank" rel="noopener noreferrer">marketscore-wordstat-mcp</a>). Gartner фиксирует переход к autonomous marketing: CMO ищут управляемые AI-воркфлоу с контролем затрат — на корпоративном масштабе похожие подходы разбираются в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude — уроки AI для бизнеса</a>.</p>
     </div>
 
     <h3 id="kak-grupiruet" style="font-size:20px;margin:36px 0 16px;">Как нейросеть группирует семантику в темы посадочных</h3>
@@ -1358,7 +1359,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </table>
       </div>
     </div>
-    <p>Полный deliverable: Excel «Карта тем», PDF one-pager, рекомендации по перелинковке, опционально — импорт в CRM (amoCRM, Bitrix24) или Notion.</p>
+    <p>Полный deliverable: Excel «Карта тем», PDF one-pager, рекомендации по перелинковке, опционально — импорт в CRM (amoCRM, Bitrix24) или Notion. Когда лиды приходят из почты, до постановки задач по кластерам полезен сценарий <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработки входящей почты в CRM</a>.</p>
     <p><strong>Лид-магнит:</strong> пришлите 100 ключей — получите 8–15 кластеров с примером оффера на каждый. CTA: <strong>«Собрать карту тем»</strong>.</p>
 
     <!-- [INSERT-1] -->
@@ -1401,7 +1402,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <h3 style="font-size:18px;margin:32px 0 14px;">Интеграция с CRM и контент-процессом без программиста</h3>
     <ul class="nero-ai-reveal">
-      <li><strong>CRM (amoCRM / Bitrix24):</strong> каждый кластер P1 → задача «создать страницу» с H1, оффером и slug.</li>
+      <li><strong>CRM (amoCRM / Bitrix24):</strong> каждый кластер P1 → задача «создать страницу» с H1, оффером и slug. Для amoCRM готовый пайплайн описан на странице <a href="/vnedrenie-ai-amocrm/">внедрения AI-агента в amoCRM под ключ</a>.</li>
       <li><strong>Make / n8n:</strong> триггер «новый кластер → ТЗ в Trello / Notion».</li>
       <li><strong>Аналитика:</strong> привязка кластеров к URL в Метрике и Вебмастере.</li>
     </ul>
@@ -1539,7 +1540,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="wsk-seg-card">
         <h3 style="font-size:17px;">In-house SEO</h3>
-        <p>Пакет «Бизнес» + CRM-интеграция + GEO-разметка. Карта тем — вход для контент-плана, ТЗ копирайтерам и рекламным кампаниям.</p>
+        <p>Пакет «Бизнес» + CRM-интеграция + GEO-разметка. Карта тем — вход для контент-плана, ТЗ копирайтерам и рекламным кампаниям. Для учётного контура и документооборота рядом рассматривают <a href="/ai-1c-erp/">AI-агента для 1С и ERP</a> — другой контур, но тот же принцип автоматизации рутины.</p>
       </div>
       <div class="wsk-seg-card">
         <h3 style="font-size:17px;">Малый бизнес</h3>
@@ -1654,8 +1655,163 @@ if ($ad_banner_url && $ad_banner_image && $ad_banner_url !== '#' && strpos($ad_b
 </div>
 <?php endif; ?>
 
-<!-- INTERNAL-LINKS:INSERT -->
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.meta-journal.ru/#organization",
+      "name": "Nero Network",
+      "url": "https://www.meta-journal.ru"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.meta-journal.ru/#website",
+      "url": "https://www.meta-journal.ru",
+      "name": "Nero Network",
+      "publisher": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#webpage",
+      "url": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/",
+      "name": "AI-кластеризация Wordstat-запросов: карта посадочных и коммерческих офферов под ключ",
+      "description": "AI группирует выгрузку Wordstat в темы посадочных: лендинги, статьи и коммерческие офферы. Внедрение под ключ для SEO и бизнеса. Разбор 100 ключей бесплатно.",
+      "isPartOf": {
+        "@id": "https://www.meta-journal.ru/#website"
+      },
+      "about": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://www.meta-journal.ru"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI-кластеризация Wordstat-запросов: карта посадочных и коммерческих офферов под ключ",
+          "item": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#service",
+      "name": "AI-кластеризация Wordstat-запросов: карта посадочных и коммерческих офферов под ключ",
+      "description": "AI группирует выгрузку Wordstat в темы посадочных: лендинги, статьи и коммерческие офферы. Внедрение под ключ для SEO и бизнеса. Разбор 100 ключей бесплатно.",
+      "url": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/",
+      "provider": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      },
+      "offers": {
+        "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#offer"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Нужен ли программист и Key Collector?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Достаточно выгрузки Wordstat в CSV/XLSX. Nero собирает семантику через Wordstat API или Keys.so — без IT-отдела."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какой объём ключей оптимален для старта?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "100 ключей — лид-магнит (8–15 кластеров). 300–500 — первый коммерческий проект. 1 000–3 000 — типичный SMB с SERP-валидацией."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как связать кластеры с CRM и контент-планом?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Колонка priority = порядок создания. P1-кластеры → задачи в CRM с H1, оффером, slug. Колонки page_type + draft_h1 = ТЗ копирайтеру."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI vs Rush Analytics / Keys.so — в чём разница?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SaaS даёт группы ключей по SERP-overlap. Nero даёт карту посадочных с офферами, приоритетами и GEO-форматами — готовый план внедрения."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI ошибается — как вы это контролируете?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Гибрид: AI-черновик → SERP P1 → human QA 5–10% батчей. Автоматизация экономит время, но не отменяет проверку."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wordstat показывает не весь спрос — это проблема?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nero дополняет ядро подсказками, семантикой конкурентов и Keys.so. Честность повышает качество финальной карты."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Зачем кластеризация для Алисы и ChatGPT (GEO)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI-выдача цитирует topic clusters с extractable answers. Кластеризация заранее размечает FAQ, definition, comparison table."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI заменяет SEO-стратега?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. AI снимает 80% рутины. Стратегия остаётся за человеком. Nero = AI + SEO-эксперт."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#offer",
+      "name": "AI-кластеризация Wordstat-запросов под ключ",
+      "description": "Карта лендингов, статей и коммерческих офферов из выгрузки Wordstat с SERP-валидацией и human QA.",
+      "url": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/",
+      "priceCurrency": "RUB",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": 80000,
+        "maxPrice": 250000,
+        "priceCurrency": "RUB"
+      },
+      "seller": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      },
+      "itemOffered": {
+        "@id": "https://www.meta-journal.ruai-klasternaya-klasterizaciya-wordstat/#service"
+      },
+      "availability": "https://schema.org/InStock"
+    }
+  ]
+}
+</script>
 
 </main>
 
