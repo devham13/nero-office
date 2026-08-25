@@ -1346,7 +1346,67 @@ nav[aria-label="Хлебные крошки"],
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$idx_page_url = trailingslashit(get_permalink());
+$idx_site_url = trailingslashit(home_url('/'));
+$idx_h1       = 'AI-агент контроля индексации сайта: внедрение под ключ';
+$idx_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $idx_site_url . '#organization',
+            'name'  => $brand,
+            'url'   => $idx_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $idx_site_url . '#website',
+            'url'       => $idx_site_url,
+            'name'      => $brand,
+            'publisher' => ['@id' => $idx_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $idx_page_url . '#webpage',
+            'url'         => $idx_page_url,
+            'name'        => $idx_h1,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $idx_site_url . '#website'],
+            'about'       => ['@id' => $idx_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id'   => $idx_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $idx_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $idx_h1, 'item' => $idx_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $idx_page_url . '#service',
+            'name'        => $idx_h1,
+            'description' => $page_seo_description,
+            'url'         => $idx_page_url,
+            'provider'    => ['@id' => $idx_site_url . '#organization'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id'   => $idx_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить ai индексация сайта?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Заявка на аудит 20 URL → подключение GSC и Вебмастера → оркестратор → алерты → daily job. Срок 2–4 недели.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит ai индексация сайта?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Ориентир 100–300 тыс. ₽ за ai индексация сайта под ключ — один домен, стандартные интеграции.']],
+                ['@type' => 'Question', 'name' => 'Можно ли без программиста?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да. Nero Network настраивает pipeline; правки robots/sitemap согласуются по чек-листу, merge — за ответственным сотрудником.']],
+                ['@type' => 'Question', 'name' => 'Чем отличается от обычного краулера?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Связка «публикация → техсигналы → GSC/Вебмастер → алерт», а не разовый crawl. LLM объясняет причину на русском.']],
+                ['@type' => 'Question', 'name' => 'Как быстро виден результат?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Первые находки — в аудите 20 страниц. Daily-мониторинг — с первой недели. Re-check — через 48–72 часа после фикса.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($idx_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+?>
+</script>
 
 </main>
 
