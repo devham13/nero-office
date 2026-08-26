@@ -6,6 +6,7 @@
 
 $page_seo_title       = 'AI-медиаплан под ключ: гипотезы, аудитории и тесты на 30 дней';
 $page_seo_description = 'Внедрение AI-медиаплана: нейросеть генерирует рекламные гипотезы, аудитории и офферы, календарь A/B-тестов на месяц. Интеграция с CRM и кабинетами. Чек 80–250 тыс. ₽. Собрать медиаплан.';
+$page_h1              = 'AI-медиапланирование и подбор гипотез для рекламы: внедрение под ключ';
 
 add_filter('document_title_parts', static function (array $parts) use ($page_seo_title): array {
     $parts['title'] = $page_seo_title;
@@ -934,7 +935,7 @@ nav[aria-label="Хлебные крошки"],
         <div class="vmp-symptom"><div class="ico">📅</div><h3>Нет календаря</h3><p>Запуски накладываются — невозможно понять, что сработало.</p></div>
         <div class="vmp-symptom"><div class="ico">⛔</div><h3>Нет kill/scale</h3><p>Неэффективные кампании крутятся неделями, съедая бюджет.</p></div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="vmp-related nero-ai-reveal" style="margin-top:20px;font-size:15px">Разрозненный tech stack мешает не только медиаплану: в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vmp-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> показано, как enterprise объединяет AI-агентов в единый контур — тот же принцип применим к рекламным гипотезам и планированию.</p>
       <p class="nero-ai-reveal"><strong>Итог:</strong> без системы AI-медиапланирования даже нейросеть для рекламы превращается в дорогую игрушку.</p>
       <div class="vmp-inline-cta nero-ai-reveal"><a href="#kak-rabotaet">Узнать, как навести порядок в гипотезах →</a></div>
     </div>
@@ -1074,7 +1075,7 @@ nav[aria-label="Хлебные крошки"],
       </div>
       <div class="vmp-card nero-ai-reveal" id="audit"><h3>Аудит текущих кампаний и сбор данных</h3><p>Аудит Яндекс/VK/Telegram, Метрика, CRM. UTM, baseline KPI. Минимум: Метрика + кабинеты.</p></div>
       <div class="vmp-card nero-ai-reveal" id="generaciya"><h3>Генерация гипотез и медиаплана на месяц</h3><p>Промпт-конвейер → матрица. 15–25 гипотез, ICE/RICE. LLM + Make/n8n.</p></div>
-      <div class="vmp-card nero-ai-reveal" id="process-testov"><h3>Настройка процесса тестов и отчётности</h3><p>CRM-интеграция, Telegram-алерты, обучение, контроль 1-го цикла.</p></div>
+      <div class="vmp-card nero-ai-reveal" id="process-testov"><h3>Настройка процесса тестов и отчётности</h3><p>CRM-интеграция, Telegram-алерты, обучение, контроль 1-го цикла. Когда лиды приходят из почты и форм, полезно сопоставить с <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vmp-accent);text-decoration:underline;text-underline-offset:3px">AI-обработкой входящей почты в CRM</a> — автоматическая классификация заявок до попадания в медиаплан-отчёт.</p></div>
       <div class="vmp-table-wrap nero-ai-reveal"><table class="vmp-table"><thead><tr><th></th><th>SaaS</th><th>Агентство</th><th>Nero Network</th></tr></thead><tbody>
 <tr><td>Скорость</td><td>5–10 мин</td><td>2–4 нед</td><td><strong>3–5 нед + интеграции</strong></td></tr>
 <tr><td>AI-гипотезы</td><td>Без контекста</td><td>Редко</td><td><strong>На данных клиента</strong></td></tr>
@@ -1108,7 +1109,7 @@ nav[aria-label="Хлебные крошки"],
         <span class="vmp-int-pill">Метрика</span>
         <span class="vmp-int-pill">Make / n8n</span>
       </div>
-      <div class="vmp-card nero-ai-reveal"><p>AI-медиаплан связывает <strong>гипотезу → канал → лид → сделку → следующую волну</strong>. 51% Salesforce про silos → единая схема с <strong>ai медиаплан интеграция crm</strong>.</p></div>
+      <div class="vmp-card nero-ai-reveal"><p>AI-медиаплан связывает <strong>гипотезу → канал → лид → сделку → следующую волну</strong>. 51% Salesforce про silos → единая схема с <strong>ai медиаплан интеграция crm</strong>. Для связки лидов из рекламы с воронкой в amoCRM см. <a href="/vnedrenie-ai-amocrm/" style="color:var(--vmp-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a> — соседний сценарий без ручного переноса данных.</p></div>
     </div>
   </section>
   <section class="vmp-section" id="dlya-kogo">
@@ -1194,9 +1195,81 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 </div>
-<!-- INTERNAL-LINKS:INSERT -->
-<!-- SCHEMA-MARKUP:INSERT -->
-
+<section class="vmp-section vmp-section-alt" id="related-materials" aria-label="Смежные материалы">
+  <div class="vmp-cnt">
+    <div class="vmp-sh nero-ai-reveal vmp-left">
+      <span class="vmp-eyebrow">Смежные услуги</span>
+      <h2>Другие сценарии внедрения AI в бизнес</h2>
+      <p>Медиаплан — один из контуров автоматизации. Если параллельно нужен учётный или документооборотный контур, смотрите отдельную посадочную про <a href="/ai-1c-erp/" style="color:var(--vmp-accent);text-decoration:underline;text-underline-offset:3px">AI-агента для 1С и ERP: внедрение под ключ</a> — заявки, счета и документы без двойного ввода.</p>
+    </div>
+  </div>
+</section>
+<?php
+$vmp_page_url = trailingslashit(get_permalink());
+$vmp_site_url = trailingslashit(home_url('/'));
+$vmp_brand    = get_bloginfo('name') ?: ($brand ?: 'Nero Network');
+$vmp_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $vmp_site_url . '#organization',
+            'name'  => $vmp_brand,
+            'url'   => $vmp_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $vmp_site_url . '#website',
+            'url'       => $vmp_site_url,
+            'name'      => $vmp_brand,
+            'publisher' => ['@id' => $vmp_site_url . '#organization'],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $vmp_page_url . '#webpage',
+            'url'         => $vmp_page_url,
+            'name'        => $page_h1,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $vmp_site_url . '#website'],
+            'about'       => ['@id' => $vmp_site_url . '#organization'],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $vmp_page_url . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vmp_site_url],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_h1, 'item' => $vmp_page_url],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $vmp_page_url . '#service',
+            'name'        => $page_h1,
+            'description' => $page_seo_description,
+            'url'         => $vmp_page_url,
+            'provider'    => ['@id' => $vmp_site_url . '#organization'],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $vmp_page_url . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить ai медиаплан?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Бриф → аудит → матрица → календарь 30 дней → интеграции. Nero выполняет под ключ.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит ai медиаплан?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Ориентир 80–250 тыс. ₽. Смета после диагностики.']],
+                ['@type' => 'Question', 'name' => 'Можно ли без программиста?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да. Make/n8n на стороне внедрения; клиенту программист не нужен.']],
+                ['@type' => 'Question', 'name' => 'Отличие от «нейросеть для рекламы»?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Нейросеть — генерация. AI-медиаплан — процесс: гипотезы + календарь + KPI + CRM.']],
+                ['@type' => 'Question', 'name' => 'Нужна ли CRM?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Желательна на этапе 2. Минимум: Метрика + кабинеты.']],
+                ['@type' => 'Question', 'name' => 'Какие данные нужны для запуска?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Цели и KPI, бюджет на 30+ дней, описание продукта и ЦА, конкуренты, доступ к кабинетам и аналитике, история креативов.']],
+                ['@type' => 'Question', 'name' => 'AI сам всё настроит — зачем платить?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'SaaS не подключает кабинеты и не сопровождает 1-й цикл. Кейс O\'STIN: человек принимает финальные решения — AI ускоряет.']],
+                ['@type' => 'Question', 'name' => 'Только Яндекс или мультиканал?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Матрица каналов: Яндекс (спрос) + VK (охват) + Telegram (ниша). Состав зависит от ЦА и бюджета.']],
+                ['@type' => 'Question', 'name' => 'Какие сроки?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Диагностика 1–2 дня. Внедрение 3–5 недель. Первый цикл — 30 дней.']],
+                ['@type' => 'Question', 'name' => 'Что остаётся за маркетологом?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Утверждение бюджета и гипотез, бренд-комплаенс, финальные креативы, стратегические решения при конфликте данных.']],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode($vmp_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "
+";
+?>
 </main>
 
 <?php nero_ai_echo_theme_scripts(); ?>
