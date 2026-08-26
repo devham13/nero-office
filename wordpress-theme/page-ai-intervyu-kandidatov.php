@@ -1462,10 +1462,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
   </div>
 </section>
+
+<section class="aihr-section aihr-section-alt" id="smeshnye-materialy" aria-label="Смежные материалы по внедрению AI">
+  <div class="aihr-cnt">
+    <div class="aihr-sh aihr-left nero-ai-reveal">
+      <span class="aihr-eyebrow">Смежные сценарии</span>
+      <h2>Другие проекты Nero Network по AI-агентам</h2>
+      <p>HR-скрининг часто идёт в одном контуре с CRM и операционной автоматизацией — полезные смежные материалы:</p>
+    </div>
+    <div class="aihr-grid-2 nero-ai-reveal">
+      <div class="aihr-card">
+        <p>Кастомные поля и воронка в amoCRM: <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a> — когда оценочный лист и score нужно писать не только в Huntflow.</p>
+      </div>
+      <div class="aihr-card">
+        <p>Отклики и письма до карточки кандидата: <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> — triage входящего потока до этапа скрининга.</p>
+      </div>
+      <div class="aihr-card">
+        <p>Корпоративный учёт и документооборот: <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> — внедрение агентов в бизнес-процессы рядом с HR.</p>
+      </div>
+      <div class="aihr-card">
+        <p>Enterprise-масштаб: <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">KPMG и Claude — уроки AI для бизнеса</a> — цифровые шлюзы и managed-агенты, применимые к операционке.</p>
+      </div>
+    </div>
+  </div>
+</section>
 </div><!-- /.aihr-content -->
 
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
+  <?php
+  $schema_home     = trailingslashit(home_url('/'));
+  $schema_page_url = trailingslashit(get_permalink());
+  $schema_org_id   = $schema_home . '#organization';
+  $schema_site_id  = $schema_home . '#website';
+  $schema_brand    = get_bloginfo('name');
+  $schema_title    = 'AI-агент для первичного интервью кандидатов: внедрение под ключ';
+  $schema_desc     = 'Внедрим AI-агента для первичного интервью кандидатов: скрининг по сценарию вакансии, фиксация ответов и оценочный лист для рекрутера. Интеграция с ATS/CRM, цена, кейсы и этапы под ключ.';
+  $schema_faq = [
+    ['q' => 'Как внедрить ai интервью кандидатов?', 'a' => 'Аудит вакансии → шаблон вопросов и рубрика → настройка агента и интеграция с ATS → пилот 30–50 интервью → масштабирование. Nero Network ведёт проект под ключ; от HR нужны JD, эталонные вопросы, доступ к API ATS, политика ПДн.'],
+    ['q' => 'Сколько стоит ai интервью кандидатов?', 'a' => 'Ориентир 150–450 тыс. ₽ за внедрение с пилотом на одной вакансии. Точная смета после аудита: канал (чат/голос), число интеграций, white-label для агентства.'],
+    ['q' => 'AI интервью кандидатов без программиста — реально?', 'a' => 'Да, на стороне клиента: не нужен штатный разработчик, если интегратор подключает webhook и поля в ATS. Low-code (n8n/Make) снижает зависимость от «чёрного ящика».'],
+    ['q' => 'AI интервью кандидатов для малого бизнеса', 'a' => 'Доступно при массовом найме (5+ откликов в день на линейную вакансию). Старт с одной вакансии — минимальный риск. Для редких senior-позиций ROI скрининга ниже.'],
+    ['q' => 'Можно ли начать с одной вакансии?', 'a' => 'Да. Пилотная модель Nero Network: одна вакансия, 30–50 интервью, метрики до/после, затем тиражирование шаблона.'],
+    ['q' => 'Что нужно от HR-команды?', 'a' => 'Описание вакансии и компетенций; 5–15 эталонных вопросов (или шаблон от Nero); политика ПДн; утверждение проходного балла; ревью shortlist после пилота.'],
+    ['q' => 'Заменит ли AI рекрутера?', 'a' => 'Нет. Jorge Amar, McKinsey: HR не будет вручную скринить каждое резюме, но критичен change management. Обзоры с отсылкой к McKinsey: использовать AI для тегирования и классификации, но не для финального hiring decision.'],
+    ['q' => 'Как кандидат узнает, что говорит с AI?', 'a' => 'Уведомление перед интервью, согласие на обработку ПДн, возможность задать вопросы человеку. Прозрачность снижает негатив; быстрый feedback повышает completion (ориентир 86% в пилотах HireVue).'],
+    ['q' => 'AI отсеет хороших кандидатов?', 'a' => 'Structured interview + транскрипт для рекрутера + финал за человеком. Возражение «bias» закрывается фиксированными вопросами и аудитом рубрики.'],
+    ['q' => 'У нас уже есть Huntflow/Potok — зачем агент?', 'a' => 'Агент — надстройка: автоматизирует интервью и пишет оценочный лист в карточку, ATS остаётся центром найма.'],
+  ];
+  $schema_graph = [
+    ['@type' => 'Organization', '@id' => $schema_org_id, 'name' => $schema_brand, 'url' => $schema_home],
+    ['@type' => 'WebSite', '@id' => $schema_site_id, 'url' => $schema_home, 'name' => $schema_brand, 'publisher' => ['@id' => $schema_org_id]],
+    ['@type' => 'WebPage', '@id' => $schema_page_url . '#webpage', 'url' => $schema_page_url, 'name' => $schema_title, 'description' => $schema_desc, 'isPartOf' => ['@id' => $schema_site_id], 'about' => ['@id' => $schema_org_id]],
+    ['@type' => 'BreadcrumbList', '@id' => $schema_page_url . '#breadcrumb', 'itemListElement' => [
+      ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $schema_home],
+      ['@type' => 'ListItem', 'position' => 2, 'name' => $schema_title, 'item' => $schema_page_url],
+    ]],
+    ['@type' => 'Service', '@id' => $schema_page_url . '#service', 'name' => $schema_title, 'description' => $schema_desc, 'url' => $schema_page_url, 'provider' => ['@id' => $schema_org_id]],
+    ['@type' => 'FAQPage', '@id' => $schema_page_url . '#faq', 'mainEntity' => array_map(static function (array $item): array {
+      return ['@type' => 'Question', 'name' => $item['q'], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']]];
+    }, $schema_faq)],
+  ];
+  ?>
+  <script type="application/ld+json">
+  <?php echo wp_json_encode(['@context' => 'https://schema.org', '@graph' => $schema_graph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+  </script>
 
 </main>
 
