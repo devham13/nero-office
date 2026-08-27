@@ -6,6 +6,7 @@
 
 $page_seo_title       = 'AI адаптация сотрудников: внедрение AI-агента под ключ';
 $page_seo_description = 'Внедряем AI-агент адаптации сотрудников: ведёт новичка по чек-листу onboarding, отвечает на вопросы по регламентам и показывает HR статус адаптации и риски. Кейсы, интеграции, цены. Проверить onboarding.';
+$page_h1              = 'AI-агент адаптации сотрудников: внедрение и настройка под ключ';
 
 add_filter('document_title_parts', static function (array $parts) use ($page_seo_title): array {
     $parts['title'] = $page_seo_title;
@@ -1463,6 +1464,7 @@ nav[aria-label="Хлебные крошки"],
         <h3>Дашборд статуса адаптации для руководителя и HR</h3>
         <p>Главный дифференциатор против «просто чат-бота». На одном экране: статус каждого новичка, просроченные шаги, топ вопросов, сравнение филиалов и ролей.</p>
       </div>
+      <p class="nero-ai-reveal" style="margin-top:20px;font-size:15px">Параллельно HR часто тонет во входящей почте — <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM</a> снимает triage заявок, чтобы команда могла сфокусироваться на адаптации новичков.</p>
     </div>
   </section>
 
@@ -1510,6 +1512,7 @@ nav[aria-label="Хлебные крошки"],
           </tbody>
         </table>
       </div>
+      <p class="nero-ai-reveal" style="margin-top:24px;font-size:15px">Для сетей на amo-стеке webhook «принят на работу» можно развивать в полноценного CRM-агента — см. материал про <a href="/vnedrenie-ai-amocrm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a>: там те же принципы state machine и human-in-the-loop, но фокус на сделках и задачах.</p>
     </div>
   </section>
 
@@ -1541,6 +1544,7 @@ nav[aria-label="Хлебные крошки"],
           <li>Админка для HR без программиста</li>
         </ul></div>
       </div>
+      <p class="nero-ai-reveal" style="margin-top:24px;font-size:15px">Если карточка сотрудника и учёт персонала живут в 1С, контур замыкается через <a href="/ai-1c-erp/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-агента для 1С и ERP</a> — webhook onboarding → статус адаптации в учётной системе без двойного ввода.</p>
     </div>
   </section>
 
@@ -1578,6 +1582,7 @@ nav[aria-label="Хлебные крошки"],
         <span class="vna-eyebrow">Кейсы</span>
         <h2>Кейсы и примеры внедрения AI-адаптации</h2>
       </div>
+      <p class="nero-ai-reveal" style="margin-bottom:28px;font-size:15px">На масштабе десятков тысяч сотрудников крупные практики уже тестируют managed-агентов — в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> показаны цифровые шлюзы, применимые и к HR-onboarding.</p>
       <div class="vna-case-grid nero-ai-reveal">
         <div class="vna-case-card"><div class="vna-case-tag">Якорный кейс</div><h3>«Открытая Линия»</h3><p>Oline Наставник на GPT + ML: адаптация <strong>×2</strong>, HR <strong>−40%</strong> нагрузки.</p></div>
         <div class="vna-case-card"><div class="vna-case-tag">RAG</div><h3>Ресторанный холдинг</h3><p>HR-бот на RAG с ролевой изоляцией — ответы со ссылкой на документ, аналитика запросов.</p></div>
@@ -2130,8 +2135,103 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
-<!-- INTERNAL-LINKS:INSERT -->
+<?php
+$aas_page_url = trailingslashit( get_permalink() );
+$aas_site_url = trailingslashit( home_url( '/' ) );
+$aas_schema_brand = $brand ?: 'Nero Network';
+$aas_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aas_site_url . '#organization',
+      'name'  => $aas_schema_brand,
+      'url'   => $aas_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aas_site_url . '#website',
+      'url'       => $aas_site_url,
+      'name'      => $aas_schema_brand,
+      'publisher' => [ '@id' => $aas_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aas_page_url . '#webpage',
+      'url'         => $aas_page_url,
+      'name'        => $page_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aas_site_url . '#website' ],
+      'about'       => [ '@id' => $aas_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aas_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aas_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_h1, 'item' => $aas_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aas_page_url . '#service',
+      'name'        => $page_h1,
+      'description' => $page_seo_description,
+      'url'         => $aas_page_url,
+      'provider'    => [ '@id' => $aas_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aas_page_url . '#faq',
+      'mainEntity' => [
+        [
+          '@type' => 'Question',
+          'name'  => 'Как внедрить ai адаптацию сотрудников?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Аудит onboarding → оцифровка регламентов в RAG → чек-листы по ролям → интеграция с HRIS → пилот на 10–20 новичках → масштабирование. ' . $aas_schema_brand . ' ведёт все этапы под ключ.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Сколько стоит ai адаптация сотрудников?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Ориентир 120–350 тыс. ₽ за MVP (1–2 роли, Telegram/Bitrix24, RAG, чек-лист, дашборд). Расширенные проекты — по смете после аудита.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Подходит ли для малого бизнеса?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Да. MVP на одной роли и Telegram — без корпоративного портала. Критично: повторяемый onboarding и хотя бы 5–10 новичков в квартал.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Нужен ли программист для интеграции?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'На этапе сопровождения — нет: HR редактирует чек-листы и БЗ в админке. Первичная интеграция (webhook, CRM) — на стороне ' . $aas_schema_brand . '.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Как защищаются персональные данные сотрудников?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => '152-ФЗ: YandexGPT/GigaChat в контуре РФ, on-prem, маскирование ПДн, RBAC в RAG, политика логов. Согласие на обработку ПДн — в пакете документов при внедрении.',
+          ],
+        ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aas_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
+<!-- internal-linker: 4 outgoing links — /vnedrenie-ai-amocrm/ (#integracii), /ai-1c-erp/ (#arhitektura), /vnedrenie-ai-obrabotka-email-crm/ (#kak-rabotaet), /kpmg-claude-vnedrenie-ai-276-tysyach/ (#keisy) -->
 
 <?php nero_ai_echo_theme_scripts(); ?>
 <?php get_footer(); ?>
