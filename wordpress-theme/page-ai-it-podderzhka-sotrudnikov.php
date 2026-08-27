@@ -1712,7 +1712,7 @@ $ithp_schema   = [
 echo '<script type="application/ld+json">' . wp_json_encode( $ithp_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
 ?>
 
-  <!-- INTERNAL-LINKS:INSERT (доп. якоря — см. комментарии в теле лонгрида) -->
+  <p class="nero-ai-reveal" style="margin:28px auto 0;width:min(1220px,calc(100% - 40px));font-size:14.5px;color:#9aa8bd;text-align:center;line-height:1.65;">Когда канал заявок — почта, а не чат: <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a> — соседний сценарий с маршрутизацией и тикетами.</p>
 
 </main>
 
