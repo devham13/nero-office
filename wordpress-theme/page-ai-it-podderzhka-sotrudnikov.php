@@ -1081,7 +1081,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="ithp-intro-text">
           <p class="ithp-eyebrow">Лонгрид · ai it поддержка сотрудников</p>
           <p><strong>Коротко:</strong> AI-агент внутренней IT-поддержки — цифровой первый контакт для сотрудников: нейросеть понимает запрос на естественном языке, ищет ответ в корпоративной базе знаний, выполняет типовые действия через API и передаёт сложные случаи живому инженеру с полным контекстом диалога.</p>
-          <!-- INTERNAL-LINKS:INSERT -->
+          <p>На корпоративном масштабе схожие принципы governance и human-in-the-loop разбираем в материале <a href="<?php echo esc_url(home_url('/kpmg-claude-vnedrenie-ai-276-tysyach/')); ?>" class="ym-link ym-link--accent">KPMG и Claude: уроки AI для бизнеса</a> — полезно сравнить с внутренним helpdesk.</p>
           <p>Nero Network внедряет <strong>ai it поддержку сотрудников</strong> под ключ: от аудита заявок до запуска <strong>ai helpdesk it</strong> в Teams, Telegram или на корпоративном портале.</p>
         </div>
 
@@ -1479,7 +1479,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </table>
       </div>
       <div class="ithp-card nero-ai-reveal" style="margin-top:20px;">
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>Заявки из CRM и ESM часто пересекаются с IT: для продажного контура см. <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>" class="ym-link ym-link--accent">AI-агент для amoCRM: внедрение и настройка под ключ</a>.</p>
+        <p>Для учётного контура и ERP — отдельный сценарий <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>" class="ym-link ym-link--accent">AI-агент для 1С и ERP</a> с теми же RAG и actions через API.</p>
         <h3>Стек LLM для РФ</h3>
         <p>YandexGPT, GigaChat, Ollama; гибрид с OpenAI/Claude для неконфиденциальных сценариев. Оркестрация — Make, n8n, MCP. <strong>152-ФЗ:</strong> ПДн и доступы — закрытый контур, RBAC, логирование.</p>
       </div>
@@ -1646,7 +1647,71 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$ithp_page_url = trailingslashit( get_permalink() );
+$ithp_site_url = trailingslashit( home_url( '/' ) );
+$ithp_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$ithp_h1       = 'AI-агент внутренней IT-поддержки: внедрение под ключ';
+$ithp_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $ithp_site_url . '#organization',
+      'name'  => $ithp_brand,
+      'url'   => $ithp_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $ithp_site_url . '#website',
+      'url'       => $ithp_site_url,
+      'name'      => $ithp_brand,
+      'publisher' => [ '@id' => $ithp_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $ithp_page_url . '#webpage',
+      'url'         => $ithp_page_url,
+      'name'        => $ithp_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $ithp_site_url . '#website' ],
+      'about'       => [ '@id' => $ithp_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $ithp_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $ithp_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $ithp_h1, 'item' => $ithp_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $ithp_page_url . '#service',
+      'name'        => $ithp_h1,
+      'description' => $page_seo_description,
+      'url'         => $ithp_page_url,
+      'provider'    => [ '@id' => $ithp_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $ithp_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI IT-поддержку в компании?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит 200–500 тикетов → 5–10 пилотных категорий → KB от 30 статей → MVP за 3–4 недели → измерить deflection и расширять.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 200–650 тыс. ₽ под ключ + OPEX 1–5 тыс. ₽/мес. Точная смета — после аудита.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, если IT на аутсорсе или 1–2 инженера. Минимум: Telegram + GLPI + RAG по Notion.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли внедрить без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, для стандартных коннекторов. Legacy — доработка на стороне Nero Network.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какие интеграции поддерживаются?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Jira SM, GLPI, OTRS, 1С:ITILIUM, SimpleOne, Zendesk; KB — Confluence, SharePoint; AD; Telegram, Teams, Slack.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько статей нужно в KB?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Минимум 30–50 для пилота, 100+ для deflection 40%+.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что если нет ITSM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Почта/таблица или лёгкий GLPI; агент создаёт заявки в доступной системе.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как быстро окупается?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При снятии 30–40% L1 и пилоте от 200 тыс. ₽ — часто 6–12 месяцев.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $ithp_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
   <!-- INTERNAL-LINKS:INSERT (доп. якоря — см. комментарии в теле лонгрида) -->
 
 </main>
