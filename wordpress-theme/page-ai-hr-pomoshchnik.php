@@ -2344,7 +2344,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div><!-- /.vna-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$aihr_page_url = trailingslashit( get_permalink() );
+$aihr_site_url = trailingslashit( home_url( '/' ) );
+$aihr_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$aihr_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $aihr_site_url . '#organization',
+      'name'  => $aihr_brand,
+      'url'   => $aihr_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $aihr_site_url . '#website',
+      'url'       => $aihr_site_url,
+      'name'      => $aihr_brand,
+      'publisher' => [ '@id' => $aihr_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $aihr_page_url . '#webpage',
+      'url'         => $aihr_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $aihr_site_url . '#website' ],
+      'about'       => [ '@id' => $aihr_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $aihr_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $aihr_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $aihr_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $aihr_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $aihr_page_url,
+      'provider'    => [ '@id' => $aihr_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $aihr_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai hr помощник в нашей компании?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Аудит → eval-набор → подготовка базы → RAG → пилот → масштабирование. Срок 4–8 недель.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит ai hr помощник?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 180–500 тыс. ₽ под ключ. Точная цена — после аудита. Первый шаг бесплатный.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли бот HR-отдел?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. Бот снимает рутину. 44% предпочитают человека по компенсации — встроена эскалация.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как вы защищаете от галлюцинаций?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Approved docs, цитаты, confidence threshold, deny-lists, regression-тесты. При низкой уверенности — отказ.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты на нашей стороне?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. Nero Network делает интеграции. От вас — регламенты, доступы, участие HR в eval.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'При 15–20+ повторяющихся HR-вопросах в месяц — да. Оптимум от 50 сотрудников.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли интегрировать с 1С и CRM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да: Bitrix24, amoCRM, Jira, 1С:ЗУП через API. Персональные расчёты — не через LLM.' ] ],
+        [ '@type' => 'Question', 'name' => 'Где хранятся данные и 152-ФЗ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Облако РФ или on-prem. ПДн в промпт не передаются. Диалоги шифруются.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что если регламенты в разных файлах?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Discovery включает нормализацию. Настраиваем versioning и re-index при изменениях.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как измерить успех внедрения?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'KPI: deflection, time-to-answer, CSAT, % citation, repeat usage, пробелы в базе.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $aihr_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 
 </main>
 
