@@ -1175,7 +1175,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
 
       <p class="nero-ai-reveal"><strong>AI-анализ P&amp;L</strong> — это не «загрузил PDF — получил магию». Типовой пайплайн:</p>
-      <p class="pnl-code-inline nero-ai-reveal" style="display:block;padding:14px 18px;margin:16px 0;line-height:1.6;">загрузка отчёта / синхронизация из 1С → нормализация статей → сравнение план-факт / период-к-периоду → поиск аномалий → прогноз ДДС (7–13 недель) → текстовый executive summary → алерт в Telegram/email</p>
+      <p class="pnl-code-inline nero-ai-reveal" style="display:block;padding:14px 18px;margin:16px 0;line-height:1.6;">загрузка отчёта / <a href="/ai-1c-erp/">подключение AI к 1С и ERP</a> → нормализация статей → сравнение план-факт / период-к-периоду → поиск аномалий → прогноз ДДС (7–13 недель) → текстовый executive summary → алерт в Telegram/email</p>
 
       <p class="nero-ai-reveal">Принцип <strong>«math outside LLM»</strong> — расчёты в коде и учётной системе, LLM только интерпретирует. Как отмечают практики Infostart и Yandex Cloud: <em>«ИИ раскрывается не на сырых данных, а на подготовленной модели»</em>.</p>
 
@@ -1388,7 +1388,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         <div class="pnl-card">
           <h3>Форматы отчётов МСБ</h3>
-          <p>1С (OData/REST), Excel, Google Sheets, Power BI, Yandex DataLens, Adesk, Финтабло, amoCRM, Bitrix24. Сначала витрина, потом AI — как в связке Yandex Cloud 1С + DataLens + Нейроаналитик.</p>
+          <p>1С (OData/REST), Excel, Google Sheets, Power BI, Yandex DataLens, Adesk, Финтабло, <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a>, Bitrix24. Сначала витрина, потом AI — как в связке Yandex Cloud 1С + DataLens + Нейроаналитик.</p>
         </div>
       </div>
 
@@ -1427,6 +1427,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </table>
       </div>
 
+      <p class="nero-ai-reveal">На этапе аудита часто всплывают «теневые» источники: счета и заявки из почты, не попавшие в CRM. Для их нормализации до витрины P&amp;L подойдёт <a href="/vnedrenie-ai-obrabotka-email-crm/">автоматизация входящей почты в CRM</a> — так дебиторка и ДДС собираются в одном контуре.</p>
+
       <div class="pnl-pipeline nero-ai-reveal" aria-label="Пайплайн внедрения">
         <div class="pnl-pipe-step"><strong>1</strong>Сбор данных</div>
         <div class="pnl-pipe-step"><strong>2</strong>Нормализация</div>
@@ -1436,8 +1438,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="pnl-pipe-step"><strong>6</strong>Контроль</div>
         <div class="pnl-pipe-step"><strong>7</strong>Итерация</div>
       </div>
-
-      <p class="nero-ai-reveal">Перекрёстные решения Nero Network: <a href="/vnedrenie-ai-amocrm/">внедрение AI в amoCRM</a> и <a href="/ai-1c-erp/">AI-агент для 1С и ERP</a> — единая экосистема автоматизации.</p>
 
       <aside class="ym-cta-block ym-cta-block--secondary" id="cta-obuchenie">
         <div class="ym-cta-block__body">
@@ -1503,7 +1503,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="pnl-case-grid nero-ai-reveal">
         <div class="pnl-case-card"><div class="pnl-case-tag">МСБ</div><h3>AI анализ P&amp;L для малого бизнеса</h3><p>Кастомный Excel/1С, несколько юрлиц, интеграция с CRM — когда SaaS не гибок. Референс COMANDOS: полный прогон месяца ~10 минут.</p></div>
         <div class="pnl-case-card"><div class="pnl-case-tag">Средний бизнес</div><h3>Производство, Челябинск</h3><p>1С + банки + Excel: закрытие месяца с 12 до ~5 дней (−60%), ошибки сверки 8–12% → 1,5%. *Маркетинговый материал интегратора.*</p></div>
-        <div class="pnl-case-card"><div class="pnl-case-tag">Метрики</div><h3>Типовой эффект</h3><p>Комментарий к отчёту: часы → минуты. Точность категоризации ДДС &gt;90% (On + Palm AI). McKinsey: 37% компаний фиксируют вклад в EBIT.</p></div>
+        <div class="pnl-case-card"><div class="pnl-case-tag">Метрики</div><h3>Типовой эффект</h3><p>Комментарий к отчёту: часы → минуты. Точность категоризации ДДС &gt;90% (On + Palm AI). McKinsey: 37% компаний фиксируют вклад в EBIT; для сравнения с крупным корпоративным опытом — <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">уроки масштабного внедрения AI от KPMG</a>.</p></div>
       </div>
 
       <div class="pnl-table-wrap nero-ai-reveal" style="margin-top:28px;">
@@ -1658,8 +1658,69 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$pnl_page_url = trailingslashit( get_permalink() );
+$pnl_site_url = trailingslashit( home_url( '/' ) );
+$pnl_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$pnl_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $pnl_site_url . '#organization',
+			'name'  => $pnl_brand,
+			'url'   => $pnl_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $pnl_site_url . '#website',
+			'url'       => $pnl_site_url,
+			'name'      => $pnl_brand,
+			'publisher' => [ '@id' => $pnl_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $pnl_page_url . '#webpage',
+			'url'         => $pnl_page_url,
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $pnl_site_url . '#website' ],
+			'about'       => [ '@id' => $pnl_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $pnl_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $pnl_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $pnl_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $pnl_page_url . '#service',
+			'name'        => $page_seo_title,
+			'description' => $page_seo_description,
+			'url'         => $pnl_page_url,
+			'provider'    => [ '@id' => $pnl_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'FAQPage',
+			'@id'   => $pnl_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить AI-анализ P&L?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Оставьте заявку или загрузите отчёт для разбора одного управленческого отчёта. Nero проводит аудит, строит витрину, подключает AI-слой и алерты. Срок — 4–8 недель. Программист на вашей стороне не обязателен.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько стоит AI-анализ P&L?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир: 250 тыс.–1 млн ₽ за проект под ключ. Точная смета — после аудита отчётов и карты интеграций. Пилот возможен от нижней границы диапазона.' ] ],
+				[ '@type' => 'Question', 'name' => 'Нужны ли программисты в компании?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. Ai анализ p&l без программиста — стандартная модель: разработку выполняет Nero Network. От вас — доступы, отчёты, участие финдира в согласовании справочников.' ] ],
+				[ '@type' => 'Question', 'name' => 'С какими системами интегрируется решение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '1С (OData/REST), банки (API), amoCRM, Bitrix24, Excel, Google Sheets, Power BI, Yandex DataLens, Adesk, Финтабло, Telegram, email.' ] ],
+				[ '@type' => 'Question', 'name' => 'Можно ли начать с разбора одного отчёта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Разбор одного управленческого отчёта — бесплатный лид-магнит: оценка качества данных, демо AI-summary, рекомендации по внедрению. Подходят P&L, ДДС или связка за 1–3 месяца.' ] ],
+				[ '@type' => 'Question', 'name' => 'Работает ли решение без 1С?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Достаточно Excel/Google Sheets + банковская выписка для старта. 1С ускоряет автоматизацию, но не обязательна.' ] ],
+				[ '@type' => 'Question', 'name' => 'Чем это отличается от Финтабло или Adesk?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'SaaS ведёт учёт и даёт базовую аналитику. Nero — AI-слой поверх ваших систем: глубокая интеграция с кастомной 1С, CRM, legacy Excel.' ] ],
+				[ '@type' => 'Question', 'name' => 'AI не ошибается в цифрах?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Расчёты выполняются в 1С или детерминированном коде. LLM только интерпретирует проверенные агрегаты — защита от галлюцинаций. Финдир утверждает финальный текст.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $pnl_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
