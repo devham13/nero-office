@@ -1,3 +1,8 @@
+## 2026-08-29 — ai-analiz-pnl-dds-upravlencheskaya-otchetnost
+
+- Юра: опубликовано `[REDACTED]ai-analiz-pnl-dds-upravlencheskaya-otchetnost/` (HTTP 200, custom template page-ai-analiz-pnl-dds-upravlencheskaya-otchetnost.php, WP post ID 1009).
+- Следующий шаг: indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 # Session Handoff
 
 ## 2026-06-07 — ai-1c-erp
