@@ -12,13 +12,16 @@ add_filter( 'document_title_parts', static function ( array $parts ) use ( $page
 	return $parts;
 }, 20 );
 
-add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_description ): void {
+$page_canonical_url = 'https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/';
+
+add_action( 'wp_head', static function () use ( $page_seo_title, $page_seo_description, $page_canonical_url ): void {
+	echo '<link rel="canonical" href="' . esc_url( $page_canonical_url ) . '" />' . "\n";
 	echo '<meta name="description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
 	echo '<meta property="og:title" content="' . esc_attr( $page_seo_title ) . '" />' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( $page_seo_description ) . '" />' . "\n";
-	echo '<meta property="og:url" content="' . esc_url( get_permalink() ) . '" />' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $page_canonical_url ) . '" />' . "\n";
 	echo '<meta property="og:type" content="article" />' . "\n";
-}, 1 );
+}, 0 );
 
 $brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret
 
@@ -1500,7 +1503,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
 
       <div class="vpc-timeline nero-ai-reveal">
-        <div class="vpc-tl-item"><span class="vpc-tl-dot"></span><h3>Сбор данных</h3><p>1С, банк, CRM, налоговый календарь — ночной или часовой синк.</p></div>
+        <div class="vpc-tl-item"><span class="vpc-tl-dot"></span><h3>Сбор данных</h3><p>1С, банк, CRM, налоговый календарь — ночной или часовой синк. Входящие заявки из почты можно автоматизировать через <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработку email в CRM</a>.</p></div>
         <div class="vpc-tl-item"><span class="vpc-tl-dot"></span><h3>Базовый календарь</h3><p>ФОТ, аренда, налоги + плановые из заявок и договоров.</p></div>
         <div class="vpc-tl-item"><span class="vpc-tl-dot"></span><h3>AI-прогноз AR</h3><p>Дата = срок по договору + медианная задержка ± доверительный интервал.</p></div>
         <div class="vpc-tl-item"><span class="vpc-tl-dot"></span><h3>Детекция разрыва</h3><p>Rolling balance; флаг при пересечении нуля или минимального остатка.</p></div>
@@ -1561,7 +1564,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="vpc-int-badge">Google Sheets / DataLens</span>
       </div>
       <div class="vpc-card nero-ai-reveal">
-        <p>Штатный календарь 1С:ERP не прогнозирует просрочки дебиторки. <!-- INTERNAL-LINKS:INSERT --> Смежная услуга — <a href="/ai-1c-erp/">AI-агент для 1С/ERP</a> (документооборот и заявки); здесь фокус — <strong>прогноз, календарь, разрывы, сценарии</strong>.</p>
+        <p>Штатный календарь 1С:ERP не прогнозирует просрочки дебиторки. Смежная услуга — <a href="/ai-1c-erp/">AI-агент для 1С/ERP</a> (документооборот и заявки); здесь фокус — <strong>прогноз, календарь, разрывы, сценарии</strong>.</p>
+        <p>Прогноз поступлений из воронки CRM опирается на сделки и этапы — помогает <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM под ключ</a>.</p>
       </div>
     </div>
   </section>
@@ -1675,7 +1679,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Как внедрить AI-платёжный календарь?</div><div class="vpc-faq-a">Диагностика → пилот на одном юрлице → AI-слой и алерты → governance → масштабирование. Nero Network ведёт интеграции; от клиента — доступы и 6–12 месяцев выписок.</div></div>
         <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Сколько стоит?</div><div class="vpc-faq-a">Ориентир 250 тыс.–1 млн ₽. Точная смета — после аудита. AI-слой может работать поверх PlanFact/Финолог.</div></div>
         <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Можно ли без программиста?</div><div class="vpc-faq-a">Да. Интеграции выполняет Nero Network. IT нужен для доступов к 1С и банку.</div></div>
-        <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Как связать с CRM и 1С?</div><div class="vpc-faq-a">OData/обмен 1С, API amoCRM/Битрикс24. CRM — pipeline для прогноза; 1С — дебиторка и заявки. Подробнее — <a href="/ai-1c-erp/">AI-агент для 1С</a>.</div></div>
+        <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Как связать с CRM и 1С?</div><div class="vpc-faq-a">OData/обмен 1С, API amoCRM/Битрикс24. CRM — pipeline для прогноза; 1С — дебиторка и заявки. Подробности по связкам — в блоке «Интеграции» выше.</div></div>
         <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Насколько безопасно доверять AI перенос платежей?</div><div class="vpc-faq-a">AI не подписывает платёжки. Критические платежи не переносятся автоматически. Все решения — в audit log.</div></div>
         <div class="vpc-faq-item"><div class="vpc-faq-q" role="button" tabindex="0">Подходит ли для производства и опта?</div><div class="vpc-faq-a">Да: производство — закупки + ФОТ + отгрузки; опт — длинная дебиторка, сезонность, мультибанк.</div></div>
       </div>
@@ -1808,7 +1812,123 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.meta-journal.ru//#organization",
+      "name": "Nero Network",
+      "url": "https://www.meta-journal.ru/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.meta-journal.ru//#website",
+      "url": "https://www.meta-journal.ru/",
+      "name": "Nero Network",
+      "publisher": {
+        "@id": "https://www.meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/#webpage",
+      "url": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/",
+      "name": "AI-платёжный календарь: внедрение под ключ и контроль кассовых разрывов",
+      "description": "Внедрение AI-платёжного календаря: прогноз платежей, раннее обнаружение кассовых разрывов, сценарии переноса.",
+      "isPartOf": {
+        "@id": "https://www.meta-journal.ru//#website"
+      },
+      "about": {
+        "@id": "https://www.meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://www.meta-journal.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI-платёжный календарь: внедрение под ключ и контроль кассовых разрывов",
+          "item": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/#service",
+      "name": "AI-платёжный календарь: внедрение под ключ и контроль кассовых разрывов",
+      "description": "Внедрение AI-платёжного календаря: прогноз платежей, раннее обнаружение кассовых разрывов, сценарии переноса.",
+      "url": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/",
+      "provider": {
+        "@id": "https://www.meta-journal.ru//#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-platezhnyi-kalendar/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как внедрить AI-платёжный календарь?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Аудит, интеграция, пилот, масштабирование."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько стоит?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "От 250 тыс. до 1 млн ₽ в зависимости от интеграций."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли без программиста?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, внедрение под ключ."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как связать с CRM и 1С?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Через API и готовые коннекторы."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Насколько безопасно доверять AI перенос платежей?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Human-in-the-loop и audit log."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Подходит ли для производства и опта?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, для SMB, производства и опта."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <script>
 (function(){
