@@ -641,7 +641,9 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="apo-cnt apo-related-block nero-ai-reveal" style="padding-bottom:clamp(24px,3vw,40px);">
+    <p style="max-width:820px;margin:0 auto;font-size:15px;text-align:center;line-height:1.72;">McKinsey называет supply chain «узким местом» AI: 88% компаний экспериментируют, но только 19% масштабируют. На корпоративном уровне полезно посмотреть опыт <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="apo-link">KPMG и Claude — уроки AI для бизнеса</a> — managed-агенты и human-in-the-loop применимы и к закупочным регламентам.</p>
+  </div>
 
   <!-- H2-1 -->
   <section class="apo-section" id="bol">
@@ -1059,7 +1061,8 @@ nav[aria-label="Хлебные крошки"],
         <p><strong>Интеграция AI прогноз остатков</strong> — ключевой фактор ROI: прогноз должен возвращаться туда, где живут закупки.</p>
       </div>
 
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="apo-related nero-ai-reveal" style="margin-bottom:16px;font-size:15px;max-width:820px;margin-left:auto;margin-right:auto;">Прогноз остатков часто нужно довести до закупщика через CRM — задачи, алерты, согласование отклонений. Для amoCRM и Bitrix24 готов отдельный контур: <a href="/vnedrenie-ai-amocrm/" class="apo-link">внедрение AI-агента в amoCRM под ключ</a>.</p>
+      <p class="apo-related nero-ai-reveal" style="margin-bottom:28px;font-size:15px;max-width:820px;margin-left:auto;margin-right:auto;">Если заявки поставщикам и уточнения по lead time идут из почты, triage и маршрутизация описаны в материале про <a href="/vnedrenie-ai-obrabotka-email-crm/" class="apo-link">AI-обработку входящей почты в CRM</a>.</p>
 
       <div class="apo-grid-2 nero-ai-reveal">
         <div class="apo-card">
@@ -1278,7 +1281,82 @@ nav[aria-label="Хлебные крошки"],
 </div><!-- /.apo-content -->
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apo_page_url = trailingslashit( get_permalink() );
+$apo_site_url = trailingslashit( home_url( '/' ) );
+$apo_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$apo_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $apo_site_url . '#organization',
+      'name'  => $apo_brand,
+      'url'   => $apo_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $apo_site_url . '#website',
+      'url'       => $apo_site_url,
+      'name'      => $apo_brand,
+      'publisher' => [ '@id' => $apo_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $apo_page_url . '#webpage',
+      'url'         => $apo_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $apo_site_url . '#website' ],
+      'about'       => [ '@id' => $apo_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $apo_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apo_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $apo_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $apo_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $apo_page_url,
+      'provider'    => [ '@id' => $apo_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $apo_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Нужны ли программисты на стороне клиента?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет, в типовом сценарии. Nero Network настраивает интеграцию и передаёт дашборд. Программист нужен только при нестандартной конфигурации 1С без обмена.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько истории продаж нужно для старта?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Минимум 6 месяцев, оптимально 12–24 месяца по SKU × склад. Для новинок — правила cold start.' ] ],
+        [ '@type' => 'Question', 'name' => 'Можно ли начать с одного склада или категории?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, рекомендуемый пилот — 50–500 SKU, один склад или категория. Масштабирование после проверки метрик.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI прогноз остатков в CRM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Прогноз и черновики идут в 1С/МойСклад; CRM получает задачи закупщику и алерты. amoCRM, Bitrix24 через API или Make/n8n.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем кастом «под ключ» отличается от SaaS?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'SaaS ограничен в кастомных ограничениях и нестандартных контурах. Кастом окупается, когда стоимость ошибки закупки выше стоимости проекта (300 тыс.–1,5 млн ₽).' ] ],
+        [ '@type' => 'Question', 'name' => 'SaaS дешевле — зачем кастом?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'SaaS не закроет нестандартные договоры, два контура учёта, связку маркетплейсы + производство.' ] ],
+      ],
+    ],
+    [
+      '@type'       => 'HowTo',
+      '@id'         => $apo_page_url . '#howto',
+      'name'        => 'Внедрение AI-прогноза остатков под ключ',
+      'description' => 'Этапы внедрения AI-прогноза остатков и заявок на закупку: от аудита 50 SKU до MLOps.',
+      'step'        => [
+        [ '@type' => 'HowToStep', 'position' => 1, 'name' => 'Аудит 50 SKU', 'text' => 'Таблица рисков, оценка качества данных. Срок: 7–10 дней.' ],
+        [ '@type' => 'HowToStep', 'position' => 2, 'name' => 'Data pipeline', 'text' => 'ETL: продажи, остатки, промо, lead time. Срок: 2–3 недели.' ],
+        [ '@type' => 'HowToStep', 'position' => 3, 'name' => 'ML-прогноз', 'text' => 'Модели по кластерам SKU, метрики WAPE/bias. Срок: 2–4 недели.' ],
+        [ '@type' => 'HowToStep', 'position' => 4, 'name' => 'Модуль заявок', 'text' => 'Черновик заказа в 1С/CRM с 10 ограничениями. Срок: 2–3 недели.' ],
+        [ '@type' => 'HowToStep', 'position' => 5, 'name' => 'Оповещения', 'text' => 'Telegram/email при риске дефицита. Срок: 1–2 недели.' ],
+        [ '@type' => 'HowToStep', 'position' => 6, 'name' => 'MLOps', 'text' => 'Переобучение, мониторинг деградации. Срок: ongoing.' ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $apo_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 </main>
 
