@@ -718,7 +718,7 @@ nav[aria-label="Хлебные крошки"],
         </table>
       </div>
       <p class="aipk-source nero-ai-reveal">Источник ориентиров: <a href="https://inner.su/articles/stoimost-prostoya-bez-avtomatiki-roi-modernizatsii-proizvodstva-2025/" target="_blank" rel="noopener noreferrer">inner.su, июнь 2025</a>. Методика расчёта ущерба: <a href="https://sveto-copy.com/skolko-stoit-chas-prostoya-proizvodstva-metodika-rascheta-ubytkov-i-vybor-rezervnoj-moshhnosti.html" target="_blank" rel="noopener noreferrer">sveto-copy.com</a>.</p>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal">Если план смены собирается из входящих заявок, имеет смысл заранее автоматизировать их приём: <a href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>">AI-обработка входящей почты в CRM</a> сокращает задержку между заказом и выдачей сменного задания на участок.</p>
       <p class="nero-ai-reveal"><strong>Итог:</strong> если простой фиксируется на следующий день, вы теряете не только деньги за час остановки, но и возможность среагировать в смене. AI-агент не отменяет поломку — но сокращает «слепой» простой и время на сбор отчёта.</p>
     </div>
   </section>
@@ -1056,16 +1056,15 @@ nav[aria-label="Хлебные крошки"],
           <h3>Связка со сменными заданиями и MES/ERP</h3>
           <p><strong>Интеграция ai производство контроль</strong> — API-прослойка: AI не бьёт в транзакционную шину ERP (<a href="https://oborot.ru/blogs/legacy-sistemy-protiv-ii-kak-integrirovat-avtonomnyh-agentov-v-samopisnye-erp-i-mes-dvadcatiletnej-davnosti-i270679.html" target="_blank" rel="noopener noreferrer">Oborot.ru</a>).</p>
           <ul>
-            <li><strong>ERP:</strong> 1С:УПП, 1С:ERP, Excel/Google Sheets;</li>
+            <li><strong>ERP:</strong> <a href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>">AI-агент для 1С и ERP</a>, 1С:УПП, 1С:ERP, Excel/Google Sheets;</li>
             <li><strong>Планирование:</strong> агенты MBS Group в 1С (<a href="https://mbsgroup.ru/ai/1c/proizvodstvo-planirovanie/optimizator-proizvodstvennogo-raspisaniya/" target="_blank" rel="noopener noreferrer">mbsgroup.ru</a>);</li>
             <li><strong>MES:</strong> ENGINE, TAP MES — опционально, фаза 2+;</li>
             <li><strong>Автоматизация:</strong> n8n / Make; <strong>LLM:</strong> YandexGPT / GigaChat / OpenAI.</li>
           </ul>
         </div>
         <div class="aipk-card">
-          <!-- INTERNAL-LINKS:INSERT -->
           <h3>Telegram для мастеров смен и дашборд для руководителя</h3>
-          <p><strong>AI производство контроль в CRM</strong> актуален, когда заказы из amoCRM или Bitrix24. Для мастера — Telegram: 2–3 кнопки, голосовой ввод причины простоя. Для директора — дашборд OEE, топ-причины потерь, вопросы агенту по данным смены.</p>
+          <p><strong>AI производство контроль в CRM</strong> актуален, когда заказы из amoCRM или Bitrix24 — см. <a href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>">интеграция AI с amoCRM под ключ</a>. Для мастера — Telegram: 2–3 кнопки, голосовой ввод причины простоя. Для директора — дашборд OEE, топ-причины потерь, вопросы агенту по данным смены.</p>
         </div>
       </div>
     </div>
@@ -1241,7 +1240,132 @@ nav[aria-label="Хлебные крошки"],
 </div><!-- /.aipk-content -->
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$schema_origin = trailingslashit(home_url());
+$schema_page_url = trailingslashit(home_url('/ai-proizvodstvo-kontrol-prostoev/'));
+$schema_org_id = $schema_origin . '#organization';
+$schema_website_id = $schema_origin . '#website';
+$schema_webpage_id = $schema_page_url . '#webpage';
+$schema_h1 = 'AI-агент для сменных заданий и контроля простоев: внедрение под ключ';
+$schema_graph = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'Organization',
+            '@id' => $schema_org_id,
+            'name' => $brand ?: 'Nero Network',
+            'url' => $schema_origin,
+        ],
+        [
+            '@type' => 'WebSite',
+            '@id' => $schema_website_id,
+            'url' => $schema_origin,
+            'name' => $brand ?: 'Nero Network',
+            'publisher' => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type' => 'WebPage',
+            '@id' => $schema_webpage_id,
+            'url' => $schema_page_url,
+            'name' => $schema_h1,
+            'description' => $page_seo_description,
+            'isPartOf' => ['@id' => $schema_website_id],
+            'about' => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $schema_page_url . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Главная',
+                    'item' => $schema_origin,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => $schema_h1,
+                    'item' => $schema_page_url,
+                ],
+            ],
+        ],
+        [
+            '@type' => 'Service',
+            '@id' => $schema_page_url . '#service',
+            'name' => $schema_h1,
+            'description' => $page_seo_description,
+            'url' => $schema_page_url,
+            'provider' => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id' => $schema_page_url . '#faq',
+            'mainEntity' => [
+                [
+                    '@type' => 'Question',
+                    'name' => 'Как внедрить ai производство контроль',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => '1) Заявка на «Карту потерь». 2) Аудит 1 участка (1–2 нед.). 3) Пилот Telegram + дашборд (3–5 нед.). 4) Интеграция 1С/CRM. 5) Тираж и KPI. Программист на стороне заказчика не обязателен.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Можно ли начать без полной автоматизации цеха',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Да. Старт без датчиков: ручной ввод и чат. Датчики и MES — фаза 2.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Какие данные нужны агенту в первую неделю',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Участки и роли, план смены, справочник причин (10–20 поз.), нормативы операций, регламент сдачи факта, доступ к 1С/таблице.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Нужны ли датчики',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Нет на старте. Ручной ввод + Telegram закрывает 80% боли «поздняя фиксация».',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Заменит ли AI людей на смене',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Нет. Агент снимает рутину: сводки, напоминания, классификацию. Решения по останову и браку — за мастером.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Что если 1С старая',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'API-прослойка: файлы, REST, COM. AI при отключении не ломает учёт.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Сколько стоит и как считать эффект',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Ориентир Nero: 500 тыс.–2 млн ₽ за пилот. Эффект — через сокращение «слепого» простоя и времени отчёта, не через «+30% OEE за месяц».',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+?>
+<script type="application/ld+json">
+<?php echo wp_json_encode($schema_graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+</script>
 
 </main>
 
