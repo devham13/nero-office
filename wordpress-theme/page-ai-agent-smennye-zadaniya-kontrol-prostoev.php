@@ -1441,7 +1441,8 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <p class="nero-ai-reveal asz-related" style="margin:0 auto 24px;max-width:var(--asz-max,960px);padding:0 20px;font-size:15px">Когда план смены берётся из учётной системы, агент логично стыковать с ERP: смежный разбор — <a href="/ai-1c-erp/">внедрение AI-агента для 1С и ERP под ключ</a> — показывает, как заказы и номенклатура попадают в производственный контур без двойного ввода.</p>
+
   <section class="asz-section asz-section-alt" id="karta-poter">
     <div class="asz-cnt">
       <div class="asz-sh nero-ai-reveal">
@@ -1564,7 +1565,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="asz-grid-2 nero-ai-reveal" style="margin-top:28px">
         <div class="asz-card">
           <h3 id="integracii-crm">ai производство контроль интеграция crm</h3>
-          <p>Если заказы приходят через Bitrix24 или amoCRM — агент читает приоритеты из CRM и связывает их с планом смены. <strong>ai производство контроль в CRM</strong> — не замена ERP, а синхронизация коммерческого и производственного контура.</p>
+          <p>Если заказы приходят через Bitrix24 или amoCRM — агент читает приоритеты из CRM и связывает их с планом смены. Подробнее про <a href="/vnedrenie-ai-amocrm/">внедрение AI-агента в amoCRM</a> — отдельная посадочная; здесь <strong>ai производство контроль в CRM</strong> — не замена ERP, а синхронизация коммерческого и производственного контура.</p>
         </div>
         <div class="asz-card">
           <h3 id="integracii-oee">OEE и датчики без замены всей MES</h3>
@@ -1716,7 +1717,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="asz-sh nero-ai-reveal">
         <span class="asz-eyebrow">Тренд 2026</span>
         <h2>Agentic AI на производстве: тренд 2026 и риски</h2>
-        <p>Рынок хочет agentic AI, но отменяет проекты без governance. Это не противоречие — это фильтр.</p>
+        <p>Рынок хочет agentic AI, но отменяет проекты без governance. На фоне <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">масштабного внедрения AI в крупном бизнесе</a> это не противоречие — это фильтр зрелости проекта.</p>
       </div>
 
       <div class="asz-gartner nero-ai-reveal" aria-label="Прогноз Gartner">
@@ -1740,7 +1741,8 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <p class="nero-ai-reveal asz-related" style="margin:0 auto 24px;max-width:var(--asz-max,960px);padding:0 20px;font-size:15px">Если отчёты руководителю идут из почтового потока, а не только из чата смены, полезно сравнить с <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработкой входящей почты в CRM</a> — как автоматизируют заявки до попадания в учёт и производственный план.</p>
+
   <section class="asz-section asz-section-alt" id="faq">
     <div class="asz-cnt">
       <div class="asz-sh nero-ai-reveal">
@@ -1795,7 +1797,116 @@ document.addEventListener("DOMContentLoaded", function () {
   </section>
 
 </div><!-- /.asz-content -->
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$nero_schema_origin   = untrailingslashit( home_url( '/' ) );
+$nero_schema_page_url = trailingslashit( get_permalink() );
+$nero_schema_h1       = 'AI-агент для сменных заданий и контроля простоев: внедрение под ключ';
+$nero_schema_org_id   = $nero_schema_origin . '/#organization';
+$nero_schema_site_id  = $nero_schema_origin . '/#website';
+$nero_schema_web_id   = $nero_schema_page_url . '#webpage';
+$nero_schema_faq      = [
+	[
+		'question' => 'Как внедрить ai производство контроль без программиста?',
+		'answer'   => 'На пилоте программист на стороне заказчика не нужен. Нужны: мастер смены, контакт IT для доступа к 1С, директор для KPI. Excel на старте — допустимый источник данных.',
+	],
+	[
+		'question' => 'Сколько стоит ai производство контроль для малого бизнеса?',
+		'answer'   => 'Ориентир 500 тыс.–2 млн ₽ за пилот с интеграцией 1С и одной линией. Узкая задача без ERP — от 100–500 тыс. ₽ по рынку.',
+	],
+	[
+		'question' => 'Чем AI-агент отличается от MES?',
+		'answer'   => 'MES — полноценная система: дорого, долго. AI-агент — лёгкий слой для сменного задания, фиксации простоев и отчёта. MES можно подключить на этапе 2.',
+	],
+	[
+		'question' => 'Заменит ли агент мастера смены?',
+		'answer'   => 'Нет. Агент ускоряет планирование и фиксацию; мастер подтверждает задания и классифицирует спорные простои.',
+	],
+	[
+		'question' => 'Нужны ли датчики на старте?',
+		'answer'   => 'Нет. Факт смены — ручной ввод через Telegram. Датчики — опционально после пилота.',
+	],
+	[
+		'question' => 'Как быть с 152-ФЗ и on-premise?',
+		'answer'   => 'Возможны on-premise, локальные LLM (GigaChat), хранение логов на серверах заказчика. Обсуждается на аудите.',
+	],
+	[
+		'question' => 'ai производство контроль примеры внедрения — где смотреть?',
+		'answer'   => 'Смежные кейсы: ФосАгро, Noltis, MBS, Bosch Shopfloor Agent. Для МСБ — пилот с измеримым KPI, а не копирование чужого пресс-релиза.',
+	],
+];
+$nero_schema_faq_entities = [];
+foreach ( $nero_schema_faq as $nero_schema_item ) {
+	$nero_schema_faq_entities[] = [
+		'@type'          => 'Question',
+		'name'           => $nero_schema_item['question'],
+		'acceptedAnswer' => [
+			'@type' => 'Answer',
+			'text'  => $nero_schema_item['answer'],
+		],
+	];
+}
+$nero_schema_graph = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $nero_schema_org_id,
+			'name'  => $brand,
+			'url'   => trailingslashit( $nero_schema_origin ),
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $nero_schema_site_id,
+			'url'       => trailingslashit( $nero_schema_origin ),
+			'name'      => $brand,
+			'publisher' => [ '@id' => $nero_schema_org_id ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $nero_schema_web_id,
+			'url'         => $nero_schema_page_url,
+			'name'        => $nero_schema_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $nero_schema_site_id ],
+			'about'       => [ '@id' => $nero_schema_org_id ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $nero_schema_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[
+					'@type'    => 'ListItem',
+					'position' => 1,
+					'name'     => 'Главная',
+					'item'     => trailingslashit( $nero_schema_origin ),
+				],
+				[
+					'@type'    => 'ListItem',
+					'position' => 2,
+					'name'     => $nero_schema_h1,
+					'item'     => $nero_schema_page_url,
+				],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $nero_schema_page_url . '#service',
+			'name'        => $nero_schema_h1,
+			'description' => $page_seo_description,
+			'url'         => $nero_schema_page_url,
+			'provider'    => [ '@id' => $nero_schema_org_id ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $nero_schema_page_url . '#faq',
+			'mainEntity' => $nero_schema_faq_entities,
+		],
+	],
+];
+?>
+<script type="application/ld+json">
+<?php echo wp_json_encode( $nero_schema_graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+</script>
 
 </main>
 
