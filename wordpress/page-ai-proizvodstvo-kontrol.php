@@ -419,7 +419,7 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
     <div class="apkc-def-block nero-ai-reveal">
       <p><strong>AI производство контроль</strong> — надстройка над процессами цеха, а не замена MES «с нуля» и не абстрактный чат-бот. AI-агент:</p>
       <ol>
-        <li>Формирует и обновляет <strong>сменные задания</strong> из плана (1С, ERP, MES-lite или ручной ввод мастера).</li>
+        <li>Формирует и обновляет <strong>сменные задания</strong> из плана (<a href="/ai-1c-erp/" style="color:var(--apkc-primary);text-decoration:underline;text-underline-offset:3px">1С и ERP с AI-агентом</a>, MES-lite или ручной ввод мастера).</li>
         <li>Собирает <strong>факт смены</strong> — планшеты, Telegram, терминалы, датчики, ручные отметки.</li>
         <li>Ведёт <strong>контроль простоев</strong>: фиксирует остановку и классифицирует причину.</li>
         <li>Формирует <strong>отчёт руководителю</strong> — сводка, топ-потери, рекомендации; критичное — в мессенджер.</li>
@@ -462,7 +462,8 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
 <section class="apkc-section" id="etapy">
   <div class="apkc-cnt">
     <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Под ключ</span><h2>Внедрение AI агентов в бизнес-процессы производства под ключ</h2>
-    <p>Внедрение ai в бизнес-процессы производства — проект с измеримыми этапами, а не бесконечный «пилот ради пилота». Так снижается риск попасть в прогноз Gartner об отмене agentic-проектов.</p></div>
+    <p>Внедрение ai в бизнес-процессы производства — проект с измеримыми этапами, а не бесконечный «пилот ради пилота». Так снижается риск попасть в прогноз Gartner об отмене agentic-проектов.</p>
+    <p class="nero-ai-reveal">Смежный контур — когда заявки приходят по почте и попадают в CRM до планирования смены: <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--apkc-primary);text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM</a> на отдельной посадочной.</p></div>
     <div class="apkc-table-wrap nero-ai-reveal">
       <table class="apkc-table">
         <thead><tr><th>Этап</th><th>Срок</th><th>Содержание</th><th>Результат</th></tr></thead>
@@ -496,7 +497,8 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
 <section class="apkc-section apkc-section-alt" id="integracii">
   <div class="apkc-cnt">
     <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Техника</span><h2>Интеграция AI производство контроль с ERP, MES, 1С и CRM</h2>
-    <p>Интеграция строится поверх того, что уже есть в цехе — принцип <strong>«MES-lite + AI-агент»</strong>, а не замена всей системы.</p></div>
+    <p>Интеграция строится поверх того, что уже есть в цехе — принцип <strong>«MES-lite + AI-агент»</strong>, а не замена всей системы.</p>
+    <p class="nero-ai-reveal">Опциональная связка с CRM — для статусов заказов и эскалаций: см. <a href="/vnedrenie-ai-amocrm/" style="color:var(--apkc-primary);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a> как соседний сценарий продаж и заявок.</p></div>
     <div class="apkc-table-wrap nero-ai-reveal">
       <table class="apkc-table">
         <thead><tr><th>Система</th><th>Роль</th><th>Подключение</th></tr></thead>
@@ -577,7 +579,7 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
     </div>
     <div class="apkc-card nero-ai-reveal" style="margin-top:20px">
       <h3>Прогноз Gartner — отмена проектов без измеримого контроля</h3>
-      <p><strong>Позиция Nero Network:</strong> не спорить с Gartner — использовать прогноз как аргумент для правильной архитектуры. Agentic-слой на смене должен логировать каждое решение; требовать подтверждения на критичных действиях; давать <strong>измеримый отчёт</strong> после каждой смены; начинаться с <strong>пилота на одной смене</strong>, а не с «автономного завода».</p>
+      <p><strong>Позиция Nero Network:</strong> не спорить с Gartner — использовать прогноз как аргумент для правильной архитектуры (на enterprise-масштабе те же риски разбирали в материале про <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--apkc-primary);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a>). Agentic-слой на смене должен логировать каждое решение; требовать подтверждения на критичных действиях; давать <strong>измеримый отчёт</strong> после каждой смены; начинаться с <strong>пилота на одной смене</strong>, а не с «автономного завода».</p>
     </div>
     <div class="apkc-quote nero-ai-reveal">«Most agentic AI projects right now are early stage experiments… often misapplied» — Anushree Verma, Gartner</div>
     <p class="nero-ai-reveal" style="text-align:center">Так <strong>ai производство контроль</strong> становится ответом на хайп, а не его копией.</p>
@@ -689,8 +691,73 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
 </div>
 <?php endif; ?>
 
-  <!-- INTERNAL-LINKS:INSERT -->
-  <!-- SCHEMA-MARKUP:INSERT -->
+  <!-- INTERNAL-LINKS: inserted inline — #kak-rabotaet, #etapy, #integracii, #agentic-ai -->
+  <?php
+  $apkc_page_url = trailingslashit( get_permalink() );
+  $apkc_site_url = trailingslashit( home_url( '/' ) );
+  $apkc_schema   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+      [
+        '@type' => 'Organization',
+        '@id'   => $apkc_site_url . '#organization',
+        'name'  => $brand,
+        'url'   => $apkc_site_url,
+      ],
+      [
+        '@type'     => 'WebSite',
+        '@id'       => $apkc_site_url . '#website',
+        'url'       => $apkc_site_url,
+        'name'      => $brand,
+        'publisher' => [ '@id' => $apkc_site_url . '#organization' ],
+      ],
+      [
+        '@type'      => 'WebPage',
+        '@id'        => $apkc_page_url . '#webpage',
+        'url'        => $apkc_page_url,
+        'name'       => "AI-агент для сменных заданий и контроля простоев: под ключ",
+        'description'=> "Внедрение AI-агента для сменных заданий и контроля простоев на производстве. Фиксация отклонений в реальном времени, отчёт руководителю. Под ключ — от 500 тыс. ₽.",
+        'isPartOf'   => [ '@id' => $apkc_site_url . '#website' ],
+        'about'      => [ '@id' => $apkc_site_url . '#organization' ],
+      ],
+      [
+        '@type'           => 'BreadcrumbList',
+        '@id'             => $apkc_page_url . '#breadcrumb',
+        'itemListElement' => [
+          [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apkc_site_url ],
+          [ '@type' => 'ListItem', 'position' => 2, 'name' => "AI-агент для сменных заданий и контроля простоев: под ключ", 'item' => $apkc_page_url ],
+        ],
+      ],
+      [
+        '@type'       => 'Service',
+        '@id'         => $apkc_page_url . '#service',
+        'name'        => "AI-агент для сменных заданий и контроля простоев: под ключ",
+        'description' => "Внедрение AI-агента для сменных заданий и контроля простоев на производстве. Фиксация отклонений в реальном времени, отчёт руководителю. Под ключ — от 500 тыс. ₽.",
+        'url'         => $apkc_page_url,
+        'provider'    => [ '@id' => $apkc_site_url . '#organization' ],
+      ],
+      [
+        '@type'      => 'FAQPage',
+        '@id'        => $apkc_page_url . '#faq',
+        'mainEntity' => [
+          [ '@type' => 'Question', 'name' => "Можно ли внедрить AI без программистов?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Да, со стороны заказчика. Интеграцию 1С, настройку агента и agentic-слой выполняет Nero Network. Нужен контакт — мастер или директор производства." ] ],
+          [ '@type' => 'Question', 'name' => "Как считается ROI от сокращения простоев?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "На пилоте фиксируем время от простоя до записи, часы по причинам, стоимость часа × часы. Отраслевые ориентиры 15–43% — только benchmark, не обещание." ] ],
+          [ '@type' => 'Question', 'name' => "Чем AI-агент отличается от цифровых сменных заданий?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "MES-lite выдаёт план по правилам. AI-агент добавляет пересчёт приоритетов при сбое, NLP-классификацию, эскалацию и отчёт на естественном языке." ] ],
+          [ '@type' => 'Question', 'name' => "Как внедрить ai производство контроль по шагам?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "1. Карта потерь (аудит). 2. Пилот 3–4 недели. 3. Интеграция 1С/MES. 4. Agentic-слой. 5. Масштабирование." ] ],
+          [ '@type' => 'Question', 'name' => "Сколько длится внедрение?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Пилот — 3–4 недели; полный контур — ориентир 2–4 месяца." ] ],
+          [ '@type' => 'Question', 'name' => "Подходит ли для малого бизнеса?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Да — основной сегмент: 5–20 РЦ, Telegram вместо тяжёлого MES, опора на 1С:УНФ/КА." ] ],
+          [ '@type' => 'Question', 'name' => "Нужны ли датчики и SCADA?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Нет для старта. Ручной ввод + планшет достаточны. Modbus — этап 2." ] ],
+          [ '@type' => 'Question', 'name' => "Что если уже есть 1С или MES-lite?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Агент надстраивается поверх существующих систем — не заменяет их." ] ],
+          [ '@type' => 'Question', 'name' => "Где посмотреть кейсы?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Прямых публичных кейсов ниши мало — показываем смежные внедрения и ваш пилот как первый измеримый кейс." ] ],
+          [ '@type' => 'Question', 'name' => "Сколько стоит ai производство контроль?", 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => "Ориентир Nero Network: 500 тыс.–2 млн ₽. Точная смета — после «Карты потерь»." ] ],
+        ],
+      ],
+    ],
+  ];
+  echo '<script type="application/ld+json">' . wp_json_encode( $apkc_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+  ?>
+
 
 </main>
 

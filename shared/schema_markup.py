@@ -68,9 +68,11 @@ def build_schema_graph(
     org_name = _org_name(organization_name)
     page_name = h1 or title
 
-    org_id = f"{origin}/#organization"
-    website_id = f"{origin}/#website"
-    webpage_id = f"{page_url}#webpage"
+    origin_base = origin.rstrip("/")
+    page_base = page_url.rstrip("/")
+    org_id = f"{origin_base}/#organization"
+    website_id = f"{origin_base}/#website"
+    webpage_id = f"{page_base}/#webpage"
 
     graph: list[dict[str, Any]] = [
         {
@@ -97,7 +99,7 @@ def build_schema_graph(
         },
         {
             "@type": "BreadcrumbList",
-            "@id": f"{page_url}#breadcrumb",
+            "@id": f"{page_base}/#breadcrumb",
             "itemListElement": [
                 {
                     "@type": "ListItem",
@@ -120,7 +122,7 @@ def build_schema_graph(
         graph.append(
             {
                 "@type": "Service",
-                "@id": f"{page_url}#service",
+                "@id": f"{page_base}/#service",
                 "name": page_name,
                 "description": description,
                 "url": page_url,
@@ -131,7 +133,7 @@ def build_schema_graph(
         graph.append(
             {
                 "@type": "Article",
-                "@id": f"{page_url}#article",
+                "@id": f"{page_base}/#article",
                 "headline": page_name,
                 "description": description,
                 "url": page_url,
@@ -158,7 +160,7 @@ def build_schema_graph(
             graph.append(
                 {
                     "@type": "FAQPage",
-                    "@id": f"{page_url}#faq",
+                    "@id": f"{page_base}/#faq",
                     "mainEntity": questions,
                 }
             )
