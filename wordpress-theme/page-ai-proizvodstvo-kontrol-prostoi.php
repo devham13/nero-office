@@ -1133,7 +1133,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="apk-step"><span class="apk-step-num">5</span><div><strong>Конец смены</strong><span>отчёт + briefing входящей смене</span></div></div>
         </div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <p class="nero-ai-reveal" style="margin-top:28px;max-width:820px;">На этапе сбора данных агент читает заказы и операции из учётной системы — по тому же принципу, что и при <a href="/ai-1c-erp/">внедрении AI-агента для 1С и ERP</a>: API или ODBC, human-in-the-loop на критичных шагах, без замены учётного контура.</p>
       <section id="ai-proizvodstvo-kontrol-prostoi-boris-block" class="apk-boris-root" aria-label="Анимация: сменный цикл AI-агента — от задания до отчёта руководителю">
 <style>
 /* === БОРИС: prefix apk-b-, scoped внутри #ai-proizvodstvo-kontrol-prostoi-boris-block === */
@@ -1863,7 +1863,71 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 <!-- INTERNAL-LINKS:INSERT -->
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apk_page_url = trailingslashit( get_permalink() );
+$apk_site_url = trailingslashit( home_url( '/' ) );
+$apk_page_h1  = 'AI-агент для производства: сменные задания и контроль простоев под ключ';
+$apk_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $apk_site_url . '#organization',
+			'name'  => $brand,
+			'url'   => $apk_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $apk_site_url . '#website',
+			'url'       => $apk_site_url,
+			'name'      => $brand,
+			'publisher' => [ '@id' => $apk_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $apk_page_url . '#webpage',
+			'url'         => $apk_page_url,
+			'name'        => $apk_page_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $apk_site_url . '#website' ],
+			'about'       => [ '@id' => $apk_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'BreadcrumbList',
+			'@id'   => $apk_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apk_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $apk_page_h1, 'item' => $apk_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $apk_page_url . '#service',
+			'name'        => $apk_page_h1,
+			'description' => $page_seo_description,
+			'url'         => $apk_page_url,
+			'provider'    => [ '@id' => $apk_site_url . '#organization' ],
+		],
+		[
+			'@type' => 'FAQPage',
+			'@id'   => $apk_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Нужен ли свой IT-отдел?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет для пилота. Nero Network берёт разработку и интеграцию. На стороне заказчика нужен владелец процесса — мастер или производственный директор.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как связать с 1С и ERP?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Агент читает документы через API или ODBC. Поддерживаются 1С:УНФ, КА, ERP. Агент — надстройка, не замена 1С.' ] ],
+				[ '@type' => 'Question', 'name' => 'Чем agentic AI отличается от «просто дашборда»?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Дашборд показывает цифры. Agentic AI собирает данные, предлагивает действия, генерирует отчёты. Критические решения — за человеком.' ] ],
+				[ '@type' => 'Question', 'name' => 'Нужны ли датчики на станках?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет для старта. Фиксация через Telegram-бот или планшет. Датчики — опция на этапе тиража.' ] ],
+				[ '@type' => 'Question', 'name' => 'Работает ли без 1С?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. План смены можно вести в Google Sheets или Excel — агент подключится к таблице.' ] ],
+				[ '@type' => 'Question', 'name' => 'Кто отвечает, если AI ошибся?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Агент не меняет план без подтверждения мастера. Ответственность — за человеком. Все действия логируются.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как соблюдается 152-ФЗ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Yandex GPT / GigaChat в облаке или on-premise. На тираже — развёртывание в контуре заказчика.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько времени до первого результата?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Карта потерь — 1–2 дня. Пилот на участке — 4–8 недель до рабочего контура на смене.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как заказать аудит и внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Оставьте заявку с CTA «Найти простои» — проведём экспресс-аудит и подготовим «Карту потерь производства».' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $apk_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 
 </main>
 
