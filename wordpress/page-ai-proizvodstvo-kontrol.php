@@ -148,20 +148,33 @@ body.nero-ai-landing{padding-top:0!important}
 .nero-ai-reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
 .nero-ai-reveal.nero-ai-active{opacity:1;transform:none}
 .apkc-hero-erp{min-height:100vh;min-height:100dvh;position:relative;display:flex;align-items:center;padding:clamp(80px,12vh,120px) 0}
+.apkc-hero-erp .nero-ai-live-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;background:rgba(34,197,94,.10);color:#bbf7d0;font-size:12px;font-weight:800}
+.apkc-hero-erp .nero-ai-live-pill::before{content:'';width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 6px rgba(34,197,94,.14);animation:apkcPulse 1.6s infinite}
+@keyframes apkcPulse{0%,100%{transform:scale(.86);opacity:.65}50%{transform:scale(1);opacity:1}}
+.apkc-hero-erp .apkc-dash-canvas-wrap{position:relative;height:clamp(160px,22vw,220px);margin:0 0 12px;border-radius:18px;overflow:hidden;border:1px solid rgba(121,242,255,.14);background:radial-gradient(ellipse at 50% 40%,rgba(121,242,255,.08),rgba(6,10,24,.9) 70%)}
+.apkc-hero-erp #apkc-hero-shift-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.apkc-callout{padding:18px 22px;border-radius:14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);margin:20px 0;font-size:14.5px;color:var(--apkc-soft)}
+.apkc-callout--benchmark{background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.25)}
+.apkc-def-block{padding:24px 28px;border-radius:18px;background:rgba(121,242,255,.06);border:1px solid rgba(121,242,255,.2);margin:24px 0}
+.apkc-def-block ol{margin:12px 0 0;padding-left:20px;color:var(--apkc-muted)}
+.apkc-def-block ol li{margin-bottom:8px;line-height:1.65}
+[data-nero-tooltip]{position:relative;cursor:help}
+[data-nero-tooltip]::after{content:attr(data-nero-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translate(-50%,4px);padding:8px 12px;border-radius:10px;background:#0f172a;color:#e2e8f0;font-size:11px;font-weight:600;line-height:1.4;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:5;border:1px solid rgba(121,242,255,.25)}
+[data-nero-tooltip]:hover::after,[data-nero-tooltip]:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page ai-proizvodstvo-kontrol-page" role="main" tabindex="-1">
 
-<!-- === ALINA (HERO) placeholder === -->
+<!-- === ALINA (HERO) === -->
 <section class="nero-ai-hero apkc-hero-erp" id="hero" aria-labelledby="apkc-hero-title">
   <div class="nero-ai-container nero-ai-hero-grid">
     <div class="nero-ai-hero-copy nero-ai-reveal">
       <p class="nero-ai-eyebrow"><?php echo esc_html($brand); ?> · производство и смены</p>
       <h1 id="apkc-hero-title">AI-агент для сменных заданий и контроля простоев: <span class="nero-ai-gradient-text">под ключ</span></h1>
-      <p class="nero-ai-hero-lead">Смена под контролем: AI фиксирует отклонения и простои до того, как они станут потерями</p>
+      <p class="nero-ai-hero-lead">Смена под контролем: AI фиксирует отклонения и простои в момент события — до того, как они превратятся в потери. Не «чёрный ящик», а проверяемый контроль: человек подтверждает критичные решения, руководитель видит картину в реальном времени.</p>
       <ul class="nero-ai-badges" aria-label="Ключевые теги">
         <li class="nero-ai-badge">Сменные задания</li><li class="nero-ai-badge">Контроль простоев</li>
-        <li class="nero-ai-badge">Human-in-the-loop</li><li class="nero-ai-badge">1С/MES</li>
+        <li class="nero-ai-badge">Human-in-the-loop</li><li class="nero-ai-badge">1С / MES</li>
         <li class="nero-ai-badge">Telegram</li><li class="nero-ai-badge">Под ключ</li>
       </ul>
       <div class="nero-ai-btn-row">
@@ -176,14 +189,17 @@ body.nero-ai-landing{padding-top:0!important}
           <span class="nero-ai-window-title">пример логики AI-агента · демонстрационные данные</span>
         </div>
         <div class="nero-ai-window-body">
-          <div class="nero-ai-dashboard-title"><h3>Пульт контроля смены</h3><span class="nero-ai-live-pill">live</span></div>
+          <div class="nero-ai-dashboard-title"><h3>Пульт контроля смены</h3><span class="nero-ai-live-pill">онлайн</span></div>
           <div class="nero-ai-metrics-grid">
-            <div class="nero-ai-metric" data-nero-tooltip="AI фиксирует остановку в момент события"><span>Простои за смену</span><strong>47 мин</strong></div>
-            <div class="nero-ai-metric"><span>Отклонения</span><strong>3</strong></div>
-            <div class="nero-ai-metric"><span>OEE смены</span><strong>82%</strong></div>
-            <div class="nero-ai-metric"><span>Эскалация</span><strong>1</strong></div>
+            <div class="nero-ai-metric" data-nero-tooltip="AI фиксирует остановку в момент события, не в конце недели" tabindex="0"><span>Простои за смену</span><strong>47 мин</strong></div>
+            <div class="nero-ai-metric" data-nero-tooltip="План vs факт — агент предлагает перестановку заданий" tabindex="0"><span>Отклонения</span><strong>3</strong></div>
+            <div class="nero-ai-metric" data-nero-tooltip="Оценка по данным смены · демо" tabindex="0"><span>OEE смены</span><strong>82%</strong></div>
+            <div class="nero-ai-metric" data-nero-tooltip="Критичный простой ушёл директору в Telegram" tabindex="0"><span>Эскалация</span><strong>1</strong></div>
           </div>
-          <div class="nero-ai-task-stream">
+          <div class="apkc-dash-canvas-wrap" aria-hidden="false">
+            <canvas id="apkc-hero-shift-canvas" role="img" aria-label="Анимация: загрузка рабочих центров, простой на РЦ-2 и динамика OEE смены"></canvas>
+          </div>
+          <div class="nero-ai-task-stream" aria-label="Лента событий смены">
             <div class="nero-ai-task"><span class="nero-ai-task-icon">🟠</span><div><strong>РЦ-2 · простой 12 мин</strong><span>нет материала</span></div></div>
             <div class="nero-ai-task"><span class="nero-ai-task-icon">🟢</span><div><strong>Перестановка задания</strong><span>подтверждено мастером</span></div></div>
             <div class="nero-ai-task"><span class="nero-ai-task-icon">🔵</span><div><strong>Отчёт смены</strong><span>готов к отправке</span></div></div>
@@ -193,6 +209,44 @@ body.nero-ai-landing{padding-top:0!important}
     </div>
   </div>
 </section>
+<script>
+(function(){
+'use strict';
+var cv=document.getElementById('apkc-hero-shift-canvas');
+if(!cv)return;
+var ctx=cv.getContext('2d'),W=0,H=0,frame=0;
+function resize(){var p=cv.parentElement;if(!p)return;cv.width=p.clientWidth||400;cv.height=p.clientHeight||200;W=cv.width;H=cv.height;}
+window.addEventListener('resize',resize);resize();
+var bars=[{x:.12,h:.55,label:'РЦ-1',ok:1},{x:.42,h:.38,label:'РЦ-2',ok:0},{x:.72,h:.62,label:'РЦ-3',ok:1}];
+function loop(){
+  frame++;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='rgba(6,10,24,.4)';ctx.fillRect(0,0,W,H);
+  var bw=W*0.14,bh0=H*0.55,by=H*0.78;
+  bars.forEach(function(b,i){
+    var pulse=b.ok?0.04*Math.sin(frame*0.06+i):0;
+    var h=(b.h+pulse)*bh0;
+    var x=b.x*W;
+    ctx.fillStyle=b.ok?'rgba(34,197,94,.75)':'rgba(245,158,11,.85)';
+    if(!b.ok){ctx.shadowColor='rgba(245,158,11,.4)';ctx.shadowBlur=12;}
+    ctx.beginPath();ctx.roundRect(x,by-h,bw,h,6);ctx.fill();ctx.shadowBlur=0;
+    ctx.fillStyle='#94a3b8';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText(b.label,x+bw/2,by+14);
+  });
+  ctx.strokeStyle='rgba(121,242,255,.5)';ctx.lineWidth=2;ctx.beginPath();
+  for(var i=0;i<=W;i+=4){
+    var t=(i/W*6+frame*0.03)%6;
+    var y=H*0.28+Math.sin(t)*H*0.08+(bars[1].ok?0:Math.sin(frame*0.1)*3);
+    i===0?ctx.moveTo(i,y):ctx.lineTo(i,y);
+  }
+  ctx.stroke();
+  ctx.fillStyle='#79f2ff';ctx.font='bold 11px Inter,sans-serif';ctx.textAlign='left';
+  ctx.fillText('OEE смены · 82%',12,18);
+  requestAnimationFrame(loop);
+}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loop();
+})();
+</script>
 
 <div class="apkc-content">
 
@@ -201,14 +255,13 @@ body.nero-ai-landing{padding-top:0!important}
     <div class="apkc-intro-grid nero-ai-reveal">
       <div class="apkc-intro-text">
         <p class="apkc-eyebrow">Лонгрид · ai производство контроль</p>
-        <p><strong>Коротко:</strong> AI производство контроль — проверяемый AI-агент на смене: формирует сменные задания, фиксирует отклонения и простои в момент события, эскалирует критичные остановки и собирает отчёт. Human-in-the-loop.</p>
-        <p>Nero Network внедряет под ключ для малого производства — цеха, мебель, пищевка. Ориентир чека <strong>500 тыс.–2 млн ₽</strong>.</p>
+        <p><strong>Коротко:</strong> AI производство контроль — это проверяемый AI-агент на смене, а не автономный «завод без людей». Он формирует сменные задания, фиксирует отклонения и простои в момент события, эскалирует критичные остановки и собирает отчёт по смене. Человек остаётся в контуре решений — human-in-the-loop. Nero Network внедряет такой агент под ключ для малого производства: цеха, мебель, пищевка.</p>
       </div>
-      <div class="apkc-intro-kpi">
-        <div class="apkc-kpi-card"><div class="kv">5–20%</div><div class="kl">потерь от простоев</div><div class="ks">ISA / TWI</div></div>
-        <div class="apkc-kpi-card"><div class="kv">&gt;40%</div><div class="kl">отмен agentic AI</div><div class="ks">Gartner 2027</div></div>
-        <div class="apkc-kpi-card"><div class="kv">3–4 нед</div><div class="kl">пилот на смене</div><div class="ks">KPI пилота</div></div>
-        <div class="apkc-kpi-card"><div class="kv">минуты</div><div class="kl">фиксация простоя</div><div class="ks">не конец недели</div></div>
+      <div class="apkc-intro-kpi" aria-label="Ключевые ориентиры">
+        <div class="apkc-kpi-card" data-nero-tooltip="Международный ориентир ISA" tabindex="0"><div class="kv">5–20%</div><div class="kl">потери от незамеченных простоев</div><div class="ks">ISA / TWI</div></div>
+        <div class="apkc-kpi-card" data-nero-tooltip="Целевая скорость фиксации на пилоте" tabindex="0"><div class="kv">Минуты</div><div class="kl">фиксация простоя</div><div class="ks">не «конец недели»</div></div>
+        <div class="apkc-kpi-card" data-nero-tooltip="Ориентир внедрения под ключ" tabindex="0"><div class="kv">500 тыс.–2 млн ₽</div><div class="kl">внедрение под ключ</div><div class="ks">продуктовая матрица</div></div>
+        <div class="apkc-kpi-card" data-nero-tooltip="Пилот на одной смене" tabindex="0"><div class="kv">3–4 недели</div><div class="kl">пилот на смене</div><div class="ks">этап 1</div></div>
       </div>
     </div>
   </div>
@@ -227,21 +280,23 @@ body.nero-ai-landing{padding-top:0!important}
     <div class="apkc-sh apkc-left nero-ai-reveal">
       <span class="apkc-eyebrow">Боль ЦА</span>
       <h2>Почему на производстве теряют деньги, когда простои фиксируются <span class="apkc-warn-mark">поздно</span></h2>
-      <p>Мастер держит задания «в голове» или на бумажке, операторы сообщают об остановках устно, в конце недели цифры переносят в Excel.</p>
+      <p>На большинстве малых производств контроль простоев устроен так: мастер держит задания в голове или на бумажке, операторы сообщают об остановках устно, а в конце недели кто-то переносит цифры в Excel. Руководитель узнаёт о потерях, когда уже поздно — перераспределить людей, заказать материал или остановить повторяющуюся поломку нельзя.</p>
     </div>
-    <p class="nero-ai-reveal"><strong>Типичная боль:</strong> задачи меняются вручную, простои фиксируются поздно. До 40% времени мастера — поиск деталей и согласования (KOBLIK GROUP, 1С Awards).</p>
-    <p class="nero-ai-reveal">Незапланированные простои — <strong>5–20% годовой производительности</strong> (ISA, TWI). Ориентир <strong>8–15%</strong> внеплановых остановок (Inner.su).</p>
+    <p class="nero-ai-reveal apkc-pain"><strong>Типичная боль:</strong> задачи меняются вручную, простои фиксируются поздно. Мастер — бутылочное горлышко: до 40% его времени уходит не на управление, а на поиск деталей и согласования (кейс KOBLIK GROUP до цифровизации сменных заданий, 1С Awards).</p>
+    <p class="nero-ai-reveal">По оценке ISA (TWI Institute), незапланированные простои съедают <strong>5–20% годовой производительности</strong>. Российские обзоры таблиц потерь дают ориентир <strong>8–15%</strong> производственного времени на внеплановые остановки (Inner.su — не госстатистика). Для расчёта «карты потерь» встречаются иллюстративные <strong>5 000–10 000 ₽/час</strong> простоя высокопроизводительного оборудования.</p>
+    <div class="apkc-callout nero-ai-reveal"><strong>Оговорка (ориентир / пилот):</strong> официальной росстатистики потерь малого производства в рублях не найдено. Мы не обещаем «гарантированный ROI 300%» — считаем экономику через пилот: стоимость часа простоя × часы, которые перестали быть невидимыми.</div>
     <div class="apkc-table-wrap nero-ai-reveal">
       <table class="apkc-table">
-        <thead><tr><th>Способ учёта</th><th>Когда видны простои</th><th>Алерт</th><th>Перестановка</th></tr></thead>
+        <thead><tr><th>Способ учёта</th><th>Когда видны простои</th><th>Алерт руководителю</th><th>Перестановка при сбое</th></tr></thead>
         <tbody>
-          <tr><td>Бумага / устно</td><td class="apkc-pain">Конец смены</td><td>Нет</td><td>Нет</td></tr>
-          <tr><td>Excel</td><td class="apkc-pain">Когда внесли</td><td>Нет</td><td>Нет</td></tr>
-          <tr><td>MES-lite</td><td>В смене</td><td>Частично</td><td>По правилам</td></tr>
-          <tr><td><strong>AI-агент</strong></td><td><strong>В момент события</strong></td><td><strong>Telegram</strong></td><td><strong>С подтверждением</strong></td></tr>
+          <tr><td>Бумага / устно</td><td class="apkc-pain">Конец смены или недели</td><td>Нет</td><td>Нет</td></tr>
+          <tr><td>Excel</td><td class="apkc-pain">Когда успели внести</td><td>Нет</td><td>Нет</td></tr>
+          <tr><td>MES-lite</td><td>В течение смены</td><td>Частично (дашборд)</td><td>По правилам, без reasoning</td></tr>
+          <tr><td><strong>AI-агент Nero Network</strong></td><td><strong>В момент события</strong></td><td><strong>Telegram / отчёт</strong></td><td><strong>С подтверждением мастера</strong></td></tr>
         </tbody>
       </table>
     </div>
+    <p class="nero-ai-reveal">Пока простой не зафиксирован, вы теряете не только время станка, но и шанс <strong>найти простои</strong> — увидеть повторяющиеся причины и закрыть их до конца месяца.</p>
   </div>
 </section>
 
@@ -360,46 +415,75 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
     <div class="apkc-sh nero-ai-reveal">
       <span class="apkc-eyebrow">Продукт</span>
       <h2>Что такое AI производство контроль и как работает агент на смене</h2>
-      <p>Надстройка над процессами цеха — не замена MES и не чат-бот.</p>
+    </div>
+    <div class="apkc-def-block nero-ai-reveal">
+      <p><strong>AI производство контроль</strong> — надстройка над процессами цеха, а не замена MES «с нуля» и не абстрактный чат-бот. AI-агент:</p>
+      <ol>
+        <li>Формирует и обновляет <strong>сменные задания</strong> из плана (1С, ERP, MES-lite или ручной ввод мастера).</li>
+        <li>Собирает <strong>факт смены</strong> — планшеты, Telegram, терминалы, датчики, ручные отметки.</li>
+        <li>Ведёт <strong>контроль простоев</strong>: фиксирует остановку и классифицирует причину.</li>
+        <li>Формирует <strong>отчёт руководителю</strong> — сводка, топ-потери, рекомендации; критичное — в мессенджер.</li>
+      </ol>
+      <p style="margin-top:14px;margin-bottom:0">AI собирает данные по смене, фиксирует отклонения и формирует отчёт руководителю — <strong>внедрение под ключ</strong>, ориентир <strong>500 тыс.–2 млн ₽</strong>.</p>
     </div>
     <div class="apkc-flow nero-ai-reveal">
-      <div class="apkc-flow-step"><div class="num">01</div><h3>Утро смены</h3><p>План из 1С → задания на планшеты</p></div>
-      <div class="apkc-flow-step"><div class="num">02</div><h3>Во время смены</h3><p>Фиксация операций и простоев</p></div>
-      <div class="apkc-flow-step"><div class="num">03</div><h3>Отклонение</h3><p>Перестановка с подтверждением</p></div>
-      <div class="apkc-flow-step"><div class="num">04</div><h3>Эскалация</h3><p>Telegram директору</p></div>
-      <div class="apkc-flow-step"><div class="num">05</div><h3>Отчёт</h3><p>Топ-3 простоя, OEE, рекомендации</p></div>
+      <div class="apkc-flow-step"><div class="num">01</div><h3>Утро смены</h3><p>План из 1С/MES → задания на планшеты или в Telegram</p></div>
+      <div class="apkc-flow-step"><div class="num">02</div><h3>Во время смены</h3><p>Кнопка «Простой» + причина; датчик Modbus подтверждает факт</p></div>
+      <div class="apkc-flow-step"><div class="num">03</div><h3>Отклонение</h3><p>Перестановка заданий — мастер подтверждает или отклоняет</p></div>
+      <div class="apkc-flow-step"><div class="num">04</div><h3>Эскалация</h3><p>Простой дольше N минут → Telegram директору с оценкой потерь</p></div>
+      <div class="apkc-flow-step"><div class="num">05</div><h3>Отчёт</h3><p>Топ-3 простоя, OEE, рекомендации на следующую смену</p></div>
     </div>
     <div class="apkc-card nero-ai-reveal">
-      <h3>Сбор данных по смене: задания, отклонения, простои</h3>
-      <p>Агент получает план из 1С/MES, раскладывает задания по РЦ, при остановке — кнопка «Простой» + причина. Датчик Modbus подтверждает факт, но не заменяет человека.</p>
+      <h3>Сбор данных по смене — задания, отклонения, простои</h3>
+      <p><strong>Утро смены.</strong> Агент получает план из 1С/MES → раскладывает задания по РЦ и исполнителям → отправляет на планшеты или в Telegram. Паттерн как у KOBLIK «Завод на автопилоте», но поверх цифровой базы — <strong>agentic-слой</strong> с анализом отклонений.</p>
+      <p><strong>Во время смены.</strong> Оператор отмечает старт и финиш. При остановке — кнопка «Простой» и причина (или голос/чат). Датчик Modbus <strong>подтверждает</strong> факт, но не заменяет человека в классификации.</p>
+      <p><strong>При отклонении.</strong> Агент сравнивает план и факт. Отставание выше порога — предлагает перестановку, уведомляет мастера. <strong>Мастер подтверждает или отклоняет</strong> — без автономных необратимых действий.</p>
     </div>
     <div class="apkc-card nero-ai-reveal" style="margin-top:16px">
-      <h3>Отчёт руководителю — human-in-the-loop</h3>
-      <p>Gartner: <strong>&gt;40% agentic AI-проектов отменят к 2027</strong> из‑за слабого контроля. Наш ответ — semiautomatic human-in-the-loop: критичные действия только с подтверждением мастера.</p>
+      <h3>Отчёт руководителю в реальном времени — human-in-the-loop</h3>
+      <p>Gartner: <strong>более 40% agentic AI-проектов</strong> будут отменены к 2027 из‑за затрат, неясного ROI и слабого контроля рисков. Ответ Nero Network — <strong>semiautomatic human-in-the-loop</strong> (IEEE / Manufacturing Dive): человек валидирует нештатные сценарии; критичные действия логируются и требуют подтверждения.</p>
+      <p>На заводе Bosch agentic AI на планшете ускоряет диагностику поломок — оператор подтверждает действия агента. У Nero Network фокус шире: <strong>все типы простоев + сменные задания + отчёт директору</strong> для цеха из 5–20 РЦ.</p>
     </div>
   </div>
 </section>
 
 <section class="apkc-section apkc-section-alt" id="dlya-kogo">
   <div class="apkc-cnt">
-    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Сегменты</span><h2>Для кого подходит внедрение AI для производства</h2></div>
+    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Сегменты</span><h2>Для кого подходит внедрение AI для производства</h2>
+    <p>Продукт для <strong>малого производства</strong> — цеха, мебель, пищевка. Там, где нет штатного IT-директора, но есть измеримая боль: <strong>ai производство контроль для малого бизнеса</strong>, а не презентация для enterprise.</p></div>
     <div class="apkc-grid-3 nero-ai-reveal">
-      <div class="apkc-card"><h3>🪑 Мебельное производство</h3><p>Переналадки, смена фасадов. Агент переставляет бригаду при задержке материала — директор видит в Telegram.</p></div>
-      <div class="apkc-card"><h3>🍽 Пищевое производство</h3><p>Санитарные остановки, смена сырья. Классификация причин и отчёт по смене без многомесячного MES.</p></div>
-      <div class="apkc-card"><h3>⚙️ Малый цех 5–15 РЦ</h3><p>MES-lite от 60 000 ₽ — база. AI-слой Nero Network — reasoning при отклонениях и NLP-классификация.</p></div>
+      <div class="apkc-card"><h3>🪑 Малые цеха и мебельное производство</h3><p>Мелкосерийка живёт переналадками: фасады, кромки, программы ЧПУ. На Дмитровском мебельном комбинате — 1С-БАЗИС: автосменные задания и загрузка (sapr.ru). Планирование есть, <strong>AI-контроля простоев в реальном времени</strong> — нет.</p><p><strong>Сценарий:</strong> утром агент собирает заказы из 1С → задания на раскрой и кромление → при задержке материала на РЦ-2 предлагает переставить бригаду → директор видит простой в Telegram, не в пятничном Excel.</p></div>
+      <div class="apkc-card"><h3>🥩 Пищевое производство и контроль смен</h3><p>На крупных площадках (Черкизово + MES) — сквозная прослеживаемость. Малый цех пищевки: санитарные остановки, смена сырья, короткие партии. Нужны <strong>классификация причин простоя</strong> и отчёт по смене, а не многомесячный MES-проект.</p><p><strong>Сценарий:</strong> оператор фиксирует «мойка линии» или «нет сырья»; агент не даёт потерять 40 минут «между делом»; в конце смены — топ-причин и «заказать X до вторника».</p></div>
+      <div class="apkc-card"><h3>⚙️ Универсальный малый цех (5–15 РЦ)</h3><p>Металлообработка, сборка, упаковка. <strong>Цифровые сменные задания</strong> без AI уже доступны (MESlite от <strong>60 000 ₽</strong>, Планол — запуск <strong>за неделю</strong>). Следующий шаг — <strong>AI-слой</strong>: reasoning при отклонениях, NLP-классификация, отчёт на естественном языке.</p></div>
     </div>
   </div>
 </section>
 
 <section class="apkc-section" id="etapy">
   <div class="apkc-cnt">
-    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Под ключ</span><h2>Внедрение AI агентов в бизнес-процессы производства под ключ</h2></div>
-    <div class="apkc-process nero-ai-reveal">
-      <div class="apkc-process-item"><div class="apkc-process-num">0</div><div><h3>Аудит и «Карта потерь» (1–2 нед)</h3><p>Обход цеха, слепые зоны простоев → лид-магнит + ТЗ.</p></div></div>
-      <div class="apkc-process-item"><div class="apkc-process-num">1</div><div><h3>Пилот на одной смене (3–4 нед)</h3><p>Планшеты/Telegram, отчёт в конце смены. KPI: фиксация простоя — минуты.</p></div></div>
-      <div class="apkc-process-item"><div class="apkc-process-num">2</div><div><h3>Интеграция (4–8 нед)</h3><p>1С/ERP REST/OData, опционально Modbus, MES-lite.</p></div></div>
-      <div class="apkc-process-item"><div class="apkc-process-num">3</div><div><h3>Agentic-слой (2–4 нед)</h3><p>Перераспределение приоритетов, эскалация — с подтверждением.</p></div></div>
-      <div class="apkc-process-item"><div class="apkc-process-num">4</div><div><h3>Масштабирование</h3><p>Другие участки, дашборд OEE, база причин для ML.</p></div></div>
+    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Под ключ</span><h2>Внедрение AI агентов в бизнес-процессы производства под ключ</h2>
+    <p>Внедрение ai в бизнес-процессы производства — проект с измеримыми этапами, а не бесконечный «пилот ради пилота». Так снижается риск попасть в прогноз Gartner об отмене agentic-проектов.</p></div>
+    <div class="apkc-table-wrap nero-ai-reveal">
+      <table class="apkc-table">
+        <thead><tr><th>Этап</th><th>Срок</th><th>Содержание</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0. Аудит и «Карта потерь»</strong></td><td>1–2 недели</td><td>Обход цеха, точки сбора данных, «слепые зоны»</td><td>Лид-магнит + ТЗ</td></tr>
+          <tr><td><strong>1. Пилот на одном участке</strong></td><td>3–4 недели</td><td>Планшеты/Telegram, ввод простоев, отчёт смены</td><td>Фиксация простоя — <strong>минуты</strong></td></tr>
+          <tr><td><strong>2. Интеграция</strong></td><td>4–8 недель</td><td>1С/ERP, опционально Modbus, MES-lite</td><td>Заказ → задание → факт</td></tr>
+          <tr><td><strong>3. Agentic-слой</strong></td><td>2–4 недели</td><td>Приоритеты, эскалация, рекомендации — с подтверждением</td><td>Human-in-the-loop в продакшене</td></tr>
+          <tr><td><strong>4. Масштабирование</strong></td><td>по плану</td><td>Другие участки, OEE, база причин для ML</td><td>Тираж без потери контроля</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="apkc-card nero-ai-reveal" style="margin-top:20px">
+      <h3>Сроки и что входит во внедрение ai производство контроль под ключ</h3>
+      <ul>
+        <li>Справочники: РЦ, операции, причины простоев (10–20 категорий), стоимость часа простоя.</li>
+        <li>Интерфейс смены: PWA на планшете или Telegram Mini App — <strong>без обязательных промышленных терминалов</strong>.</li>
+        <li>AI-агент: пересчёт приоритетов, NLP-классификация, отчёт, паттерны («каждый вторник простой на РЦ-3 из‑за материала»).</li>
+        <li>Интеграция 1С:ERP, УНФ, КА; обучение мастера и директора; <strong>4–8 недель</strong> модерации рекомендаций AI на пилоте.</li>
+      </ul>
+      <p><strong>ai производство контроль без программиста</strong> со стороны заказчика — интеграцию делает Nero Network.</p>
     </div>
     <?php if ($secondary_training_url && $secondary_training_url !== '#' && strpos($secondary_training_url, 'placeholder') === false): ?>
     <div class="ym-cta-block ym-cta-block--secondary nero-ai-reveal">
@@ -411,39 +495,52 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
 
 <section class="apkc-section apkc-section-alt" id="integracii">
   <div class="apkc-cnt">
-    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Техника</span><h2>Интеграция AI производство контроль с ERP, MES, 1С и CRM</h2></div>
-    <div class="apkc-int-grid nero-ai-reveal">
-      <div class="apkc-int-chip">1С:ERP / УНФ / КА</div>
-      <div class="apkc-int-chip">MES-lite</div>
-      <div class="apkc-int-chip">CRM</div>
-      <div class="apkc-int-chip">Modbus</div>
-      <div class="apkc-int-chip">Telegram</div>
-      <div class="apkc-int-chip">Планшеты PWA</div>
+    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Техника</span><h2>Интеграция AI производство контроль с ERP, MES, 1С и CRM</h2>
+    <p>Интеграция строится поверх того, что уже есть в цехе — принцип <strong>«MES-lite + AI-агент»</strong>, а не замена всей системы.</p></div>
+    <div class="apkc-table-wrap nero-ai-reveal">
+      <table class="apkc-table">
+        <thead><tr><th>Система</th><th>Роль</th><th>Подключение</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1С:ERP / УНФ / КА</strong></td><td>Заказы, номенклатура, выпуск</td><td>REST/OData</td></tr>
+          <tr><td><strong>MES-lite</strong> (MESlite, INTEKEY, Планол, ПС:MES)</td><td>Сменные задания, OEE, брак</td><td>API; агент <strong>поверх</strong></td></tr>
+          <tr><td><strong>CRM</strong></td><td>Заявки, статусы</td><td>Опционально</td></tr>
+          <tr><td><strong>Датчики</strong></td><td>Подтверждение остановки</td><td>Modbus → шлюз → API</td></tr>
+          <tr><td><strong>Telegram</strong></td><td>Алерты, подтверждения, мини-формы</td><td>Бот для директора и мастера</td></tr>
+        </tbody>
+      </table>
     </div>
     <div class="apkc-scenario nero-ai-reveal">
       <h3>Планшеты на смене, датчики, Telegram-уведомления</h3>
-      <p>Telegram — первый «дашборд» директора. Датчики — опционально на этапе 2. Старт без датчиков: ручной ввод + планшет.</p>
+      <p><strong>Планшеты.</strong> PWA на смене — как KOBLIK: задание и факт. AI добавляет <strong>анализ отклонений</strong>, не только форму.</p>
+      <p><strong>Telegram.</strong> Для малого производства — часто <strong>первый дашборд директора</strong>: простой выше порога — сообщение с контекстом; перестановка — кнопкой в боте. Отдельный BI на старте не обязателен.</p>
+      <p><strong>Датчики — опционально.</strong> Agentic AI работает лучше при связанных данных ERP/MES (Deloitte, Altimetrik). <strong>Старт без датчиков возможен:</strong> ручной ввод + планшет/Telegram; Modbus — этап 2.</p>
+      <p><strong>AI-модель:</strong> Claude / GPT / YandexGPT; on-premise при требованиях безопасности. Оркестрация — n8n / Make.</p>
     </div>
   </div>
 </section>
 
 <section class="apkc-section" id="ceny">
   <div class="apkc-cnt">
-    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Коммерция</span><h2>Сколько стоит AI для контроля простоев и сменных заданий</h2></div>
+    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Коммерция</span><h2>Сколько стоит AI для контроля простоев и сменных заданий</h2>
+    <p>Вопрос «сколько стоит ai производство контроль» зависит от глубины интеграции и числа участков — не от «лицензии на нейросеть».</p>
+    <p><strong>Ориентир Nero Network:</strong> <strong>500 тыс.–2 млн ₽</strong> — аудит, пилот, интеграция с 1С, agentic-слой, обучение.</p></div>
     <div class="apkc-table-wrap nero-ai-reveal">
       <table class="apkc-table">
         <thead><tr><th>Уровень</th><th>Ориентир</th><th>Источник</th></tr></thead>
         <tbody>
-          <tr><td>Пилот на участке</td><td>150 000–500 000 ₽</td><td>chimitdorzhi.tech 2027</td></tr>
+          <tr><td>Пилот на одном участке</td><td>150 000–500 000 ₽</td><td>chimitdorzhi.tech, 2027</td></tr>
+          <tr><td>Сквозная автоматизация</td><td>от 700 000 ₽</td><td>тот же</td></tr>
           <tr><td><strong>Nero Network под ключ</strong></td><td><strong>500 000–2 000 000 ₽</strong></td><td>продуктовая матрица</td></tr>
           <tr><td>MES-lite без AI</td><td>от 60 000 ₽</td><td>MESlite</td></tr>
+          <tr><td>Компьютерное зрение</td><td>от 1 500 000 ₽</td><td>тот же</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="apkc-card nero-ai-reveal"><p><strong>Формула пилота:</strong> эффект ≈ (стоимость часа простоя × сокращённые часы) − затраты. Отраслевые ориентиры 15–43% — benchmark, не гарантия.</p></div>
+    <p class="nero-ai-reveal"><strong>ai производство контроль цена:</strong> одна линия + Telegram — ближе к нижней границе; несколько участков + 1С:ERP + датчики — к верхней.</p>
+    <div class="apkc-callout apkc-callout--benchmark nero-ai-reveal"><strong>Формула ROI (ориентир / benchmark):</strong><br>Эффект пилота ≈ (стоимость часа простоя × сокращённые часы видимых простоев) − затраты на внедрение.<br>Отраслевые <strong>ориентиры</strong> снижения незапланированных простоев — <strong>15–43%</strong> (Customertimes, Applied Sciences, Bosch) — <strong>benchmark, не гарантия</strong>. ~95% ROI-positive деплойментов predictive maintenance при готовности данных (Customertimes).</div>
     <div class="ym-cta-block ym-cta-block--dual nero-ai-reveal">
       <h3 class="ym-cta-block__headline">Узнать смету под ваш цех</h3>
-      <p class="ym-cta-block__sub">Ориентир 500 тыс.–2 млн ₽; точная цифра — после «Карты потерь»</p>
+      <p class="ym-cta-block__sub">Ориентир 500 тыс.–2 млн ₽. Точная цифра — после бесплатной «Карты потерь».</p>
       <div class="ym-cta-block__actions"><a class="ym-btn ym-btn--accent" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>>Найти простои</a></div>
     </div>
   </div>
@@ -452,25 +549,38 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
 <section class="apkc-section apkc-section-alt" id="keisy">
   <div class="apkc-cnt">
     <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Доверие</span><h2>Кейсы и примеры внедрения AI-агента на производстве</h2>
-    <p>Прямых публичных кейсов ниши в РФ мало — ниже смежные внедрения.</p></div>
+    <p>Прямых публичных кейсов «AI-агент + сменные задания + контроль простоев» на малом производстве в РФ <strong>не найдено</strong>. Ниже — смежные внедрения и международные паттерны; они показывают готовность рынка и место продукта Nero Network.</p></div>
     <div class="apkc-case-grid nero-ai-reveal">
-      <div class="apkc-case-card"><div class="apkc-case-tag">смежный кейс</div><h3>KOBLIK GROUP</h3><p>1С + планшеты, автосменные задания. Простои ≤5%, производительность +40% (1С Awards).</p></div>
-      <div class="apkc-case-card"><div class="apkc-case-tag">смежный кейс</div><h3>MBS Group</h3><p>ИИ-агент планирования в 1С:ERP. Отличие — оперативный контроль смены, не только план.</p></div>
-      <div class="apkc-case-card"><div class="apkc-case-tag">международный</div><h3>Bosch Shopfloor Agent</h3><p>Agentic AI на планшете, human-in-the-loop, сокращение простоев.</p></div>
+      <div class="apkc-case-card"><div class="apkc-case-tag">смежный кейс</div><h3>KOBLIK GROUP</h3><p>5 заводов: 1С:ERP + планшеты, автосменные задания. Заявлено: простои ≤5%, производительность +40%, поиск деталей −90% (1С Awards). <em>Цифровая база — наш AI-слой поверх.</em></p></div>
+      <div class="apkc-case-card"><div class="apkc-case-tag">смежный кейс</div><h3>MBS Group «Оптимизатор расписания»</h3><p>ИИ-агент в 1С:ERP, 20+ РЦ, переналадки −25–50%. <em>Отличие Nero Network — оперативный контроль смены и простоев, не только план «на завтра».</em></p></div>
+      <div class="apkc-case-card"><div class="apkc-case-tag">международный</div><h3>Bosch Shopfloor Agent</h3><p>Agentic AI на планшете, human-in-the-loop, экономия простоев (~€850 000/год на завод, Bosch).</p></div>
+      <div class="apkc-case-card"><div class="apkc-case-tag">международный</div><h3>Керамика, Applied Sciences 2025</h3><p>Agentic AI + human oversight: незапланированные простои −43%, окупаемость 1,6 года.</p></div>
+      <div class="apkc-case-card"><div class="apkc-case-tag">конкурентный контекст</div><h3>MES-lite</h3><p>MESlite, INTEKEY, Планол — сменные задания и OEE <strong>без agentic AI</strong> и отчёта на естественном языке.</p></div>
     </div>
+    <p class="nero-ai-reveal" style="margin-top:24px;text-align:center"><strong>ai производство контроль примеры внедрения</strong> для вашей отрасли фиксируем на <strong>пилоте</strong> — это этап 1, а не маркетинговая выдумка.</p>
   </div>
 </section>
 
 <section class="apkc-section" id="agentic-ai">
   <div class="apkc-cnt">
-    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Тренд 2026</span><h2>Agentic AI в 2026: почему важен контроль результата</h2></div>
-    <div class="apkc-kpi-grid nero-ai-reveal">
-      <div class="apkc-kpi-box"><strong>&gt;40%</strong><span>отмен agentic AI к 2027</span></div>
-      <div class="apkc-kpi-box"><strong>33%</strong><span>apps с agentic AI к 2028</span></div>
-      <div class="apkc-kpi-box"><strong>40%</strong><span>task-specific agents к 2026</span></div>
-      <div class="apkc-kpi-box"><strong>HITL</strong><span>human-in-the-loop — норма</span></div>
+    <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">Тренд 2026</span><h2>Agentic AI в 2026: почему важен контроль результата, а не автономия «вслепую»</h2></div>
+    <div class="apkc-table-wrap nero-ai-reveal">
+      <table class="apkc-table">
+        <thead><tr><th>Факт</th><th>Источник</th></tr></thead>
+        <tbody>
+          <tr><td><strong>&gt;40%</strong> agentic AI-проектов отменят к <strong>2027</strong></td><td>Gartner, 25.06.2025</td></tr>
+          <tr><td>К <strong>2028</strong>: <strong>33%</strong> enterprise-приложений с agentic AI</td><td>Gartner</td></tr>
+          <tr><td>К <strong>2026</strong>: <strong>40%</strong> apps с task-specific AI agents (было &lt;5% в 2025)</td><td>Gartner, 26.08.2025</td></tr>
+          <tr><td>Текущее состояние — <strong>«semiautomatic human-in-the-loop»</strong></td><td>IEEE / Manufacturing Dive</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="apkc-card nero-ai-reveal" style="margin-top:20px">
+      <h3>Прогноз Gartner — отмена проектов без измеримого контроля</h3>
+      <p><strong>Позиция Nero Network:</strong> не спорить с Gartner — использовать прогноз как аргумент для правильной архитектуры. Agentic-слой на смене должен логировать каждое решение; требовать подтверждения на критичных действиях; давать <strong>измеримый отчёт</strong> после каждой смены; начинаться с <strong>пилота на одной смене</strong>, а не с «автономного завода».</p>
     </div>
     <div class="apkc-quote nero-ai-reveal">«Most agentic AI projects right now are early stage experiments… often misapplied» — Anushree Verma, Gartner</div>
+    <p class="nero-ai-reveal" style="text-align:center">Так <strong>ai производство контроль</strong> становится ответом на хайп, а не его копией.</p>
   </div>
 </section>
 
@@ -479,23 +589,27 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
     <div class="apkc-highlight nero-ai-reveal">
       <span class="apkc-eyebrow">Лид-магнит</span>
       <h2>Карта потерь производства — бесплатный аудит простоев</h2>
+      <p>Перед внедрением ai производство контроль — диагностика, а не закупка «нейросети».</p>
+      <p><strong>Лид-магнит «Карта потерь производства»</strong> (результат аудита 1–2 недели):</p>
       <ul>
-        <li>Список РЦ и «слепых зон» учёта</li>
+        <li>Рабочие центры и «слепые зоны» учёта</li>
         <li>Справочник причин простоев</li>
-        <li>Стоимость часа простоя по участкам</li>
+        <li><strong>Стоимость часа простоя</strong> по участкам</li>
         <li>Карта: где простой фиксируется сразу, где — «когда мастер вспомнит»</li>
       </ul>
+      <p>Инструмент из практики OEE и таблиц потерь (Inner.su, TWI) — <strong>привязанный к вашему цеху</strong>. Основа для ТЗ и пилота.</p>
     </div>
     <div class="ym-cta-block ym-cta-block--primary nero-ai-reveal">
       <div class="ym-cta-block__icon">📊</div>
       <h3 class="ym-cta-block__headline">Найти простои на вашем производстве</h3>
-      <p class="ym-cta-block__sub">Бесплатный аудит: карта потерь, слепые зоны, ТЗ на пилот — 1–2 недели</p>
+      <p class="ym-cta-block__sub">Бесплатный аудит: карта потерь, слепые зоны учёта, ТЗ на пилот — 1–2 недели.</p>
       <div class="ym-cta-block__actions"><a class="ym-btn ym-btn--accent" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>>Найти простои</a></div>
+      <p style="margin-top:14px;font-size:14px;color:var(--apkc-muted)">Не «купить AI» — <strong>увидеть</strong>, сколько вы теряете незамеченным.</p>
     </div>
   </div>
 </section>
 
-<section class="apkc-section" id="faq">
+<section class="apkc-section apkc-section-alt" id="faq">
   <div class="apkc-cnt">
     <div class="apkc-sh nero-ai-reveal"><span class="apkc-eyebrow">GEO</span><h2>FAQ: как внедрить ai производство контроль</h2></div>
     <div class="apkc-faq">
@@ -543,18 +657,24 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loop);else loo
   </div>
 </section>
 
-<section class="apkc-section apkc-section-alt" id="zakazat">
+<section class="apkc-section" id="zakazat">
   <div class="apkc-cnt">
+    <div class="apkc-sh nero-ai-reveal" style="margin-bottom:32px">
+      <span class="apkc-eyebrow">Следующий шаг</span>
+      <h2>Заказать внедрение AI производство контроль для вашей компании</h2>
+      <p>Если <strong>задачи меняются вручную, простои фиксируются поздно</strong> — вы не управляете производством. Вы <strong>расплачиваетесь</strong> за каждый незамеченный час.</p>
+      <p>Nero Network — <strong>разработка и интеграция ai производство контроль</strong> в ваш контур: 1С, MES-lite, планшеты, Telegram — <strong>под ключ</strong>, с пилотом на одной смене и human-in-the-loop. Без обещания «автономного завода за месяц».</p>
+    </div>
     <div class="ym-cta-block ym-cta-block--footer-final nero-ai-final-cta nero-ai-reveal">
       <h2 class="ym-cta-block__headline">Запустить пилот на одной смене</h2>
-      <p class="ym-cta-block__sub">3–4 недели, human-in-the-loop, измеримый отчёт по первой смене</p>
-      <ol style="text-align:left;max-width:480px;margin:0 auto 24px;color:var(--apkc-muted)">
-        <li>Найти простои — старт аудита</li>
-        <li>Получить «Карту потерь» и ТЗ</li>
-        <li>Запустить пилот с измеримым отчётом</li>
+      <p class="ym-cta-block__sub">3–4 недели, human-in-the-loop, измеримый отчёт по первой смене.</p>
+      <ol style="text-align:left;max-width:520px;margin:0 auto 24px;color:var(--apkc-muted);padding-left:20px">
+        <li><strong>Найти простои</strong> — старт аудита.</li>
+        <li>Получить <strong>«Карту потерь производства»</strong> и ТЗ на пилот.</li>
+        <li>Запустить <strong>ai производство контроль под ключ</strong> с измеримым отчётом по первой смене.</li>
       </ol>
       <div class="ym-cta-block__actions"><a class="ym-btn ym-btn--accent" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>>Найти простои</a></div>
-      <p style="margin-top:16px;font-size:14px">Ориентир инвестиций: <strong>500 тыс.–2 млн ₽</strong></p>
+      <p style="margin-top:16px;font-size:14px;color:var(--apkc-muted)">Ориентир инвестиций <strong>500 тыс.–2 млн ₽</strong>; точная смета — после «Карты потерь».</p>
     </div>
   </div>
 </section>
