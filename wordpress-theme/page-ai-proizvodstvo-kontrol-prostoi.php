@@ -1862,7 +1862,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div>
 
-<!-- INTERNAL-LINKS:INSERT -->
+<div class="apk-content">
+  <section class="apk-section apk-section-alt" id="smeshnye-materialy" aria-label="Смежные материалы Nero Network">
+    <div class="apk-cnt">
+      <div class="apk-sh apk-left nero-ai-reveal">
+        <span class="apk-eyebrow">Смежные материалы</span>
+        <h2>Внедрение AI в бизнес: что читать дальше</h2>
+        <p>По теме <strong>agentic AI</strong> и внедрения агентов под ключ — материалы Nero Network на смежные сценарии:</p>
+      </div>
+      <ul class="nero-ai-reveal" style="max-width:820px;">
+        <li><a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">масштабное внедрение AI в бизнес</a> — уроки enterprise-внедрений и риски agentic AI по данным Gartner</li>
+        <li><a href="/vnedrenie-ai-amocrm/">внедрение AI-агента для amoCRM</a> — смежный сценарий автоматизации заявок с human-in-the-loop</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
 <?php
 $apk_page_url = trailingslashit( get_permalink() );
 $apk_site_url = trailingslashit( home_url( '/' ) );
