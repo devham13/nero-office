@@ -1,5 +1,10 @@
 # Session Handoff
 
+## 2026-09-10 — ai-smeta-po-zayavke
+
+- Юра: опубликовано `[REDACTED]ai-smeta-po-zayavke/` (HTTP 200, custom template page-ai-smeta-po-zayavke.php, WP post ID 1041).
+- Следующий шаг: google-table-manager (publish, строка 144), indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
