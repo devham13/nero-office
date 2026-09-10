@@ -52,6 +52,10 @@ $primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение';
 $secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '';
 
+$apkc_public_base = rtrim((string) (getenv('PUBLIC_SITE_URL') ?: getenv('WP_SITE_URL') ?: home_url('/')), '/');
+$apkc_page_url    = $apkc_public_base . '/ai-proizvodstvo-kontrol/';
+$apkc_brand_name  = $brand !== '' ? $brand : (get_bloginfo('name') ?: 'Nero Network');
+
 get_header();
 
 $nero_ai_floating = get_stylesheet_directory() . '/nero-ai-floating-header.inc.php';
@@ -641,7 +645,10 @@ nav[aria-label="Хлебные крошки"],
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="apkc-cnt apkc-related-wrap nero-ai-reveal" style="margin:24px auto 8px;">
+  <p class="apkc-related" style="font-size:15px;line-height:1.7;color:#64748b;margin:0 0 14px;">Слой поверх 1С:ERP и Excel — не отдельный MES, а автоматизация сменных заданий и простоев в учётном контуре. Подробнее о смежном сценарии: <a href="<?php echo esc_url($apkc_public_base . '/ai-1c-erp/'); ?>" style="color:#d97706;text-decoration:underline;text-underline-offset:3px">внедрение AI-агента для 1С и ERP под ключ</a>.</p>
+  <p class="apkc-related" style="font-size:15px;line-height:1.7;color:#64748b;margin:0;">Когда заявки и статусы смены уходят в CRM (amoCRM, Битрикс24), полезно сравнить с готовой посадочной: <a href="<?php echo esc_url($apkc_public_base . '/vnedrenie-ai-amocrm/'); ?>" style="color:#d97706;text-decoration:underline;text-underline-offset:3px">AI-агент для amoCRM: внедрение под ключ</a>.</p>
+</div>
 
   <div class="apkc-toc-outer">
     <div class="apkc-cnt">
@@ -984,7 +991,10 @@ loop();
     </div>
   </section>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="apkc-cnt apkc-related-wrap nero-ai-reveal" style="margin:8px auto 24px;">
+  <p class="apkc-related" style="font-size:15px;line-height:1.7;color:#64748b;margin:0 0 14px;">На корпоративном масштабе те же принципы human-in-the-loop и managed-агентов уже проверены в enterprise: в разборе <a href="<?php echo esc_url($apkc_public_base . '/kpmg-claude-vnedrenie-ai-276-tysyach/'); ?>" style="color:#d97706;text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> — цифровые шлюзы и контроль рисков, которые переносятся на пилот в цехе.</p>
+  <p class="apkc-related" style="font-size:15px;line-height:1.7;color:#64748b;margin:0;">Смежный B2B-паттерн «входящий канал → CRM без ручного ввода» описан на странице <a href="<?php echo esc_url($apkc_public_base . '/vnedrenie-ai-obrabotka-email-crm/'); ?>" style="color:#d97706;text-decoration:underline;text-underline-offset:3px">AI-обработка входящей почты в CRM</a> — полезно, если производство связано с потоком заявок от клиентов.</p>
+</div>
 
   <section class="apkc-section apkc-section-alt" id="agentic">
     <div class="apkc-cnt">
@@ -1049,7 +1059,124 @@ loop();
 
 </div><!-- /.apkc-content -->
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apkc_schema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'Organization',
+            '@id' => $apkc_public_base . '/#organization',
+            'name' => $apkc_brand_name,
+            'url' => $apkc_public_base . '/',
+        ],
+        [
+            '@type' => 'WebSite',
+            '@id' => $apkc_public_base . '/#website',
+            'url' => $apkc_public_base . '/',
+            'name' => $apkc_brand_name,
+            'publisher' => ['@id' => $apkc_public_base . '/#organization'],
+        ],
+        [
+            '@type' => 'WebPage',
+            '@id' => $apkc_page_url . '#webpage',
+            'url' => $apkc_page_url,
+            'name' => 'AI-агент для сменных заданий и контроля простоев: внедрение под ключ',
+            'description' => $page_seo_description,
+            'isPartOf' => ['@id' => $apkc_public_base . '/#website'],
+            'about' => ['@id' => $apkc_public_base . '/#organization'],
+        ],
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $apkc_page_url . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Главная',
+                    'item' => $apkc_public_base . '/',
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'AI-агент для сменных заданий и контроля простоев: внедрение под ключ',
+                    'item' => $apkc_page_url,
+                ],
+            ],
+        ],
+        [
+            '@type' => 'Service',
+            '@id' => $apkc_page_url . '#service',
+            'name' => 'AI-агент для сменных заданий и контроля простоев: внедрение под ключ',
+            'description' => $page_seo_description,
+            'url' => $apkc_page_url,
+            'provider' => ['@id' => $apkc_public_base . '/#organization'],
+        ],
+        [
+            '@type' => 'FAQPage',
+            '@id' => $apkc_page_url . '#faq',
+            'mainEntity' => [
+                [
+                    '@type' => 'Question',
+                    'name' => 'Как внедрить ai производство контроль?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => '1) «Найти простои» → аудит и карта потерь. 2) 1С/Excel + Telegram. 3) Коды простоев и правила. 4) Пилот human-in-the-loop. 5) ROI → масштаб.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Сколько стоит и сколько длится?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Пилот 4–8 нед., 500 тыс.–2 млн ₽. Аудит 3–5 дней. Окупаемость — по карте потерь; смежные кейсы от 3 мес. до <1 мес.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Нужны ли программисты в цеху?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Нет. Нужны мастер (подтверждения) и операторы (фиксация простоев).',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Какие системы подключить?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => '1С:ERP, УНФ, MES, Excel, Telegram, WhatsApp, Битрикс24, DataLens, датчики опционально.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Нужны ли датчики с первого дня?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Нет. Старт — Telegram + ручная фиксация; датчики на этапе 2.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Чем вы отличаетесь от Noltis, PROTECH, 1С:MES?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Noltis — помощник мастера; PROTECH — простои; 1С:MES — полный контур. Мы — сменные задания + простои + отчёт в одном пакете для малого цеха за недели, не годы.',
+                    ],
+                ],
+                [
+                    '@type' => 'Question',
+                    'name' => 'Это хайп agentic AI?',
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => 'Gartner 40% отмен + наш подход: узкий ROI, пилот, подтверждения, журнал аудита.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+?>
+  <script type="application/ld+json"><?php echo wp_json_encode($apkc_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?></script>
 
 </main>
 
