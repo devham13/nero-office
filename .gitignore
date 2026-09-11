@@ -18,7 +18,11 @@ output/
 .cursor/nero-network-fragments/
 page-*.php
 !wordpress/
+!wordpress/**
 !wordpress/page-*.php
+!wordpress-theme/
+!wordpress-theme/**
+!wordpress-theme/page-*.php
 temp_page.html
 downloaded.html
 
