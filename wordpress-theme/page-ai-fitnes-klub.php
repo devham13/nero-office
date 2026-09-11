@@ -603,7 +603,7 @@ nav[aria-label="Хлебные крошки"],.woocommerce-breadcrumb,.rank-math
   </div>
 </div>
 
-<!-- INTERNAL-LINKS:INSERT -->
+<p class="afk-cnt nero-ai-reveal" style="font-size:14.5px;color:var(--afk-muted);padding:0 0 clamp(16px,2.5vw,28px);margin:0 auto;max-width:820px;text-align:left">Фитнес-клубы часто уже ведут клиентов в CRM — если у вас amoCRM, полезно сравнить сценарии <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">внедрения AI-агента в amoCRM под ключ</a> до запуска AI-администратора на ресепшене.</p>
 
 <section class="afk-section" id="pochemu-teryayut">
   <div class="afk-cnt">
@@ -663,7 +663,7 @@ nav[aria-label="Хлебные крошки"],.woocommerce-breadcrumb,.rank-math
         </tbody>
       </table>
     </div>
-    <p class="nero-ai-reveal" style="margin-top:20px;max-width:820px"><strong>Внедрение ai в бизнес</strong> в фитнес-нише — один из самых понятных кейсов: результат считается в продлениях и снижении нагрузки на фронт-деск.</p>
+    <p class="nero-ai-reveal" style="margin-top:20px;max-width:820px"><strong>Внедрение ai в бизнес</strong> в фитнес-нише — один из самых понятных кейсов: результат считается в продлениях и снижении нагрузки на фронт-деск. На enterprise-масштабе похожие принципы orchestration уже разобраны в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link ym-link--accent">KPMG и Claude — уроки AI для бизнеса</a>.</p>
   </div>
 </section>
 
@@ -1152,7 +1152,7 @@ nav[aria-label="Хлебные крошки"],.woocommerce-breadcrumb,.rank-math
     </div>
     <div class="afk-card nero-ai-reveal" style="margin-top:28px">
       <h3>Сроки и что нужно от клуба (ai фитнес клуб без программиста)</h3>
-      <p>Клуб <strong>не нанимает программиста</strong> — достаточно экспорта базы, правил абонементов, доступа к API CRM и согласий на рассылки (152-ФЗ).</p>
+      <p>Клуб <strong>не нанимает программиста</strong> — достаточно экспорта базы, правил абонементов, доступа к API CRM и согласий на рассылки (152-ФЗ). Если часть обращений приходит из почты, на этапе triage помогает <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a>.</p>
       <ul class="afk-checklist">
         <li>Неделя 1: аудит + доступы CRM + правила абонементов</li>
         <li>Неделя 2: интеграция API + база знаний + черновые сценарии</li>
@@ -1189,7 +1189,7 @@ nav[aria-label="Хлебные крошки"],.woocommerce-breadcrumb,.rank-math
     </div>
     <div class="afk-card nero-ai-reveal" style="margin-top:24px">
       <h3>Когда хватит триггеров 1С:Фитнес, а когда нужен AI-администратор</h3>
-      <p><strong>Достаточно CRM-триггеров</strong>, если клуб шлёт только шаблонные SMS. <strong>Нужен AI</strong>, если нужен диалог, оформление заморозки в переписке, ответы на FAQ в свободной форме и единое окно Telegram/VK.</p>
+      <p><strong>Достаточно CRM-триггеров</strong>, если клуб шлёт только шаблонные SMS. <strong>Нужен AI</strong>, если нужен диалог, оформление заморозки в переписке, ответы на FAQ в свободной форме и единое окно Telegram/VK. Клубы на <strong>1С:Фитнес</strong> могут расширить учётный контур — см. <a href="/ai-1c-erp/" class="ym-link ym-link--accent">AI-агента для 1С и ERP</a>.</p>
     </div>
   </div>
 </section>
@@ -1311,7 +1311,70 @@ nav[aria-label="Хлебные крошки"],.woocommerce-breadcrumb,.rank-math
 
 </div><!-- .afk-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$afk_page_url = trailingslashit( get_permalink() );
+$afk_site_url = trailingslashit( home_url( '/' ) );
+$afk_brand    = get_bloginfo( 'name' ) ?: 'Nero Network';
+$afk_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $afk_site_url . '#organization',
+      'name'  => $afk_brand,
+      'url'   => $afk_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $afk_site_url . '#website',
+      'url'       => $afk_site_url,
+      'name'      => $afk_brand,
+      'publisher' => [ '@id' => $afk_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $afk_page_url . '#webpage',
+      'url'         => $afk_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $afk_site_url . '#website' ],
+      'about'       => [ '@id' => $afk_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $afk_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $afk_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $afk_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $afk_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $afk_page_url,
+      'provider'    => [ '@id' => $afk_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $afk_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Как внедрить AI в фитнес-клуб без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Заказать внедрение ai фитнес клуб под ключ у интегратора. Клуб предоставляет доступ к CRM, правила абонементов и FAQ — программирование на стороне подрядчика. Срок — 3–4 недели.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько стоит AI-администратор для клуба?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир Nero Network: 120–350 тыс. ₽ за проект «под ключ». SaaS от 5 тыс. ₽/мес возможны, но часто без глубокой заморозки и сквозной воронки.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли решение для студии и малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Пилот на 15% базы, один канал (Telegram), интеграция с YCLIENTS / FitBase / Mobifitness.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как AI работает с заморозками и продлениями?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI читает лимиты в CRM, проводит клиента через диалог, оформляет заморозку или отправляет ссылку на оплату. Нестандартные перерасчёты — эскалация администратору.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI живого администратора?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI закрывает рутину 24/7; человек — споры, возвраты, дорогие допродажи, конфликты.' ] ],
+        [ '@type' => 'Question', 'name' => 'У нас уже есть CRM с напоминаниями — зачем AI?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'CRM шлёт шаблон. AI отвечает на «а можно на 10 дней?», оформляет заморозку в переписке и реактивирует «спящих» с персонализацией.' ] ],
+        [ '@type' => 'Question', 'name' => 'Клиенты не любят роботов — что делать?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Один timely message в мессенджере, естественный диалог, мгновенная эскалация человеку. Кейс DDX: 47% конверсии в продление после диалога с AI.' ] ],
+        [ '@type' => 'Question', 'name' => 'А если AI ошибётся?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Модерация первые 2–4 недели, жёсткие лимиты действий, полное логирование. AI не выдаёт скидки вне политики клуба.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужно ли заказать демо перед внедрением?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, рекомендуем короткий созвон и демо сценария «продление + заморозка» на ваших правилах — до подписания договора.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $afk_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 <script>
 /**
