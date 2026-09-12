@@ -40,7 +40,7 @@ $primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Снизить недох
 $primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'Обучение AI-автоматизации';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#kak-rabotaet';
 
 get_header();
 
@@ -626,7 +626,7 @@ nav[aria-label="Хлебные крошки"],
       <div class="akos-intro-text nero-ai-intro-text">
         <p class="nero-ai-eyebrow">Лонгрид · ai куратор edtech</p>
         <p>До <strong>87%</strong> покупателей онлайн-курсов не доходят до финала (ИнфоХит, отраслевые данные). Критичны <strong>первые две недели</strong>: ученик оплатил поток, открыл урок — и не сдал первое ДЗ. Без касания он выпадает, а школа теряет LTV и сжигает рекламный бюджет.</p>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>EdTech и коммерческие воронки пересекаются там, где школе важно не потерять клиента после оплаты: по опыту <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/">масштабного внедрения AI в бизнес</a> управляемые AI-агенты работают только при чётких триггерах и контроле качества — те же принципы мы переносим в сопровождение учеников.</p>
         <p>AI-куратор для онлайн-школы — не «чат-бот с FAQ», а связка LLM, базы знаний курса (RAG) и триггеров из LMS/CRM. Nero Network внедряет такие системы <strong>под ключ</strong>: от карты точек выпадения до пилота на одном потоке с измеримым ROI за <strong>4–6 недель</strong>.</p>
       </div>
       <div class="akos-intro-kpi" aria-label="Ключевые показатели EdTech">
@@ -1285,7 +1285,9 @@ nav[aria-label="Хлебные крошки"],
       <h2>Интеграция с LMS и CRM: GetCourse, Moodle и другие</h2>
       <p>Миграция с GetCourse не требуется — AI-куратор подключается через API и webhooks.</p>
     </div>
-    <!-- INTERNAL-LINKS:INSERT -->
+    <p class="akos-related nero-ai-reveal" style="margin-bottom:20px;font-size:15px">Для воронки «лид → оплата → обучение» часто уже используется amoCRM: <a href="/vnedrenie-ai-amocrm/">AI-агент для amoCRM под ключ</a> закрывает смежный контур — автоматические задачи и заметки при эскалации от AI-куратора.</p>
+    <p class="akos-related nero-ai-reveal" style="margin-bottom:24px;font-size:15px">Если школа получает заявки и вопросы по email, имеет смысл сразу связать канал с CRM: <a href="/vnedrenie-ai-obrabotka-email-crm/">AI-обработка входящей почты в CRM</a> маршрутизирует письма до того, как ученик «зависнет» без ответа.</p>
+    <p class="akos-related nero-ai-reveal" style="margin-bottom:24px;font-size:15px">В корпоративном обучении с учётом в ERP добавьте к LMS-контуру <a href="/ai-1c-erp/">AI-агента для 1С и ERP</a> — согласование заявок на обучение и отчётность без двойного ввода.</p>
     <div class="akos-card nero-ai-reveal" style="margin-bottom:24px;">
       <h3>Подключение к существующей LMS без смены платформы</h3>
       <ol style="padding-left:20px;color:var(--akos-muted);line-height:1.8;">
@@ -1579,7 +1581,70 @@ nav[aria-label="Хлебные крошки"],
 })();
 </script>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$schema_origin  = untrailingslashit(home_url('/'));
+$schema_page    = untrailingslashit(get_permalink());
+$schema_org_id  = $schema_origin . '/#organization';
+$schema_site_id = $schema_origin . '/#website';
+$schema_graph   = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $schema_org_id,
+            'name'  => $brand ?: 'Nero Network',
+            'url'   => $schema_origin . '/',
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $schema_site_id,
+            'url'       => $schema_origin . '/',
+            'name'      => $brand ?: 'Nero Network',
+            'publisher' => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $schema_page . '#webpage',
+            'url'         => $schema_page . '/',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'isPartOf'    => ['@id' => $schema_site_id],
+            'about'       => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $schema_page . '#breadcrumb',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $schema_origin . '/'],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $schema_page . '/'],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $schema_page . '#service',
+            'name'        => $page_seo_title,
+            'description' => $page_seo_description,
+            'url'         => $schema_page . '/',
+            'provider'    => ['@id' => $schema_org_id],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $schema_page . '#faq',
+            'mainEntity' => [
+                ['@type' => 'Question', 'name' => 'Как внедрить AI-куратора без программиста?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'На стороне школы программист не нужен. Nero Network настраивает LMS → n8n/Make → Telegram → LLM → CRM. Срок пилота — 4–6 недель.']],
+                ['@type' => 'Question', 'name' => 'Сколько стоит AI-куратор для онлайн-школы?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Пилот — от 150 тыс. ₽, полный контур — 150–450 тыс. ₽ (Nero Network) до 900 тыс. ₽ на рынке. Точная смета — после аудита.']],
+                ['@type' => 'Question', 'name' => 'Безопасны ли персональные данные учеников (152-ФЗ)?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'С 01.09.2025 согласие — отдельный документ. Nero Network использует YandexGPT / GigaChat для данных в РФ, серверы Albato в РФ, оформляет политику — в т.ч. для несовершеннолетних.']],
+                ['@type' => 'Question', 'name' => 'Подходит ли решение для малого бизнеса?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Да. Пилот на одном потоке (50–100 учеников). MVP возможен за 2–3 недели — дешевле найма куратора на полную ставку.']],
+                ['@type' => 'Question', 'name' => 'Заменит ли AI живого куратора?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Нет. AI закрывает рутину; человек — творческие ДЗ, конфликты, мотивацию. Гибридная модель — стандарт рынка.']],
+                ['@type' => 'Question', 'name' => 'Бот будет «врать» ученикам?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'RAG ограничен материалами курса. При низкой уверенности — эскалация. На пилоте спорные ответы проходят модерацию.']],
+                ['@type' => 'Question', 'name' => 'GetCourse и так умеет напоминать — зачем AI?', 'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Штатные напоминания шаблонные и не отвечают на вопросы. AI добавляет контекст, язык, проверку ДЗ и risk score — второй слой поверх процессов LMS.']],
+            ],
+        ],
+    ],
+];
+?>
+<script type="application/ld+json"><?php echo wp_json_encode($schema_graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?></script>
+
 
 </main>
 
