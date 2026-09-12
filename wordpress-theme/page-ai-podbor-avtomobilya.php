@@ -182,11 +182,481 @@ body.nero-ai-landing{padding-top:0!important}
 #ai-podbor-avtomobilya-boris-block .apb-rgt{position:relative;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 18%,#f0f9ff 55%,#f8fafc 100%);min-height:420px;overflow:hidden}
 @media(max-width:1023px){#ai-podbor-avtomobilya-boris-block .apb-rgt{min-height:360px}}
 #apa-avto-brief-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.apa-intro-text p{text-align:left!important;font-size:clamp(14.5px,1.55vw,16.5px);line-height:1.8;color:var(--apa-muted);margin-bottom:1em}
+.apa-intro-text p:last-child{margin-bottom:0;color:var(--apa-soft)}
+.apa-toc-outer{padding:0 0 clamp(36px,4.5vw,56px)}
+.apa-toc{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.apa-toc a{display:inline-block;padding:9px 18px;background:var(--apa-surface);border:1px solid var(--apa-border);border-radius:999px;font-size:13px;font-weight:600;color:var(--apa-muted);transition:border-color .2s,color .2s,background .2s}
+.apa-toc a:hover{border-color:rgba(121,242,255,.42);color:var(--apa-accent);background:rgba(121,242,255,.08)}
+.ym-cta-block--footer-final{background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(121,242,255,.08));border-color:rgba(139,92,246,.3)}
+@media(max-width:600px){.ym-cta-block{padding:28px 20px}}
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page apa-page" role="main" tabindex="-1">
 
-<?php /* === HERO: вставляет Наташа из фрагмента Алины (=== АЛИНА (HERO) ===) === */ ?>
+<section class="nero-ai-hero apa-hero-avto" id="hero" aria-labelledby="apa-hero-title">
+<style>
+/* ── Hero ai-podbor-avtomobilya: самодостаточные стили (без CSS темы) ── */
+.apa-hero-avto {
+  --apa-cyan: #79f2ff;
+  --apa-violet: #8b5cf6;
+  --apa-green: #22c55e;
+  --apa-amber: #f59e0b;
+  --apa-text: #e6edf7;
+  --apa-muted: #9aa8bd;
+  --apa-soft: #c7d2e5;
+  --apa-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  position: relative;
+  min-height: min(980px, calc(100dvh - 1px));
+  display: grid;
+  align-items: center;
+  padding: clamp(72px, 9vw, 132px) 0 clamp(44px, 7vw, 86px);
+  isolation: isolate;
+}
+.apa-hero-avto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 32% 26%, #000 0%, transparent 72%);
+  opacity: .55;
+  pointer-events: none;
+  z-index: -2;
+}
+.apa-hero-avto::after {
+  content: "";
+  position: absolute;
+  right: 6%;
+  top: 10%;
+  width: 620px;
+  height: 620px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(121,242,255,.12), transparent 66%);
+  filter: blur(8px);
+  animation: apaHeroGlow 9s ease-in-out infinite alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+@keyframes apaHeroGlow {
+  from { opacity: .35; transform: scale(.94); }
+  to { opacity: .78; transform: scale(1.06); }
+}
+.apa-hero-avto .nero-ai-container {
+  width: min(1220px, calc(100% - 40px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.apa-hero-avto .nero-ai-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+.apa-hero-avto .nero-ai-hero-copy h1 {
+  margin: 0;
+  max-width: 820px;
+  font-size: clamp(34px, 5.2vw, 66px);
+  line-height: .98;
+  letter-spacing: -0.06em;
+  color: #fff;
+  font-weight: 900;
+}
+.apa-hero-avto .nero-ai-gradient-text {
+  display: block;
+  margin-top: .08em;
+  background: linear-gradient(92deg, #fff 0%, var(--apa-cyan) 44%, var(--apa-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+.apa-hero-avto .nero-ai-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 8px 12px;
+  border: 1px solid rgba(121,242,255,.22);
+  border-radius: 999px;
+  background: rgba(121,242,255,.08);
+  color: var(--apa-cyan) !important;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.apa-hero-avto .nero-ai-hero-lead {
+  margin: 22px 0 0;
+  max-width: 720px;
+  color: var(--apa-soft) !important;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.58;
+}
+.apa-hero-avto .nero-ai-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.apa-hero-avto .nero-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 999px;
+  background: rgba(255,255,255,.055);
+  color: #dce8f7;
+  font-size: 13px;
+  font-weight: 700;
+}
+.apa-hero-avto .apa-hero-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.apa-hero-avto .apa-hero-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: var(--apa-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.apa-hero-avto .apa-hero-step span {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(121,242,255,.22), rgba(139,92,246,.22));
+  color: var(--apa-cyan);
+  font-size: 11px;
+  font-weight: 900;
+}
+.apa-hero-avto .nero-ai-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin-top: 30px;
+}
+.apa-hero-avto .nero-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none !important;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+.apa-hero-avto .nero-ai-btn:hover { transform: translateY(-2px); }
+.apa-hero-avto .nero-ai-btn-primary {
+  color: #050711 !important;
+  background: linear-gradient(135deg, var(--apa-cyan), #a5f3fc);
+  box-shadow: 0 18px 42px rgba(121, 242, 255, 0.18);
+}
+.apa-hero-avto .nero-ai-btn-secondary {
+  color: var(--apa-text) !important;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.apa-hero-avto .nero-ai-dashboard {
+  position: relative;
+  padding: 18px;
+  border-radius: 34px;
+  background: rgba(2, 6, 23, 0.42);
+  box-shadow: var(--apa-shadow);
+  transform: perspective(1100px) rotateY(-2deg) rotateX(2deg);
+}
+.apa-hero-avto .nero-ai-dashboard-shell {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, .95), rgba(6, 10, 24, .96));
+}
+.apa-hero-avto .nero-ai-window-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.045);
+}
+.apa-hero-avto .nero-ai-dots { display: flex; gap: 7px; }
+.apa-hero-avto .nero-ai-dot { width: 10px; height: 10px; border-radius: 50%; }
+.apa-hero-avto .nero-ai-dot:nth-child(1) { background: #fb7185; }
+.apa-hero-avto .nero-ai-dot:nth-child(2) { background: #fbbf24; }
+.apa-hero-avto .nero-ai-dot:nth-child(3) { background: #34d399; }
+.apa-hero-avto .nero-ai-window-title {
+  color: #cfe3f9;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.apa-hero-avto .nero-ai-window-body { padding: 16px; }
+.apa-hero-avto .nero-ai-dashboard-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.apa-hero-avto .nero-ai-dashboard-title h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.apa-hero-avto .nero-ai-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(34,197,94,.10);
+  color: #bbf7d0;
+  font-size: 12px;
+  font-weight: 800;
+}
+.apa-hero-avto .nero-ai-live-pill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+  animation: apaPulse 1.6s infinite;
+}
+@keyframes apaPulse {
+  0%, 100% { transform: scale(.86); opacity: .65; }
+  50% { transform: scale(1); opacity: 1; }
+}
+.apa-hero-avto .nero-ai-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.apa-hero-avto .nero-ai-metric {
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 16px;
+  background: rgba(255,255,255,.055);
+}
+.apa-hero-avto .nero-ai-metric span {
+  display: block;
+  color: var(--apa-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.apa-hero-avto .nero-ai-metric strong {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+}
+.apa-hero-avto .nero-ai-metric small {
+  display: block;
+  margin-top: 4px;
+  color: #9fb0c9;
+  font-size: 11px;
+}
+.apa-hero-avto .apa-dash-canvas-wrap {
+  position: relative;
+  height: clamp(220px, 32vw, 300px);
+  margin: 0 0 12px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(121, 242, 255, 0.16);
+  background: radial-gradient(ellipse at 28% 42%, rgba(121,242,255,.08), rgba(6,10,24,.92) 72%);
+}
+.apa-hero-avto #apa-avto-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.apa-hero-avto .nero-ai-task-stream { display: grid; gap: 8px; }
+.apa-hero-avto .nero-ai-task {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: rgba(255,255,255,.04);
+}
+.apa-hero-avto .nero-ai-task-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 12px;
+  background: rgba(121,242,255,.12);
+  color: var(--apa-cyan);
+  font-size: 11px;
+  font-weight: 800;
+}
+.apa-hero-avto .nero-ai-task strong {
+  display: block;
+  color: #f8fafc;
+  font-size: 12px;
+}
+.apa-hero-avto .nero-ai-task span {
+  color: var(--apa-muted);
+  font-size: 11px;
+}
+.apa-hero-avto .nero-ai-status {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(34,197,94,.11);
+  color: #bbf7d0;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.apa-hero-avto .nero-ai-status--amber {
+  background: rgba(245,158,11,.12);
+  color: #fde68a;
+}
+.apa-hero-avto .nero-ai-status--violet {
+  background: rgba(139,92,246,.14);
+  color: #ddd6fe;
+}
+@media (max-width: 1100px) {
+  .apa-hero-avto .nero-ai-hero-grid { grid-template-columns: 1fr; }
+  .apa-hero-avto .nero-ai-dashboard { transform: none; }
+}
+@media (max-width: 520px) {
+  .apa-hero-avto .nero-ai-dashboard { padding: 10px; border-radius: 24px; }
+  .apa-hero-avto .nero-ai-window-body { padding: 12px; }
+  .apa-hero-avto .nero-ai-task { grid-template-columns: 28px 1fr; }
+  .apa-hero-avto .nero-ai-status { grid-column: 2; width: fit-content; }
+}
+</style>
+
+  <div class="nero-ai-container nero-ai-hero-grid">
+    <div class="nero-ai-hero-copy">
+      <p class="nero-ai-eyebrow"><?php echo esc_html($brand); ?> · ai автодилер</p>
+      <h1 id="apa-hero-title">AI-агент для подбора автомобиля:<span class="nero-ai-gradient-text">внедрение под ключ</span></h1>
+      <p class="nero-ai-hero-lead">Квиз по бюджету и задачам клиента — AI собирает бриф и передаёт менеджеру готовую заявку, пока вы не теряете лиды в очереди</p>
+      <ul class="nero-ai-badges" aria-label="Ключевые возможности">
+        <li class="nero-ai-badge">Квиз 24/7</li>
+        <li class="nero-ai-badge">RAG по стоку</li>
+        <li class="nero-ai-badge">Бриф в CRM</li>
+        <li class="nero-ai-badge">Avito / TG</li>
+        <li class="nero-ai-badge">Anti-hallucination</li>
+        <li class="nero-ai-badge">152-ФЗ</li>
+        <li class="nero-ai-badge">amoCRM / Bitrix24</li>
+      </ul>
+      <ol class="apa-hero-steps" aria-label="Этапы подбора">
+        <li class="apa-hero-step"><span>1</span> Канал</li>
+        <li class="apa-hero-step"><span>2</span> Квиз</li>
+        <li class="apa-hero-step"><span>3</span> Подбор</li>
+        <li class="apa-hero-step"><span>4</span> Бриф</li>
+        <li class="apa-hero-step"><span>5</span> CRM</li>
+      </ol>
+      <div class="nero-ai-btn-row">
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label ?: 'Собрать автоагента'); ?></a>
+        <a class="nero-ai-btn nero-ai-btn-secondary" href="#kak-rabotaet">Как это работает</a>
+      </div>
+    </div>
+
+    <div class="nero-ai-dashboard" aria-label="Демонстрация AI-подбора автомобиля">
+      <div class="nero-ai-dashboard-shell">
+        <div class="nero-ai-window-top">
+          <div class="nero-ai-dots"><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span><span class="nero-ai-dot"></span></div>
+          <span class="nero-ai-window-title">пример логики AI-системы · демонстрационные данные</span>
+        </div>
+        <div class="nero-ai-window-body">
+          <div class="nero-ai-dashboard-title">
+            <h3>автоагент · демо подбора</h3>
+            <span class="nero-ai-live-pill">онлайн</span>
+          </div>
+          <div class="nero-ai-metrics-grid">
+            <div class="nero-ai-metric">
+              <span>Входящие заявки</span>
+              <strong>47</strong>
+              <small>Avito · сайт · Telegram</small>
+            </div>
+            <div class="nero-ai-metric">
+              <span>Средний ответ</span>
+              <strong>3 сек</strong>
+              <small>квиз + уточнение</small>
+            </div>
+            <div class="nero-ai-metric">
+              <span>Брифов сегодня</span>
+              <strong>18</strong>
+              <small>с транскриптом</small>
+            </div>
+            <div class="nero-ai-metric">
+              <span>Лиды A-приоритет</span>
+              <strong>6</strong>
+              <small>срок ≤ 2 нед.</small>
+            </div>
+          </div>
+
+          <div class="apa-dash-canvas-wrap">
+            <canvas id="apa-avto-hero-canvas" role="img" aria-label="Анимация: заявки с каналов проходят квиз, AI подбирает авто из стока и передаёт бриф в CRM"></canvas>
+          </div>
+
+          <div class="nero-ai-task-stream" aria-label="Лента событий подбора">
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">AV</span>
+              <div><strong>Avito: семейный кроссовер</strong><span>запрос принят · канал Avito</span></div>
+              <span class="nero-ai-status nero-ai-status--amber">новый</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">AI</span>
+              <div><strong>AI уточняет бюджет</strong><span>до 2,8 млн · дача · trade-in</span></div>
+              <span class="nero-ai-status">квиз</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">3×</span>
+              <div><strong>3 авто из стока</strong><span>Tiggo 8 · Jolion · Dargo — в наличии</span></div>
+              <span class="nero-ai-status">подбор</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">CRM</span>
+              <div><strong>Бриф в amoCRM</strong><span>приоритет A · транскрипт диалога</span></div>
+              <span class="nero-ai-status nero-ai-status--violet">бриф</span>
+            </div>
+            <div class="nero-ai-task">
+              <span class="nero-ai-task-icon">!</span>
+              <div><strong>Уведомление менеджеру</strong><span>push · Telegram · дежурный РОП</span></div>
+              <span class="nero-ai-status">отправлено</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="apa-content">
 
@@ -196,6 +666,7 @@ body.nero-ai-landing{padding-top:0!important}
         <div class="apa-intro-text">
           <p class="apa-eyebrow">Лонгрид · ai подбор автомобиля</p>
           <p><strong>Коротко:</strong> AI-агент для подбора автомобиля — виртуальный консультант первой линии, который принимает запрос на естественном языке, уточняет бюджет и задачи клиента, подбирает 2–5 вариантов из актуального стока дилера и передаёт менеджеру готовый бриф в CRM. Это не «чат-бот с кнопками», а инструмент квалификации лидов, который работает 24/7.</p>
+          <!-- INTERNAL-LINKS:INSERT -->
           <p>Покупатель уже привык к диалоговому подбору на «Авто.ру AI» и в «СберАвто». Дилеру нужен <strong>свой</strong> автоагент на <strong>своём</strong> складе — с передачей лида в CRM, а не удержанием клиента на маркетплейсе. Nero Network внедряет такие решения под ключ: от квиза на сайте до интеграции с amoCRM, Bitrix24 и отраслевыми DMS.</p>
         </div>
         <div class="apa-intro-kpi" aria-label="Ключевые метрики">
@@ -207,6 +678,20 @@ body.nero-ai-landing{padding-top:0!important}
       </div>
     </div>
   </section>
+
+  <div class="apa-toc-outer">
+    <div class="apa-cnt">
+      <nav class="apa-toc nero-ai-reveal" aria-label="Оглавление статьи">
+        <a href="#kak-rabotaet">Как работает</a>
+        <a href="#kviz">Квиз</a>
+        <a href="#vnedrenie">Внедрение</a>
+        <a href="#crm">CRM</a>
+        <a href="#keisy">Кейсы</a>
+        <a href="#ceny">Стоимость</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </div>
 
   <section class="apa-section" id="kak-rabotaet">
     <div class="apa-cnt">
@@ -459,6 +944,7 @@ Trade-in: Kia Sportage 2019, ~1,1 млн ₽
       <div class="apa-sh nero-ai-reveal">
         <span class="apa-eyebrow">Референсы</span>
         <h2>Кейсы и примеры внедрения</h2>
+        <!-- INTERNAL-LINKS:INSERT -->
         <p>Публичных кейсов «AI-агент подбора по бюджету у конкретного дилера» пока мало — ниже референсы, на которые опирается Nero Network.</p>
       </div>
 
@@ -582,7 +1068,442 @@ Trade-in: Kia Sportage 2019, ~1,1 млн ₽
 
 </div><!-- /.apa-content -->
 
+<!-- SCHEMA-MARKUP:INSERT -->
+
 </main>
+
+<script>
+/**
+ * apa-avto-hero-engine — «Диспетчерская подбора авто»
+ * Мир: OmnichannelInquiryStream → BudgetQuizGate → VehicleMatchConsole → CrmBriefDrawer
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  var canvas = document.getElementById("apa-avto-hero-canvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var cw = 0, ch = 0, scale = 1, cx = 0, cy = 0, frame = 0;
+
+  function resizeCanvas() {
+    var wrap = canvas.parentElement;
+    if (!wrap) return;
+    canvas.width = wrap.clientWidth || 400;
+    canvas.height = wrap.clientHeight || 260;
+    cw = canvas.width;
+    ch = canvas.height;
+    cx = cw / 2;
+    cy = ch / 2 + 6;
+    scale = Math.min(cw / 440, ch / 280) * 1.08;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  var C = {
+    outline: "#64748b",
+    panel: "#0f172a",
+    panelEdge: "#1e293b",
+    chatBg: "rgba(255,255,255,0.06)",
+    carCard: "rgba(121,242,255,0.12)",
+    carAmber: "#f59e0b",
+    carCyan: "#79f2ff",
+    carViolet: "#8b5cf6",
+    crmGreen: "#22c55e",
+    crmDrawer: "#111827",
+    streamAvito: "#f97316",
+    streamSite: "#38bdf8",
+    streamTg: "#8b5cf6",
+    agentYellow: "#eab308",
+    agentGreen: "#10b981",
+    agentBlue: "#3b82f6",
+    agentPink: "#ec4899",
+    agentPurple: "#8b5cf6",
+    bubbleBg: "#0f172a",
+    bubbleText: "#e2e8f0",
+    track: "rgba(121,242,255,0.25)"
+  };
+
+  function drawRR(ctx, x, y, w, h, r, fill, stroke) {
+    ctx.fillStyle = fill;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
+    else ctx.rect(x, y, w, h);
+    ctx.fill();
+    if (stroke) {
+      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = stroke;
+      ctx.stroke();
+    }
+  }
+
+  function drawMiniCar(ctx, x, y, w, color, label) {
+    drawRR(ctx, x - w / 2, y - 8, w, 16, 4, color, C.outline);
+    ctx.fillStyle = "rgba(15,23,42,0.5)";
+    ctx.beginPath();
+    ctx.arc(x - w * 0.28, y + 10, 4, 0, Math.PI * 2);
+    ctx.arc(x + w * 0.28, y + 10, 4, 0, Math.PI * 2);
+    ctx.fill();
+    if (label) {
+      ctx.fillStyle = "#e2e8f0";
+      ctx.font = "bold 5px Inter,sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(label, x, y + 1);
+    }
+  }
+
+  /* Дуговые рельсы заявок — вместо Conveyor */
+  function OmnichannelInquiryStream() {
+    this.items = [
+      { t0: 0, color: C.streamAvito, tag: "AV" },
+      { t0: 45, color: C.streamSite, tag: "WEB" },
+      { t0: 90, color: C.streamTg, tag: "TG" }
+    ];
+  }
+  OmnichannelInquiryStream.prototype.draw = function (ctx) {
+    var prg = (frame * 0.042) % 260;
+    ctx.strokeStyle = C.track;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 5]);
+    [-1, 0, 1].forEach(function (lane, i) {
+      ctx.beginPath();
+      ctx.moveTo(-185 + lane * 18, 55);
+      ctx.quadraticCurveTo(-40 + lane * 12, -15 + lane * 8, 35, -35);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    this.items.forEach(function (it) {
+      var t = ((frame * 0.55 + it.t0) % 130) / 130;
+      if (t > 0.88) return;
+      var lane = it.tag === "AV" ? -1 : it.tag === "WEB" ? 0 : 1;
+      var x = -185 + lane * 18 + (35 - (-185 + lane * 18)) * t;
+      var y = 55 + (-35 - 55) * t + Math.sin(t * Math.PI) * (-18 - lane * 4);
+      drawRR(ctx, x - 14, y - 10, 28, 18, 4, it.color, C.outline);
+      ctx.fillStyle = "#fff";
+      ctx.font = "bold 6px Inter,sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(it.tag, x, y + 2);
+    });
+  };
+
+  /* Ворота квиза бюджета */
+  function BudgetQuizGate() {
+    this.slider = 0;
+  }
+  BudgetQuizGate.prototype.draw = function (ctx) {
+    var prg = (frame * 0.042) % 260;
+    if (prg < 48 || prg > 165) return;
+    drawRR(ctx, -58, -8, 46, 52, 6, "rgba(139,92,246,0.15)", C.outline);
+    ctx.fillStyle = "#ddd6fe";
+    ctx.font = "bold 6px Inter,sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("КВИЗ", -35, 2);
+    var fill = Math.min(1, (prg - 55) / 50);
+    drawRR(ctx, -52, 14, 34 * fill, 6, 3, C.carCyan, null);
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "5px Inter,sans-serif";
+    ctx.fillText("≤ 2,8 млн", -35, 28);
+  };
+
+  /* Карусель силуэтов стока */
+  function ShowroomStockCarousel() {
+    this.angle = 0;
+  }
+  ShowroomStockCarousel.prototype.draw = function (ctx) {
+    this.angle += 0.018;
+    var colors = [C.carCyan, C.carAmber, C.carViolet];
+    for (var i = 0; i < 3; i++) {
+      var a = this.angle + (i * Math.PI * 2) / 3;
+      var rx = -120 + Math.cos(a) * 22;
+      var ry = 18 + Math.sin(a) * 10;
+      drawMiniCar(ctx, rx, ry, 22, colors[i], "");
+    }
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "bold 6px Inter,sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("STOCK", -132, 8);
+  };
+
+  /* Пунктирная дорога к сделке — фоновая анимация */
+  function TestDriveTrackArc() {
+    this.dot = 0;
+  }
+  TestDriveTrackArc.prototype.draw = function (ctx) {
+    this.dot = (this.dot + 0.008) % 1;
+    ctx.strokeStyle = "rgba(245,158,11,0.35)";
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([3, 6]);
+    ctx.beginPath();
+    ctx.arc(0, 30, 95, Math.PI * 0.15, Math.PI * 0.85);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    var ang = Math.PI * 0.15 + (Math.PI * 0.7) * this.dot;
+    var dx = Math.cos(ang) * 95;
+    var dy = 30 + Math.sin(ang) * 95;
+    ctx.fillStyle = C.carAmber;
+    ctx.beginPath();
+    ctx.arc(dx, dy, 3, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  /* Центральная консоль подбора — вместо WebsiteTerminal */
+  function VehicleMatchConsole() {
+    this.cards = 0;
+  }
+  VehicleMatchConsole.prototype.draw = function (ctx) {
+    var prg = (frame * 0.042) % 260;
+    drawRR(ctx, -8, -72, 130, 118, 10, C.panel, C.outline);
+
+    /* Чат */
+    drawRR(ctx, 2, -64, 52, 96, 6, C.chatBg, C.outline);
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "bold 5px Inter,sans-serif";
+    ctx.textAlign = "left";
+    var lines = [
+      prg > 60 ? "Семья + дача?" : "",
+      prg > 85 ? "Бюджет до 2,8 млн" : "",
+      prg > 110 ? "Trade-in: Sportage" : ""
+    ];
+    lines.forEach(function (ln, i) {
+      if (!ln) return;
+      drawRR(ctx, 6, -58 + i * 16, 44, 10, 3, "rgba(121,242,255,0.18)", null);
+      ctx.fillText(ln, 8, -51 + i * 16);
+    });
+
+    /* Карточки авто */
+    if (prg >= 125) {
+      var cars = [
+        { x: 68, label: "Tiggo 8", price: "2,6 млн", col: C.carCyan },
+        { x: 92, label: "Jolion", price: "2,3 млн", col: C.carAmber },
+        { x: 116, label: "Dargo", price: "2,9 млн", col: C.carViolet }
+      ];
+      cars.forEach(function (car, i) {
+        var pop = Math.min(1, (prg - 125 - i * 12) / 14);
+        if (pop <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = pop;
+        drawRR(ctx, car.x - 14, -58 + i * 28, 28, 24, 4, car.col, C.outline);
+        drawMiniCar(ctx, car.x, -46 + i * 28, 18, "rgba(15,23,42,0.35)", "");
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 5px Inter,sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(car.label, car.x, -36 + i * 28);
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillText(car.price, car.x, -28 + i * 28);
+        drawRR(ctx, car.x - 12, -22 + i * 28, 24, 7, 3, "rgba(34,197,94,0.25)", C.crmGreen);
+        ctx.fillStyle = "#bbf7d0";
+        ctx.font = "bold 4px Inter,sans-serif";
+        ctx.fillText("в наличии", car.x, -17 + i * 28);
+        ctx.restore();
+      });
+    }
+  };
+
+  /* Слот CRM — финал: бриф + приоритет A */
+  function CrmBriefDrawer() {
+    this.slide = 0;
+  }
+  CrmBriefDrawer.prototype.draw = function (ctx) {
+    var prg = (frame * 0.042) % 260;
+    drawRR(ctx, 118, -18, 58, 72, 8, C.crmDrawer, C.outline);
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "bold 6px Inter,sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("CRM", 147, -8);
+
+    if (prg >= 188) {
+      this.slide = Math.min(1, (prg - 188) / 22);
+      var by = 8 + (1 - this.slide) * 40;
+      ctx.save();
+      ctx.globalAlpha = this.slide;
+      drawRR(ctx, 124, by, 46, 38, 5, "rgba(34,197,94,0.2)", C.crmGreen);
+      ctx.fillStyle = "#ecfdf5";
+      ctx.font = "bold 5px Inter,sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText("Бриф · Алексей", 128, by + 10);
+      ctx.fillText("A · 2,8 млн", 128, by + 20);
+      ctx.fillText("3 модели", 128, by + 30);
+      ctx.restore();
+    }
+
+    if (prg >= 215) {
+      var pulse = (prg - 215) / 45;
+      ctx.strokeStyle = "rgba(34,197,94," + (0.8 - pulse * 0.6) + ")";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(147, 52, 8 + pulse * 18, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  };
+
+  /* Маяк горячего лида */
+  function HotLeadBeacon() {
+    this.on = false;
+  }
+  HotLeadBeacon.prototype.draw = function (ctx) {
+    var prg = (frame * 0.042) % 260;
+    this.on = prg >= 220;
+    if (!this.on) return;
+    var blink = 0.6 + Math.sin(frame * 0.2) * 0.4;
+    ctx.fillStyle = "rgba(34,197,94," + blink + ")";
+    ctx.beginPath();
+    ctx.arc(168, -52, 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#bbf7d0";
+    ctx.font = "bold 5px Inter,sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText("!", 166, -50);
+  };
+
+  function Agent(x, y, color, role, stepTrig, dialogs) {
+    this.x = x; this.y = y; this.baseX = x; this.baseY = y;
+    this.color = color; this.role = role;
+    this.timer = Math.random() * 100;
+    this.stepTrig = stepTrig;
+    this.dialogs = dialogs;
+  }
+
+  Agent.prototype.draw = function (ctx) {
+    this.timer += 0.03;
+    var prg = (frame * 0.042) % 260;
+    var isMoving = false;
+    var faceDir = 1;
+    var carryType = null;
+
+    var targets = {
+      "1_architect": { x: -45, y: -20 },
+      "2_seo": { x: -35, y: 5 },
+      "3_coder": { x: -105, y: 25 },
+      "4_designer": { x: 55, y: -15 },
+      "5_deployer": { x: 130, y: 15 }
+    };
+    var tgt = targets[this.role] || { x: 0, y: 0 };
+
+    if (prg >= this.stepTrig && prg < this.stepTrig + 26) {
+      var local = prg - this.stepTrig;
+      if (local < 13) {
+        isMoving = true;
+        this.x = this.baseX + (tgt.x - this.baseX) * (local / 13);
+        this.y = this.baseY + (tgt.y - this.baseY) * (local / 13);
+      } else if (local < 18) {
+        this.x = tgt.x; this.y = tgt.y;
+      } else {
+        isMoving = true;
+        faceDir = -1;
+        this.x = tgt.x - (tgt.x - this.baseX) * ((local - 18) / 8);
+        this.y = tgt.y - (tgt.y - this.baseY) * ((local - 18) / 8);
+      }
+    } else {
+      this.x = this.baseX; this.y = this.baseY;
+      carryType = prg >= this.stepTrig - 8 ? this.color : null;
+    }
+
+    if (!isMoving && frame % 200 === 0 && Math.random() < 0.12) {
+      createBubble(this.x, this.y - 14, this.dialogs[Math.floor(Math.random() * this.dialogs.length)], 220);
+    }
+
+    var bob = Math.sin(this.timer * 1.5) * 1;
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    drawRR(ctx, -10, -8 - bob, 20, 14, 4, this.color, C.outline);
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(0, -18 - bob, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = C.outline;
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+    if (carryType) {
+      drawRR(ctx, -16, -16 - bob, 10, 10, 2, carryType, C.outline);
+    }
+    ctx.restore();
+  };
+
+  var entities = [];
+  var bubbles = [];
+
+  entities.push(new TestDriveTrackArc());
+  entities.push(new OmnichannelInquiryStream());
+  entities.push(new ShowroomStockCarousel());
+  entities.push(new BudgetQuizGate());
+  entities.push(new VehicleMatchConsole());
+  entities.push(new CrmBriefDrawer());
+  entities.push(new HotLeadBeacon());
+
+  entities.push(new Agent(-155, 42, C.agentYellow, "1_architect", 18, [
+    "Avito: кроссовер до 3 млн",
+    "Принял запрос с канала",
+    "Семья + дача — ок"
+  ]));
+  entities.push(new Agent(-165, 58, C.agentGreen, "2_seo", 58, [
+    "Уточняю бюджет клиента",
+    "Trade-in: Sportage 2019",
+    "Срок — 2 недели, приоритет A"
+  ]));
+  entities.push(new Agent(-175, 28, C.agentBlue, "3_coder", 98, [
+    "RAG: только live-сток",
+    "VIN подтверждён",
+    "Без галлюцинаций"
+  ]));
+  entities.push(new Agent(20, 48, C.agentPink, "4_designer", 132, [
+    "3 карточки из наличия",
+    "Цвет и комплектация",
+    "UI подбора готов"
+  ]));
+  entities.push(new Agent(95, 38, C.agentPurple, "5_deployer", 172, [
+    "submit_lead → amoCRM",
+    "Транскрипт в сделке",
+    "Менеджер уведомлён"
+  ]));
+
+  function createBubble(x, y, text, customLife) {
+    bubbles.push({ x: x, y: y, text: text, life: customLife || 220, maxLife: customLife || 220 });
+  }
+
+  function engineLoop() {
+    frame++;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(scale, scale);
+
+    entities.sort(function (a, b) { return (a.y || 0) - (b.y || 0); });
+    entities.forEach(function (ent) { ent.draw(ctx); });
+
+    var prg = (frame * 0.042) % 260;
+    if (prg >= 22 && prg < 22.05) createBubble(-120, 10, "1. Avito → квиз");
+    if (prg >= 62 && prg < 62.05) createBubble(-40, -5, "2. Бюджет 2,8 млн");
+    if (prg >= 128 && prg < 128.05) createBubble(70, -40, "3. Tiggo · Jolion · Dargo");
+    if (prg >= 192 && prg < 192.05) createBubble(145, 0, "4. Бриф → CRM · A");
+
+    ctx.font = "bold 9px Inter,sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (var i = bubbles.length - 1; i >= 0; i--) {
+      var bub = bubbles[i];
+      bub.life--;
+      if (bub.life <= 0) { bubbles.splice(i, 1); continue; }
+      var alpha = Math.min(1, bub.life / 28);
+      if (bub.life > bub.maxLife - 8) alpha = (bub.maxLife - bub.life) / 8;
+      ctx.globalAlpha = alpha;
+      var tw = ctx.measureText(bub.text).width + 14;
+      var th = 18;
+      var by = bub.y - (bub.maxLife - bub.life) * 0.04;
+      drawRR(ctx, bub.x - tw / 2, by - th, tw, th, 5, C.bubbleBg, C.outline);
+      ctx.fillStyle = C.bubbleText;
+      ctx.fillText(bub.text, bub.x, by - th / 2);
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.restore();
+    requestAnimationFrame(engineLoop);
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(engineLoop);
+  } else {
+    engineLoop();
+  }
+});
+</script>
 
 <script>
 (function(){
