@@ -666,7 +666,8 @@ body.nero-ai-landing{padding-top:0!important}
         <div class="apa-intro-text">
           <p class="apa-eyebrow">Лонгрид · ai подбор автомобиля</p>
           <p><strong>Коротко:</strong> AI-агент для подбора автомобиля — виртуальный консультант первой линии, который принимает запрос на естественном языке, уточняет бюджет и задачи клиента, подбирает 2–5 вариантов из актуального стока дилера и передаёт менеджеру готовый бриф в CRM. Это не «чат-бот с кнопками», а инструмент квалификации лидов, который работает 24/7.</p>
-          <!-- INTERNAL-LINKS:INSERT -->
+          <p>Без передачи брифа в CRM автоагент не окупается: на практике дилеры внедряют его в связке с <a href="/vnedrenie-ai-amocrm/" class="ym-link ym-link--accent">воронкой amoCRM под ключ</a> — от квиза до карточки сделки с транскриптом диалога и приоритетом A/B/C.</p>
+          <p>Смежный сценарий — когда заявки приходят не только из чата, но и с почты: <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link ym-link--accent">AI-обработка входящей почты в CRM</a> снимает ручную сортировку обращений до того, как менеджер откроет сделку.</p>
           <p>Покупатель уже привык к диалоговому подбору на «Авто.ру AI» и в «СберАвто». Дилеру нужен <strong>свой</strong> автоагент на <strong>своём</strong> складе — с передачей лида в CRM, а не удержанием клиента на маркетплейсе. Nero Network внедряет такие решения под ключ: от квиза на сайте до интеграции с amoCRM, Bitrix24 и отраслевыми DMS.</p>
         </div>
         <div class="apa-intro-kpi" aria-label="Ключевые метрики">
@@ -944,7 +945,8 @@ Trade-in: Kia Sportage 2019, ~1,1 млн ₽
       <div class="apa-sh nero-ai-reveal">
         <span class="apa-eyebrow">Референсы</span>
         <h2>Кейсы и примеры внедрения</h2>
-        <!-- INTERNAL-LINKS:INSERT -->
+        <p>У автодилеров с ERP и складским учётом полезно сравнить подходы с enterprise-автоматизацией: смежный разбор — <a href="/ai-1c-erp/" class="ym-link ym-link--accent">внедрение AI-агента в 1С и ERP</a>, где агенты обрабатывают заявки и документы без двойного ввода.</p>
+        <p>На уровне крупных компаний похожие принципы managed-агентов показаны в материале о <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link ym-link--accent">масштабном внедрении AI в бизнес</a> — цифровые шлюзы и human-in-the-loop, которые адаптируют под дилерскую первую линию.</p>
         <p>Публичных кейсов «AI-агент подбора по бюджету у конкретного дилера» пока мало — ниже референсы, на которые опирается Nero Network.</p>
       </div>
 
@@ -1068,7 +1070,69 @@ Trade-in: Kia Sportage 2019, ~1,1 млн ₽
 
 </div><!-- /.apa-content -->
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$apa_page_url  = trailingslashit( get_permalink() );
+$apa_site_url  = trailingslashit( home_url( '/' ) );
+$apa_brand     = get_bloginfo( 'name' ) ?: 'Nero Network';
+$apa_h1        = 'AI-агент для подбора автомобиля: внедрение под ключ';
+$apa_schema    = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $apa_site_url . '#organization',
+			'name'  => $apa_brand,
+			'url'   => $apa_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $apa_site_url . '#website',
+			'url'       => $apa_site_url,
+			'name'      => $apa_brand,
+			'publisher' => [ '@id' => $apa_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $apa_page_url . '#webpage',
+			'url'         => $apa_page_url,
+			'name'        => $apa_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $apa_site_url . '#website' ],
+			'about'       => [ '@id' => $apa_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $apa_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $apa_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $apa_h1, 'item' => $apa_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $apa_page_url . '#service',
+			'name'        => $apa_h1,
+			'description' => $page_seo_description,
+			'url'         => $apa_page_url,
+			'provider'    => [ '@id' => $apa_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $apa_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Как внедрить ai подбор автомобиля без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Внедрение под ключ — задача интегратора. От дилера нужны: доступ к CRM, каталог в Excel/API, FAQ салона и 2–3 часа на согласование сценариев. Программист в штате не обязателен.' ] ],
+				[ '@type' => 'Question', 'name' => 'Сколько стоит ai подбор автомобиля?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 180–600 тыс. ₽ в зависимости от каналов и глубины интеграции. MVP — нижняя часть вилки. Точная смета — после аудита.' ] ],
+				[ '@type' => 'Question', 'name' => 'Можно ли запустить только квиз без полной интеграции?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да. Квиз как лид-магнит — первый шаг: собирает бриф и отправляет в CRM или на e-mail менеджеру. Полноценный AI-агент в мессенджерах — следующий этап.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие CRM поддерживаются?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'amoCRM, Bitrix24, RetailCRM — нативные коннекторы. Отраслевые DMS — через API или Make/n8n/Alboto. Чаты AUTO.ru — через приложение Bitrix24 (pweb.chatautoru).' ] ],
+				[ '@type' => 'Question', 'name' => 'Что если нужной модели нет в наличии?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Агент не «придумывает» машину. RAG ищет ближайшие альтернативы из актуального стока. Если подходящего нет — честно сообщает и предлагает связь с менеджером.' ] ],
+				[ '@type' => 'Question', 'name' => 'Бот будет врать про наличие?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет — при правильной настройке. Anti-hallucination: ответы только по данным выгрузки (VIN, статус, цена). Синхронизация стока каждые 15–60 минут.' ] ],
+				[ '@type' => 'Question', 'name' => 'Клиенты хотят живого человека — зачем бот?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'AI-агент — первая линия, не замена менеджера. Эскалация request_human в любой момент. Бот снимает рутину; человек закрывает сделку, торг, trade-in, F&I.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $apa_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
