@@ -1471,6 +1471,7 @@ nav[aria-label="Хлебные крошки"],
 <section class="akl-section nero-ai-reveal" id="crm">
   <div class="akl-cnt">
     <header class="akl-sh"><h2>Интеграция с CRM: amoCRM, Bitrix24, HubSpot</h2></header>
+    <!-- INTERNAL-LINKS:INSERT -->
     <div class="akl-prose">
 <p><strong>Определение:</strong> <strong>Интеграция ai квалификация лидов с crm</strong> — запись статусов, счёта и резюме в нативные поля и запуск роботов без ручного копирования из чата.</p>
 <h3 class="akl-h3">Поля, статусы и автоматизации в CRM</h3>
