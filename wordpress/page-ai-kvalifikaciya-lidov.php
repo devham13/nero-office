@@ -542,6 +542,7 @@ nav[aria-label="Хлебные крошки"],
 
 
 <main id="primary" class="site-main nero-ai-home-page ai-kvalifikaciya-lidov-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1"></span>
 
 <section class="nero-ai-hero akl-hero-qualify" id="akl-hero-qualify" aria-labelledby="akl-hero-title">
 <style>
