@@ -1106,18 +1106,18 @@ requestAnimationFrame(tick);
 </div></section>
 <section class="vkal-section vkal-section-alt" id="crm-voronka"><div class="vkal-cnt">
 <header class="vkal-sh nero-ai-reveal"><h2>Интеграция с CRM и AI-воронкой продаж</h2></header>
-<div class="vkal-prose nero-ai-reveal"><!-- INTERNAL-LINKS:INSERT -->
-<p>Запросы <strong>интеграция ai квалификация лидов с crm</strong> и <strong>ai воронка продаж</strong> закрываются не «голым чатом», а сквозным pipeline.</p>
+<div class="vkal-prose nero-ai-reveal">
+<p>Запросы <strong>интеграция ai квалификация лидов с crm</strong> и <strong>ai воронка продаж</strong> закрываются не «голым чатом», а сквозным pipeline — в том числе когда первый контакт приходит из почты: <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-obrabotka-email-crm/' ) ); ?>">AI-обработка входящей почты в CRM</a> дополняет диалоговый скоринг единым handoff.</p>
 <p><strong>Логика работы (типовой проект):</strong></p>
 <ol class="vkal-ol"><li>Событие: заявка, сообщение, транскрипт звонка.</li><li>Нормализация: телефон E.164, дедуп за 72 ч, история CRM.</li><li>Rule-layer: спам, дубль, явный нецелевой → статус без дорогой модели.</li><li>Диалог: 3–7 вопросов; FAQ из RAG с возвратом к сценарию.</li><li>Скоринг: score + статус; расхождение LLM и правил → очередь проверки.</li><li>Handoff по статусу (hot → задача с дедлайном; reject → закрытие с причиной).</li><li>Аналитика: доли статусов, время ответа, MQL→SQL, причины отказов.</li></ol>
 <h3 class="vkal-h3">Передача полей и статусов в CRM</h3>
 <p>Рекомендуемый набор полей handoff:</p>
 <ul class="vkal-ul"><li><code>ai_status</code> — hot / warm / cold / reject;</li><li><code>ai_score</code> — 0–100;</li><li><code>qualification_summary</code> — 2–4 предложения для менеджера;</li><li><code>disqualify_reason</code> — для нецелевых;</li><li>транскрипт / цитаты — в таймлайне или примечании.</li></ul>
-<p>Нативный <strong>amoCRM AI-агент</strong> (тарифы Профессиональный+) снижает порог входа, но <strong>внедрение ai агентов</strong> под кросс-канальность (сайт + Wazzup + Авито + очереди) обычно требует кастомной матрицы и оркестрации — это зона <strong>внедрение ai в бизнес процессы</strong> с фокусом на продажи, а не общий «вайбкодинг».</p>
-<p>В Bitrix24 можно комбинировать кастомный AI-проект с приложениями вроде <strong>SiMiX Lead Scoring</strong> (правила hot/warm/cold без кода) — Nero Network проектирует связку так, чтобы скоринг и диалог не дублировали друг друга.</p>
+<p>Нативный <a href="<?php echo esc_url( home_url( '/vnedrenie-ai-amocrm/' ) ); ?>"><strong>AI-агент для amoCRM под ключ</strong></a> (тарифы Профессиональный+) снижает порог входа, но <strong>внедрение ai агентов</strong> под кросс-канальность (сайт + Wazzup + Авито + очереди) обычно требует кастомной матрицы и оркестрации — это зона <strong>внедрение ai в бизнес процессы</strong> с фокусом на продажи, а не общий «вайбкодинг».</p>
+<p>В Bitrix24 можно комбинировать кастомный AI-проект с приложениями вроде <strong>SiMiX Lead Scoring</strong> (правила hot/warm/cold без кода) — Nero Network проектирует связку так, чтобы скоринг и диалог не дублировали друг друга. Если после квалификации лид уходит в учётный контур, смежный сценарий — <a href="<?php echo esc_url( home_url( '/ai-1c-erp/' ) ); ?>">AI-агент для 1С и ERP</a>.</p>
 <h3 class="vkal-h3">Триггеры для менеджеров и SLA первого ответа</h3>
 <p>Для <strong>горячих</strong> — push и задача «перезвонить до …»; для <strong>тёплых</strong> — отложенный контакт; для <strong>холодных</strong> — вход в nurture; для <strong>нецелевых</strong> — без эскалации на менеджера. SLA первого ответа измеряется с момента обращения до первого осмысленного контакта (бот или человек) — в российских кейсах целевой коридор <strong>секунды–минуты</strong>, не часы.</p>
-<p>Кейс Ultima.school (TextBack + amoCRM + ChatGPT-бот WhatsApp): <strong>в 2 раза больше обработанных лидов</strong> без роста штата при сохранении конверсии — типичный эффект для EdTech и услуг с записью на консультацию.</p></div>
+<p>На уровне крупных организаций те же принципы оркестрации агентов разбираются в материале <a href="<?php echo esc_url( home_url( '/kpmg-claude-vnedrenie-ai-276-tysyach/' ) ); ?>">KPMG и Claude: уроки AI для бизнеса</a>. Кейс Ultima.school (TextBack + amoCRM + ChatGPT-бот WhatsApp): <strong>в 2 раза больше обработанных лидов</strong> без роста штата при сохранении конверсии — типичный эффект для EdTech и услуг с записью на консультацию.</p></div>
 </div></section>
 <section class="vkal-section" id="metriki"><div class="vkal-cnt">
 <header class="vkal-sh nero-ai-reveal"><h2>Метрики до и после: доля нецелевых, MQL→SQL, время ответа</h2></header>
@@ -1171,7 +1171,101 @@ requestAnimationFrame(tick);
 </div><!-- /vkal-content -->
 
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vkal_page_url = trailingslashit( get_permalink() );
+$vkal_site_url = trailingslashit( home_url( '/' ) );
+$vkal_brand    = $brand ?: ( get_bloginfo( 'name' ) ?: 'Nero Network' );
+$vkal_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $vkal_site_url . '#organization',
+      'name'  => $vkal_brand,
+      'url'   => $vkal_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $vkal_site_url . '#website',
+      'url'       => $vkal_site_url,
+      'name'      => $vkal_brand,
+      'publisher' => [ '@id' => $vkal_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $vkal_page_url . '#webpage',
+      'url'         => $vkal_page_url,
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $vkal_site_url . '#website' ],
+      'about'       => [ '@id' => $vkal_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $vkal_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vkal_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $page_seo_title, 'item' => $vkal_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $vkal_page_url . '#service',
+      'name'        => $page_seo_title,
+      'description' => $page_seo_description,
+      'url'         => $vkal_page_url,
+      'provider'    => [ '@id' => $vkal_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $vkal_page_url . '#faq',
+      'mainEntity' => [
+        [
+          '@type' => 'Question',
+          'name'  => 'Как внедрить ai квалификация лидов самостоятельно и когда нужен подрядчик?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Коротко: своими силами реалистично собрать прототип на n8n + CRM (см. разборы Wildbots, Habr). Подрядчик нужен, когда важны сроки 3–5 недель, согласованная матрица с РОПом, очереди под лимит webhook Bitrix24, RAG без галлюцинаций, ПДн и приёмка метрик на пилоте. Запрос как внедрить ai квалификация лидов на коммерческой странице ведёт к услуге ai квалификация лидов под ключ.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Подходит ли ai квалификация лидов для малого бизнеса?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Да, если есть повторяемый поток заявок и хотя бы один менеджер, который тонет в «мусоре». При 10–20 лидах в месяц ценность — в скорости ответа и полноте полей, а не только в объёме. Нативные функции CRM могут хватить для одного канала; при кросс-канале и маркетплейсах чаще заказывают настройка ai квалификация лидов у интегратора.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Риски: персональные данные, галлюцинации, контроль качества',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Галлюцинации: RAG, allowlist статусов, запрет обещать цены вне базы; гибрид LLM + правила (BESTERS, Wildbots). ПДн: хранение и обработка в РФ, договор поручения; не логировать полные телефоны в сторонние SaaS без DPA (тренд стека: GigaChat/YandexGPT + n8n на Yandex Cloud — Likesoft и аналоги). Ложные hot: rule-layer, сверка score, HITL на пилоте. Сопротивление продаж: совместная матрица с РОПом.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Чем AI-квалификация отличается от amoAI «из коробки»?',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Коробочный агент закрывает сценарии внутри amoCRM. Внедрение ai агентов под ключ у Nero Network добавляет кастомные дисквалификаторы, Авито, телефонию, очереди, единую матрицу на несколько CRM и отчётность по доле нецелевых — то, что запрашивают при ai квалификация лидов для бизнеса с несколькими точками входа.',
+          ],
+        ],
+        [
+          '@type' => 'Question',
+          'name'  => 'Связь с другими внедрениями AI в продажах',
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text'  => 'Квалификация на входе дополняет (не дублирует) проекты по обработке почты в CRM и AI в amoCRM: сначала статус и поля, затем менеджер работает с подготовленной карточкой. Внутренние ссылки на смежные материалы подберёт этап internal-linker.',
+          ],
+        ]
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vkal_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
