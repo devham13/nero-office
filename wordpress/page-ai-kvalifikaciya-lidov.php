@@ -968,7 +968,11 @@ nav[aria-label="Хлебные крошки"],
   </nav>
 </div>
 
-<!-- INTERNAL-LINKS:INSERT -->
+<div class="akl-cnt nero-ai-reveal" style="margin:0 auto 28px;max-width:920px;padding:0 24px;">
+<p class="akl-related" style="font-size:15px;color:var(--akl-muted);margin:0 0 14px;line-height:1.55;">Лиды приходят не только с форм сайта: если первичный поток — <strong>входящая почта</strong>, имеет смысл сначала закрыть triage в CRM — см. посадочную про <a href="/vnedrenie-ai-obrabotka-email-crm/" class="akl-link">AI-обработку входящей почты в CRM под ключ</a>, а уже затем накладывать скоринг и статусы hot/warm/cold.</p>
+<p class="akl-related" style="font-size:15px;color:var(--akl-muted);margin:0 0 14px;line-height:1.55;">После квалификации частый следующий шаг — учётный контур: <a href="/ai-1c-erp/" class="akl-link">внедрение AI-агента для 1С и ERP</a> связывает сделку в amoCRM или Битрикс24 с заказом и документами без двойного ввода.</p>
+<p class="akl-related" style="font-size:15px;color:var(--akl-muted);margin:0;line-height:1.55;">На фоне <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="akl-link">корпоративного масштаба внедрения AI</a> (цифровые шлюзы, managed-агенты) скоринг лидов в CRM — та же дисциплина маршрутизации, только ближе к отделу продаж и SLA первого касания.</p>
+</div>
 
 <section class="akl-section nero-ai-reveal" id="zachem">
   <div class="akl-cnt">
@@ -1471,7 +1475,7 @@ nav[aria-label="Хлебные крошки"],
 <section class="akl-section nero-ai-reveal" id="crm">
   <div class="akl-cnt">
     <header class="akl-sh"><h2>Интеграция с CRM: amoCRM, Bitrix24, HubSpot</h2></header>
-    <!-- INTERNAL-LINKS:INSERT -->
+    <p class="akl-related nero-ai-reveal" style="max-width:920px;margin:0 auto 22px;padding:0 24px;font-size:15px;color:var(--akl-muted);line-height:1.55;">Если ваша воронка завязана на amoCRM, отдельная посадочная Nero — <a href="/vnedrenie-ai-amocrm/" class="akl-link">внедрение AI-агента в amoCRM под ключ</a>: webhook, Salesbot и кастомные поля дополняют квалификацию до передачи менеджеру и сокращают ручной перенос из чатов.</p>
     <div class="akl-prose">
 <p><strong>Определение:</strong> <strong>Интеграция ai квалификация лидов с crm</strong> — запись статусов, счёта и резюме в нативные поля и запуск роботов без ручного копирования из чата.</p>
 <h3 class="akl-h3">Поля, статусы и автоматизации в CRM</h3>
@@ -1575,7 +1579,74 @@ nav[aria-label="Хлебные крошки"],
 
 </div>
 
-<!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$akl_page_url = trailingslashit( get_permalink() );
+$akl_site_url = trailingslashit( home_url( '/' ) );
+$akl_brand    = get_bloginfo( 'name' ) ?: ( getenv( 'SITE_BRAND' ) ?: 'Nero Network' ); // pragma: allowlist secret
+$akl_h1       = 'AI-квалификация лидов: внедрение и настройка под ключ';
+$akl_schema   = [
+  '@context' => 'https://schema.org',
+  '@graph'   => [
+    [
+      '@type' => 'Organization',
+      '@id'   => $akl_site_url . '#organization',
+      'name'  => $akl_brand,
+      'url'   => $akl_site_url,
+    ],
+    [
+      '@type'     => 'WebSite',
+      '@id'       => $akl_site_url . '#website',
+      'url'       => $akl_site_url,
+      'name'      => $akl_brand,
+      'publisher' => [ '@id' => $akl_site_url . '#organization' ],
+    ],
+    [
+      '@type'       => 'WebPage',
+      '@id'         => $akl_page_url . '#webpage',
+      'url'         => $akl_page_url,
+      'name'        => $akl_h1,
+      'description' => $page_seo_description,
+      'isPartOf'    => [ '@id' => $akl_site_url . '#website' ],
+      'about'       => [ '@id' => $akl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'BreadcrumbList',
+      '@id'   => $akl_page_url . '#breadcrumb',
+      'itemListElement' => [
+        [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $akl_site_url ],
+        [ '@type' => 'ListItem', 'position' => 2, 'name' => $akl_h1, 'item' => $akl_page_url ],
+      ],
+    ],
+    [
+      '@type'       => 'Service',
+      '@id'         => $akl_page_url . '#service',
+      'name'        => $akl_h1,
+      'description' => $page_seo_description,
+      'url'         => $akl_page_url,
+      'provider'    => [ '@id' => $akl_site_url . '#organization' ],
+    ],
+    [
+      '@type' => 'FAQPage',
+      '@id'   => $akl_page_url . '#faq',
+      'mainEntity' => [
+        [ '@type' => 'Question', 'name' => 'Что такое ai лид скоринг простыми словами?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Автоматическая оценка заявки по вашим правилам и тексту обращения с числовым баллом и статусом до работы менеджера.' ] ],
+        [ '@type' => 'Question', 'name' => 'Чем ai квалификация лидов отличается от чат-бота?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Чат-бот ведёт диалог; квалификация обязательно пишет результат в CRM и маршрутизирует задачи. Диалог — опция, не ядро.' ] ],
+        [ '@type' => 'Question', 'name' => 'Нужен ли отдельный ai-агент?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Не всегда. Salesbot закрывает сценарные ветки; агент с LLM нужен, когда важен свободный текст, BANT из одной формы и объяснимый reasoning.' ] ],
+        [ '@type' => 'Question', 'name' => 'Заменит ли AI менеджеров?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет. AI снимает первичный отсев и черновики; закрытие, нестандартные условия и юридические обещания — за человеком (модель Nero Network).' ] ],
+        [ '@type' => 'Question', 'name' => 'AI ошибётся и отдаст мусор в hot?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Снижается порогами confidence, правилами anti-test-data, human-in-the-loop для спорных лидов (практика Velmi).' ] ],
+        [ '@type' => 'Question', 'name' => 'Как внедрить ai квалификация лидов при 152-ФЗ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Минимизировать ПДн в промпте, российские модели, self-hosted оркестратор, договор с обработчиком.' ] ],
+        [ '@type' => 'Question', 'name' => 'Какой минимальный объём лидов для окупаемости?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Формального порога нет; при малом потоке ценность — скорость реакции на hot и освобождение часов (см. кейс 80 лидов/мес).' ] ],
+        [ '@type' => 'Question', 'name' => 'Только CRM-роботы vs LLM vs ML на истории?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Роботы — жёсткие ветки; LLM — неструктурированный текст; ML как Einstein — нужна история конверсий. Часто оптимален гибрид LLM + правила.' ] ],
+        [ '@type' => 'Question', 'name' => 'Сколько длится внедрение под ключ?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пилот на одном канале обычно недели, не месяцы; полный контур — по количеству каналов и CRM.' ] ],
+        [ '@type' => 'Question', 'name' => 'Что входит в «карту квалификации»?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Матрица BANT/MEDDIC под ваш сегмент, чек-лист полей CRM, примеры статусов — бесплатно по CTA на этой странице.' ] ],
+        [ '@type' => 'Question', 'name' => 'Подходит ли для девелоперов и агентств?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, целевая аудитория темы — B2B-услуги, агентства, девелоперы с отделом продаж и CRM.' ] ],
+        [ '@type' => 'Question', 'name' => 'Как связано с ai для crm?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'CRM — система записи; AI-квалификация — сервис, который заполняет поля и запускает автоматизации внутри неё.' ] ],
+      ],
+    ],
+  ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $akl_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
 
 </main>
 
