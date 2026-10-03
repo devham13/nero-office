@@ -1,5 +1,11 @@
 # Session Handoff
 
+## 2026-10-03 — ai-kvalifikaciya-lidov
+
+- Юра: опубликовано `[REDACTED]ai-kvalifikaciya-lidov/` (HTTP 200, custom template page-ai-kvalifikaciya-lidov.php, WP post ID 44).
+- Google Таблица: publish row 3 — ok (service_account).
+- Следующий шаг: indexator, QA (Макс), SEO-аудит (Лёня), vk-publisher.
+
 ## 2026-06-07 — ai-1c-erp
 
 - Юра: опубликовано `[REDACTED]ai-1c-erp/` (HTTP 200, custom template page-ai-1c-erp.php, WP post ID 115).
