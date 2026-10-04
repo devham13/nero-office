@@ -66,17 +66,50 @@ def _webhook_post(payload: dict[str, Any]) -> dict[str, Any]:
         return {"ok": False, "error": str(exc)}
 
 
-def _load_ledger_texts() -> set[str]:
-    texts: set[str] = set()
-    for path in (LEDGER, PUBLISHED):
-        if not path.exists():
-            continue
-        content = path.read_text(encoding="utf-8").lower()
-        for slug in re.findall(r"\|\s*([a-z0-9][a-z0-9-]{2,})\s*\|", content):
-            texts.add(slug.strip())
-        for url in re.findall(r"https?://[^\s|)]+", content):
-            texts.add(url.strip().lower().rstrip("/"))
-    return texts
+def _slug_from_url(url: str) -> str:
+    match = re.search(r"meta-journal\.ru/([^/\s?#]+)", url, flags=re.IGNORECASE)
+    return match.group(1).rstrip("/").lower() if match else ""
+
+
+def _load_published_identifiers() -> tuple[set[str], set[str]]:
+    """Slugs and canonical URLs that are already live (published-pages + ledger published)."""
+    slugs: set[str] = set()
+    urls: set[str] = set()
+
+    if PUBLISHED.exists():
+        for line in PUBLISHED.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("|") or "---" in line:
+                continue
+            parts = [p.strip() for p in line.split("|")]
+            if len(parts) < 4 or parts[2].lower() == "slug":
+                continue
+            slug = parts[2].lower()
+            url = parts[3].lower().rstrip("/")
+            if slug:
+                slugs.add(slug)
+            if url.startswith("http"):
+                urls.add(url)
+
+    if LEDGER.exists():
+        for line in LEDGER.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("|") or "---" in line:
+                continue
+            parts = [p.strip() for p in line.split("|")]
+            if len(parts) < 6:
+                continue
+            if parts[2].lower() != "published":
+                continue
+            slug = parts[5].lower()
+            url = parts[4].lower().rstrip("/")
+            if slug:
+                slugs.add(slug)
+            if url.startswith("http"):
+                urls.add(url)
+            slug_from_url = _slug_from_url(url)
+            if slug_from_url:
+                slugs.add(slug_from_url)
+
+    return slugs, urls
 
 
 def _sheet_tab() -> str:
@@ -112,7 +145,7 @@ def _read_rows_service_account() -> list[dict[str, Any]] | None:
 
 
 def _find_candidate(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
-    known = _load_ledger_texts()
+    published_slugs, published_urls = _load_published_identifiers()
     link_keys = [_link_header(), "link", "url", "Ссылка"]
     for index, row in enumerate(rows, start=2):
         if row.get("_error"):
@@ -122,13 +155,20 @@ def _find_candidate(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
             if key in row and str(row.get(key) or "").strip():
                 link_val = str(row[key]).strip()
                 break
-        if link_val:
-            continue
         topic = str(row.get("Узкая тема посадочной") or row.get("Тема") or row.get("topic") or "").strip()
         if not topic:
             continue
+        status = str(row.get("Статус") or "").strip().lower()
+        if status in {"использована", "опубликовано"}:
+            continue
+        slug_from_link = _slug_from_url(link_val) if link_val else ""
+        link_norm = link_val.lower().rstrip("/")
+        if link_norm and link_norm in published_urls:
+            continue
+        if slug_from_link and slug_from_link in published_slugs:
+            continue
         slug_hint = re.sub(r"[^a-z0-9]+", "-", topic.lower()).strip("-")[:60]
-        if slug_hint in known:
+        if slug_hint in published_slugs:
             continue
         return {"row": index, "topic": topic, "data": row}
     return None

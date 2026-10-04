@@ -52,7 +52,7 @@ $primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Получить карт
 $primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
 $primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
 $secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#etapy';
 
 get_header();
 
@@ -511,6 +511,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page ai-kvalifikaciya-lidov-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1"></span>
 
 <section class="akl-hero-qual nero-ai-hero nero-ai-section" id="top" aria-labelledby="akl-hero-title">
   <div class="nero-ai-container">
@@ -1061,7 +1062,7 @@ nav[aria-label="Хлебные крошки"],
 })();
 </script>
 </section></div>
-<!-- INTERNAL-LINKS:INSERT -->
+<p class="ym-internal-links">См. также: <a class="ym-link" href="<?php echo esc_url(home_url('/vnedrenie-ai-amocrm/')); ?>">AI-агент для amoCRM: внедрение и настройка под ключ</a> и <a class="ym-link" href="<?php echo esc_url(home_url('/vnedrenie-ai-obrabotka-email-crm/')); ?>">AI-обработка входящей почты в CRM</a>.</p>
 <h3 id="kak-rabotaet-h3">Горячий, тёплый, холодный, нецелевой: критерии матрицы</h3>
 <div class="akl-table-wrap"><table class="akl-table"><thead><tr><th>Статус</th><th>Типичные сигналы</th><th>Действие в CRM</th></tr></thead><tbody><tr><td><strong>Горячий</strong></td><td>ICP совпал, бюджет/объём выше порога, срок ≤ N недель, ЛПР подтверждён или высокая уверенность</td><td>Задача ответственному, уведомление, слот в календаре</td></tr><tr><td><strong>Тёплый</strong></td><td>Потребность есть, бюджет/срок неясны, не ЛПР</td><td>Nurture, серия касаний, повторный диалог AI или SDR</td></tr><tr><td><strong>Холодный</strong></td><td>Интерес слабый, срок «когда-нибудь», низкий приоритет</td><td>Отложенный контакт, тег, без звонка в первые 24 ч</td></tr><tr><td><strong>Нецелевой</strong></td><td>Анти-портрет: гео, продукт, спам, конкурент, нет бюджета</td><td>Автозакрытие или стадия «отказ» с <strong>причиной</strong> в карточке</td></tr></tbody></table></div>
 <p>Веса критериев (бюджет, срок, роль, продукт, канал) фиксируются на этапе аудита — не «в голове у бота», а в документе, который вы согласуете с продажами. Это и есть <strong>настройка ai квалификация лидов</strong> в прикладном смысле.</p>
@@ -1632,7 +1633,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- SCHEMA-MARKUP:INSERT -->
 
-<!-- INTERNAL-LINKS:INSERT -->
+<p class="ym-internal-links">Для документооборота и ERP-сценариев: <a class="ym-link" href="<?php echo esc_url(home_url('/ai-1c-erp/')); ?>">AI-агент для 1С и ERP: внедрение под ключ</a>.</p>
 
 </main>
 
