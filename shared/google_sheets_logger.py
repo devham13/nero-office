@@ -111,6 +111,15 @@ def _read_rows_service_account() -> list[dict[str, Any]] | None:
         return [{"_error": str(exc)}]
 
 
+def _slug_from_public_url(link_val: str) -> str:
+    match = re.search(r"meta-journal\.ru/([a-z0-9][a-z0-9-]*)/?", link_val, re.IGNORECASE)
+    return match.group(1).lower() if match else ""
+
+
+def _topic_slug_hint(topic: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", topic.lower()).strip("-")[:60]
+
+
 def _find_candidate(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
     known = _load_ledger_texts()
     link_keys = [_link_header(), "link", "url", "Ссылка"]
@@ -122,14 +131,20 @@ def _find_candidate(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
             if key in row and str(row.get(key) or "").strip():
                 link_val = str(row[key]).strip()
                 break
-        if link_val:
-            continue
         topic = str(row.get("Узкая тема посадочной") or row.get("Тема") or row.get("topic") or "").strip()
         if not topic:
             continue
-        slug_hint = re.sub(r"[^a-z0-9]+", "-", topic.lower()).strip("-")[:60]
+        slug_hint = _slug_from_public_url(link_val) if link_val else _topic_slug_hint(topic)
+        if not slug_hint:
+            slug_hint = _topic_slug_hint(topic)
         if slug_hint in known:
             continue
+        if link_val:
+            norm_link = link_val.strip().lower().rstrip("/")
+            if norm_link in known:
+                continue
+            # Planned URL in sheet before live publication — row is still available.
+            return {"row": index, "topic": topic, "data": row, "planned_url": link_val}
         return {"row": index, "topic": topic, "data": row}
     return None
 
