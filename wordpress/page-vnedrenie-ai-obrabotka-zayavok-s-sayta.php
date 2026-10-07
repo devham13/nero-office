@@ -30,12 +30,7 @@ add_action(
     1
 );
 
-$brand               = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: '');
-$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Проверить, сколько заявок вы теряете';
-$primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
-$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
-$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
-$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
+$brand = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: '');
 
 $nero_ai_header_links = [
     ['label' => 'Боль и SLA', 'href' => '#zayavki-ostyvayut'],
@@ -54,6 +49,12 @@ if (!is_readable($nero_ai_bootstrap)) {
     $nero_ai_bootstrap = dirname(__DIR__) . '/shared/theme-canonical/longread-page-wordpress-bootstrap.inc.php';
 }
 require $nero_ai_bootstrap;
+
+$primary_cta_label   = getenv('PRIMARY_CTA_LABEL') ?: 'Проверить, сколько заявок вы теряете';
+$primary_cta_url     = nero_ai_primary_cta_url(getenv('PRIMARY_CTA_URL') ?: '');
+$primary_cta_attrs   = nero_ai_primary_cta_link_attrs($primary_cta_url);
+$secondary_cta_label = getenv('SECONDARY_CTA_LABEL') ?: 'обучение по внедрению AI в бизнес-процессы';
+$secondary_cta_url   = getenv('SECONDARY_CTA_URL') ?: '#';
 
 get_header();
 
@@ -1091,7 +1092,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="ym-cta-block__body">
           <p class="ym-cta-block__headline">Проверить, сколько заявок вы теряете</p>
           <p class="ym-cta-block__sub">Разберём форму, чат и мессенджеры: где лиды остывают ночью и сколько времени уходит на первое касание. Аудит потерь заявок — 30 минут.</p>
-          <a href="<?php echo esc_url( nero_ai_primary_cta_url() ); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent ym-cta-block__btn" <?php echo nero_ai_primary_cta_link_attrs(); ?>>Проверить, сколько заявок вы теряете</a>
+          <a href="<?php echo esc_url( $primary_cta_url ); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent ym-cta-block__btn"<?php echo $primary_cta_attrs; ?>>Проверить, сколько заявок вы теряете</a>
         </div>
       </aside>
     </div>
@@ -1164,7 +1165,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="ym-cta-block__headline">Ориентир 120–350 тыс. ₽ под ваши каналы</p>
           <p class="ym-cta-block__sub">Оценим точки входа, amoCRM или Битрикс24 и вилку бюджета — без выдуманных ROI.</p>
           <div class="ym-cta-block__actions">
-            <a href="<?php echo esc_url( nero_ai_primary_cta_url() ); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent" <?php echo nero_ai_primary_cta_link_attrs(); ?>>Проверить, сколько заявок вы теряете</a>
+            <a href="<?php echo esc_url( $primary_cta_url ); ?>" class="nero-ai-btn nero-ai-btn-primary ym-btn ym-btn--accent"<?php echo $primary_cta_attrs; ?>>Проверить, сколько заявок вы теряете</a>
             <a href="#cta-proverit" class="nero-ai-btn nero-ai-btn-secondary ym-btn ym-btn--ghost">Квиз: потери заявок</a>
           </div>
         </div>
