@@ -57,6 +57,21 @@ if (!function_exists('nero_ai_echo_theme_styles')) {
     }
 }
 
+if (!function_exists('nero_ai_public_site_origin')) {
+    /**
+     * Публичный origin страницы: WP home/siteurl (обычно https://www…), без PUBLIC_SITE_URL из env.
+     */
+    function nero_ai_public_site_origin(): string
+    {
+        $home = rtrim((string) get_option('home', ''), '/');
+        if ($home !== '') {
+            return $home;
+        }
+
+        return rtrim((string) home_url(), '/');
+    }
+}
+
 if (!function_exists('nero_ai_echo_theme_scripts')) {
     /**
      * @param list<string> $files JS-файлы в теме (по умолчанию header + reveal).
