@@ -56,7 +56,12 @@ $home = home_url('/');
       </nav>
 
       <div class="nero-ai-header-actions">
-        <?php if (!empty($secondary_cta_label) && !empty($secondary_cta_url)) : ?>
+        <?php
+        $secondary_is_actionable = !empty($secondary_cta_label)
+            && !empty($secondary_cta_url)
+            && !(function_exists('nero_ai_is_placeholder_cta_url') && nero_ai_is_placeholder_cta_url((string) $secondary_cta_url));
+        if ($secondary_is_actionable) :
+            ?>
           <a class="nero-ai-header-cta nero-ai-header-cta--ghost" href="<?php echo esc_url($secondary_cta_url); ?>"><?php echo esc_html($secondary_cta_label); ?></a>
         <?php endif; ?>
         <a class="nero-ai-header-cta" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
