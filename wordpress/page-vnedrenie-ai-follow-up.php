@@ -1592,8 +1592,8 @@ nav[aria-label="Хлебные крошки"],
 <td>% сделок с следующим шагом, reactivation rate</td>
 </tr>
 </tbody></table></div>
-<p>Смежные материалы сети: автоматизация обработки email в CRM — про входящий поток; здесь — исходящие повторные касания по правилам стадии.</p>
-<!-- INTERNAL-LINKS:INSERT -->
+<p>Смежные материалы сети: на посадочной про <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vnfu-accent);text-decoration:underline;text-underline-offset:3px">AI-обработку входящей почты в CRM</a> разобран входящий поток и triage писем; на этой странице — исходящие повторные касания по правилам стадии.</p>
+<p>Если нужна автоматизация всей воронки в amoCRM (лид → квалификация → сделка), а не только reactivation, сравните с <a href="/vnedrenie-ai-amocrm/" style="color:var(--vnfu-accent);text-decoration:underline;text-underline-offset:3px">внедрением AI-агента в amoCRM под ключ</a> — таблица выше фиксирует отличия от follow-up.</p>
       </div>
       
     </div>
@@ -1621,7 +1621,7 @@ nav[aria-label="Хлебные крошки"],
 <p>- reactivation rate (вернулись в активную стадию);</p>
 <p>- остановки цепочки по ответу клиента;</p>
 <p>- доля касаний, ушедших через approve.</p>
-<p>После приёмки пилота — второй сценарий (реанимация 90+ дней), подключение телефонии (Mango, UIS, Sipuni) с транскриптом в карточку.</p>
+<p>После приёмки пилота — второй сценарий (реанимация 90+ дней), подключение телефонии (Mango, UIS, Sipuni) с транскриптом в карточку. Когда сделка после дожима уходит в учётный контур, смежный кейс — <a href="/ai-1c-erp/" style="color:var(--vnfu-accent);text-decoration:underline;text-underline-offset:3px">AI-агент для 1С и ERP</a> (заказы и лимиты без двойного ввода).</p>
 <p>Рыночные ориентиры стоимости у интеграторов на AI в продажах в РФ в открытых источниках — от порядка <strong>69–279 тыс. ₽</strong> до <strong>250 тыс. ₽+</strong> за пилот; итоговая смета Nero Network зависит от числа воронок, каналов и требований к ПДн — без обещания фиксированной цены в тексте без калькуляции.</p>
       </div>
       <aside class="ym-cta-block ym-cta-block--secondary" id="cta-obuchenie">
@@ -2023,8 +2023,128 @@ document.addEventListener("DOMContentLoaded", function () {
   } else { items.forEach(function(item){ item.classList.add('nero-ai-active'); }); }
 })();
 </script>
-<!-- SCHEMA-MARKUP:INSERT -->
-<!-- INTERNAL-LINKS:INSERT -->
+<?php
+$vnfu_page_url  = trailingslashit( get_permalink() );
+$vnfu_site_url  = trailingslashit( home_url( '/' ) );
+$vnfu_brand     = $brand ?: 'Nero Network';
+$vnfu_page_h1   = 'AI follow-up менеджер: внедрение повторных касаний по сделкам под ключ';
+$vnfu_schema    = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $vnfu_site_url . '#organization',
+			'name'  => $vnfu_brand,
+			'url'   => $vnfu_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $vnfu_site_url . '#website',
+			'url'       => $vnfu_site_url,
+			'name'      => $vnfu_brand,
+			'publisher' => [ '@id' => $vnfu_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $vnfu_page_url . '#webpage',
+			'url'         => $vnfu_page_url,
+			'name'        => $vnfu_page_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $vnfu_site_url . '#website' ],
+			'about'       => [ '@id' => $vnfu_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $vnfu_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vnfu_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $vnfu_page_h1, 'item' => $vnfu_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $vnfu_page_url . '#service',
+			'name'        => $vnfu_page_h1,
+			'description' => $page_seo_description,
+			'url'         => $vnfu_page_url,
+			'provider'    => [ '@id' => $vnfu_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $vnfu_page_url . '#faq',
+			'mainEntity' => [
+				[
+					'@type'          => 'Question',
+					'name'           => 'Чем AI follow-up отличается от email-рассылки?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Рассылка идёт по списку и не смотрит на стадию сделки в CRM. AI follow-up срабатывает по триггерам карточки (нет задачи, N дней без ответа, стадия «КП»), подставляет контекст и останавливается при ответе клиента.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Нужен ли уже настроенный CRM?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Да. Услуга рассчитана на компании, где воронка уже есть; мы не продаём CRM с нуля, а накладываем ai слой в crm. Минимум — стадии, ответственные, поля для генерации текста.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Заменит ли AI менеджеров?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Нет. Заменяет пропущенные касания и ускоряет черновики; закрытие и переговоры — у команды. 94% лидеров с агентами в отчёте Salesforce называют их критичными для роста — как усиление, не как вывод штата.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Сколько длится внедрение?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Аудит — несколько дней; пилот одного сценария — ориентир 2–4 недели; масштабирование зависит от числа воронок и каналов. Жёсткие сроки фиксируют в договоре после аудита.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Сколько касаний нужно лиду?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Считайте медиану по своим закрытым сделкам; ориентиры из чужих опросов (5–8 до встречи) — только как фон, не как KPI.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Опасно ли для персональных данных?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'При работе с ПДн граждан РФ — российские модели (YandexGPT, GigaChat), минимизация полей в промпте, договор обработки, согласия на каналы. Автосообщения в мессенджер — только при наличии правового основания.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'У нас уже есть роботы в CRM — зачем AI?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Роботы шлют шаблон. AI добавляет вариативность и контекст из карточки при сохранении ваших правил и красных линий.',
+					],
+				],
+				[
+					'@type'          => 'Question',
+					'name'           => 'Чем это отличается от AI-агента для amoCRM?',
+					'acceptedAnswer' => [
+						'@type' => 'Answer',
+						'text'  => 'Агент закрывает широкий путь от лида до сделки; follow-up менеджер — узкий фокус на зависших сделках и реактивации базы.',
+					],
+				],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vnfu_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
+<p class="vnfu-related nero-ai-reveal" style="margin:clamp(32px,4vw,48px) auto 0;width:min(var(--vnfu-container),calc(100% - 40px));font-size:15px;line-height:1.65;color:var(--vnfu-muted)">Масштаб и governance AI в продажах на уровне enterprise — в разборе <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vnfu-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude: уроки AI для бизнеса</a> (managed-агенты и цифровые шлюзы для тысяч сотрудников).</p>
 
 </main>
 
