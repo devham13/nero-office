@@ -832,7 +832,7 @@ body.nero-ai-landing{padding-top:0!important}
         <li class="nero-ai-badge">24/7</li>
       </ul>
       <div class="nero-ai-btn-row">
-        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html('<?php echo esc_html($primary_cta_label); ?>'); ?></a>
+        <a class="nero-ai-btn nero-ai-btn-primary" href="<?php echo esc_url($primary_cta_url); ?>"<?php echo $primary_cta_attrs; ?>><?php echo esc_html($primary_cta_label); ?></a>
         <a class="nero-ai-btn nero-ai-btn-secondary" href="#kak-rabotaet">Как это работает</a>
       </div>
     </div>
@@ -1317,7 +1317,10 @@ document.addEventListener("DOMContentLoaded", function () {
           <p>Скорость первого ответа и структура диалога напрямую влияют на конверсию. <strong>AI обработка заявок</strong> закрывает разрыв между моментом отправки формы и появлением осмысленной карточки в CRM.</p>
         </div>
       </div>
-      <!-- INTERNAL-LINKS:INSERT -->
+      <div class="vna-related nero-ai-reveal" style="margin-top:28px" aria-label="Смежные материалы Nero Network">
+        <p style="margin:0 0 14px;font-size:15px;line-height:1.65;color:var(--vna-muted);">Заявки часто дублируются письмами на общий ящик — тогда имеет смысл сопоставить с <a href="/vnedrenie-ai-obrabotka-email-crm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-обработкой входящей почты в CRM под ключ</a>: тот же принцип triage и маршрутизации, но для email-потока.</p>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:var(--vna-muted);">Если основная CRM — amoCRM, полезно заранее понять стык сделок и задач: отдельный разбор — <a href="/vnedrenie-ai-amocrm/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">внедрение AI-агента в amoCRM под ключ</a> без ручного переноса полей из чата.</p>
+      </div>
     </div>
   </section>
 
@@ -1817,7 +1820,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="vna-sh nero-ai-reveal">
         <span class="vna-eyebrow">CRM и middleware</span>
         <h2>Интеграция с CRM: amoCRM, Bitrix24, Make и n8n</h2>
-        <p><strong>Интеграция ai обработка заявок</strong> — ядро услуги: без записи в CRM агент остаётся «умным чатом».</p>
+        <p><strong>Интеграция ai обработка заявок</strong> — ядро услуги: без записи в CRM агент остаётся «умным чатом». Когда нужна связка с учётом и ERP, а не только сделки в amoCRM, смотрите сценарий <a href="/ai-1c-erp/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">AI-агента для 1С и ERP</a>.</p>
       </div>
       <div class="vna-flow nero-ai-reveal" aria-label="Схема webhook">
         <span>Событие формы/чата</span><span class="arr">→</span>
@@ -1891,7 +1894,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="vna-sh vna-left nero-ai-reveal">
         <span class="vna-eyebrow">Процесс</span>
         <h2>Пример внедрения: от заявки на сайте до сделки в CRM</h2>
-        <p>Процессный сценарий без выдуманных метрик клиента Nero Network.</p>
+        <p>Процессный сценарий без выдуманных метрик клиента Nero Network. На корпоративном масштабе те же шлюзы квалификации и managed-агенты уже разбирались в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" style="color:var(--vna-accent);text-decoration:underline;text-underline-offset:3px">KPMG и Claude — уроки AI для бизнеса</a> — идеи можно адаптировать к ночному потоку заявок с сайта.</p>
       </div>
       <ol class="nero-ai-reveal" style="padding-left:20px;color:var(--vna-muted);line-height:1.75;max-width:820px">
         <li>Посетитель пишет в чат на лендинге в 23:40.</li>
