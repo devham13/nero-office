@@ -1969,7 +1969,131 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </section>
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.meta-journal.ru/#organization",
+      "name": "Nero Network",
+      "url": "https://www.meta-journal.ru/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.meta-journal.ru/#website",
+      "url": "https://www.meta-journal.ru/",
+      "name": "Nero Network",
+      "publisher": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/#webpage",
+      "url": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/",
+      "name": "AI-агент для первичной обработки заявок с сайта: внедрение под ключ",
+      "description": "Внедрим AI-агента для первичной обработки заявок с формы и чата: ответ за 5–15 секунд, квалификация и передача лида в CRM. Аудит потерь заявок — бесплатно по заявке.",
+      "isPartOf": {
+        "@id": "https://www.meta-journal.ru/#website"
+      },
+      "about": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://www.meta-journal.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI-агент для первичной обработки заявок с сайта: внедрение под ключ",
+          "item": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/#service",
+      "name": "AI-агент для первичной обработки заявок с сайта: внедрение под ключ",
+      "description": "Внедрим AI-агента для первичной обработки заявок с формы и чата: ответ за 5–15 секунд, квалификация и передача лида в CRM. Аудит потерь заявок — бесплатно по заявке.",
+      "url": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/",
+      "provider": {
+        "@id": "https://www.meta-journal.ru/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.meta-journal.ru/vnedrenie-ai-obrabotka-zayavok-s-sayta/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как внедрить AI-обработку заявок на существующий сайт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Обычно не нужно переписывать сайт: webhook формы или API виджета, middleware, интеграция с CRM. Начинается с одного канала и пилота."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужен ли отдельный разработчик?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Для типового стека (форма + amoCRM + Make/n8n) достаточно команды интегратора Nero Network. Свой разработчик — при нестандартной ERP или жёстком ИБ-аудите."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли оставить менеджеров только на «горячих» лидах?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да: агент обрабатывает первичку и нецелевых, человек — переговоры и закрытие. Доля эскалаций измеряется на пилоте."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Сколько стоит ai обработка заявок?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ориентир проекта 120–350 тыс. ₽ + поддержка; точная смета после аудита каналов и CRM."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что если уже подключён amoAI или Jivo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "amoAI закрывает сценарии внутри amoCRM; Jivo — быстрый чат. Кастом нужен при форме вне экосистемы, двух CRM, ERP, self-hosted n8n в РФ и асинхронных webhook Bitrix24."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как доказать эффект?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Пилот 2–4 недели: время первого ответа, доля квалифицированных лидов, доля эскалаций, сравнение с периодом «до» на том же канале."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чем отличается от корпоративного ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Workspace agents автоматизируют процессы сотрудников внутри компании. AI агент для сайта работает с клиентами на вашем домене и в вашей CRM."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 </div><!-- /.vna-content -->
 
