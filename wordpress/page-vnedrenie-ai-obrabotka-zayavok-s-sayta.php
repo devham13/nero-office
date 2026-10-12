@@ -1675,7 +1675,74 @@ nav[aria-label="Хлебные крошки"],
 </section>
   <!-- INTERNAL-LINKS:INSERT -->
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+<?php
+$vnz_page_url = trailingslashit( get_permalink() );
+$vnz_site_url = trailingslashit( home_url( '/' ) );
+$vnz_brand    = $brand ?: 'Nero Network';
+$vnz_h1       = 'AI-агент для первичной обработки заявок с сайта: внедрение под ключ';
+$vnz_schema   = [
+	'@context' => 'https://schema.org',
+	'@graph'   => [
+		[
+			'@type' => 'Organization',
+			'@id'   => $vnz_site_url . '#organization',
+			'name'  => $vnz_brand,
+			'url'   => $vnz_site_url,
+		],
+		[
+			'@type'     => 'WebSite',
+			'@id'       => $vnz_site_url . '#website',
+			'url'       => $vnz_site_url,
+			'name'      => $vnz_brand,
+			'publisher' => [ '@id' => $vnz_site_url . '#organization' ],
+		],
+		[
+			'@type'       => 'WebPage',
+			'@id'         => $vnz_page_url . '#webpage',
+			'url'         => $vnz_page_url,
+			'name'        => $vnz_h1,
+			'description' => $page_seo_description,
+			'isPartOf'    => [ '@id' => $vnz_site_url . '#website' ],
+			'about'       => [ '@id' => $vnz_site_url . '#organization' ],
+		],
+		[
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $vnz_page_url . '#breadcrumb',
+			'itemListElement' => [
+				[ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vnz_site_url ],
+				[ '@type' => 'ListItem', 'position' => 2, 'name' => $vnz_h1, 'item' => $vnz_page_url ],
+			],
+		],
+		[
+			'@type'       => 'Service',
+			'@id'         => $vnz_page_url . '#service',
+			'name'        => $vnz_h1,
+			'description' => $page_seo_description,
+			'url'         => $vnz_page_url,
+			'provider'    => [ '@id' => $vnz_site_url . '#organization' ],
+		],
+		[
+			'@type'      => 'FAQPage',
+			'@id'        => $vnz_page_url . '#faq',
+			'mainEntity' => [
+				[ '@type' => 'Question', 'name' => 'Сколько стоит ai обработка заявок?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ориентир 120–350 тыс. ₽ за старт «под ключ» + поддержка; точная смета после аудита каналов и CRM.' ] ],
+				[ '@type' => 'Question', 'name' => 'Как внедрить ai обработка заявок без риска для продаж?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Пилот 2–3 недели на одном входе, метрики SLA и доли заполненных полей CRM, эскалация на человека при низкой уверенности.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какая интеграция ai обработка заявок с crm поддерживается?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Типовой фокус: amoCRM (leads/complex) и Битрикс24 (crm.lead.add). Другие системы — по ТЗ.' ] ],
+				[ '@type' => 'Question', 'name' => 'Есть ли пример внедрения ai обработка заявок в моей нише?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Публичные кейсы интеграторов (MrBoro, Юнкис, Inteltek) — в разделе выше; ваш пример формируется на пилоте.' ] ],
+				[ '@type' => 'Question', 'name' => 'Где посмотреть ai обработка заявок кейсы?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Ссылки на кейсы интеграторов в разделе «Кейсы»; цифры — с пометкой источника.' ] ],
+				[ '@type' => 'Question', 'name' => 'Подходит ли это для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, при потоке заявок с сайта и готовности поддерживать KB; иначе сначала CRM и базовая форма.' ] ],
+				[ '@type' => 'Question', 'name' => 'Чем это отличается от ai бот для сайта из коробки?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Кастомная квалификация, запись в вашу воронку, guardrails и SLA, а не только FAQ-виджет.' ] ],
+				[ '@type' => 'Question', 'name' => 'Заменит ли BitrixGPT ваш агент?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Нет для первого ответа посетителю на сайте; BitrixGPT сильнее в пост-анализе уже состоявшихся чатов в CRM.' ] ],
+				[ '@type' => 'Question', 'name' => 'Какие сроки внедрения ai агентов?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Первый рабочий контур часто 2–8 недель (кейсы рынка); ускорение — узкий пилот на одной форме.' ] ],
+				[ '@type' => 'Question', 'name' => 'Безопасны ли персональные данные?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Согласие в форме/виджете, 152-ФЗ, по возможности российский контур (Yandex Cloud, YandexGPT/GigaChat) — по политике клиента.' ] ],
+				[ '@type' => 'Question', 'name' => 'Что если AI ошибётся в цене?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Цены и сроки — только из базы знаний или эскалация; запрет авто-обещаний вне KB.' ] ],
+			],
+		],
+	],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vnz_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+?>
+
 </div>
 </main>
 
