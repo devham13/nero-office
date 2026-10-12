@@ -545,6 +545,7 @@ nav[aria-label="Хлебные крошки"],
 </style>
 
 <main id="primary" class="site-main nero-ai-home-page vnedrenie-ai-obrabotka-zayavok-s-sayta-page" role="main" tabindex="-1">
+<span id="main" class="screen-reader-text" tabindex="-1"></span>
 
 <style>
 /* Hero vnz: премиальный тёмный стиль как главная meta-journal (.nero-ai-hero) */
