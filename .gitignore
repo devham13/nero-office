@@ -19,6 +19,8 @@ output/
 page-*.php
 !wordpress/
 !wordpress/page-*.php
+!wordpress-theme/
+!wordpress-theme/page-*.php
 temp_page.html
 downloaded.html
 
