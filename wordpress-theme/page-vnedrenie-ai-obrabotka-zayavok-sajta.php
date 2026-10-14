@@ -1016,7 +1016,9 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 
-  <!-- INTERNAL-LINKS:INSERT -->
+  <div class="vzaz-cnt" style="padding:0 0 12px">
+    <p class="nero-ai-reveal" style="font-size:15px;margin:0">Лиды приходят не только с формы: если заметная доля обращений — из почты, сайт и inbox логично связать через <a href="/vnedrenie-ai-obrabotka-email-crm/" class="ym-link--accent">AI-обработку входящей почты в CRM</a> в одной воронке.</p>
+  </div>
 
   <section class="vzaz-section" id="poteri-zayavok">
     <div class="vzaz-cnt">
@@ -1530,11 +1532,11 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="vzaz-grid-2 nero-ai-reveal">
         <div class="vzaz-card">
           <h3>amoCRM, Битрикс24 и другие</h3>
-          <p>Сделка из диалога, дедупликация по телефону. Кейс MrBoroAI: запуск 2–8 недель. Velmi: ответ 2–3 ч → 30–40 с, квалифицированные лиды +35% (Хабр).</p>
+          <p>Сделка из диалога, дедупликация по телефону. Если amoCRM — основной контур продаж, см. отдельную услугу <a href="/vnedrenie-ai-amocrm/" class="ym-link--accent">внедрение AI-агента в amoCRM под ключ</a>. Кейс MrBoroAI: запуск 2–8 недель. Velmi: ответ 2–3 ч → 30–40 с, квалифицированные лиды +35% (Хабр).</p>
         </div>
         <div class="vzaz-card">
           <h3>Webhook, Make/n8n</h3>
-          <p>Виджет на Tilda, WordPress, Bitrix → Make/n8n/FastAPI → LLM structured output → CRM. G2: 9 из 10 считают критичным единый customer data перед автономией агента.</p>
+          <p>Виджет на Tilda, WordPress, Bitrix → Make/n8n/FastAPI → LLM structured output → CRM. Когда после квалификации нужен учёт в 1С или ERP, смотрите смежный сценарий — <a href="/ai-1c-erp/" class="ym-link--accent">AI-агент для 1С и ERP: внедрение под ключ</a>. G2: 9 из 10 считают критичным единый customer data перед автономией агента.</p>
         </div>
       </div>
     </div>
@@ -1595,7 +1597,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="vzaz-case-card nero-ai-reveal nero-ai-delay-1"><div class="vzaz-case-tag">BESTERS</div><h3>Авито + Bitrix24</h3><p>95% первички без менеджера, 6500+ сообщений (workspace.ru).</p></div>
         <div class="vzaz-case-card nero-ai-reveal nero-ai-delay-2"><div class="vzaz-case-tag">MrBoroAI</div><h3>amoCRM</h3><p>Сделка из диалога, запуск 2–8 недель.</p></div>
       </div>
-      <p class="nero-ai-reveal" style="margin-top:24px"><strong>Когда агент не нужен:</strong> мало заявок, менеджер отвечает за минуты, нет ночного трафика — честный отказ повышает доверие.</p>
+      <p class="nero-ai-reveal" style="margin-top:24px">На корпоративном масштабе те же принципы triage и маршрутизации заявок разбираются в материале <a href="/kpmg-claude-vnedrenie-ai-276-tysyach/" class="ym-link--accent">KPMG и Claude: уроки AI для бизнеса</a> — цифровые шлюзы и managed-агенты, которые можно адаптировать к inbound с сайта.</p>
+      <p class="nero-ai-reveal" style="margin-top:12px"><strong>Когда агент не нужен:</strong> мало заявок, менеджер отвечает за минуты, нет ночного трафика — честный отказ повышает доверие.</p>
     </div>
   </section>
 
@@ -1633,7 +1636,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </div><!-- /.vzaz-content -->
 
-  <!-- SCHEMA-MARKUP:INSERT -->
+
+<?php
+$vzaz_page_url  = trailingslashit( get_permalink() );
+$vzaz_site_url  = trailingslashit( home_url( '/' ) );
+$vzaz_brand     = $brand ?: 'Nero Network';
+$vzaz_page_h1   = 'AI-агент для первичной обработки заявок с сайта: внедрение под ключ';
+$vzaz_schema    = [
+    '@context' => 'https://schema.org',
+    '@graph'   => [
+        [
+            '@type' => 'Organization',
+            '@id'   => $vzaz_site_url . '#organization',
+            'name'  => $vzaz_brand,
+            'url'   => $vzaz_site_url,
+        ],
+        [
+            '@type'     => 'WebSite',
+            '@id'       => $vzaz_site_url . '#website',
+            'url'       => $vzaz_site_url,
+            'name'      => $vzaz_brand,
+            'publisher' => [ '@id' => $vzaz_site_url . '#organization' ],
+        ],
+        [
+            '@type'       => 'WebPage',
+            '@id'         => $vzaz_page_url . '#webpage',
+            'url'         => $vzaz_page_url,
+            'name'        => $vzaz_page_h1,
+            'description' => $page_seo_description,
+            'isPartOf'    => [ '@id' => $vzaz_site_url . '#website' ],
+            'about'       => [ '@id' => $vzaz_site_url . '#organization' ],
+        ],
+        [
+            '@type'           => 'BreadcrumbList',
+            '@id'             => $vzaz_page_url . '#breadcrumb',
+            'itemListElement' => [
+                [ '@type' => 'ListItem', 'position' => 1, 'name' => 'Главная', 'item' => $vzaz_site_url ],
+                [ '@type' => 'ListItem', 'position' => 2, 'name' => $vzaz_page_h1, 'item' => $vzaz_page_url ],
+            ],
+        ],
+        [
+            '@type'       => 'Service',
+            '@id'         => $vzaz_page_url . '#service',
+            'name'        => $vzaz_page_h1,
+            'description' => $page_seo_description,
+            'url'         => $vzaz_page_url,
+            'provider'    => [ '@id' => $vzaz_site_url . '#organization' ],
+        ],
+        [
+            '@type'      => 'FAQPage',
+            '@id'        => $vzaz_page_url . '#faq',
+            'mainEntity' => [
+                [ '@type' => 'Question', 'name' => 'Как внедрить ai обработка заявок без хаоса в CRM?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Одна точка входа, маппинг полей, дедупликация, пилот 2–3 недели. Nero Network ведёт внедрение под ключ.' ] ],
+                [ '@type' => 'Question', 'name' => 'Чем ai консультант на сайт отличается от колл-центра?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => '24/7 в момент интереса, стандартизированные вопросы, запись в CRM. Колл-центр — для сложных переговоров.' ] ],
+                [ '@type' => 'Question', 'name' => 'Можно ли без программиста?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да: подрядчик настраивает виджет и интеграции; с вашей стороны — скрипт продаж и доступ к CRM.' ] ],
+                [ '@type' => 'Question', 'name' => 'AI соврёт клиенту?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Guardrails, RAG по утверждённым документам, запрет автообещаний, эскалация спорных диалогов.' ] ],
+                [ '@type' => 'Question', 'name' => 'Подойдёт ли для малого бизнеса?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'Да, при потоке заявок с сайта и заметной задержке ответа. Типовой вход — одна форма.' ] ],
+                [ '@type' => 'Question', 'name' => 'Сколько длится внедрение?', 'acceptedAnswer' => [ '@type' => 'Answer', 'text' => 'От 7–21 дня за простой сценарий до 2–8 недель при сложной CRM.' ] ],
+            ],
+        ],
+    ],
+];
+echo '<script type="application/ld+json">' . wp_json_encode( $vzaz_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "
+";
+?>
 
 </main>
 
