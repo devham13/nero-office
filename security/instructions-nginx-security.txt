@@ -1,0 +1,34 @@
+# Production site — nginx security snippets (Beget)
+# Добавить в панели Beget → Сайты → ваш домен → Настройки nginx
+# или через include в пользовательский конфиг, если доступен.
+#
+# После правок:
+#   nginx -t
+#   systemctl reload nginx
+
+# Block version disclosure files
+location ~* /(readme\.html|license\.txt)$ {
+    deny all;
+    return 403;
+}
+
+location ~* /wp-content/plugins/.*/readme\.txt$ {
+    deny all;
+    return 403;
+}
+
+# Block PHP execution in uploads
+location ~* /wp-content/uploads/.*\.(php|phtml|phar|php[0-9])$ {
+    deny all;
+    return 403;
+}
+
+# Security headers (if not set by MU-plugin)
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+# Optional CSP Report-Only (enable after testing)
+# add_header Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mc.yandex.ru https://*.yandex.ru https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru;" always;

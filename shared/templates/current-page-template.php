@@ -20,27 +20,18 @@ declare(strict_types=1);
 // --- SEO (заменить под страницу) ---
 $page_seo_title       = 'Заголовок страницы';
 $page_seo_description = 'Meta description для excerpt и og:description';
+$page_og_image        = null; // опционально: абсолютный URL превью hero 1200×630
 
-add_filter(
-    'document_title_parts',
-    static function (array $parts) use ($page_seo_title): array {
-        $parts['title'] = $page_seo_title;
-        return $parts;
-    },
-    20
-);
-
-add_action(
-    'wp_head',
-    static function () use ($page_seo_title, $page_seo_description): void {
-        echo '<meta name="description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
-        echo '<meta property="og:title" content="' . esc_attr($page_seo_title) . '" />' . "\n";
-        echo '<meta property="og:description" content="' . esc_attr($page_seo_description) . '" />' . "\n";
-        echo '<meta property="og:url" content="' . esc_url(get_permalink()) . '" />' . "\n";
-        echo '<meta property="og:type" content="article" />' . "\n";
-    },
-    1
-);
+$social_meta = get_stylesheet_directory() . '/nero-page-social-meta.php';
+if (!is_readable($social_meta)) {
+    $social_meta = dirname(__DIR__) . '/theme-canonical/nero-page-social-meta.php';
+}
+if (is_readable($social_meta)) {
+    require_once $social_meta;
+}
+if (function_exists('nero_page_register_social_meta')) {
+    nero_page_register_social_meta($page_seo_title, $page_seo_description, $page_og_image);
+}
 
 // --- CTA из env (primary → Telegram по умолчанию) ---
 $brand               = get_bloginfo('name') ?: (getenv('SITE_BRAND') ?: ''); // pragma: allowlist secret

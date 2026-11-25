@@ -21,6 +21,7 @@ CSS через **`nero_ai_echo_theme_styles()`** в PHP; reveal: **`longread-pag
 3. **Второй блок (введение сразу после hero):** не верстай два центрированных абзаца подряд без ритма. Текст вступления — **по левому краю**, сетка «лид + декор» (терминал/чипы), акцентная полоска **слева** у текста; `.ym-toc` — ниже, по центру. Подробно: **skill designer-natasha**, **`shared/longread-page-design-system.md`** (§ введение после hero). Без Tailwind-only классов без своего CSS в `<style>`.
 4. **КРИТИЧНО**: Не удаляй `<canvas>` и `<script>` из hero Алины и блока Бориса. Они обязательны для анимации.
 5. **КРИТИЧНО**: Основной контент страницы должен быть внутри `<main id="primary" class="site-main ... " role="main" tabindex="-1">...</main>`, чтобы skip-link из темы вёл в реальную цель и accessibility-аудит видел landmark `main`.
+6. **Юридический футер:** в PHP-шаблоне после `</main>` — только `get_footer()` (см. `shared/templates/current-page-template.php`). Ссылку на политику конфиденциальности добавляет MU-plugin через `wp_footer`; не дублируй юридический блок в HTML вручную.
 
 ### Структура финального HTML:
 
